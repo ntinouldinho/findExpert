@@ -10,19 +10,29 @@ const Room = (props) => {
     const userStream = useRef();
 
     useEffect(() => {
-        navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then(stream => {
+        navigator.mediaDevices.getUserMedia({ audio: false, video: true }).then(stream => {
             userVideo.current.srcObject = stream;
             userStream.current = stream;
 
             socketRef.current = io.connect("/");
+
+           console.log("started");
             socketRef.current.emit("join room", props.match.params.roomID);
 
+          
+
             socketRef.current.on('other user', userID => {
+                console.log("other user "+userID);
                 callUser(userID);
                 otherUser.current = userID;
             });
 
+            socketRef.current.on("no user", userID => {
+                console.log("on your own "+userID);
+            });
+
             socketRef.current.on("user joined", userID => {
+                console.log("user joined");
                 otherUser.current = userID;
             });
 
@@ -33,7 +43,7 @@ const Room = (props) => {
             socketRef.current.on("ice-candidate", handleNewICECandidateMsg);
         });
 
-    }, []);
+    }, [callUser,handleRecieveCall]);
 
     function callUser(userID) {
         peerRef.current = createPeer(userID);
@@ -58,6 +68,7 @@ const Room = (props) => {
         peer.ontrack = handleTrackEvent;
         peer.onnegotiationneeded = () => handleNegotiationNeededEvent(userID);
 
+        console.log(peer);
         return peer;
     }
 
