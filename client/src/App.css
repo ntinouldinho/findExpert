@@ -24,6 +24,18 @@
   color: white;
 }
 
+.streaming{
+  width: 50%;
+  height: 50%;
+}
+
+@media only screen and (max-width: 700px) {
+  .streaming {
+    width: 100%;
+    height: 50%;
+  }
+}
+
 #myVideo
 {
     transform: rotateY(180deg);

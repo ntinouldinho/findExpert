@@ -15,7 +15,6 @@ const Room = (props) => {
             userStream.current = stream;
 
             socketRef.current = io.connect("/");
-
            console.log("started");
             socketRef.current.emit("join room", props.match.params.roomID);
 
@@ -132,8 +131,8 @@ const Room = (props) => {
 
     return (
         <div>
-            <video id="myVideo" muted="muted" autoPlay ref={userVideo} />
-            <video id="partnerVideo" autoPlay ref={partnerVideo} />
+            <video id="myVideo" className="streaming" muted="muted" autoPlay ref={userVideo} />
+            <video id="partnerVideo" className="streaming" autoPlay  ref={partnerVideo} />
         </div>
     );
 };
