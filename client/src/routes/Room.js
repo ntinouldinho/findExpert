@@ -132,7 +132,7 @@ const Room = (props) => {
 
     return (
         <div>
-            <video id="myVideo"  style="transform: rotateY(180deg); -webkit-transform:rotateY(180deg);-moz-transform:rotateY(180deg);" muted="muted" autoPlay ref={userVideo} />
+            <video id="myVideo" muted="muted" autoPlay ref={userVideo} />
             <video id="partnerVideo" autoPlay ref={partnerVideo} />
         </div>
     );
