@@ -1,0 +1,16 @@
+{
+  "name": "videochat",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "ntinouldinho <37417801+ntinouldinho@users.noreply.github.com>",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "socket.io": "^4.0.0"
+  },
+  "scripts": {
+    "start": "PROD=true node server.js",
+    "postinstall": "cd ./client && yarn" 
+  }
+}
