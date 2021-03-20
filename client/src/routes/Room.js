@@ -28,7 +28,7 @@ const Room = (props) => {
             });
 
             socketRef.current.on("no user", userID => {
-                console.log("on your own "+userID);
+                console.log(userID);
             });
 
             socketRef.current.on("user joined", userID => {

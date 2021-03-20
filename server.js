@@ -7,6 +7,33 @@ const socket = require("socket.io");
 const io = socket(server);
 const path = require("path");
 
+
+var firebase = require("firebase/app");
+
+// Add the Firebase products that you want to use
+require("firebase/auth");
+require("firebase/firestore");
+
+var firebaseConfig = {
+    apiKey: "AIzaSyBuNVQwF1eRddiz_P8S-2Bzs5aHo-SRnvs",
+    authDomain: "professionall.firebaseapp.com",
+    projectId: "professionall",
+    storageBucket: "professionall.appspot.com",
+    messagingSenderId: "628673579093",
+    appId: "1:628673579093:web:cbb614b2bf2ed592fc2cdc",
+    measurementId: "G-LT02G7RWYZ"
+  };
+
+firebase.initializeApp(firebaseConfig);
+
+const firestore = firebase.firestore();
+const callDoc = firestore.collection('users').doc('id');
+
+var doc;
+(async() => {
+    doc = await callDoc.get();
+  })();
+
 const rooms = {};
 
 io.on("connection", socket => {
@@ -23,7 +50,7 @@ io.on("connection", socket => {
             socket.emit("other user", otherUser);
             socket.to(otherUser).emit("user joined", socket.id);
         }else{
-            socket.emit("no user", socket.id);
+            socket.emit("no user", doc.data());
         }
     });
 
