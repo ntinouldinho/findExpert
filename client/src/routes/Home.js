@@ -5,11 +5,8 @@ import '../CSS/Home.css';
 
 function Home(){
 
-    function videoChat() {
-        window.location.replace("createroom");
-    }
     return(
-       <HomeCategory name = "Mechanic" image = "mechanic.jpg"/>
+       <HomeCategory name = "Mechanic"/>
     );
         
     
