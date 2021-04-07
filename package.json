@@ -9,7 +9,8 @@
     "express": "^4.17.1",
     "firebase": "^8.3.1",
     "firebase-admin": "^9.5.0",
-    "socket.io": "^4.0.0"
+    "socket.io": "^4.0.0",
+    "sweetalert": "^2.1.2"
   },
   "scripts": {
     "start": "PROD=true node server.js",
