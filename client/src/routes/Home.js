@@ -6,7 +6,11 @@ import '../CSS/Home.css';
 function Home(){
 
     return(
-       <HomeCategory name = "Mechanic"/>
+        <div className="HomeCategories">
+            <HomeCategory name = "Mechanic"/>
+            <HomeCategory name = "Mechanic"/>
+            <HomeCategory name = "Mechanic"/>
+        </div>
     );
         
     
