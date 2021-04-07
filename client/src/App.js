@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import {Home} from "./routes/Home";
 import CreateRoom from "./routes/CreateRoom";
 import Room from "./routes/Room";
-import Results from "./routes/Results";
+import {Results} from "./routes/Results";
 import './CSS/App.css';
 
 

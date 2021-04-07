@@ -1,0 +1,20 @@
+.ProfessionalBlock{
+    position: relative;
+    height: 100px;
+    width: 60%;
+    background-color: aqua;
+    margin:20px;
+  }
+
+.ProfilePic{
+    position:relative;
+    width:15%;
+    height:100%;
+    float:left;
+}
+
+#logo {
+    text-align: left !important;
+    top:0%;
+    left:5%
+}
