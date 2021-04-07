@@ -1,3 +1,7 @@
+body{
+    overflow: hidden;
+}
+
 .logoSearch {
   text-align: center;
 }
