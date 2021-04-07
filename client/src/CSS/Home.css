@@ -1,31 +1,38 @@
+.logoSearch {
+  text-align: center;
+}
+
+.logoSearch form {
+  margin-top: 20vh;
+}
+
 .HomeCategory {
-    /* size */
-    height: 80px;
-    width: 80px;
+  /* size */
+  height: 120px;
+  width: 120px;
 
-    /* text */
-    font-size: fluid;
-    word-wrap: break-word;
+  /* text */
+  font-size: fluid;
+  word-wrap: break-word;
 
-    /* background */
-    background-size: 100% 100%;
-    margin-right: 50px;
-  }
+  /* background */
+  background-size: 100% 100%;
+  margin-right: 50px;
+}
 
-  .HomeCategories{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
-    display: flex;                  /* establish flex container */
-    flex-direction: row;            /* default value; can be omitted */
-    flex-wrap: nowrap;              /* default value; can be omitted */
+.HomeCategories {
+  position: relative;
+  margin-top: 10vh;
+  left: 35%;
+  /* transform: translate(-50%, -50%); */
+  align-items: center;
+  display: flex; /* establish flex container */
+  flex-direction: row; /* default value; can be omitted */
+  flex-wrap: nowrap; /* default value; can be omitted */
+}
 
-  }
-
-  #login {
-    position: fixed;
-    top:5%;
-    left:80%;
-  }
+#login {
+  position: absolute;
+  top: 5%;
+  left: 90%;
+}
