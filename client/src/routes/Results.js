@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../CSS/Results.css';
 import logo from "../assets/logo.png";
+import profile from "../assets/blank-profile-picture.png";
 import  SearchBar  from "../components/SearchBar.js";
 
 const ProfessionalBlock = ({person}) => {
@@ -29,18 +30,22 @@ export class Results extends Component {
     render(){
         return(
            <div>
-                <div className="search">
+                <div className="header">
                     <img src={logo} alt="logo" height="100" width="200" id="logo"/>
                     
-                        <SearchBar 
-                            value={this.state.search}
-                            handleChange={(e)=> this.setState({search:e.target.value})} 
-                            placeholder="Search for category" />
+                    <SearchBar 
+                        value={this.state.search}
+                        handleChange={(e)=> this.setState({search:e.target.value})} 
+                        placeholder="Search for category" />
+
+                    <img src={profile} alt="profile" height="50" width="50" id="profile" />
                     
                 </div>
                 
                 
-                <div>{this.state.professionals.map((item,i) =>  <ProfessionalBlock key={i} person = {item}/>)}</div>
+                <div className="Professionals">
+                    {this.state.professionals.map((item,i) =>  <ProfessionalBlock key={i} person = {item}/>)}
+                </div>
             </div>
         );
     }

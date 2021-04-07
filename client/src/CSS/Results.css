@@ -1,16 +1,27 @@
+.Professionals{
+    text-align: center;
+}
 .ProfessionalBlock{
     position: relative;
+    float: center;
     height: 100px;
     width: 60%;
+    left:20%;
     background-color: aqua;
     margin:20px;
+    border-radius: 30px;
   }
 
 .ProfilePic{
+    border-radius: 30px;
     position:relative;
     width:15%;
     height:100%;
     float:left;
+}
+
+#profile{
+    border-radius: 30px;
 }
 
 #logo {
@@ -19,14 +30,19 @@
     left:5%
 }
 
-.search{
+
+
+.header{
+    background-color: aqua;
+    text-align: right;
     display: flex;                  /* establish flex container */
-    flex-direction: row;            /* default value; can be omitted */
-    flex-wrap: nowrap;              /* default value; can be omitted */
+
+    align-items: center;
+    justify-content: space-between;
 }
 
-.search form{
-    position: relative;
+.header form{
+    text-align: left;
     width:50%;
-    top:50%;
 }
+
