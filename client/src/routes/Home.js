@@ -1,7 +1,6 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import CreateRoom from "./CreateRoom";
-import Room from "./Room";
+// import HomeCategory from '../components/HomeCategory';
+import { HomeCategory } from "../components/HomeCategory";
 import '../CSS/Home.css';
 
 function Home(){
@@ -11,7 +10,7 @@ function Home(){
     }
 
     return(
-        <button onClick={videoChat}>Video Chat</button>
+       <HomeCategory name = "Mechanic" image = "../assets/mechanic-school.jpg"/>
     );
         
     
