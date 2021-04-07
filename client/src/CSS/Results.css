@@ -18,3 +18,15 @@
     top:0%;
     left:5%
 }
+
+.search{
+    display: flex;                  /* establish flex container */
+    flex-direction: row;            /* default value; can be omitted */
+    flex-wrap: nowrap;              /* default value; can be omitted */
+}
+
+.search form{
+    position: relative;
+    width:50%;
+    top:50%;
+}
