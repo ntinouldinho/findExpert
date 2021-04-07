@@ -23,7 +23,7 @@ const SearchBar = (props) => {
             <input
                 type="search"
                 placeholder={props.placeholder}
-                nane="search"
+                name="search"
                 onChange={props.handleChange}
             />
             <button type="submit">Search</button>

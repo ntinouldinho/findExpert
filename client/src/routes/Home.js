@@ -22,7 +22,7 @@ export class Home extends Component {
     super(props);
     this.state = {
       src: ["Mechanic", "Doctor", "Chef", "Chef", "Doctor", "Mechanic"],
-      search: "",
+      search: ""
     };
   }
 
