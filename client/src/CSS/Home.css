@@ -1,12 +1,23 @@
 .HomeCategory {
-    height: 50px;
-    width: 50px;
-    background-color: #555;
-    background-repeat: no-repeat;
+    /* size */
+    height: 80px;
+    width: 80px;
+
+    /* text */
+    font-size: fluid;
+    word-wrap: break-word;
+
+    /* background */
+    background-size: 100% 100%;
     margin-right: 50px;
   }
 
   .HomeCategories{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
     display: flex;                  /* establish flex container */
     flex-direction: row;            /* default value; can be omitted */
     flex-wrap: nowrap;              /* default value; can be omitted */

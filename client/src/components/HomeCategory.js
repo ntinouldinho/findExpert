@@ -3,7 +3,7 @@ import '../CSS/Home.css';
 
 import mechanic from '../assets/mechanic.jpg';
 
-export class HomeCategory extends React.Component { 
+export class HomeCategory extends Component { 
 
     renderSwitch(param) {
         switch(param) {
