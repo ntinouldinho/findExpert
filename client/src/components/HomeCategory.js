@@ -1,7 +1,9 @@
 import React, { Component } from 'react';  
 import '../CSS/Home.css';
 
-import mechanic from '../assets/mechanic.jpg';
+import mechanic from '../assets/car_mechanic.jpg';
+import doctor from '../assets/doctor.jpg';
+import chef from '../assets/chef.jpg';
 
 export class HomeCategory extends Component { 
 
@@ -9,6 +11,10 @@ export class HomeCategory extends Component {
         switch(param) {
           case 'Mechanic':
             return mechanic;
+          case 'Doctor':
+            return doctor;
+            case 'Chef':
+              return chef;
           default:
             return mechanic;
         }
