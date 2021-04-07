@@ -24,7 +24,7 @@ export class HomeCategory extends Component {
     render(){
         return(
             <div className = "HomeCategory" style = {{backgroundImage: 'url(' +  this.renderSwitch(this.props.name) + ')'}}>
-                {this.props.name}
+                <h3 id="catName" >{this.props.name}</h3> 
             </div>
         );
     }

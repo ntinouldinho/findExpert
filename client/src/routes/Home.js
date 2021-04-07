@@ -21,7 +21,7 @@ export class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      src: ["Mechanic", "Doctor", "Chef"],
+      src: ["Mechanic", "Doctor", "Chef", "Chef", "Doctor", "Mechanic"],
       search: "",
     };
   }

@@ -1,5 +1,5 @@
-body{
-    overflow: hidden;
+body {
+  overflow-x: hidden;
 }
 
 .logoSearch {
@@ -22,9 +22,19 @@ body{
   /* background */
   background-size: 100% 100%;
   margin-right: 50px;
+  margin-bottom: 50px;
+  flex-basis: 20%;
+}
+
+#catName{
+    margin: 80px 10px 0 10px;
+    color: #000;
+    outline: 2px dotted #000;
+    background-color: #fff;
 }
 
 .HomeCategories {
+  width: 40%;
   position: relative;
   margin-top: 10vh;
   left: 35%;
@@ -32,7 +42,8 @@ body{
   align-items: center;
   display: flex; /* establish flex container */
   flex-direction: row; /* default value; can be omitted */
-  flex-wrap: nowrap; /* default value; can be omitted */
+  flex-wrap: wrap; /* default value; can be omitted */
+  /* order: 3; */
 }
 
 #login {
