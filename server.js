@@ -34,6 +34,9 @@ var doc;
     doc = await callDoc.get();
   })();
 
+
+//instead of const rooms we will access firebase and see if in the assigned uuid room someone is currently inside and waiting
+//every time a user enters or leaves the room we have to keep a log about his time of arrival and departure from the room
 const rooms = {};
 
 io.on("connection", socket => {
