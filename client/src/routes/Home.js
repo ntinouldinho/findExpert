@@ -8,9 +8,8 @@ function Home(){
     function videoChat() {
         window.location.replace("createroom");
     }
-
     return(
-       <HomeCategory name = "Mechanic" image = "../assets/mechanic-school.jpg"/>
+       <HomeCategory name = "Mechanic" image = "mechanic.jpg"/>
     );
         
     
