@@ -19,7 +19,7 @@ const SearchBar = (props) => {
           type="search"
           placeholder={props.placeholder}
           name="search"
-          onChange={props.handleChange}
+          onChange={props.onChange}
           value={props.value}
         />
         <button type="submit">

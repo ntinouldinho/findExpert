@@ -1,0 +1,41 @@
+body {
+  background: #00b4cc;
+}
+
+ul.options {
+  background-color: white;
+   opacity: 0.9;
+  display: block;
+  list-style: none;
+  left: 33%;
+  width: 32rem;
+  transition: width 0.3s;
+  margin: auto;
+  position: absolute;
+  z-index: 10;
+}
+
+ul.options li {
+  display: block;
+  background: white;
+  margin: 10px auto;
+  padding: 10px;
+  font-size: 1.2rem;
+  width: 100%;
+  border-radius: 2px;
+}
+ul.options li:hover {
+  font-weight: bold;
+  color: darkorange;
+  cursor: pointer;
+  transition: 0.3s all;
+}
+
+ul.options li.option-active {
+  background: whitesmoke;
+  font-size: 1.5rem;
+  color: darkorange;
+}
+.no-options {
+  color: white;
+}

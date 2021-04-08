@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { useHistory } from "react-router-dom";
 import { HomeCategory } from "../components/HomeCategory";
-import SearchBar from "../components/SearchBar.js";
+import { Autocomplete } from "../components/Autocomplete";
+
 import "../CSS/Home.css";
 import logo from "../assets/logo.png";
 
@@ -38,10 +39,8 @@ export class Home extends Component {
             width="400"
           />
           <Login />
-          <SearchBar
-            value={this.state.search}
-            handleChange={(e) => this.setState({ search: e.target.value })}
-            placeholder="Search for category"
+          <Autocomplete
+            options={this.state.src}
           />
         </div>
         <div className="HomeCategories">
