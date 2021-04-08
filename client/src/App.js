@@ -6,6 +6,7 @@ import Room from "./routes/Room";
 import {Results} from "./routes/Results";
 import {Login} from "./routes/Login";
 import './CSS/App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
