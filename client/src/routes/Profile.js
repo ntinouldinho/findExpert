@@ -10,7 +10,7 @@ export class Profile extends Component {
             profession: "Epaggelma",
             photo: "Fwtografia",
             reviews: ["4", " 5"],
-            services: ["$$ ", "$$"],
+            services: ["$$ ", " $$"],
             cv: "My CV",
             about: "About me",
             stars: "5 STARS",
@@ -24,6 +24,7 @@ export class Profile extends Component {
                 <div>
                     <div className="header">
                         <div className="picture">
+                            {/* <img src={this.state.photo} alt="Profile Picture" height="100" width="200" id="profpic"/> */}
                             <img src={logo} alt="Profile Picture" height="100" width="200" id="profpic"/>
                         </div>
                         <div className="info">
@@ -60,13 +61,4 @@ export class Profile extends Component {
         );
     }
 }
-
-
-                        // <h3>{this.state.name}</h3>
-                        // <h3>{this.state.profession}</h3>
-                        // <img src={this.state.photo} alt="Profile Picture" height="100" width="200" id="profpic"/>
-                        // <h3>{this.state.reviews}</h3>
-                        // <h3>{this.state.services}</h3>
-                        // <h3>{this.state.cv}</h3>
-                        // <h3>{this.state.about}</h3>
-                        // <h3>{this.state.stars}</h3>
+                     
