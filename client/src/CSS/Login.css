@@ -1,19 +1,34 @@
 
 #center-div{
-    height:50%;
+
+    margin-top: 2.5%;
+    margin-left: 25%;
+    height:75%;
+    width:50%;
     background-color: black;
     text-align: center;
     border-radius: 25px;
+    border: 10px groove darkorange;
 }
 
 #center-div form{
-    padding-top:70%;
+    padding-top:2.5%;
+    padding-bottom:5%;
 }
 
-#all{
-    left: 45%;
-    text-align: center;
-    position: absolute;
-    height:100%;
-    width:auto;
+#center-div h2{
+    color:aqua;
 }
+
+#center-div h4{
+    color:darkorange;
+}
+
+#sign_up_div input,#sign_in_div input{
+    width: 50%;
+    padding: 5px;
+    margin: 0;
+}
+
+
+
