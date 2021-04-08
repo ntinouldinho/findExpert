@@ -1,13 +1,38 @@
 require("dotenv").config();
 const express = require("express");
 const http = require("http");
-const app = express();
-const server = http.createServer(app);
 const socket = require("socket.io");
-const io = socket(server);
+const bodyParser = require('body-parser');
 const path = require("path");
 
+const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
+
+const server = http.createServer(app);
+const io = socket(server);
+const port = process.env.PORT || 8000;
+
+
+
+app.get('/api/hello', (req, res) => {
+    res.send({ express: 'Hello From Express' });
+});
+
+app.post('/api/addUser/', async (req, res) => {
+    console.log(req.body);
+    try {
+        const newDoc = await firestore.collection('users').add(req.body);
+        res.status(201).send(`Created a new user: ${newDoc.id}`);
+    } catch (error) {
+        res.status(400).send(`User should cointain firstName, lastName, email, areaNumber, department, id and contactNumber!!!`)
+    }
+
+    
+});
+
+  
 var firebase = require("firebase/app");
 
 // Add the Firebase products that you want to use
@@ -81,5 +106,5 @@ if(process.env.PROD){
     })
 }
 
-const port = process.env.PORT || 8000;
+
 server.listen(port, () => console.log(`server is running on port ${port}`));
