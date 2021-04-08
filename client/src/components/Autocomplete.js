@@ -11,25 +11,25 @@ export class Autocomplete extends Component {
     activeOption: 0,
     filteredOptions: [],
     showOptions: false,
-    userInput: "",
+    search: "",
   };
 
   onChange = (e) => {
     console.log("onChanges");
 
     const { options } = this.props;
-    const userInput = e.currentTarget.value;
+    const search = e.currentTarget.value;
 
     const filteredOptions = options.filter(
       (optionName) =>
-        optionName.toLowerCase().indexOf(userInput.toLowerCase()) > -1
+        optionName.toLowerCase().indexOf(search.toLowerCase()) > -1
     );
 
     this.setState({
       activeOption: 0,
       filteredOptions,
       showOptions: true,
-      userInput: e.currentTarget.value,
+      search: e.currentTarget.value,
     });
   };
 
@@ -38,7 +38,7 @@ export class Autocomplete extends Component {
       activeOption: 0,
       filteredOptions: [],
       showOptions: false,
-      userInput: e.currentTarget.innerText,
+      search: e.currentTarget.innerText,
     });
   };
   onKeyDown = (e) => {
@@ -48,7 +48,7 @@ export class Autocomplete extends Component {
       this.setState({
         activeOption: 0,
         showOptions: false,
-        userInput: filteredOptions[activeOption],
+        search: filteredOptions[activeOption],
       });
     } else if (e.keyCode === 38) {
       if (activeOption === 0) {
@@ -70,10 +70,10 @@ export class Autocomplete extends Component {
       onClick,
       onKeyDown,
 
-      state: { activeOption, filteredOptions, showOptions, userInput },
+      state: { activeOption, filteredOptions, showOptions, search },
     } = this;
     let optionList;
-    if (showOptions && userInput) {
+    if (showOptions && search) {
       if (filteredOptions.length) {
         optionList = (
           <ul className="options">
@@ -83,9 +83,11 @@ export class Autocomplete extends Component {
                 className = "option-active";
               }
               return (
-                <li className={className} key={optionName} onClick={onClick}>
-                  {optionName}
-                </li>
+                <a href={"/search/" + optionName}>
+                  <li className={className} key={optionName} onClick={onClick}>
+                    {optionName}
+                  </li>
+                </a>
               );
             })}
           </ul>
