@@ -3,6 +3,8 @@ import '../CSS/Login.css';
 import logo from "../assets/black-logo.png";
 import profile from "../assets/blank-profile-picture.png";
 import Button from 'react-bootstrap/Button';
+
+import Rating from 'react-star-review';
 // import ReactSummernote from 'react-summernote';
 // import 'react-summernote/dist/react-summernote.css'; // import styles
 // import 'react-summernote/lang/summernote-el-GR'; // you can import any other locale
@@ -49,6 +51,8 @@ export class Login extends Component {
         return(
             <div id="center-div">
                 <img src={logo} alt="logo"  width="45%" id="logo"/>
+                
+    <Rating rating={7.7} count={10}/>
                     <form
                         action="/"
                         method="get"

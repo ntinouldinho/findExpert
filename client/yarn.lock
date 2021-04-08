@@ -9315,6 +9315,11 @@ react-star-rating-component@^1.4.1:
     classnames "^2.2.5"
     prop-types "^15.6.1"
 
+react-star-review@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-star-review/-/react-star-review-1.2.0.tgz#2340ab003cd1419ad53f3f5e18bedca5d99064ab"
+  integrity sha512-YGKtpIysJTROs7du51R67VjPorAvbDg1Zw314AU7dDyEhJot/lX7otX8+2HQoz5JfzUGDMXbIrolvtYqd5rJ7g==
+
 react-summernote@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/react-summernote/-/react-summernote-2.0.2.tgz#7be8ff8f38c286ffb0d6d99a1ef5360b027d30a8"
