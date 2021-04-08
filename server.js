@@ -14,30 +14,10 @@ const server = http.createServer(app);
 const io = socket(server);
 const port = process.env.PORT || 8000;
 
-
-
-app.get('/api/hello', (req, res) => {
-    res.send({ express: 'Hello From Express' });
-});
-
-app.post('/api/addUser/', async (req, res) => {
-    console.log(req.body);
-    try {
-        const newDoc = await firestore.collection('users').add(req.body);
-        res.status(201).send(`Created a new user: ${newDoc.id}`);
-    } catch (error) {
-        res.status(400).send(`User should cointain firstName, lastName, email, areaNumber, department, id and contactNumber!!!`)
-    }
-
-    
-});
-
-  
 var firebase = require("firebase/app");
-
-// Add the Firebase products that you want to use
 require("firebase/auth");
 require("firebase/firestore");
+
 
 var firebaseConfig = {
     apiKey: "AIzaSyBuNVQwF1eRddiz_P8S-2Bzs5aHo-SRnvs",
@@ -52,6 +32,54 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const firestore = firebase.firestore();
+
+
+app.get('/api/hello', (req, res) => {
+    res.send({ express: 'Hello From Express' });
+});
+
+app.post('/api/register/', async (req, res) => {
+    console.log(req.body);
+    
+        //const newDoc = await firestore.collection('users').add(req.body);
+        firebase.auth().createUserWithEmailAndPassword(req.body.email, req.body.password)
+            .then((userCredential) => {
+            // Signed in 
+            var user = userCredential.user;
+            
+            res.status(201).send(`Created a new user: ${user}`);
+            })
+            .catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ..
+            res.status(400).send(`${errorMessage} and ${errorCode}` );
+        });
+
+});
+
+  
+app.post('/api/login/', async (req, res) => {
+    console.log(req.body);
+    
+        //const newDoc = await firestore.collection('users').add(req.body);
+        firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
+            .then((userCredential) => {
+            // Signed in 
+            var user = userCredential.user;
+            
+            res.status(201).send(`Logged in: ${user}`);
+            })
+            .catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ..
+            res.status(400).send(`${errorMessage} and ${errorCode}` );
+        });
+
+});
+
+
 
 
 //instead of const rooms we will access firebase and see if in the assigned uuid room someone is currently inside and waiting

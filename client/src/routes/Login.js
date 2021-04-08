@@ -10,7 +10,7 @@ export class Login extends Component {
         this.state = {
             isLogin:false,
             name:"",
-            username:"",
+            email:"",
             password:""
         }
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,8 +26,8 @@ export class Login extends Component {
             this.setState({ name: e.target.value });
         }else if(name=="password"){
             this.setState({ password: e.target.value });
-        }else if(name=="username"){
-            this.setState({ username: e.target.value });
+        }else if(name=="email"){
+            this.setState({ email: e.target.value });
         }
         
         console.log(this.state);
@@ -56,14 +56,18 @@ export class Login extends Component {
     
     handleSubmit = async e => {
         e.preventDefault();
-        const response = await fetch('/api/addUser', {
+
+        const api = this.state.isLogin ? "login":"register";
+
+        
+        const response = await fetch('/api/'+api, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({ 
               name: this.state.name, 
-              username: this.state.username,
+              email: this.state.email,
               password: this.state.password
             }),
         });
@@ -110,11 +114,11 @@ export class Login extends Component {
                             
                             <br/>
 
-                            <h4>Username:</h4>
+                            <h4>email:</h4>
                             <input
                                 type="text"
-                                placeholder={"Enter your username..."}
-                                name="username"
+                                placeholder={"Enter your email..."}
+                                name="email"
                                 onChange={e => this.onTodoChange(e)}
                             />
 
