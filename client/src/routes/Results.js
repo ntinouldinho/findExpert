@@ -7,13 +7,15 @@ import SearchBar from "../components/SearchBar.js";
 const ProfessionalBlock = ({ person }) => {
   return (
     <div className="ProfessionalBlock">
-      <img
-        alt="profile pic"
-        className="ProfilePic"
-        src={"https://www.ecpi.edu/sites/default/files/CIV%20Sept%2026.png"}
-      />
-      <h1>Όνομα: {person.name}</h1>
-      <h1>Ειδικότητα: {person.job}</h1>
+      <a href="/profile">
+        <img
+          alt="profile pic"
+          className="ProfilePic"
+          src={"https://www.ecpi.edu/sites/default/files/CIV%20Sept%2026.png"}
+        />
+        <h1>Όνομα: {person.name}</h1>
+        <h1>Ειδικότητα: {person.job}</h1>
+      </a>
     </div>
   );
 };
