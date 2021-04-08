@@ -25,6 +25,7 @@ const SearchBar = (props) => {
                 placeholder={props.placeholder}
                 name="search"
                 onChange={props.handleChange}
+                value={props.value}
             />
             <button type="submit">Search</button>
         </form>

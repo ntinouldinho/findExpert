@@ -23,7 +23,7 @@ export class Results extends Component {
         super(props);
         this.state = {
             professionals:[{job:"doctor",name:"kostas"},{job:"paparas",name:"mitsos"}],
-            search: ""
+            search:  props.match.params.search
         }
     }
 
