@@ -27,12 +27,6 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const firestore = firebase.firestore();
-const callDoc = firestore.collection('users').doc('id');
-
-var doc;
-(async() => {
-    doc = await callDoc.get();
-  })();
 
 
 //instead of const rooms we will access firebase and see if in the assigned uuid room someone is currently inside and waiting
@@ -40,6 +34,16 @@ var doc;
 const rooms = {};
 
 io.on("connection", socket => {
+    socket.on("profile", profile_id => {
+        
+        const callDoc = firestore.collection('users').doc(profile_id);
+        var doc;
+        (async() => {
+            doc = await callDoc.get();
+        })();
+
+    });
+
     socket.on("join room", roomID => {
 
         if (rooms[roomID]) {
