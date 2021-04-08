@@ -1,0 +1,70 @@
+.header{
+    background-color: blueviolet;
+    text-align:center;
+    display: flex;                  
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    
+}
+
+.picture{
+    text-align: center;
+    align-items: center;
+    border-style: double;
+    margin: 20px;
+}
+
+.info{
+    text-align: center;
+    align-items: center;
+    border-style: double;
+}
+
+.aboutme{
+    text-align: center;
+    align-items: center;
+    border-style: double;
+    margin: 20px;
+}
+
+.services{
+    text-align: center;
+    align-items: center;
+    border-style: double;
+    margin: 20px;
+}
+
+.appointment{
+    text-align: center;
+    align-items: center;
+    border-style: double;
+}
+
+.contact{
+    text-align: center;
+    align-items: center;
+    border-style: double;
+    margin: 20px;
+}
+
+.cv{
+    text-align: center;
+    align-items: center;
+    border-style: double;
+    position:relative;
+    left:0;
+    width:100%;
+}
+
+.reviews{
+    text-align: center;
+    align-items: center;
+    border-style: double;
+    position:relative;
+    left:0;
+    width:100%;
+}
+
+
+
