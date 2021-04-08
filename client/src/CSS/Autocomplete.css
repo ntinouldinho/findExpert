@@ -1,10 +1,6 @@
-body {
-  background: #00b4cc;
-}
-
 ul.options {
   background-color: white;
-   opacity: 0.9;
+  opacity: 0.9;
   display: block;
   list-style: none;
   left: 33%;
