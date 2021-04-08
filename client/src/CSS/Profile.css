@@ -1,49 +1,49 @@
 
-.header{
-    background-color: blueviolet;
-    text-align:center;
-    display: flex;                  
-    align-items: center;
-    
-
-    justify-content: space-between;
-    
-
-}
 
 .grid-container {
     display: grid;
     border: 3px groove orangered;
+    justify-content: space-between;
     grid-template-areas: 
     'picture info info aboutme aboutme aboutme'
     'services services services appointment appointment appointment'
     'cv cv cv cv cv cv'
     'reviews reviews reviews reviews reviews reviews';
     grid-gap: 10px;
-    background-color: #2196F3;
-    padding: 10px;
+    background-color: white;
     width: 100%;
+    text-align:center;
+    align-items: center;
+   
 }
   
 .grid-container > div {
-    background-color: rgba(255, 255, 255, 0.8);
-    text-align: center;
-    padding: 20px 0;
+    /* background-color: rgba(255, 255, 255, 0.8); */
+    border: 1px solid black ;
     font-size: 30px;
 }
 
 .picture{
-    grid-area: picture;
+    grid-area: picture;   
+}
+
+.picture img{
+    height: auto; 
+    width: auto; 
+    max-width: 300px; 
+    max-height: 300px;
     
 }
 
 .info{
     grid-area: info;
-    
+   
+
 }
 
 .aboutme{
     grid-area: aboutme;
+    
     
 }
 

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import '../CSS/Profile.css';
-import logo from "../assets/logo.png";
-import ProfessionalBlock from '../components/ProfessionalBlock.js';
-import StarRatingComponent from 'react-star-rating-component';
+import Rating from 'react-star-review';
 
 export class Profile extends Component { 
     constructor(props){
@@ -15,7 +13,7 @@ export class Profile extends Component {
             services: ["$$ ", " $$"],
             cv: "My CV",
             about: "About me",
-            stars: "5 STARS",
+            stars: "4.2",
             appointment: "appointment"
         };
     }
@@ -33,7 +31,7 @@ export class Profile extends Component {
                         <div className="info">
                             {this.state.name}<br></br>
                             {this.state.profession}<br></br>
-                            {this.state.stars}<br></br>
+                            <Rating rating={this.state.stars} count={5}/><br></br>
                         </div>
 
                         <div className="aboutme">
