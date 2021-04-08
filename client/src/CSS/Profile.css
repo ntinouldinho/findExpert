@@ -1,9 +1,7 @@
-
-
 .grid-container {
     display: grid;
     border: 3px groove orangered;
-    justify-content: space-between;
+    
     grid-template-areas: 
     'picture info info aboutme aboutme aboutme'
     'services services services appointment appointment appointment'
@@ -13,8 +11,7 @@
     background-color: white;
     width: 100%;
     text-align:center;
-    align-items: center;
-   
+    align-items: center;   
 }
   
 .grid-container > div {

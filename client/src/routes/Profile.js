@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../CSS/Profile.css';
 import Rating from 'react-star-review';
+import { Header } from "../components/Header";
 
 export class Profile extends Component { 
     constructor(props){
@@ -21,6 +22,7 @@ export class Profile extends Component {
     render(){
         return(
             <div> 
+                <Header/>
                 <div className="header">
                     <div className = "grid-container" style={{margin: "15%" }}>
                         <div className="picture">
