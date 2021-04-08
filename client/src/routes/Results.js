@@ -2,23 +2,8 @@ import React, { Component } from "react";
 import "../CSS/Results.css";
 import logo from "../assets/logo.png";
 import profile from "../assets/blank-profile-picture.png";
-import SearchBar from "../components/SearchBar.js";
-
-const ProfessionalBlock = ({ person }) => {
-  return (
-    <div className="ProfessionalBlock">
-      <a href={"/profile/"+person.name+"/56"}>
-        <img
-          alt="profile pic"
-          className="ProfilePic"
-          src={"https://www.ecpi.edu/sites/default/files/CIV%20Sept%2026.png"}
-        />
-        <h1>Όνομα: {person.name}</h1>
-        <h1>Ειδικότητα: {person.job}</h1>
-      </a>
-    </div>
-  );
-};
+import SearchBar from "../components/SearchBar";
+import ProfessionalBlock from '../components/ProfessionalBlock.js';
 
 // <h1>{this.props.match.params.search}</h1>
 export class Results extends Component {
