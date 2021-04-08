@@ -21,6 +21,7 @@ const SearchBar = (props) => {
           name="search"
           onChange={props.onChange}
           value={props.value}
+          onKeyDown={props.onKeyDown}
         />
         <button type="submit">
           <FontAwesomeIcon icon={faSearch} />

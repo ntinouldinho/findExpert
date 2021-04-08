@@ -5,13 +5,14 @@ import "../CSS/Autocomplete.css";
 
 export class Autocomplete extends Component {
   static propTypes = {
-    options: PropTypes.instanceOf(Array).isRequired,
+      options: PropTypes.instanceOf(Array).isRequired,
+      search: PropTypes.instanceOf(String)
   };
   state = {
     activeOption: 0,
     filteredOptions: [],
     showOptions: false,
-    search: "",
+    search: this.props.search,
   };
 
   onChange = (e) => {
