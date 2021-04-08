@@ -20,7 +20,7 @@ function App() {
           <Route path="/room/:roomID" component={Room} />
           <Route path="/search/:search" component={Results} />
           <Route path="/login" component={Login} />
-          <Route path="/profile" component={Profile} />
+          <Route path="/profile/:name/:id" component={Profile} />
         </Switch>
       </BrowserRouter>
     </div>
