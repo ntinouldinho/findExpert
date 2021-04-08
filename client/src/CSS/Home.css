@@ -16,7 +16,8 @@ body {
   width: 120px;
 
   /* text */
-  font-size: fluid;
+  font-size: 1.5vw;
+
   word-wrap: break-word;
 
   /* background */

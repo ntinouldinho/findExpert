@@ -1,6 +1,8 @@
 import React from 'react';  
 import { useHistory } from 'react-router-dom';
 import '../CSS/Home.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 
 const SearchBar = (props) => {
@@ -11,28 +13,20 @@ const SearchBar = (props) => {
     };
 
     return (
-        <form
-            action="/"
-            method="get"
-            autoComplete="off"
-            onSubmit={onSubmit}
-        >
-            <label htmlFor="search">
-                   {props.placeholder}
-            </label>
-            <input
-                type="search"
-                placeholder={props.placeholder}
-                name="search"
-                onChange={props.handleChange}
-                value={props.value}
-            />
-            <button type="submit">Search</button>
-        </form>
+      <form action="/" method="get" autoComplete="off" onSubmit={onSubmit}>
+        <label htmlFor="search">{props.placeholder}</label>
+        <input
+          type="search"
+          placeholder={props.placeholder}
+          name="search"
+          onChange={props.handleChange}
+          value={props.value}
+        />
+        <button type="submit">
+          <FontAwesomeIcon icon={faSearch} />
+        </button>
+      </form>
     );
 };
 
 export default SearchBar;
-
-
-
