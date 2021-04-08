@@ -7,7 +7,7 @@ import SearchBar from "../components/SearchBar.js";
 const ProfessionalBlock = ({ person }) => {
   return (
     <div className="ProfessionalBlock">
-      <a href="/profile">
+      <a href={"/profile/"+person.name+"/56"}>
         <img
           alt="profile pic"
           className="ProfilePic"
