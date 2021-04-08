@@ -1,69 +1,66 @@
+
 .header{
     background-color: blueviolet;
     text-align:center;
     display: flex;                  
     align-items: center;
-    justify-content: space-between;
-    width: 100%;
     
+
+    justify-content: space-between;
+    
+
+}
+
+.grid-container {
+    display: grid;
+    border: 3px groove orangered;
+    grid-template-areas: 
+    'picture info info aboutme aboutme aboutme'
+    'services services services appointment appointment appointment'
+    'cv cv cv cv cv cv'
+    'reviews reviews reviews reviews reviews reviews';
+    grid-gap: 10px;
+    background-color: #2196F3;
+    padding: 10px;
+    width: 100%;
+}
+  
+.grid-container > div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
 }
 
 .picture{
-    text-align: center;
-    align-items: center;
-    border-style: double;
-    margin: 20px;
+    grid-area: picture;
+    
 }
 
 .info{
-    text-align: center;
-    align-items: center;
-    border-style: double;
+    grid-area: info;
+    
 }
 
 .aboutme{
-    text-align: center;
-    align-items: center;
-    border-style: double;
-    margin: 20px;
+    grid-area: aboutme;
+    
 }
 
 .services{
-    text-align: center;
-    align-items: center;
-    border-style: double;
-    margin: 20px;
+    grid-area: services;
 }
 
 .appointment{
-    text-align: center;
-    align-items: center;
-    border-style: double;
-}
-
-.contact{
-    text-align: center;
-    align-items: center;
-    border-style: double;
-    margin: 20px;
+    grid-area: appointment;
 }
 
 .cv{
-    text-align: center;
-    align-items: center;
-    border-style: double;
-    position:relative;
-    left:0;
-    width:100%;
+    grid-area: cv;
 }
 
 .reviews{
-    text-align: center;
-    align-items: center;
-    border-style: double;
-    position:relative;
-    left:0;
-    width:100%;
+    grid-area: reviews;
 }
 
 
