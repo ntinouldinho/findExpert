@@ -17,14 +17,12 @@ export class Profile extends Component {
         return(
             <div className = "Profile" >
                 <header>
-                    
-                        <h3>{this.state.name}</h3>
-                        <h3>{this.state.profession}</h3>
-                        <img src={this.state.photo} alt="Profile Picture" height="100" width="200" id="profpic"/>
-                        <h3>{this.state.reviews}</h3>
-                        <h3>{this.state.services}</h3>
-                        <h3>{this.state.cv}</h3>
-                
+                    <h3>{this.state.name}</h3>
+                    <h3>{this.state.profession}</h3>
+                    <img src={this.state.photo} alt="Profile Picture" height="100" width="200" id="profpic"/>
+                    <h3>{this.state.reviews}</h3>
+                    <h3>{this.state.services}</h3>
+                    <h3>{this.state.cv}</h3>
                 </header>
             </div>
         );
