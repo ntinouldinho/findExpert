@@ -34,6 +34,21 @@ firebase.initializeApp(firebaseConfig);
 const firestore = firebase.firestore();
 
 
+app.post('/api/reset/', async (req, res) => {
+    console.log(req.body);
+    
+    firebase.auth().sendPasswordResetEmail(
+        req.body.email)
+        .then(function() {
+            console.log("sent");
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+
+});
+
+    
 app.get('/api/hello', (req, res) => {
     res.send({ express: 'Hello From Express' });
 });
@@ -46,7 +61,11 @@ app.post('/api/register/', async (req, res) => {
             .then((userCredential) => {
             // Signed in 
             var user = userCredential.user;
-            
+
+            var user = {
+
+            }
+            //const newDoc = await firestore.collection('users').add(req.body)
             res.status(201).send(`Created a new user: ${user}`);
             })
             .catch((error) => {
