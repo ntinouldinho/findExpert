@@ -8,7 +8,7 @@ export class Header extends Component {
   constructor(props) {
     super(props);
       this.state = {
-        src: ["Mechanic", "Doctor", "Chef", "Chef", "Doctor", "Mechanic"],
+        src: [ "Doctor","Mechanic", "Chef", "Chef", "Doctor", "Mechanic"],
         search: props.search,
       };
   }

@@ -17,21 +17,28 @@ export class Autocomplete extends Component {
 
   onChange = (e) => {
     console.log("onChanges");
-
+    console.log(e);
     const { options } = this.props;
     const search = e.currentTarget.value;
-
+      if (search == "") {
+          this.setState({
+              search: ""
+          });
+          return;
+      }
     const filteredOptions = options.filter(
       (optionName) =>
         optionName.toLowerCase().indexOf(search.toLowerCase()) > -1
-    );
-
+      );
+      console.log(filteredOptions);
+      
     this.setState({
       activeOption: 0,
       filteredOptions,
       showOptions: true,
       search: e.currentTarget.value,
     });
+    
   };
 
   onClick = (e) => {
@@ -106,7 +113,7 @@ export class Autocomplete extends Component {
         <div className="search">
           <SearchBar
             value={this.state.search}
-            handleChange={(e) => this.setState({ search: e.target.value })}
+            // handleChange={(e) => this.setState({ search: e.target.value })}
             placeholder="Search for category"
             onChange={onChange}
             onKeyDown={onKeyDown}
