@@ -139,21 +139,21 @@ const Room = (props) => {
                 <video id="partnerVideo" className="imageDiv topDiv " autoPlay  ref={partnerVideo} />
                 <video id="myVideo" className="imageDiv bottomDiv" muted="muted" autoPlay ref={userVideo} />
                 <img
-                    className="Logo camera"
+                    className="LogoRoom camera"
                     src={camera}
                     alt="logo"
                     height="50" 
                     width="50"
                 />
                 <img
-                    className="Logo mute"
+                    className="LogoRoom mute"
                     src={mute}
                     alt="logo"
                     height="50" 
                     width="50"
                 />
                 <img
-                    className="Logo screen"
+                    className="LogoRoom screen"
                     src={screen}
                     alt="logo"
                     height="50" 
