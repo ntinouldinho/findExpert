@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import CreditCard from '../components/CreditCard';
 import '../CSS/User.css';
 import Button from 'react-bootstrap/Button';
+import { Header } from "../components/Header";
 
 const Overview = (props) => {
     
@@ -47,8 +48,7 @@ const Billing = (props) => {
   
     return (
         <div>
-        <input type="text" defaultValue={props.name} />
-       <CreditCard />
+            <CreditCard />
         </div>
        
     );
@@ -124,7 +124,7 @@ export class User extends Component {
         return (
     
             <div>
-                <h2>User Profile</h2>
+                <Header />
                 <div className="tab">
                     {this.state.data.map((button, i) => (
                         <button key={button.name} className="tablinks" onClick={() => this.handleClick(i)}>{button.name}</button>
