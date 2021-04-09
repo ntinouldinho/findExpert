@@ -5,6 +5,7 @@ import CreateRoom from "./routes/CreateRoom";
 import Room from "./routes/Room";
 import {Results} from "./routes/Results";
 import {Login} from "./routes/Login";
+import {EditProfile} from "./routes/EditProfile";
 import {Profile} from "./routes/Profile";
 import {User} from "./routes/User";
 import './CSS/App.css';
@@ -23,6 +24,7 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/profile/:name/:id" component={Profile} />
           <Route path="/user" component={User} />
+          <Route path="/profile/edit" component={EditProfile} />
         </Switch>
       </BrowserRouter>
     </div>
