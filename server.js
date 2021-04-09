@@ -106,6 +106,7 @@ app.post('/api/login/', async (req, res) => {
 const rooms = {};
 
 io.on("connection", socket => {
+
     socket.on("profile", profile_id => {
         
         const callDoc = firestore.collection('users').doc(profile_id);
@@ -129,7 +130,7 @@ io.on("connection", socket => {
             socket.emit("other user", otherUser);
             socket.to(otherUser).emit("user joined", socket.id);
         }else{
-            socket.emit("no user", doc.data());
+            socket.emit("no user", "23");
         }
     });
 
