@@ -1,5 +1,9 @@
 import React, { useRef, useEffect } from "react";
 import io from "socket.io-client";
+import "../CSS/Room.css";
+import screen from "../assets/screen.png";
+import mute from "../assets/mute.png";
+import camera from "../assets/video-camera.png"; 
 
 const Room = (props) => {
     const userVideo = useRef();
@@ -130,9 +134,37 @@ const Room = (props) => {
     };
 
     return (
-        <div id="basicDiv">
-            <video id="partnerVideo" className="streaming" autoPlay  ref={partnerVideo} />
-            <video id="myVideo" className="streaming" muted="muted" autoPlay ref={userVideo} />
+        <div id="container">
+            <div className="video-container">
+                <video id="partnerVideo" className="imageDiv topDiv " autoPlay  ref={partnerVideo} />
+                <video id="myVideo" className="imageDiv bottomDiv" muted="muted" autoPlay ref={userVideo} />
+                <img
+                    className="Logo camera"
+                    src={camera}
+                    alt="logo"
+                    height="50" 
+                    width="50"
+                />
+                <img
+                    className="Logo mute"
+                    src={mute}
+                    alt="logo"
+                    height="50" 
+                    width="50"
+                />
+                <img
+                    className="Logo screen"
+                    src={screen}
+                    alt="logo"
+                    height="50" 
+                    width="50"
+                />
+
+                
+            </div>
+
+            <div id="chat">D
+            </div>
         </div>
     );
 };
