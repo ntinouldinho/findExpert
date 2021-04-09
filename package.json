@@ -12,6 +12,7 @@
     "express": "^4.17.1",
     "firebase": "^8.3.1",
     "firebase-admin": "^9.5.0",
+    "react-credit-cards": "^0.8.3",
     "socket.io": "^4.0.0",
     "sweetalert": "^2.1.2"
   },
