@@ -17,7 +17,6 @@ export class Autocomplete extends Component {
 
   onChange = (e) => {
     console.log("onChanges");
-    console.log(e);
     const { options } = this.props;
     const search = e.currentTarget.value;
       if (search == "") {
@@ -30,7 +29,6 @@ export class Autocomplete extends Component {
       (optionName) =>
         optionName.toLowerCase().indexOf(search.toLowerCase()) > -1
       );
-      console.log(filteredOptions);
       
     this.setState({
       activeOption: 0,
