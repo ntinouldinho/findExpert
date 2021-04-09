@@ -20,7 +20,7 @@ require("firebase/firestore");
 
 
 var firebaseConfig = {
-    apiKey: "AIzaSyBuNVQwF1eRddiz_P8S-2Bzs5aHo-SRnvs",
+    apiKey: process.env.API_KEY ,
     authDomain: "professionall.firebaseapp.com",
     projectId: "professionall",
     storageBucket: "professionall.appspot.com",
@@ -33,6 +33,31 @@ firebase.initializeApp(firebaseConfig);
 
 const firestore = firebase.firestore();
 
+
+var nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+  service: 'hotmail',
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.PASSWORD
+  }
+});
+
+var mailOptions = {
+  from: process.env.EMAIL,
+  to: 'eminemsticked@gmail.com',
+  subject: 'Se gamaw',
+  text: 'Ton pairneis!'
+};
+
+// transporter.sendMail(mailOptions, function(error, info){
+//   if (error) {
+//     console.log(error);
+//   } else {
+//     console.log('Email sent: ' + info.response);
+//   }
+// });
 
 app.post('/api/reset/', async (req, res) => {
     console.log(req.body);
@@ -155,4 +180,4 @@ if(process.env.PROD){
 }
 
 
-server.listen(port, () => console.log(`🚀🚀🚀🚀🚀server is running on port🚀🚀🚀 ${port}`));
+server.listen(port, () => console.log(`🚀🚀🚀🚀🚀server is running on port🚀🚀🚀 ${process.env.EMAIL}`));
