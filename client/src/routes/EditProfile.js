@@ -6,7 +6,6 @@ import { Header } from "../components/Header";
 import { EditorState, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
-import htmlToDraft from 'html-to-draftjs';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 export class EditProfile extends Component { 
@@ -43,6 +42,7 @@ export class EditProfile extends Component {
                         <div className="picture">
                             <img src={"https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/car_mechanic.jpg?alt=media&token=23cb2e86-4440-404d-9fdc-53e99eb2a2dc"} alt="Profile Picture" height="100" width="200" id="profpic"/>
                             {/* <img src={logo} alt="Profile Picture" height="100" width="200" id="profpic"/> */}
+                            <input type="file"></input>
                         </div>
 
                         <div className="info">

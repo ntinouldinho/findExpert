@@ -1,9 +1,10 @@
 .grid-container {
     display: grid;
-    border: 3px groove orangered;
-    
+    /* border: 3px groove orangered; */
+    border: 3px double cyan;
     grid-template-areas: 
-    'picture info info aboutme aboutme aboutme'
+    'picture picture picture info info info'
+    'aboutme aboutme aboutme aboutme aboutme aboutme'
     'services services services appointment appointment appointment'
     'cv cv cv cv cv cv'
     'reviews reviews reviews reviews reviews reviews';
@@ -17,10 +18,15 @@
 .core{
     width: 75%;
 }
-  
+
+#rating {
+    height: 50%;
+    padding-top: 8px;
+    margin-left: 10px;
+}
 .grid-container > div {
-    /* background-color: rgba(255, 255, 255, 0.8); */
-    border: 1px solid black ;
+    border: 3px solid orangered;
+    border-radius: 20px;
     font-size: 30px;
 }
 
@@ -38,14 +44,17 @@
 
 .info{
     grid-area: info;
-   
-
+    font-Size: "15";
+    text-align: left;
+    margin-left: 15%;
 }
 
 .aboutme{
+    min-height : 100px;
     grid-area: aboutme;
-    
-    
+    overflow: auto; 
+    height: 75%;
+    text-align: center;
 }
 
 .services{
