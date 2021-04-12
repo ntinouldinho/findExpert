@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { useHistory } from "react-router-dom";
 import { HomeCategory } from "../components/HomeCategory";
 import { Autocomplete } from "../components/Autocomplete";
+import { Footer } from "../components/Footer";
 
 import "../CSS/Home.css";
 import logo from "../assets/logo.png";
@@ -35,8 +36,8 @@ export class Home extends Component {
             className="Logo"
             src={logo}
             alt="logo"
-            height="200"
-            width="400"
+            height="150"
+            width="378"
           />
           <Login />
           <Autocomplete
@@ -47,7 +48,8 @@ export class Home extends Component {
           {this.state.src.map((item, i) => (
             <HomeCategory key={i} name={item} />
           ))}
-        </div>
+            </div>
+            <Footer />
       </div>
     );
   }

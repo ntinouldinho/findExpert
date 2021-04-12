@@ -16,7 +16,7 @@ export class Header extends Component {
     return (
       <div className="header">
         <a href="/">
-          <img src={logo} alt="logo" height="100" width="200" id="logo" />
+          <img src={logo} alt="logo" height="150" width="378" id="logo" />
         </a>
 
         <Autocomplete options={this.state.src} search={this.state.search}/>

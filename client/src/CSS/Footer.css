@@ -1,0 +1,71 @@
+
+footer {
+    margin-top: 50px;
+    background: #222;
+    color: #fff;
+}
+
+footer h1 {
+    font-size: 15px;
+    margin: 25px 0;
+}
+
+footer p {
+    font-size: 12px;
+}
+
+.copyright {
+    margin-bottom: -80px;
+    text-align: center;
+    font-size: 12px;
+    padding-bottom: 20px;
+}
+
+footer hr {
+    margin-top: 10px;
+    background-color: #ccc;
+}
+
+.media {
+    margin: -20px 0;
+}
+
+.media ul li {
+    display: inline;
+    margin: 0 5px;
+}
+
+.aueb,
+.eclass,
+.fb,
+.insta {
+    margin-top: .625em;
+    width: 40px;
+    height: 40px;
+    opacity: .6;
+    border-radius: 25px;
+}
+
+.fb:hover,
+.insta:hover,
+.aueb:hover,
+.eclass:hover {
+    opacity: 1.0;
+}
+
+footer button {
+    font-family: FontAwesome;
+    background-color: orangered;
+    /* padding: 0 5px; */
+    /* font-size: 19px; */
+    border: 2px groove #fff;
+}
+
+footer .row a:any-link {
+    text-decoration: none;
+    color: white;
+}
+
+footer .row a:hover {
+    color: orangered;
+}
