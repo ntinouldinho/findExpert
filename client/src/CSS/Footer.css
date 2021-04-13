@@ -3,6 +3,7 @@ footer {
     margin-top: 50px;
     background: #222;
     color: #fff;
+    text-align: center;
 }
 
 footer h1 {
@@ -28,8 +29,11 @@ footer hr {
 
 .media {
     margin: -20px 0;
+    justify-content:center;
 }
-
+.media ul{
+    padding-inline-start: 0px;
+}
 .media ul li {
     display: inline;
     margin: 0 5px;
