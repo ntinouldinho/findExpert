@@ -20,14 +20,14 @@ require("firebase/firestore");
 
 
 var firebaseConfig = {
-    apiKey: process.env.API_KEY ,
+    apiKey: process.env.API_KEY,
     authDomain: "professionall.firebaseapp.com",
     projectId: "professionall",
     storageBucket: "professionall.appspot.com",
     messagingSenderId: "628673579093",
     appId: "1:628673579093:web:cbb614b2bf2ed592fc2cdc",
     measurementId: "G-LT02G7RWYZ"
-  };
+};
 
 firebase.initializeApp(firebaseConfig);
 
@@ -37,18 +37,18 @@ const firestore = firebase.firestore();
 var nodemailer = require('nodemailer');
 
 var transporter = nodemailer.createTransport({
-  service: 'hotmail',
-  auth: {
-    user: process.env.EMAIL,
-    pass: process.env.PASSWORD
-  }
+    service: 'hotmail',
+    auth: {
+        user: process.env.EMAIL,
+        pass: process.env.PASSWORD
+    }
 });
 
 var mailOptions = {
-  from: process.env.EMAIL,
-  to: 'eminemsticked@gmail.com',
-  subject: 'Se gamaw',
-  text: 'Ton pairneis!'
+    from: process.env.EMAIL,
+    to: 'eminemsticked@gmail.com',
+    subject: 'Se gamaw',
+    text: 'Ton pairneis!'
 };
 
 // transporter.sendMail(mailOptions, function(error, info){
@@ -59,66 +59,67 @@ var mailOptions = {
 //   }
 // });
 
-app.post('/api/reset/', async (req, res) => {
+app.post('/api/reset/', async(req, res) => {
     console.log(req.body);
-    
+
     firebase.auth().sendPasswordResetEmail(
-        req.body.email)
+            req.body.email)
         .then(function() {
             console.log("sent");
         })
         .catch(function(error) {
-          console.log(error);
+            console.log(error);
         });
 
 });
 
-    
+
 app.get('/api/hello', (req, res) => {
     res.send({ express: 'Hello From Express' });
 });
 
-app.post('/api/register/', async (req, res) => {
+app.post('/api/register/', async(req, res) => {
     console.log(req.body);
-    
-        //const newDoc = await firestore.collection('users').add(req.body);
-        firebase.auth().createUserWithEmailAndPassword(req.body.email, req.body.password)
-            .then((userCredential) => {
+
+    //const newDoc = await firestore.collection('users').add(req.body);
+    firebase.auth().createUserWithEmailAndPassword(req.body.email, req.body.password)
+        .then((userCredential) => {
             // Signed in 
-            var user = userCredential.user;
+            var user = userCredential.user.uid;
 
-            var user = {
+            firestore.collection('users').doc(user).set({
+                name: req.body.name
+            })
 
-            }
             //const newDoc = await firestore.collection('users').add(req.body)
             res.status(201).send(`Created a new user: ${user}`);
-            })
-            .catch((error) => {
+        })
+        .catch((error) => {
             var errorCode = error.code;
             var errorMessage = error.message;
             // ..
-            res.status(400).send(`${errorMessage} and ${errorCode}` );
+            res.status(400).send(`${errorMessage} and ${errorCode}`);
         });
 
 });
 
-  
-app.post('/api/login/', async (req, res) => {
+
+app.post('/api/login/', async(req, res) => {
     console.log(req.body);
-    
-        //const newDoc = await firestore.collection('users').add(req.body);
-        firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
-            .then((userCredential) => {
+
+    //const newDoc = await firestore.collection('users').add(req.body);
+    firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
+        .then((userCredential) => {
             // Signed in 
             var user = userCredential.user;
-            
+
             res.status(201).send(`Logged in: ${user}`);
-            })
-            .catch((error) => {
+        })
+        .catch((error) => {
             var errorCode = error.code;
             var errorMessage = error.message;
             // ..
-            res.status(400).send(`${errorMessage} and ${errorCode}` );
+            res.status(400).send(`${errorMessage} and ${errorCode}`);
         });
 
 });
@@ -133,7 +134,7 @@ const rooms = {};
 io.on("connection", socket => {
 
     socket.on("profile", profile_id => {
-        
+
         const callDoc = firestore.collection('users').doc(profile_id);
         var doc;
         (async() => {
@@ -154,7 +155,7 @@ io.on("connection", socket => {
         if (otherUser) {
             socket.emit("other user", otherUser);
             socket.to(otherUser).emit("user joined", socket.id);
-        }else{
+        } else {
             socket.emit("no user", "23");
         }
     });
@@ -172,8 +173,8 @@ io.on("connection", socket => {
     });
 });
 
-if(process.env.PROD){
-    app.use(express.static(path.join(__dirname,'./client/build')));
+if (process.env.PROD) {
+    app.use(express.static(path.join(__dirname, './client/build')));
     app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname, './client/build/index.html'));
     })
