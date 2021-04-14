@@ -9,7 +9,7 @@ const HomeCategory = (props) => {
   const renderSwitch = (param) => {
     switch (param) {
       case "Mechanic":
-        return mechanic;
+        return "https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/car_mechanic.jpg?alt=media&token=23cb2e86-4440-404d-9fdc-53e99eb2a2dc";
       case "Doctor":
         return doctor;
       case "Chef":
@@ -19,6 +19,7 @@ const HomeCategory = (props) => {
     }
   };
 
+  
   const classType = (classtype) => {
     console.log(classtype);
     return classtype % 2 === 0 ? "Even" : "Odd";
