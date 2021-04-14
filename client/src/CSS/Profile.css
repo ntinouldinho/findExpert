@@ -2,21 +2,58 @@
     display: grid;
     /* border: 3px groove orangered; */
     border: 3px double cyan;
-    grid-template-areas: 
-    'picture picture picture info info info'
-    'aboutme aboutme aboutme aboutme aboutme aboutme'
-    'services services services appointment appointment appointment'
-    'cv cv cv cv cv cv'
-    'reviews reviews reviews reviews reviews reviews';
+    grid-template-areas: 'picture info' 'aboutme aboutme' 'box box' 'services appointment' 'cv cv' 'reviews reviews';
     grid-gap: 10px;
     background-color: white;
     width: 100%;
-    text-align:center;
-    align-items: center;   
+    text-align: center;
+    align-items: center;
 }
 
-.core{
-    width: 75%;
+.core {
+    width: 60%;
+}
+
+.line {
+    background-color: #000000;
+    height: 10px;
+    width: 100%;
+}
+
+.box {
+    /* create flexbox */
+    grid-area: box;
+    display: flex;
+    flex-direction: column;
+    /* make it scrollable */
+    max-height: 300px;
+    overflow-y: scroll;
+    /* make it round  */
+    border: 2px solid lightgray;
+    padding: 10px;
+    border-radius: 25px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+.box h2 {
+    border-bottom: 2px solid #b03535;
+    float: left;
+    max-width: 200px;
+}
+
+.Modal {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    height: 50%;
+    width: 50%;
+    background-color: papayawhip;
 }
 
 #rating {
@@ -24,54 +61,79 @@
     padding-top: 8px;
     margin-left: 10px;
 }
-.grid-container > div {
-    border: 3px solid orangered;
+
+.grid-container>div {
+    /* border: 3px solid; */
     border-radius: 20px;
     font-size: 30px;
 }
 
-.picture{
-    grid-area: picture;   
+.picture {
+    grid-area: picture;
 }
 
-.picture img{
-    height: auto; 
-    width: auto; 
-    max-width: 300px; 
+.picture img {
+    height: auto;
+    width: auto;
+    max-width: 300px;
     max-height: 300px;
-    
+    border-radius: 150px;
 }
 
-.info{
+.info {
     grid-area: info;
     font-Size: "15";
     text-align: left;
     margin-left: 15%;
 }
 
-.aboutme{
-    min-height : 100px;
+.aboutme {
     grid-area: aboutme;
-    overflow: auto; 
-    height: 75%;
-    text-align: center;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
-.services{
+.link {
+    text-decoration: underline;
+    cursor: pointer;
+    color: #0d6aa8;
+}
+
+.services {
     grid-area: services;
 }
 
-.appointment{
+.appointment {
     grid-area: appointment;
 }
 
-.cv{
+.cv {
     grid-area: cv;
 }
 
-.reviews{
+.reviews {
     grid-area: reviews;
 }
 
+/* MODAL GRID */
 
+#modal-content {
+    display: grid;
+    grid-template-areas: "calendar results" "choices choices";
+}
 
+#calendar {
+    position: relative;
+    margin-top: 25%;
+    left: 25%;
+    grid-area: calendar;
+}
+
+#results {
+    grid-area: results;
+}
+
+#modal-choices {
+    grid-area: choices;
+}
