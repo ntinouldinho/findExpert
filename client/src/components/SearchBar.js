@@ -14,7 +14,7 @@ const SearchBar = (props) => {
 
     return (
       <form action="/" method="get" autoComplete="off" onSubmit={onSubmit}>
-        <label htmlFor="search">{props.placeholder}</label>
+        {/* <label htmlFor="search">{props.placeholder}</label> */}
         <input
           type="search"
           placeholder={props.placeholder}

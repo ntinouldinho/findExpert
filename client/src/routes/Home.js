@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { useHistory } from "react-router-dom";
-import { HomeCategory } from "../components/HomeCategory";
+import  HomeCategory  from "../components/HomeCategory.js";
 import { Autocomplete } from "../components/Autocomplete";
 import { Footer } from "../components/Footer";
 
@@ -30,7 +30,7 @@ export class Home extends Component {
 
   render() {
     return (
-      <div>
+      <div className="HomeContainer">
         <div className="logoSearch">
           <img
             className="Logo"
@@ -45,8 +45,8 @@ export class Home extends Component {
           />
         </div>
         <div className="HomeCategories">
-          {this.state.src.map((item, i) => (
-            <HomeCategory key={i} name={item} />
+                {this.state.src.map((item, i) => (
+                    <HomeCategory key={i} name={item} classtype={i+1}/>
           ))}
             </div>
             <Footer />
