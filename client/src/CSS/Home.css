@@ -7,31 +7,33 @@
 }
 
 .HomeCategories {
-    width: 600px;
-    position: relative;
-    margin: auto;
-    margin-top: 20vh;
-    margin-bottom: 20vh;
-    display: flex; /* establish flex container */
-    flex-wrap: wrap; /* default value; can be omitted */
-    justify-content:center;
-    /* transform: translate(-50%, -50%); */
-    align-content: center;
-   flex-direction: row; /*  default value; can be omitted */
-    background-color: rgba(87, 87, 87, 0.363);
-    border: solid 2px orangered;
-    border-radius:10px;
-    
+  width: calc(50%);
+  height: 300px;
+  position: relative;
+  margin: auto;
+  margin-top: 20vh;
+  margin-bottom: 20vh;
+  display: flex; /* establish flex container */
+  flex-wrap: wrap; /* default value; can be omitted */
+  justify-content: center;
+  /* transform: translate(-50%, -50%); */
+  align-content: center;
+  flex-direction: row; /*  default value; can be omitted */
+  background-color: rgba(255, 173, 144, 0.384);
+  /* border: solid 2px orangered; */
+  border-radius: 10px;
+  padding: 0 13%;
+  align-items: center;
 }
 
 .HomeCategory {
   /* size */
   height: 120px;
   width: 120px;
-  min-width: 120px;
+  /* min-width: 120px; */
 
   /* text */
-  font-size: max(1.2vw, 16px);
+  font-size: max(1.1vw, 16px);
 
   /* word-wrap: normal; */
   text-align: center;
@@ -40,21 +42,75 @@
   /* margin-right: 5%;
   margin-left: 5%;
   margin-bottom: 5%; */
-  margin: 5%;
-  flex-basis: 120px; 
+  border: 1px solid #fff;
+  flex-basis: 120px;
+  transition: all 0.5s ease;
 }
 
-#catName{
-    margin: 80px 10px 0 10px;
-    color: #000;
-    outline: 2px dotted #000;
-    background-color: #fff;
+/* ---------------------category shape------------------------- */
+
+.HomeCategory.Odd {
+  /* border-top-left-radius: 0px 0px; 
+  border-top-right-radius: 0px 0px; 
+  border-bottom-right-radius: 500px 1000px; 
+  border-bottom-left-radius: 500px 1000px; */
+  clip-path: polygon(0% 10%, 50% 100%, 50% 100%, 100% 10%);
+  border-radius: 20px;
+  margin: 0 0% 5%;
 }
 
+.HomeCategory.Even {
+  border-bottom-left-radius: 0px 0px;
+  border-bottom-right-radius: 0px 0px;
+  border-top-right-radius: 500px 1000px;
+  border-top-left-radius: 500px 1000px;
+  clip-path: polygon(50% 0%, 0% 90%, 100% 90%, 50% 0%);
+  border-radius: 20px;
+  margin: 5% 0% 0;
+}
 
+.HomeCategories:hover .HomeCategory {
+  filter: blur(3px);
+}
+
+.HomeCategory:hover {
+  clip-path: polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%);
+  border-radius: 10px;
+  z-index: 100;
+  filter: blur(0px) !important;
+  margin: 5% -5%;
+}
+
+/* ---------------------end category shape------------------------- */
+
+#catName {
+  /* display: none; */
+  color: #000;
+  outline: 2px dotted #000;
+  background-color: #fff;
+  transition: all 0.5s ease;
+}
+
+.Odd #catName {
+  margin: 8px 0 0 0;
+}
+
+.Even #catName {
+  margin: 70% 0 0 0;
+}
+
+.HomeCategory:hover #catName {
+  margin-top: 50%;
+  outline: none;
+  /* text-decoration-style: none; */
+}
+
+a:hover, a:visited, a:active, a:focus, a:link {
+  color: #000 !important;
+}
 
 #login {
-  position: absolute;
+  position: fixed;
   top: 5%;
-  left: 90%;
+  left: 80%;
 }

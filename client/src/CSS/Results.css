@@ -33,16 +33,16 @@
 
 
 .header{
-    background-color: aqua;
+    background-color: rgb(255, 255, 255);
     text-align: right;
     display: flex;                  /* establish flex container */
-
+    border-bottom: 5px solid #000 ;
     align-items: center;
     justify-content: space-between;
 }
 
 .header form{
     text-align: left;
-    width:50%;
+    width:100%;
 }
 
