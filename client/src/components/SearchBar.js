@@ -1,6 +1,6 @@
 import React from 'react';  
 import { useHistory } from 'react-router-dom';
-import '../CSS/Home.css';
+import '../CSS/Autocomplete.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
