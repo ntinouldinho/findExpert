@@ -3,6 +3,9 @@ import { useHistory } from "react-router-dom";
 import HomeCategory from "../components/HomeCategory.js";
 import { Autocomplete } from "../components/Autocomplete";
 import { Footer } from "../components/Footer";
+import Header from "../components/Header.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 import "../CSS/Home.css";
 import logo from "../assets/logo.png";
@@ -15,9 +18,30 @@ const Login = () => {
   };
 
   return (
-    <input type="button" onClick={toLogin} id="login" value="Login/Register" />
+    <button
+      type="button"
+      onClick={toLogin}
+      id="login"
+      //   value={<FontAwesomeIcon icon={faUser} />}
+    >
+      <FontAwesomeIcon icon={faUser} />
+    </button>
   );
 };
+
+export default Login;
+
+window.onscroll = function () {
+  scrollFunction();
+};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    document.getElementsByClassName("header")[0].style.top = "0";
+  } else {
+    document.getElementsByClassName("header")[0].style.top = "-150px";
+  }
+}
 
 export class Home extends Component {
   constructor(props) {
@@ -25,13 +49,13 @@ export class Home extends Component {
     this.state = {
       src: [
         "Legal ",
-        "Financial",
         "Medical",
+        "Financial",
         "Technician",
-        "Chef",
         "Teacher ",
         "Informatics",
         "Artist",
+        "Chef",
         "Household",
         "Other",
       ],
@@ -42,6 +66,7 @@ export class Home extends Component {
   render() {
     return (
       <div className="HomeContainer">
+        <Header search={this.state.search} />
         <div className="logoSearch">
           <img
             className="Logo"
@@ -58,9 +83,36 @@ export class Home extends Component {
             <HomeCategory key={i} name={item} classtype={i} />
           ))}
         </div>
-        <section className="Steps Step3"></section>
-        <section className="Steps Step4"></section>
-        <section className="Steps Step5"></section>
+        <section className="Steps Step3">
+            <h1>Book your appointment: </h1>
+          <img
+            className="Logo"
+            src={logo}
+            alt="logo"
+            height="400"
+            width="600"
+          />
+        </section>
+        <section className="Steps Step4">
+          <h1>Log in to your video call through our site: </h1>
+          <img
+            className="Logo"
+            src={logo}
+            alt="logo"
+            height="400"
+            width="600"
+          />
+        </section>
+        <section className="Steps Step5">
+            <h1>Payment is charged automatically on your card: </h1>
+          <img
+            className="Logo"
+            src={logo}
+            alt="logo"
+            height="400"
+            width="600"
+          />
+        </section>
         <Footer />
       </div>
     );

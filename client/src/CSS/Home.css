@@ -1,3 +1,12 @@
+.HomeContainer .header{
+    width: 100%;
+    position: fixed;
+    top: -150px;
+    transition: top 0.3s;
+    z-index: 101;
+    /* display: none; */
+}
+
 .logoSearch {
   text-align: center;
 }
@@ -19,10 +28,10 @@
   /* transform: translate(-50%, -50%); */
   align-content: center;
   flex-direction: row; /*  default value; can be omitted */
-  background-color: rgba(255, 140, 0, 0.3);
-  border: solid 2px black;
-  border-radius: 100%;
-  padding: 5%;
+  background-color: rgba(230, 230, 230, 0.486);
+  border: solid 5px black;
+  border-radius: 10%;
+  padding: 4%;
   align-items: center;
 }
 
@@ -109,10 +118,18 @@
   color: #000 !important;
 }
 
+/* ------------------Login------------------ */
+
+
 #login {
-  position: fixed;
-  top: 5%;
-  left: 80%;
+
+  position: absolute;
+  font-size:36px;
+  top: 40px;
+  left: 95%;
+border-color: orangered;
+ color: darkorange;
+ background-color: #000;
 }
 
 /* ------------------Step Sections------------------ */
@@ -123,12 +140,27 @@
     width: auto;
 }
 
+.Steps img{
+    background-color: #000;
+    border: 5px groove black;
+    margin:30vh 10vw 0;
+}
+
+.Steps h1{
+    margin: 0 10vw 0;
+    float:left;
+}
+
 .Step3{
-    background-color: darkorange;
+    background-color: rgb(255, 207, 148);
 }
 .Step4{
-    background-color: orangered;
+    background-color: rgb(216, 141, 114);
 }
 .Step5{
-    background-color: rgb(161, 132, 76);
+    background-color: rgb(219, 139, 73);
+}
+
+.Step4 img, .Step3 h1, .Step5 h1{
+    float:right;
 }

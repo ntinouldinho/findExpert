@@ -58,11 +58,11 @@
   font-size: 1em;
 }
 
-#profile {
+.header #profile {
   border-radius: 30vw;
 }
 
-#logo {
+.header #logo {
   text-align: left !important;
   top: 0%;
   left: 5%;
@@ -77,8 +77,11 @@
   justify-content: space-between;
 }
 
-.header form {
-  text-align: left;
+.header .search {
+  margin: auto;
+  margin-right: 328px;
+  display: block;
+  text-align: center;
   width: 100%;
 }
 
@@ -92,5 +95,5 @@
 }
 
 .namesurname {
-    grid-area: namesurname;
+  grid-area: namesurname;
 }
