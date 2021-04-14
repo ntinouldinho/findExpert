@@ -467,6 +467,11 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-13.13.47.tgz#6eca42c3462821309b26edbc2eff0db1e37ab9bc"
   integrity sha512-R6851wTjN1YJza8ZIeX6puNBSi/ZULHVh4WVleA7q256l+cP2EtXnKbO455fTs2ytQk3dL9qkU+Wh8l/uROdKg==
 
+"@wojtekmaj/date-utils@^1.0.2":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@wojtekmaj/date-utils/-/date-utils-1.0.3.tgz#2dcfd92881425c5923e429c2aec86fb3609032a1"
+  integrity sha512-1VPkkTBk07gMR1fjpBtse4G+oJqpmE+0gUFB0dg3VIL7qJmUVaBoD/vlzMm/jNeOPfvlmerl1lpnsZyBUFIRuw==
+
 abort-controller@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/abort-controller/-/abort-controller-3.0.0.tgz#eaf54d53b62bae4138e809ca225c8439a6efb392"
@@ -801,6 +806,11 @@ event-target-shim@^5.0.0:
   resolved "https://registry.yarnpkg.com/event-target-shim/-/event-target-shim-5.0.1.tgz#5d4d3ebdf9583d63a5333ce2deb7480ab2b05789"
   integrity sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==
 
+exenv@^1.2.0:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/exenv/-/exenv-1.2.2.tgz#2ae78e85d9894158670b03d47bec1f03bd91bb9d"
+  integrity sha1-KueOhdmJQVhnCwPUe+wfA72Ru50=
+
 express@^4.17.1:
   version "4.17.1"
   resolved "https://registry.yarnpkg.com/express/-/express-4.17.1.tgz#4491fc38605cf51f8629d39c2b5d026f98a4c134"
@@ -977,6 +987,13 @@ get-stream@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/get-stream/-/get-stream-6.0.0.tgz#3e0012cb6827319da2706e601a1583e8629a6718"
   integrity sha512-A1B3Bh1UmL0bidM/YX2NsCOTnGJePL9rO/M+Mw3m9f2gUpfokS0hi5Eah0WSUEWZdZhIZtMjkIYS7mDfOqNHbg==
+
+get-user-locale@^1.2.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/get-user-locale/-/get-user-locale-1.4.0.tgz#a2c4b5da46feec9f03c9b07d197b1620490a5370"
+  integrity sha512-gQo03lP1OArHLKlnoglqrGGl7b04u2EP9Xutmp72cMdtrrSD7ZgIsCsUKZynYWLDkVJW33Cj3pliP7uP0UonHQ==
+  dependencies:
+    lodash.once "^4.1.1"
 
 globalthis@^1.0.2:
   version "1.0.2"
@@ -1268,7 +1285,7 @@ lodash.isstring@^4.0.1:
   resolved "https://registry.yarnpkg.com/lodash.isstring/-/lodash.isstring-4.0.1.tgz#d527dfb5456eca7cc9bb95d5daeaf88ba54a5451"
   integrity sha1-1SfftUVuynzJu5XV2ur4i6VKVFE=
 
-lodash.once@^4.0.0:
+lodash.once@^4.0.0, lodash.once@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/lodash.once/-/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
   integrity sha1-DdOXEhPHxW34gJd9UEyI+0cal6w=
@@ -1303,6 +1320,11 @@ media-typer@0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
   integrity sha1-hxDXrwqmJvj/+hzgAWhUUmMlV0g=
+
+merge-class-names@^1.1.1:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/merge-class-names/-/merge-class-names-1.4.0.tgz#02edcdd5ff677fbb03b47ecd4586df89d697b81b"
+  integrity sha512-xNdBM7s+6uD+vNZJEymqrFbMBCDGzoA8clZTcj2F1XIy1QQKF+wjFVv7iDZFfdCBnViTdt54A4Ye2lmBsXrBjQ==
 
 merge-descriptors@1.0.1:
   version "1.0.1"
@@ -1454,7 +1476,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.7.2:
+prop-types@^15.5.10, prop-types@^15.6.0, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -1532,6 +1554,16 @@ raw-body@2.4.0:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
+react-calendar@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/react-calendar/-/react-calendar-3.3.1.tgz#da691a5d59c88f178695fd8b33909a71d698021f"
+  integrity sha512-iDIrhE0ABz3mChAIvA+5d2UtQGEb5oaUpLiEbrRdWHBYb45MhsbO59pG9HIy2uTdHkBF/nvzRV2JBmMfdg/0Qg==
+  dependencies:
+    "@wojtekmaj/date-utils" "^1.0.2"
+    get-user-locale "^1.2.0"
+    merge-class-names "^1.1.1"
+    prop-types "^15.6.0"
+
 react-credit-cards@^0.8.3:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/react-credit-cards/-/react-credit-cards-0.8.3.tgz#608a8ee8bf3a88857fc83023ffba1ad536ba8c7e"
@@ -1554,6 +1586,26 @@ react-is@^16.8.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
+
+react-lifecycles-compat@^3.0.0:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
+  integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
+
+react-modal@^3.13.1:
+  version "3.13.1"
+  resolved "https://registry.yarnpkg.com/react-modal/-/react-modal-3.13.1.tgz#a02dce63bbfee7582936f1e9835d518ef8f56453"
+  integrity sha512-m6yXK7I4YKssQnsjHK7xITSXy2O81BSOHOsg0/uWAsdKtuT9HF2tdoYhRuxNNQg2V+LgepsoHUPJKS8m6no+eg==
+  dependencies:
+    exenv "^1.2.0"
+    prop-types "^15.5.10"
+    react-lifecycles-compat "^3.0.0"
+    warning "^4.0.3"
+
+react-show-more-button@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-show-more-button/-/react-show-more-button-1.0.0.tgz#5cee8f27977ec0636af649bb0cdd0422f66a8614"
+  integrity sha512-uDCVO99RB/nkDiW0Gztj3buxX3cEeoVc5pIrapYU6P40Msq5b28Krdi7c3BqqYF+W5Xz/eG3LSDmUfu3d6/k3A==
 
 readable-stream@^3.1.1:
   version "3.6.0"
@@ -1803,6 +1855,13 @@ vary@^1, vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
+
+warning@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/warning/-/warning-4.0.3.tgz#16e9e077eb8a86d6af7d64aa1e05fd85b4678ca3"
+  integrity sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==
+  dependencies:
+    loose-envify "^1.0.0"
 
 websocket-driver@>=0.5.1:
   version "0.7.4"

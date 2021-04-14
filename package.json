@@ -16,8 +16,11 @@
     "firebase-admin": "^9.5.0",
     "html-to-draftjs": "^1.5.0",
     "nodemailer": "^6.5.0",
+    "react-calendar": "^3.3.1",
     "react-credit-cards": "^0.8.3",
     "react-draft-wysiwyg": "^1.14.5",
+    "react-modal": "^3.13.1",
+    "react-show-more-button": "^1.0.0",
     "socket.io": "^4.0.0",
     "sweetalert": "^2.1.2"
   },
