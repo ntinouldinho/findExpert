@@ -7,7 +7,7 @@
 }
 
 .HomeCategories {
-  width: calc(50%);
+  width: calc(68%);
   height: 300px;
   position: relative;
   margin: auto;
@@ -19,7 +19,7 @@
   /* transform: translate(-50%, -50%); */
   align-content: center;
   flex-direction: row; /*  default value; can be omitted */
-  background-color: rgba(255, 173, 144, 0.384);
+  background-color: rgb(0, 0, 0);
   /* border: solid 2px orangered; */
   border-radius: 10px;
   padding: 0 13%;
@@ -105,7 +105,7 @@
   /* text-decoration-style: none; */
 }
 
-a:hover, a:visited, a:active, a:focus, a:link {
+.HomeCategory a:hover, a:visited, a:active, a:focus, .HomeCategory a:link {
   color: #000 !important;
 }
 

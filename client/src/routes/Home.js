@@ -23,8 +23,19 @@ export class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      src: [ "Doctor","Mechanic", "Chef", "Chef", "Doctor", "Mechanic"],
-      search: ""
+      src: [
+        "Doctor",
+        "Mechanic",
+        "Chef",
+        "Chef",
+        "Doctor",
+        "Mechanic",
+        "Chef",
+        "Doctor",
+        "Mechanic",
+        "Chef"
+      ],
+      search: "",
     };
   }
 
@@ -46,7 +57,7 @@ export class Home extends Component {
         </div>
         <div className="HomeCategories">
                 {this.state.src.map((item, i) => (
-                    <HomeCategory key={i} name={item} classtype={i+1}/>
+                    <HomeCategory key={i} name={item} classtype={i}/>
           ))}
             </div>
             <Footer />
