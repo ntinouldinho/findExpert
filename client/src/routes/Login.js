@@ -22,11 +22,11 @@ export class Login extends Component {
 
     onTodoChange(e) {
         const name = e.target.name;
-        if(name=='name'){
+        if(name==='name'){
             this.setState({ name: e.target.value });
-        }else if(name=="password"){
+        }else if(name==="password"){
             this.setState({ password: e.target.value });
-        }else if(name=="email"){
+        }else if(name==="email"){
             this.setState({ email: e.target.value });
         }
         
@@ -60,7 +60,7 @@ export class Login extends Component {
         const api = this.state.isLogin ? "login":"register";
 
         
-        const response = await fetch('/api/'+api, {
+        await fetch('/api/'+api, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

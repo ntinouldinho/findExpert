@@ -19,7 +19,7 @@ export class Autocomplete extends Component {
     console.log("onChanges");
     const { options } = this.props;
     const search = e.currentTarget.value;
-      if (search == "") {
+      if (search === "") {
           this.setState({
               search: ""
           });
