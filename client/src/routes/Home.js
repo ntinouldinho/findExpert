@@ -24,16 +24,16 @@ export class Home extends Component {
     super(props);
     this.state = {
       src: [
-        "Doctor",
-        "Mechanic",
+        "Legal ",
+        "Financial",
+        "Medical",
+        "Technician",
         "Chef",
-        "Chef",
-        "Doctor",
-        "Mechanic",
-        "Chef",
-        "Doctor",
-        "Mechanic",
-        "Chef",
+        "Teacher ",
+        "Informatics",
+        "Artist",
+        "Household",
+        "Other",
       ],
       search: "",
     };
@@ -58,6 +58,9 @@ export class Home extends Component {
             <HomeCategory key={i} name={item} classtype={i} />
           ))}
         </div>
+        <section className="Steps Step3"></section>
+        <section className="Steps Step4"></section>
+        <section className="Steps Step5"></section>
         <Footer />
       </div>
     );

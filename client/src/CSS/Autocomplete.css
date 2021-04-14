@@ -40,7 +40,7 @@ ul.options li.option-active {
   text-align: center;
 }
 
-.logoSearch form input {
+.searchForm input {
   /* margin-top: 10vh; */
   /* margin-top: 9px;
   margin-left: 30px;
@@ -54,7 +54,7 @@ ul.options li.option-active {
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
   box-shadow: none !important;
-  width: 30%;
+  width: 40%;
   outline: none;
   background-color: rgba(255, 140, 0, 0.3);
 }
@@ -64,7 +64,7 @@ ul.options li.option-active {
     color:darkorange;
 } */
 
-form button {
+.searchForm button {
     position: relative;
   background: darkorange;
   border: 6px solid darkorange;
@@ -75,6 +75,12 @@ form button {
   border-top-right-radius: 20px !important;
   border-bottom-right-radius: 20px !important;
   cursor: pointer;
+  transition: 0.1s;
+}
+
+.searchForm button:active {
+    border-color: rgb(255, 174, 74);
+    background-color:rgb(223, 122, 0);
 }
 
 .search {

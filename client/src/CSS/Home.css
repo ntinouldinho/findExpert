@@ -114,3 +114,21 @@
   top: 5%;
   left: 80%;
 }
+
+/* ------------------Step Sections------------------ */
+
+.Steps{
+    
+    height: 100vh;
+    width: auto;
+}
+
+.Step3{
+    background-color: darkorange;
+}
+.Step4{
+    background-color: orangered;
+}
+.Step5{
+    background-color: rgb(161, 132, 76);
+}
