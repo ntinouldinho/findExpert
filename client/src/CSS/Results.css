@@ -1,48 +1,96 @@
-.Professionals{
-    text-align: center;
+.Professionals {
+  grid-area: Professionals;
+  text-align: center;
 }
-.ProfessionalBlock{
-    position: relative;
-    float: center;
-    height: 100px;
-    width: 60%;
-    left:20%;
-    background-color: aqua;
-    margin:20px;
-    border-radius: 30px;
-  }
-
-.ProfilePic{
-    border-radius: 30px;
-    position:relative;
-    width:15%;
-    height:100%;
-    float:left;
+.ProfessionalBlock {
+  grid-template-areas:
+    "ProfilePic Rating"
+    "ProfilePic namesurname"
+    "info info";
+  display: grid;
+  height: 25vh;
+  width: 60vw;
+  left: 20%;
+  background-color: black;
+  margin: 20px;
+  border-radius: 25px;
+  border: 5px solid orangered;
+  overflow: scroll;
+  grid-template-columns: 70% 30%;
 }
 
-#profile{
-    border-radius: 30px;
+.ProfessionalBlock > div {
+  text-align: left;
+}
+
+.info {
+  grid-area: info;
+  color: cadetblue;
+  font-size: 1vw;
+  text-align: center;
+}
+
+.ProfessionalBlock > a:hover {
+  color: crimson;
+}
+
+.ProfilePic {
+  grid-area: ProfilePic;
+  border-radius: 50%;
+  width: 30%;
+  height: 50%;
+  border: 1px orangered solid;
+}
+
+.ProfList {
+  grid-area: ProfList;
+  list-style-type: circle;
+  padding: 20px;
+  border: 5px solid orangered;
+  list-style-position: inside;
+  display: inline-block;
+  text-align: left;
+  border-radius: 25px;
+}
+
+.ProfList li:hover {
+  color: orangered;
+  font-size: 1em;
+}
+
+#profile {
+  border-radius: 30vw;
 }
 
 #logo {
-    text-align: left !important;
-    top:0%;
-    left:5%
+  text-align: left !important;
+  top: 0%;
+  left: 5%;
 }
 
-
-
-.header{
-    background-color: rgb(255, 255, 255);
-    text-align: right;
-    display: flex;                  /* establish flex container */
-    border-bottom: 5px solid #000 ;
-    align-items: center;
-    justify-content: space-between;
+.header {
+  background-color: rgb(255, 255, 255);
+  text-align: right;
+  display: flex; /* establish flex container */
+  border-bottom: 5px solid #000;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.header form{
-    text-align: left;
-    width:100%;
+.header form {
+  text-align: left;
+  width: 100%;
 }
 
+.grid-container-prof {
+  grid-template-areas: "ProfList Professionals";
+  display: grid;
+}
+
+.Rating {
+  grid-area: Rating;
+}
+
+.namesurname {
+    grid-area: namesurname;
+}

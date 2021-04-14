@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { useHistory } from "react-router-dom";
-import  HomeCategory  from "../components/HomeCategory.js";
+import HomeCategory from "../components/HomeCategory.js";
 import { Autocomplete } from "../components/Autocomplete";
 import { Footer } from "../components/Footer";
 
@@ -33,7 +33,7 @@ export class Home extends Component {
         "Chef",
         "Doctor",
         "Mechanic",
-        "Chef"
+        "Chef",
       ],
       search: "",
     };
@@ -51,16 +51,14 @@ export class Home extends Component {
             width="378"
           />
           <Login />
-          <Autocomplete
-            options={this.state.src}
-          />
+          <Autocomplete options={this.state.src} />
         </div>
         <div className="HomeCategories">
-                {this.state.src.map((item, i) => (
-                    <HomeCategory key={i} name={item} classtype={i}/>
+          {this.state.src.map((item, i) => (
+            <HomeCategory key={i} name={item} classtype={i} />
           ))}
-            </div>
-            <Footer />
+        </div>
+        <Footer />
       </div>
     );
   }
