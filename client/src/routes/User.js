@@ -101,7 +101,7 @@ export class User extends Component {
     resetPassword = async e => {
         e.preventDefault();
 
-        const response = await fetch('/api/reset', {
+        await fetch('/api/reset', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

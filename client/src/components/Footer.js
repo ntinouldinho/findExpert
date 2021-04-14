@@ -31,7 +31,7 @@ export class Footer extends Component {
                   <div className="media">
                     <ul>
                       <li>
-                        <a href="https://www.aueb.gr/" target="_blank">
+                        <a href="https://www.aueb.gr/" target="_blank" rel="noreferrer">
                           <img
                             src="https://upload.wikimedia.org/wikipedia/el/9/94/Athens_University_of_Economics_and_Business_%28logo%29.png"
                             alt="AUEB Logo"
@@ -52,6 +52,7 @@ export class Footer extends Component {
                         <a
                           href="https://www.facebook.com/auebgreece"
                           target="_blank"
+                          rel="noreferrer"
                         >
                           <img
                             src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/120px-Facebook_f_logo_%282019%29.svg.png"
@@ -64,6 +65,7 @@ export class Footer extends Component {
                         <a
                           href="https://www.instagram.com/aueb.gr/?hl=el"
                           target="_blank"
+                          rel="noreferrer"
                         >
                           <img
                             src="https://lh3.googleusercontent.com/2sREY-8UpjmaLDCTztldQf6u2RGUtuyf6VT5iyX3z53JS4TdvfQlX-rNChXKgpBYMw"
