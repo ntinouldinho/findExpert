@@ -56,19 +56,9 @@ export class Home extends Component {
     window.addEventListener("scroll", this.scrollFunction);
   }
 
-<<<<<<< Updated upstream
   componentWillUnmount() {
     window.removeEventListener('scroll', this.scrollFunction);
   }
-=======
-  // componentDidUpdate = () => {
-  //   if (shouldBlockNavigation) {
-  //     window.onbeforeunload = () => true
-  //   } else {
-  //     window.onbeforeunload = undefined
-  //   }
-  // }
->>>>>>> Stashed changes
 
   scrollFunction() {
     console.log("scrolling");
