@@ -135,7 +135,7 @@ border-color: orangered;
 /* ------------------Step Sections------------------ */
 
 .Steps{
-    
+    grid-area: step;
     height: 100vh;
     width: auto;
 }
@@ -163,4 +163,55 @@ border-color: orangered;
 
 .Step4 img, .Step3 h1, .Step5 h1{
     float:right;
+}
+
+
+.grid-container-righttext {
+  display: grid;
+  height: 100vh;
+  grid-template-areas: 'Logo stepTitle' 
+  'Logo desc' ;
+  grid-gap: 10px;
+  /* background-color: red; */
+  width: 100%;
+  justify-content: center;
+  align-content: center;
+  /* text-align: center;
+  align-items: center; */
+
+}
+
+.grid-container-lefttext {
+  display: grid;
+  height: 100vh;
+  grid-template-areas: 'stepTitle Logo' 
+  'desc Logo' ;
+  grid-gap: 10px;
+  /* background-color: red; */
+  width: 100%;
+  justify-content: center;
+  align-content: center;
+  
+  /*align-items: center; */
+}
+
+.desc{
+  grid-area: desc;
+  font-size: 2vw;
+}
+
+.Logo{
+  grid-area: Logo;
+}
+
+.stepTitle{
+  grid-area: stepTitle;
+}
+
+#moto1 {
+    font-size: 4vw;
+}
+
+#moto2 {
+  font-size: 2vw;
 }
