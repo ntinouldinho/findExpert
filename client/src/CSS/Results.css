@@ -81,6 +81,9 @@
   border-radius: 25px;
   overflow:auto;
   float: left;
+
+  top: 20%;
+  position: sticky;
 }
 
 .ProfList li:hover {
