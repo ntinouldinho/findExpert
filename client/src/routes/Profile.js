@@ -8,6 +8,9 @@ import ReactModal from 'react-modal';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import ShowMore from 'react-show-more-button';
+import ShowMoreText from 'react-show-more-text';
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+ 
 
 class ExampleApp extends React.Component {
 
@@ -110,10 +113,13 @@ const AboutMe = (props) => {
 
     return (
         <div className="aboutme">
-            <h2> About me</h2>
-            <ShowMore maxHeight={200}>
-                {props.about}
-                </ShowMore>
+            <h2 id="aboutmetitle"> About me</h2>
+            <ShowMoreText  
+                lines={3}
+                more='Show more'
+                less='Show less'>
+                { ReactHtmlParser(props.about) }
+            </ShowMoreText>
         </div>
         
        
@@ -121,31 +127,17 @@ const AboutMe = (props) => {
 
 }
 
-const Appointment = (props) => {
-  
-    return (
-        <div className="appointment box">
-            <h2> Appointment</h2>
-            <ul>
-                {props.appointment.map((item, i) => (
-                    <h3>{item}</h3>
-                ))}
-            </ul>
-            
-        </div>
-       
-    );
-
-}
 
 const CV = (props) => {
   
     return (
         <div className="cv box">
             <h2> CV </h2>
+            <ul>
             {props.cv.map((item, i) => (
-                <h1 key={i}>{item}</h1>
+                <li key={i}>{item}</li>
             ))}
+            </ul>
         </div>
        
     );
@@ -204,7 +196,6 @@ export class Profile extends React.Component {
     }
 
     async componentDidMount() {
-        console.log(2);
         try {
           const response = await fetch(`/api/expert/get`);
           const json = await response.json();
@@ -221,7 +212,6 @@ export class Profile extends React.Component {
     }
 
     render(){
-        console.log(1);
         return(
             <div style ={{backgroundColor: "lightgrey"}}> 
                 <Header/>
