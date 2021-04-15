@@ -12,14 +12,12 @@ export class Results extends Component {
     super(props);
     this.state = {
       professionals: [
-        { job: "Doctor", name: "Kostas", surname: "Iliadis" },
-        { job: "Mechanic", name: "Jimis", surname: "Iliadis" },
-        { job: "Doctor", name: "Kostas", surname: "Iliadis" },
-        { job: "Mechanic", name: "Jimis", surname: "Iliadis" },
-        { job: "Doctor", name: "Kostas", surname: "Iliadis" },
-        { job: "Mechanic", name: "Jimis", surname: "Iliadis" },
-        { job: "Doctor", name: "Kostas", surname: "Iliadis" },
-        { job: "Mechanic", name: "Jimis", surname: "Iliadis" },
+        { job: "Doctor", name: "Kostas"},
+        { job: "Doctor", name: "Kostas"},
+        { job: "Doctor", name: "Kostas"},
+        { job: "Doctor", name: "Kostas"},
+        { job: "Doctor", name: "Kostas"},
+        { job: "Doctor", name: "Kostas"},
       ],
       search: props.match.params.search,
     };

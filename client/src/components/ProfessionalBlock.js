@@ -15,7 +15,7 @@ const ProfessionalBlock = ({ person }) => {
             
           />
           <span class="caption">
-            {person.name} {person.surname} <br></br>{person.job}
+            {person.name}<br></br>{person.job}
             <Rating rating={"4"} count={5} />
           </span>
           
