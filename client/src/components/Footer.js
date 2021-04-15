@@ -15,7 +15,7 @@ export class Footer extends Component {
                   <p>Upcoming Discounts</p>
                   <p>Return Policy</p>
                   <p>
-                    <a href="javascript:priv()">Privacy Policy</a>
+                    Privacy Policy
                   </p>
                   <p>Terms of Use</p>
                 </div>
