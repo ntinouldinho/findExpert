@@ -324,8 +324,8 @@ function ChatMessage(props) {
   return (
     <>
       <div>
-        <img src={"https://api.adorable.io/avatars/23/abott@adorable.png"} />
-        <p></p>
+        <img src={"https://p.kindpng.com/picc/s/24-248325_profile-picture-circle-png-transparent-png.png"} />
+        <p>{props.message}</p>
       </div>
     </>
   );
