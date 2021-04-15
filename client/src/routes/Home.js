@@ -58,6 +58,10 @@ export class Home extends Component {
     window.addEventListener('scroll', this.scrollFunction);
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.scrollFunction);
+  }
+
   scrollFunction() {
     console.log("scrolling");
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
