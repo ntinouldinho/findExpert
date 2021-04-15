@@ -15,8 +15,9 @@ class ExampleApp extends React.Component {
       super();
       this.state = {
         showModal: false,
-        time:['7:00-8:00','8:00-9:00','10:00-11:00'],
-        selected: -1
+        time:['7:00-8:00','8:00-9:00','10:00-11:00','11:00-12:00','12:00-13:00','13:00-14:00','14:00-15:00','15:00-16:00','16:00-17:00','17:00-18:00','18:00-19:00'],
+        selected: -1,
+        html: <p>ffff<em>ff</em></p>
       };
       
       this.handleOpenModal = this.handleOpenModal.bind(this);
@@ -78,6 +79,8 @@ class ExampleApp extends React.Component {
                 </div>
                 <div id="modal-choices">
                     <Button id="book-appointment" variant="success">Book</Button>
+
+                    <Button id="cancel-modal" onClick={this.handleCloseModal} variant="danger">Cancel</Button>
                 </div>
             </div>
           </ReactModal>
@@ -90,8 +93,8 @@ const Info = (props) => {
   
     return (
         <div className="info">
-            Name: {props.name}<br/>
-            Profession: {props.profession}<br/>
+            {props.name}<br/>
+            {props.profession}<br/>
             <div style={{display: "inline-flex"}}>Rating:   <span id="rating"><Rating rating={props.stars} count={5} /></span></div><br/>
             
             <ExampleApp />
@@ -105,7 +108,7 @@ const AboutMe = (props) => {
 
 
     return (
-        <div className="box">
+        <div className="aboutme">
             <h2> About me</h2>
             <ShowMore maxHeight={200}>
                 {props.about}

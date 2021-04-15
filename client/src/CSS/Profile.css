@@ -2,7 +2,7 @@
     display: grid;
     /* border: 3px groove orangered; */
     border: 3px double cyan;
-    grid-template-areas: 'picture info' 'aboutme aboutme' 'box box' 'services appointment' 'cv cv' 'reviews reviews';
+    grid-template-areas: 'picture info info' 'aboutme aboutme aboutme' 'box box box' 'services services services' 'cv cv cv' 'reviews reviews reviews';
     grid-gap: 10px;
     background-color: white;
     width: 100%;
@@ -51,7 +51,7 @@
     position: absolute;
     top: 25%;
     left: 25%;
-    height: 50%;
+    height: 50vh;
     width: 50%;
     background-color: papayawhip;
 }
@@ -85,13 +85,12 @@
     font-Size: "15";
     text-align: left;
     margin-left: 15%;
+    text-align: center;
 }
 
 .aboutme {
     grid-area: aboutme;
-    overflow-x: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    margin: 70px;
 }
 
 .link {
@@ -120,7 +119,9 @@
 
 #modal-content {
     display: grid;
-    grid-template-areas: "calendar results" "choices choices";
+    grid-template-areas: "calendar results"
+                     "calendar choices";
+    height: 100%;
 }
 
 #calendar {
@@ -130,10 +131,16 @@
     grid-area: calendar;
 }
 
-#results {
+#results>ul {
     grid-area: results;
+    height: 200px;
+    overflow-y: scroll;
 }
 
 #modal-choices {
     grid-area: choices;
+}
+
+#cancel-modal{
+    margin-left:50px;
 }
