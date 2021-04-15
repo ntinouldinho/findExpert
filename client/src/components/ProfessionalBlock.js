@@ -4,8 +4,9 @@ import Rating from "react-star-review";
 
 const ProfessionalBlock = ({ person }) => {
   return (
-    <a href={"/profile/" + person.name + "/56"}>
+    
       <div className="ProfessionalBlock">
+        <a href={"/profile/" + person.name + "/56"}>
         <div className="leftside" style={{ float: "left" }}>
           <img
             alt="profile pic"
@@ -45,8 +46,9 @@ const ProfessionalBlock = ({ person }) => {
           desktop publishing software like Aldus PageMaker including versions of
           Lore
         </div>
+        </a>
       </div>
-    </a>
+    
   );
 };
 

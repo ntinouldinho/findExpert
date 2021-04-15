@@ -1,23 +1,17 @@
 .Professionals {
-  grid-area: Professionals;
   text-align: center;
+  
 }
 .ProfessionalBlock {
-  /* grid-template-areas:
-    "ProfilePic ."
-    "Rating ."
-    "info info"; */
-  /* display: grid; */
-  
   height: 25vh;
   width: 60vw;
   left: 20%;
-  background-color: black;
-  margin: 20px;
+  background-color: lightgrey;
+ 
   border-radius: 25px;
   border: 5px solid orangered;
   overflow: hidden;
-  /* grid-template-columns: 70% 30%; */
+  margin:20px;
 }
 
 .ProfessionalBlock > div {
@@ -26,26 +20,29 @@
 
 .info {
   grid-area: info;
-  color: cadetblue;
+  color: rgb(0, 0, 0);
   font-size: 1vw;
-  text-align: left; 
+  text-align: left;
+  
 }
 
-.ProfessionalBlock > a:hover {
-  color: crimson;
+/* .ProfessionalBlock > a:hover {
+  
+} */
+
+a:hover .caption {
+  color: darkorange;
+  text-decoration: none;
 }
 
-.ProfilePic{
+.ProfilePic {
   display: block;
-    margin: auto;
-    max-width: 100%;
-    max-height: 100%;
+  margin: auto;
+  max-width: 100%;
+  max-height: 100%;
 }
-
 
 .leftside {
-  /* grid-area: ProfilePic; */
- 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,19 +51,16 @@
   text-align: center;
   width: 150px;
   margin: 10px;
-  
 }
 
 .caption {
-  
   font-size: 1vw;
 }
 
 .leftside > img {
-  
   width: 80%;
   height: 70%;
-  border: 1px orangered solid;
+  /* border: 1px orangered solid; */
   border-radius: 50%;
 }
 
@@ -76,17 +70,17 @@
   padding: 20px;
   border: 5px solid orangered;
   list-style-position: inside;
-  
+  background-color: lightgrey;
   text-align: left;
   border-radius: 25px;
-  overflow:auto;
+  overflow: auto;
   float: left;
 
   top: 20%;
   position: sticky;
 }
 
-.ProfList li:hover {
+.ProfList a:hover, .ProfList li:hover {
   color: orangered;
   font-size: 1em;
 }
@@ -97,21 +91,11 @@
   display: grid;
 }
 
-.flexboxresults{
+.flexboxresults {
   display: flex;
   align-items: baseline;
   flex-direction: row;
- 
 }
-
-/* .Rating {
-  grid-area: Rating;
-}
-
-.namesurname {
-  grid-area: namesurname;
-} */
-
 
 .header #profile {
   border-radius: 30vw;
@@ -139,4 +123,3 @@
   text-align: center;
   width: 100%;
 }
-
