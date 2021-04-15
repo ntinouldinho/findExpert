@@ -31,17 +31,7 @@ const Login = () => {
 
 export default Login;
 
-window.onscroll = function () {
-  scrollFunction();
-};
 
-function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    document.getElementsByClassName("header")[0].style.top = "0";
-  } else {
-    document.getElementsByClassName("header")[0].style.top = "-150px";
-  }
-}
 
 export class Home extends Component {
   constructor(props) {
@@ -61,8 +51,21 @@ export class Home extends Component {
       ],
       search: "",
     };
+    this.scrollFunction=this.scrollFunction.bind(this);
   }
 
+  componentDidMount() {
+    window.addEventListener('scroll', this.scrollFunction);
+  }
+
+  scrollFunction() {
+    console.log("scrolling");
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      document.getElementsByClassName("header")[0].style.top = "0";
+    } else {
+      document.getElementsByClassName("header")[0].style.top = "-150px";
+    }
+  }
   render() {
     return (
       <div className="HomeContainer">
