@@ -63,8 +63,8 @@ export class Home extends Component {
   scrollFunction() {
     console.log("scrolling");
     if (
-      document.body.scrollTop > 20 ||
-      document.documentElement.scrollTop > 20
+      document.body.scrollTop > 300 ||
+      document.documentElement.scrollTop > 300
     ) {
       document.getElementsByClassName("header")[0].style.top = "0";
     } else {
