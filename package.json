@@ -19,8 +19,10 @@
     "react-calendar": "^3.3.1",
     "react-credit-cards": "^0.8.3",
     "react-draft-wysiwyg": "^1.14.5",
+    "react-html-parser": "^2.0.2",
     "react-modal": "^3.13.1",
     "react-show-more-button": "^1.0.0",
+    "react-show-more-text": "^1.4.6",
     "socket.io": "^4.0.0",
     "sweetalert": "^2.1.2"
   },
