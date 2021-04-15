@@ -1,17 +1,17 @@
 .Professionals {
   text-align: center;
-  
+  margin-left: 69px;
 }
 .ProfessionalBlock {
   height: 25vh;
   width: 60vw;
   left: 20%;
   background-color: lightgrey;
- 
+
   border-radius: 25px;
   border: 5px solid orangered;
   overflow: hidden;
-  margin:20px;
+  margin: 20px;
 }
 
 .ProfessionalBlock > div {
@@ -23,7 +23,6 @@
   color: rgb(0, 0, 0);
   font-size: 1vw;
   text-align: left;
-  
 }
 
 /* .ProfessionalBlock > a:hover {
@@ -80,11 +79,11 @@ a:hover .caption {
   position: sticky;
 }
 
-.ProfList a:hover, .ProfList li:hover {
+.ProfList a:hover,
+.ProfList li:hover {
   color: orangered;
   font-size: 1em;
 }
-
 
 .grid-container-prof {
   grid-template-areas: "ProfList Professionals";
