@@ -15,6 +15,10 @@
   margin-top: 10vh;
 }
 
+p.desc {
+  text-align: justify;
+}
+
 .HomeCategories {
   width: 1000px;
   height: 500px;
