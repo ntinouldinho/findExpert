@@ -103,6 +103,28 @@ app.post('/api/register/', async(req, res) => {
 
 });
 
+app.get('/api/expert/get', async(req, res) => {
+    const callDoc = firestore.collection('experts').doc('uDOmxlKpwHvQaJ0N1Dds');
+     var doc = await callDoc.get();
+     console.log(doc.data());
+    res.status(201).send(doc.data());
+});
+
+
+app.post('/api/user/edit', async(req, res) => {
+    const user = db.collection('users').doc(req.body.id);
+
+     res = await user.update({name: req.body.name});
+
+});
+
+app.post('/api/expert/edit', async(req, res) => {
+    const expert = db.collection('experts').doc(req.body.id);
+
+     res = await expert.update({name: req.body.name});
+
+});
+
 
 app.post('/api/login/', async(req, res) => {
     console.log(req.body);
