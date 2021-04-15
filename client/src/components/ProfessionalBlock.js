@@ -7,18 +7,17 @@ const ProfessionalBlock = ({ person }) => {
     <a href={"/profile/" + person.name + "/56"}>
       <div className="ProfessionalBlock">
         <div className="leftside" style={{ float: "left" }}>
-          
-          <span class="caption">
-            {person.name} {person.surname} Profession: {person.job}
-            <Rating rating={"4"} count={5} />
-          </span>
           <img
             alt="profile pic"
-            
+            className="ProfilePic"
             src={"https://www.ecpi.edu/sites/default/files/CIV%20Sept%2026.png"}
-            width="150px"
-            height="120px"
+            
           />
+          <span class="caption">
+            {person.name} {person.surname} <br></br>{person.job}
+            <Rating rating={"4"} count={5} />
+          </span>
+          
         </div>
         <div className="info">
           m Ipsum. um passages, and more recently with desktop publishing

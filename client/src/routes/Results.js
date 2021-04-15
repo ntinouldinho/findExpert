@@ -30,7 +30,7 @@ export class Results extends Component {
       <div>
         <Header search={this.state.search} />
 
-        <div className="grid-container-prof">
+        <div className="flexboxresults">
           <div class="ProfList">
             <ul>
               <h2>Subcategories</h2>
