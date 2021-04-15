@@ -59,6 +59,7 @@ class ExampleApp extends React.Component {
              contentLabel="onRequestClose Example"
              onRequestClose={this.handleCloseModal}
              className="Modal"
+             ariaHideApp={false}
           > 
             <div id="modal-content">
         
@@ -191,24 +192,36 @@ export class Profile extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            name: "Giannis Giannou",
-            profession: "Ydraylikos",
-            photo: "Fwtografia",
+            name: "",
+            profession: "",
             reviews: ["4", " 5"],
-            services: ["Service 1", "Service 2"],
-            cv: ["Prwptyxiako", "Ph.D."],
-            about: "I am passionate about my work. Because I love what I do, I have a steady source of motivation that drives me to do my best. In my last job, this passion led me to challenge myself daily and learn new skills that helped me to do better work. For example, I taught myself how to use Photoshop to improve the quality of our photos and graphics. I soon became the go-to person for any design needs.",
+            services: [],
+            cv: [],
+            about: "",
             stars: "4.2",
-            appointment: ["Rantevou 1 stis 20/4", "Rantevou 2 stis 30/6"],
-            url:"https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/car_mechanic.jpg?alt=media&token=23cb2e86-4440-404d-9fdc-53e99eb2a2dc"
+            url:""
         };
     }
 
-    componentDidMount() {
-        console.log("loaded");
+    async componentDidMount() {
+        console.log(2);
+        try {
+          const response = await fetch(`/api/expert/get`);
+          const json = await response.json();
+          this.setState({ 
+                name:json.name+" "+json.surname,
+                profession:json.profession,
+                about: json.about,
+                url:json.photo,
+                services:json.services,
+                cv:json.cv
+            });
+        } catch (error) {
+        }
     }
 
     render(){
+        console.log(1);
         return(
             <div style ={{backgroundColor: "lightgrey"}}> 
                 <Header/>
