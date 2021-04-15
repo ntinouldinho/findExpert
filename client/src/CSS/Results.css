@@ -3,11 +3,12 @@
   text-align: center;
 }
 .ProfessionalBlock {
-  grid-template-areas:
-    "ProfilePic Rating"
-    "ProfilePic namesurname"
-    "info info";
-  display: grid;
+  /* grid-template-areas:
+    "ProfilePic ."
+    "Rating ."
+    "info info"; */
+  /* display: grid; */
+  
   height: 25vh;
   width: 60vw;
   left: 20%;
@@ -16,7 +17,7 @@
   border-radius: 25px;
   border: 5px solid orangered;
   overflow: scroll;
-  grid-template-columns: 70% 30%;
+  /* grid-template-columns: 70% 30%; */
 }
 
 .ProfessionalBlock > div {
@@ -27,19 +28,33 @@
   grid-area: info;
   color: cadetblue;
   font-size: 1vw;
-  text-align: center;
+  text-align: left; 
 }
 
 .ProfessionalBlock > a:hover {
   color: crimson;
 }
 
-.ProfilePic {
-  grid-area: ProfilePic;
-  border-radius: 50%;
-  width: 30%;
-  height: 50%;
+.leftside {
+  /* grid-area: ProfilePic; */
+ 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: top;
+  display: inline-block;
+  text-align: center;
+  width: 150px;
+  margin: 10px;
+  
+}
+
+.leftside > img {
+  margin: 5px;
+  width: 80%;
+  height: 70%;
   border: 1px orangered solid;
+  border-radius: 50%;
 }
 
 .ProfList {
@@ -57,6 +72,21 @@
   color: orangered;
   font-size: 1em;
 }
+
+
+.grid-container-prof {
+  grid-template-areas: "ProfList Professionals";
+  display: grid;
+}
+
+/* .Rating {
+  grid-area: Rating;
+}
+
+.namesurname {
+  grid-area: namesurname;
+} */
+
 
 .header #profile {
   border-radius: 30vw;
@@ -83,17 +113,4 @@
   display: block;
   text-align: center;
   width: 100%;
-}
-
-.grid-container-prof {
-  grid-template-areas: "ProfList Professionals";
-  display: grid;
-}
-
-.Rating {
-  grid-area: Rating;
-}
-
-.namesurname {
-  grid-area: namesurname;
 }
