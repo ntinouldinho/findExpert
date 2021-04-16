@@ -96,6 +96,8 @@ a:hover .caption {
   flex-direction: row;
 }
 
+/* -------------header------------- */
+
 .header #profile {
   border-radius: 30vw;
 }
@@ -120,5 +122,14 @@ a:hover .caption {
   margin-right: 328px;
   display: block;
   text-align: center;
-  width: 100%;
+  /* width: 100%; */
+}
+
+.header .search input{ 
+    font-size: 4vh;
+}
+.header .search button{
+    font-size: 5vh;
+    padding:0 10px;
+    top: 2.5px;
 }

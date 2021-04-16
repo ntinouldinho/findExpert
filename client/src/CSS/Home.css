@@ -12,7 +12,7 @@
 }
 
 .logoSearch form {
-  margin-top: 10vh;
+  margin: 10vh 0 20vh;
 }
 
 p.desc {
@@ -218,4 +218,8 @@ border-color: orangered;
 
 #moto2 {
   font-size: 2vw;
+}
+
+#moto3 {
+    font-size: 3.5vw;
 }

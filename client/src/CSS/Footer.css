@@ -59,10 +59,16 @@ footer hr {
 
 footer button {
     font-family: FontAwesome;
-    background-color: orangered;
+    background-color: darkorange;
     /* padding: 0 5px; */
     /* font-size: 19px; */
     border: 2px groove #fff;
+    transition: all 0.1s ease;
+}
+
+footer button:active {
+    background-color: orangered;
+
 }
 
 footer .row a:any-link {

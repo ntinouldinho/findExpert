@@ -112,7 +112,7 @@ export class Autocomplete extends Component {
           <SearchBar
             value={this.state.search}
             // handleChange={(e) => this.setState({ search: e.target.value })}
-            placeholder="Search for category"
+            placeholder="Search for a Professional..."
             onChange={onChange}
             onKeyDown={onKeyDown}
           />

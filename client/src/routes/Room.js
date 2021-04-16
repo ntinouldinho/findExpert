@@ -23,6 +23,7 @@ const Room = (props) => {
         socketRef.current = io.connect("/");
         console.log("started");
         socketRef.current.emit("join room", props.match.params.roomID);
+        dragElement();
 
         socketRef.current.on("other user", (userID) => {
           console.log("other user " + userID);
@@ -45,7 +46,7 @@ const Room = (props) => {
 
         socketRef.current.on("ice-candidate", handleNewICECandidateMsg);
       });
-  }, [callUser, handleRecieveCall]);
+  }, [callUser, handleRecieveCall, dragElement]);
 
   function callUser(userID) {
     peerRef.current = createPeer(userID);
@@ -148,23 +149,14 @@ const Room = (props) => {
 
   /*---------------Make small camera movable----------------*/
 
-  // Make the DIV element draggable:
-  // if()
-
-  //   userVideo.addEventListener("loadeddata", dragElement(myVid));
-  var elmnt = document.getElementsByClassName("bottomDiv")[0];
-  function dragElement() {
+    function dragElement() {
+    var  elmnt = document.getElementById("myVideo");
     console.log(elmnt);
     var pos1 = 0,
       pos2 = 0,
       pos3 = 0,
       pos4 = 0;
-    // if (document.getElementById(elmnt.id)) {
-    //   // if present, the header is where you move the DIV from:
-    //   document.getElementById(elmnt.id).onmousedown = dragMouseDown;
-    // } else {
-    //   // otherwise, move the DIV from anywhere inside the DIV:
-    console.log(userVideo);
+
     if (elmnt) {
       elmnt.onmousedown = dragMouseDown;
     }
@@ -210,16 +202,13 @@ const Room = (props) => {
           autoPlay
           ref={partnerVideo}
         />
-        {/* <div > */}
         <video
           id="myVideo"
           className="imageDiv bottomDiv"
           muted="muted"
           autoPlay
           ref={userVideo}
-          onDrag={dragElement()}
         />
-        {/* </div> */}
         <div className="room-buttons">
           <img
             className="LogoRoom camera"
@@ -296,8 +285,8 @@ function ChatRoom() {
   return (
     <>
       <main>
-        <ChatMessage key={3} message={"Hello Johnny"} />
-        <ChatMessage key={8} message={"Wazup"} />
+        <ChatMessage key={3} message={"Hello Johnny!"} />
+        <ChatMessage key={8} message={"The meeting will start in 5 minutes."} />
 
         {/* <span ref={dummy}></span> */}
       </main>
@@ -310,7 +299,7 @@ function ChatRoom() {
           placeholder="say something nice"
         />
 
-        <button type="submit">🕊️</button>
+        <button type="submit">📝</button>
       </form>
     </>
   );
@@ -324,7 +313,11 @@ function ChatMessage(props) {
   return (
     <>
       <div>
-        <img src={"https://p.kindpng.com/picc/s/24-248325_profile-picture-circle-png-transparent-png.png"} />
+        <img
+          src={
+            "https://p.kindpng.com/picc/s/24-248325_profile-picture-circle-png-transparent-png.png"
+          }
+        />
         <p>{props.message}</p>
       </div>
     </>

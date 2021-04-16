@@ -75,9 +75,8 @@ export class Home extends Component {
     return (
       <div className="HomeContainer">
         <Header search={this.state.search} />
-        
+
         <div className="logoSearch">
-        
           <img
             className="Logo"
             src={logo}
@@ -86,19 +85,32 @@ export class Home extends Component {
             width="378"
           />
           <Login />
-          <p id="moto1">Looking for an <span style={{color:"orangered"}}>expert</span>? Book your session now!</p>
-          <p id="moto2">Look through our many <span style={{color:"orangered"}}>experts</span>, and <span style={{color:"orangered"}}>find</span> the one that fits you most.</p>
+          <p id="moto1">
+            Looking for an <span style={{ color: "orangered" }}>expert</span>?
+            Book your session now!
+          </p>
+          <p id="moto2">
+            Look through our many{" "}
+            <span style={{ color: "orangered" }}>experts</span>, and{" "}
+            <span style={{ color: "orangered" }}>find</span> the one that fits
+            you better.
+          </p>
           <Autocomplete options={this.state.src} />
-          
+          <p id="moto3">
+            or browse our <span style={{ color: "orangered" }}>categories</span>.
+          </p>
         </div>
-       
+
         <div className="HomeCategories">
           {this.state.src.map((item, i) => (
             <HomeCategory key={i} name={item} classtype={i} />
           ))}
         </div>
 
-        <div className="grid-container-righttext" style={{backgroundColor: "rgb(255, 207, 148)"}}>
+        <div
+          className="grid-container-righttext"
+          style={{ backgroundColor: "rgb(255, 207, 148)" }}
+        >
           <h1 className="stepTitle">Book your appointment: </h1>
           <img
             className="Logo"
@@ -117,8 +129,13 @@ export class Home extends Component {
           </p>
         </div>
 
-        <div className="grid-container-lefttext" style={{backgroundColor: "rgb(216, 141, 114)"}}>
-          <h1 className="stepTitle">Log in to your video call through our site: </h1>
+        <div
+          className="grid-container-lefttext"
+          style={{ backgroundColor: "rgb(216, 141, 114)" }}
+        >
+          <h1 className="stepTitle">
+            Log in to your video call through our site:{" "}
+          </h1>
           <img
             className="Logo"
             src={logo}
@@ -127,15 +144,20 @@ export class Home extends Component {
             width="600"
           />
           <p className="desc">
-          When your appointment is booked, you will recieve an e-mail that contains a link.
-          When you click that, you will be redirected to a room, where your videocall will take place.
-          Feel free to use the chat too!
+            When your appointment is booked, you will recieve an e-mail that
+            contains a link. When you click that, you will be redirected to a
+            room, where your videocall will take place. Feel free to use the
+            chat too!
           </p>
         </div>
 
-
-        <div className="grid-container-righttext" style={{backgroundColor: "rgb(255, 207, 148)"}}>
-          <h1 className="stepTitle">Payment is charged automatically on your card: </h1>
+        <div
+          className="grid-container-righttext"
+          style={{ backgroundColor: "rgb(255, 207, 148)" }}
+        >
+          <h1 className="stepTitle">
+            Payment is charged automatically on your card:{" "}
+          </h1>
           <img
             className="Logo"
             src={logo}
@@ -144,12 +166,13 @@ export class Home extends Component {
             width="600"
           />
           <p className="desc">
-            You will be asked to enter your credit card information during sign up, so don't worry
-            about paying all the time, as everything is done automatically!
+            You will be asked to enter your credit card information during sign
+            up, so don't worry about paying all the time, as everything is done
+            automatically!
           </p>
         </div>
         <Footer />
-        </div>
+      </div>
     );
   }
 }
