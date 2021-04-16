@@ -53,7 +53,7 @@ const Room = (props) => {
     peerRef.current = createPeer(userID);
     userStream.current
       .getTracks()
-      .forEach((track) => senders.current.push(peerRef.current.addTrack(track, userStream.current)));
+      .forEach(track => senders.current.push(peerRef.current.addTrack(track, userStream.current)));
   }
 
   function createPeer(userID) {
@@ -151,6 +151,8 @@ const Room = (props) => {
   function shareScreen() {
     navigator.mediaDevices.getDisplayMedia({ cursor: true }).then(stream => {
         const screenTrack = stream.getTracks()[0];
+        console.log(screenTrack);
+        
         senders.current.find(sender => sender.track.kind === 'video').replaceTrack(screenTrack);
         screenTrack.onended = function() {
             senders.current.find(sender => sender.track.kind === "video").replaceTrack(userStream.current.getTracks()[1]);
@@ -211,6 +213,7 @@ const Room = (props) => {
           id="partnerVideo"
           className="imageDiv topDiv "
           autoPlay
+          controls
           ref={partnerVideo}
         />
         <video
@@ -218,6 +221,7 @@ const Room = (props) => {
           className="imageDiv bottomDiv"
           muted="muted"
           autoPlay
+          controls
           ref={userVideo}
         />
         <div className="room-buttons">
