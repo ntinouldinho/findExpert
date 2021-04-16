@@ -12,6 +12,7 @@ const Room = (props) => {
   const socketRef = useRef();
   const otherUser = useRef();
   const userStream = useRef();
+  const senders = useRef([]);
 
   useEffect(() => {
     navigator.mediaDevices
@@ -52,7 +53,7 @@ const Room = (props) => {
     peerRef.current = createPeer(userID);
     userStream.current
       .getTracks()
-      .forEach((track) => peerRef.current.addTrack(track, userStream.current));
+      .forEach((track) => senders.current.push(peerRef.current.addTrack(track, userStream.current)));
   }
 
   function createPeer(userID) {
@@ -147,6 +148,16 @@ const Room = (props) => {
     partnerVideo.current.srcObject = e.streams[0];
   }
 
+  function shareScreen() {
+    navigator.mediaDevices.getDisplayMedia({ cursor: true }).then(stream => {
+        const screenTrack = stream.getTracks()[0];
+        senders.current.find(sender => sender.track.kind === 'video').replaceTrack(screenTrack);
+        screenTrack.onended = function() {
+            senders.current.find(sender => sender.track.kind === "video").replaceTrack(userStream.current.getTracks()[1]);
+        }
+    })
+}
+
   /*---------------Make small camera movable----------------*/
 
     function dragElement() {
@@ -227,6 +238,7 @@ const Room = (props) => {
           <img
             className="LogoRoom screen"
             src={screen}
+            onClick={shareScreen}
             alt="logo"
             height="50"
             width="50"
