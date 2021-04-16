@@ -130,6 +130,6 @@ a:hover .caption {
 }
 .header .search button{
     font-size: 5vh;
-    padding:0 10px;
-    top: 2.5px;
+    padding:0 0.5vw;
+    top: 0.3vh;
 }

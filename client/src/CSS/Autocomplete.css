@@ -47,7 +47,7 @@ ul.options li.option-active {
   margin-bottom: 9px; */
   margin:auto;
   padding-right: 10px;
-  padding-left: 10px;
+  padding-left: 1.5%;
   border: 1px solid darkorange !important;
   border-top-left-radius: 80px !important;
   border-bottom-left-radius: 80px !important;
@@ -75,16 +75,16 @@ ul.options li.option-active {
 
 .searchForm button {
     position: relative;
-    padding:0 20px;
+    padding:0 1%;
   background: darkorange;
-  border: 6px solid darkorange;
+  border: 1vh solid darkorange;
   /* margin: 0  0 10px 0; */
-  left: -40px;
-  top: 5px;
-  border-top-left-radius: 80px !important;
-  border-bottom-left-radius: 80px !important;
-  border-top-right-radius: 80px !important;
-  border-bottom-right-radius: 80px !important;
+  left: -2.7%;
+  top: 0.6vh;
+  border-top-left-radius: 100% !important;
+  border-bottom-left-radius: 100% !important;
+  border-top-right-radius: 100% !important;
+  border-bottom-right-radius: 100% !important;
   cursor: pointer;
   transition: 0.1s;
   font-size: 10vh;
