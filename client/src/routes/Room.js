@@ -16,6 +16,7 @@ const Room = (props) => {
   const otherUser = useRef();
   const userStream = useRef();
   const senders = useRef([]);
+  let mute = false;
 
   useEffect(() => {
     navigator.mediaDevices
@@ -178,6 +179,10 @@ const Room = (props) => {
     }
     // }
 
+    function setMute(mute){
+      let icon = mute ? "muteicon":"notmute";
+      
+    }
     function dragMouseDown(e) {
       e = e || window.event;
       e.preventDefault();
@@ -238,10 +243,10 @@ const Room = (props) => {
           </button>
           <button id="mutebtn">
             <FontAwesomeIcon
-              icon={faMicrophoneSlash}
-            //   onClick={() => {
-            //     setIcon("faTimes");
-            //   }}
+              icon={faMicrophoneSlash(!mute)}
+              onClick={() => {
+                setIcon("mute",!mute);
+              }}
             />
           </button>
           <button id="screensharebtn">
