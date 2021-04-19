@@ -59,12 +59,6 @@ a:hover .caption, a:hover{
   font-size: 1vw;
 }
 
-.leftside > img {
-  width: 80%;
-  height: 70%;
-  /* border: 1px orangered solid; */
-  border-radius: 50%;
-}
 
 .ProfList {
   grid-area: ProfList;

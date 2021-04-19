@@ -11,6 +11,8 @@ const ProfessionalBlock = ({ person }) => {
             alt="Expert Profile Picture"
             className="ProfilePic"
             src={person.url}
+            height="80"
+            width="120"
           />
           <span class="caption">
             {person.name}
