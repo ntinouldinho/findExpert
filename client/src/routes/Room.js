@@ -4,6 +4,7 @@ import "../CSS/Room.css";
 import screen from "../assets/screen.png";
 import mute from "../assets/mute.png";
 import camera from "../assets/video-camera.png";
+import endcall from "../assets/endcall.png";
 
 const Room = (props) => {
   const userVideo = useRef();
@@ -247,12 +248,24 @@ const Room = (props) => {
             height="50"
             width="50"
           />
+          <img
+            className="LogoRoom end"
+            src={endcall}
+            onClick={endcall}
+            alt="logo"
+            height="50"
+            width="50"
+          />
+
+
+
         </div>
       </div>
 
       <div id="chat">
         <header>
-          <h1>⚛️🔥💬</h1>
+          {/* <h1>⚛️🔥💬</h1> */}
+          <h1>Chat Room</h1>
           {/* <SignOut /> */}
         </header>
 
@@ -312,7 +325,7 @@ function ChatRoom() {
           type="text"
           //   value={formValue}
           //   onChange={(e) => setFormValue(e.target.value)}
-          placeholder="say something nice"
+          placeholder="Type your message here"
         />
 
         <button type="submit">📝</button>

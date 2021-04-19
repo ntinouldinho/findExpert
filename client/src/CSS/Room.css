@@ -59,7 +59,7 @@
 
 .room-buttons img {
   position: relative;
-  background-color: rgba(255, 94, 0, 0.5);
+  background-color: lightgrey;
   /* grid-row-start: 1;
   grid-column-start: 1; */
   /* object-fit: fill; */
@@ -68,7 +68,7 @@
 .LogoRoom {
   
   background: lightgray;
-  border-radius: 20px;
+  border-radius: 25px;
   margin-top: 0%;
   opacity: 0;
 }
@@ -87,7 +87,7 @@
   margin-left: 30%;
 }
 */
-.screen, .mute {
+.screen, .mute, .end {
   margin-left: 21px;
 } 
 
