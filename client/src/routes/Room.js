@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect,useState } from "react";
 import io from "socket.io-client";
 import "../CSS/Room.css";
 // import screen from "../assets/screen.png";
@@ -23,11 +23,13 @@ const Room = (props) => {
   const otherUser = useRef();
   const userStream = useRef();
   const senders = useRef([]);
-  let mute = false;
+  const [mute, setMute] = useState(true);
+  const [camera, setCamera] = useState(true);
+  const [screen, setScreen] = useState(false);
 
   useEffect(() => {
     navigator.mediaDevices
-      .getUserMedia({ audio: true, video: true })
+      .getUserMedia({ audio: mute, video: camera })
       .then((stream) => {
         userVideo.current.srcObject = stream;
         userStream.current = stream;
@@ -171,6 +173,7 @@ const Room = (props) => {
       senders.current
         .find((sender) => sender.track.kind === "video")
         .replaceTrack(screenTrack);
+
       screenTrack.onended = function () {
         senders.current
           .find((sender) => sender.track.kind === "video")
@@ -225,9 +228,9 @@ const Room = (props) => {
     }
   }
 
-  function setMute(mute) {
-    let icon = mute ? "faMicrophone" : "faMicrophoneSlash";
-  }
+  // function setMute(mute) {
+  //   let icon = mute ? "faMicrophone" : "faMicrophoneSlash";
+  // }
 
     function iconChang() {
         var icn = document.getElementById("muteicon"); //!this is undefined
@@ -253,30 +256,18 @@ const Room = (props) => {
           ref={userVideo}
         />
         <div className="room-buttons">
-          <button id="camerabtn">
-            <FontAwesomeIcon
-              icon={faVideo}
-              //   onClick={() => {
-              //     setIcon("faTimes");
-              //   }}
-            />
+          <button id="camerabtn"
+           onClick={() =>{setCamera(!camera)}}>
+            <FontAwesomeIcon icon={camera ? faVideo : faVideoSlash}/>
           </button>
-          <button id="mutebtn">
-            <FontAwesomeIcon id="muteicon"
-              icon={faMicrophone}
-            //   onClick={() => {
-            //     setIcon("mute", !mute);
-            //   }}
-                          onClick={iconChang}
-            />
+          <button id="mutebtn"
+           onClick={() =>{setMute(!mute);}}>
+            <FontAwesomeIcon icon={mute ? faMicrophone : faMicrophoneSlash}/>
+           
           </button>
-          <button id="screensharebtn">
-            <FontAwesomeIcon
-              icon={faChromecast}
-              //   onClick={() => {
-              //     setIcon("faTimes");
-              //   }}
-            />
+          <button id="screensharebtn"
+            onClick={() =>{setScreen(!screen);if(!screen){shareScreen();}}}>
+            <FontAwesomeIcon icon={screen ? faWindowClose : faChromecast}/>
           </button>
           <button id="closebtn">
             <FontAwesomeIcon
