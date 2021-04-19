@@ -5,7 +5,14 @@ import "../CSS/Room.css";
 // import mute from "../assets/mute.png";
 // import camera from "../assets/video-camera.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faVideo, faVideoSlash, faWindowClose, faMicrophone, faMicrophoneSlash, faPhoneSlash} from "@fortawesome/free-solid-svg-icons";
+import {
+  faVideo,
+  faVideoSlash,
+  faWindowClose,
+  faMicrophone,
+  faMicrophoneSlash,
+  faPhoneSlash,
+} from "@fortawesome/free-solid-svg-icons";
 import { faChromecast } from "@fortawesome/free-brands-svg-icons";
 
 const Room = (props) => {
@@ -57,7 +64,11 @@ const Room = (props) => {
     peerRef.current = createPeer(userID);
     userStream.current
       .getTracks()
-      .forEach(track => senders.current.push(peerRef.current.addTrack(track, userStream.current)));
+      .forEach((track) =>
+        senders.current.push(
+          peerRef.current.addTrack(track, userStream.current)
+        )
+      );
   }
 
   function createPeer(userID) {
@@ -153,21 +164,25 @@ const Room = (props) => {
   }
 
   function shareScreen() {
-    navigator.mediaDevices.getDisplayMedia({ cursor: true }).then(stream => {
-        const screenTrack = stream.getTracks()[0];
-        console.log(screenTrack);
-        
-        senders.current.find(sender => sender.track.kind === 'video').replaceTrack(screenTrack);
-        screenTrack.onended = function() {
-            senders.current.find(sender => sender.track.kind === "video").replaceTrack(userStream.current.getTracks()[1]);
-        }
-    })
-}
+    navigator.mediaDevices.getDisplayMedia({ cursor: true }).then((stream) => {
+      const screenTrack = stream.getTracks()[0];
+      console.log(screenTrack);
+
+      senders.current
+        .find((sender) => sender.track.kind === "video")
+        .replaceTrack(screenTrack);
+      screenTrack.onended = function () {
+        senders.current
+          .find((sender) => sender.track.kind === "video")
+          .replaceTrack(userStream.current.getTracks()[1]);
+      };
+    });
+  }
 
   /*---------------Make small camera movable----------------*/
 
-    function dragElement() {
-    var  elmnt = document.getElementById("myVideo");
+  function dragElement() {
+    var elmnt = document.getElementById("myVideo");
     console.log(elmnt);
     var pos1 = 0,
       pos2 = 0,
@@ -179,10 +194,6 @@ const Room = (props) => {
     }
     // }
 
-    function setMute(mute){
-      let icon = mute ? "muteicon":"notmute";
-      
-    }
     function dragMouseDown(e) {
       e = e || window.event;
       e.preventDefault();
@@ -214,6 +225,15 @@ const Room = (props) => {
     }
   }
 
+  function setMute(mute) {
+    let icon = mute ? "faMicrophone" : "faMicrophoneSlash";
+  }
+
+    function iconChang() {
+        var icn = document.getElementById("muteicon"); //!this is undefined
+        console.log(icn);
+    }
+
   return (
     <div className="room-container">
       <div className="video-container">
@@ -235,34 +255,35 @@ const Room = (props) => {
         <div className="room-buttons">
           <button id="camerabtn">
             <FontAwesomeIcon
-              icon={faVideoSlash}
-            //   onClick={() => {
-            //     setIcon("faTimes");
-            //   }}
+              icon={faVideo}
+              //   onClick={() => {
+              //     setIcon("faTimes");
+              //   }}
             />
           </button>
           <button id="mutebtn">
-            <FontAwesomeIcon
-              icon={faMicrophoneSlash(!mute)}
-              onClick={() => {
-                setIcon("mute",!mute);
-              }}
+            <FontAwesomeIcon id="muteicon"
+              icon={faMicrophone}
+            //   onClick={() => {
+            //     setIcon("mute", !mute);
+            //   }}
+                          onClick={iconChang}
             />
           </button>
           <button id="screensharebtn">
             <FontAwesomeIcon
               icon={faChromecast}
-            //   onClick={() => {
-            //     setIcon("faTimes");
-            //   }}
+              //   onClick={() => {
+              //     setIcon("faTimes");
+              //   }}
             />
           </button>
           <button id="closebtn">
             <FontAwesomeIcon
               icon={faPhoneSlash}
-            //   onClick={() => {
-            //     setIcon("faTimes");
-            //   }}
+              //   onClick={() => {
+              //     setIcon("faTimes");
+              //   }}
             />
           </button>
         </div>
