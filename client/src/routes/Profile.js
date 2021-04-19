@@ -150,9 +150,13 @@ const Reviews = (props) => {
     return (
         <div className="reviews box">
             <h2> Reviews </h2>
+            <ul>
             {props.reviews.map((item, i) => (
-                 <h1 key={i}>{item}</h1>
+                <li key={i}>{item}</li>
             ))}
+            </ul>
+
+            
         </div>
        
     );
@@ -167,9 +171,11 @@ const Services = (props) => {
     return (
         <div className="services box">
             <h2> Services </h2>
-             {props.services.map((item, i) => (
-            <h1 key={i}>{item}</h1>
-        ))}
+            <ul>
+            {props.services.map((item, i) => (
+                <li key={i}>{item}</li>
+            ))}
+            </ul>
         </div>
        
     );
@@ -190,7 +196,7 @@ export class Profile extends React.Component {
             services: [],
             cv: [],
             about: "",
-            stars: "4.2",
+            stars: "3.2",
             url:""
         };
     }
@@ -211,12 +217,13 @@ export class Profile extends React.Component {
         }
     }
 
+
     render(){
         return(
             <div style ={{backgroundColor: "lightgrey"}}> 
                 <Header/>
                 <div className="core">
-                    <div className = "grid-container" style={{margin: "15%" }}>
+                    <div className = "grid-container">
                         <div className="picture">
                             <img src={this.state.url} alt="Profile Picture" height="100" width="200" id="profpic"/>
                         </div>

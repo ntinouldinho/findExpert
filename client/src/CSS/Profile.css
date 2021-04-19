@@ -1,17 +1,21 @@
 .grid-container {
     display: grid;
     /* border: 3px groove orangered; */
-    border: 3px double cyan;
+    
     grid-template-areas: 'picture info info' 'aboutme aboutme aboutme' 'box box box' 'services services services' 'cv cv cv' 'reviews reviews reviews';
     grid-gap: 10px;
     background-color: white;
     width: 100%;
     text-align: center;
     align-items: center;
+    border: 10px groove darkorange;
+    
+    
 }
 
 .core {
     width: 60%;
+    margin: 5px auto;
 }
 
 .line {
@@ -29,7 +33,7 @@
     max-height: 300px;
     overflow-y: scroll;
     /* make it round  */
-    border: 2px solid lightgray;
+    border: 2px solid lightgrey;
     padding: 10px;
     border-radius: 25px;
     margin-left: 40px;
@@ -104,6 +108,13 @@
 
 .services {
     grid-area: services;
+    
+}
+
+ul {
+    text-align: left;
+    list-style-position: inside;
+    text-align: left;
 }
 
 .appointment {
@@ -112,6 +123,8 @@
 
 .cv {
     grid-area: cv;
+ 
+    
 }
 
 .reviews {
