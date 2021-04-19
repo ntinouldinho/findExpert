@@ -130,3 +130,8 @@ a:hover .caption, a:hover{
     padding:0 0.5vw;
     top: 0.3vh;
 }
+.header ul.options, .no-options {
+     top: 15vh;
+      width: 40%;
+      left: 30%;
+}
