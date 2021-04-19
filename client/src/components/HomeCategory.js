@@ -20,7 +20,6 @@ const HomeCategory = (props) => {
     }
   };
 
-  
   const classType = (classtype) => {
     console.log(classtype);
     return classtype % 2 === 0 ? "Even" : "Odd";
@@ -28,11 +27,12 @@ const HomeCategory = (props) => {
 
   console.log(props);
   return (
-    <div
-      className={"HomeCategory " + classType(props.classtype)}
-      style={{ backgroundImage: "url(" + renderSwitch(props.name) + ")" }}
-    >
+    <div className={"HomeCategory " + classType(props.classtype)}>
       <a href={"/search/" + props.name}>
+        <div
+          className="homeoverlay"
+          style={{ backgroundImage: "url(" + renderSwitch(props.name) + ")" }}
+        ></div>
         <div id="catName">{props.name}</div>
       </a>
     </div>

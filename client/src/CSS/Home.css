@@ -1,10 +1,10 @@
-.HomeContainer .header{
-    width: 100%;
-    position: fixed;
-    top: -150px;
-    transition: top 0.3s;
-    z-index: 101;
-    /* display: none; */
+.HomeContainer .header {
+  width: 100%;
+  position: fixed;
+  top: -150px;
+  transition: top 0.3s;
+  z-index: 101;
+  /* display: none; */
 }
 
 .logoSearch {
@@ -39,7 +39,8 @@ p.desc {
   align-items: center;
 }
 
-.HomeCategory {
+.HomeCategory,
+.homeoverlay {
   /* size */
   height: 160px;
   width: 160px;
@@ -82,8 +83,13 @@ p.desc {
   margin: 5% 0% 0;
 }
 
-.HomeCategories:hover .HomeCategory {
+.HomeCategories:hover .homeoverlay {
   filter: blur(3px);
+}
+
+.HomeCategories:hover #catName {
+  z-index: 110 !important;
+  filter: blur(0px) !important;
 }
 
 .HomeCategory:hover {
@@ -94,7 +100,19 @@ p.desc {
   margin: 5% -5%;
 }
 
+.HomeCategory:hover .homeoverlay {
+  border-radius: 10px;
+  filter: blur(0px) !important;
+}
+
 /* ---------------------end category shape------------------------- */
+
+.homeoverlay {
+  position: absolute;
+  height: 160px;
+  width: 160px;
+  z-index: -1;
+}
 
 #catName {
   /* display: none; */
@@ -118,63 +136,64 @@ p.desc {
   /* text-decoration-style: none; */
 }
 
-.HomeCategory a:hover, .HomeCategory a:link {
+.HomeCategory a:hover,
+.HomeCategory a:link {
   color: #000 !important;
 }
 
 /* ------------------Login------------------ */
 
-
 #login {
-
   position: absolute;
-  font-size:36px;
+  font-size: 36px;
   top: 40px;
   left: 95%;
-border-color: orangered;
- color: darkorange;
- background-color: #000;
+  border-color: orangered;
+  color: darkorange;
+  background-color: #000;
 }
 
 /* ------------------Step Sections------------------ */
 
-.Steps{
-    grid-area: step;
-    height: 100vh;
-    width: auto;
+.Steps {
+  grid-area: step;
+  height: 100vh;
+  width: auto;
 }
 
-.Steps img{
-    background-color: #000;
-    border: 5px groove black;
-    margin:30vh 10vw 0;
+.Steps img {
+  background-color: #000;
+  border: 5px groove black;
+  margin: 30vh 10vw 0;
 }
 
-.Steps h1{
-    margin: 0 10vw 0;
-    float:left;
+.Steps h1 {
+  margin: 0 10vw 0;
+  float: left;
 }
 
-.Step3{
-    background-color: rgb(255, 207, 148);
+.Step3 {
+  background-color: rgb(255, 207, 148);
 }
-.Step4{
-    background-color: rgb(216, 141, 114);
+.Step4 {
+  background-color: rgb(216, 141, 114);
 }
-.Step5{
-    background-color: rgb(219, 139, 73);
-}
-
-.Step4 img, .Step3 h1, .Step5 h1{
-    float:right;
+.Step5 {
+  background-color: rgb(219, 139, 73);
 }
 
+.Step4 img,
+.Step3 h1,
+.Step5 h1 {
+  float: right;
+}
 
 .grid-container-righttext {
   display: grid;
   height: 100vh;
-  grid-template-areas: 'Logo stepTitle' 
-  'Logo desc' ;
+  grid-template-areas:
+    "Logo stepTitle"
+    "Logo desc";
   grid-gap: 10px;
   /* background-color: red; */
   width: 100%;
@@ -182,38 +201,38 @@ border-color: orangered;
   align-content: center;
   /* text-align: center;
   align-items: center; */
-
 }
 
 .grid-container-lefttext {
   display: grid;
   height: 100vh;
-  grid-template-areas: 'stepTitle Logo' 
-  'desc Logo' ;
+  grid-template-areas:
+    "stepTitle Logo"
+    "desc Logo";
   grid-gap: 10px;
   /* background-color: red; */
   width: 100%;
   justify-content: center;
   align-content: center;
-  
+
   /*align-items: center; */
 }
 
-.desc{
+.desc {
   grid-area: desc;
   font-size: 2vw;
 }
 
-.Logo{
+.Logo {
   grid-area: Logo;
 }
 
-.stepTitle{
+.stepTitle {
   grid-area: stepTitle;
 }
 
 #moto1 {
-    font-size: 4vw;
+  font-size: 4vw;
 }
 
 #moto2 {
@@ -221,5 +240,5 @@ border-color: orangered;
 }
 
 #moto3 {
-    font-size: 3.5vw;
+  font-size: 3.5vw;
 }
