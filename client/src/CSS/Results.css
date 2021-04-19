@@ -29,9 +29,11 @@
   
 } */
 
-a:hover .caption {
+
+
+a:hover .caption, a:hover{
   color: darkorange;
-  text-decoration: none;
+  text-decoration:none !important; 
 }
 
 .ProfilePic {

@@ -55,7 +55,7 @@ class ExampleApp extends React.Component {
     render () {
         
       return (
-        <div>
+        <div className="Profile">
           <Button onClick={this.handleOpenModal} variant="success">Book Appointment</Button>
           <ReactModal 
              isOpen={this.state.showModal}

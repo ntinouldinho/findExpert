@@ -4,21 +4,20 @@ import Rating from "react-star-review";
 
 const ProfessionalBlock = ({ person }) => {
   return (
-    
-      <div className="ProfessionalBlock">
-        <a href={"/profile/" + person.name + "/56"}>
+    <div className="ProfessionalBlock">
+      <a href={"/profile/" + person.name + "/56"}>
         <div className="leftside" style={{ float: "left" }}>
           <img
             alt="profile pic"
             className="ProfilePic"
             src={"https://www.ecpi.edu/sites/default/files/CIV%20Sept%2026.png"}
-            
           />
           <span class="caption">
-            {person.name}<br></br>{person.job}
+            {person.name}
+            <br></br>
+            {person.job}
             <Rating rating={"4"} count={5} />
           </span>
-          
         </div>
         <div className="info">
           m Ipsum. um passages, and more recently with desktop publishing
@@ -28,16 +27,14 @@ const ProfessionalBlock = ({ person }) => {
           recently with desktop publishing software like Aldus PageMaker
           including versions of Lore sum passages, and more recently with
           desktop publishing software like Aldus PageMaker including versions of
-          Lore
-          m Ipsum. um passages, and more recently with desktop publishing
+          Lore m Ipsum. um passages, and more recently with desktop publishing
           software like Aldus PageMaker including versions of Lorem Ipsum. sum
           passages, and more recently with desktop publishing software like
           Aldus PageMaker including versions of Lore sum passages, and more
           recently with desktop publishing software like Aldus PageMaker
           including versions of Lore sum passages, and more recently with
           desktop publishing software like Aldus PageMaker including versions of
-          Lore
-          m Ipsum. um passages, and more recently with desktop publishing
+          Lore m Ipsum. um passages, and more recently with desktop publishing
           software like Aldus PageMaker including versions of Lorem Ipsum. sum
           passages, and more recently with desktop publishing software like
           Aldus PageMaker including versions of Lore sum passages, and more
@@ -46,9 +43,8 @@ const ProfessionalBlock = ({ person }) => {
           desktop publishing software like Aldus PageMaker including versions of
           Lore
         </div>
-        </a>
-      </div>
-    
+      </a>
+    </div>
   );
 };
 

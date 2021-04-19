@@ -83,7 +83,7 @@
     border-radius: 150px;
 }
 
-.info {
+.Profile .info {
     grid-area: info;
     font-Size: "15";
     text-align: left;
