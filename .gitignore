@@ -23,3 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 .env
 backupshell.ps1
+build.ps1
