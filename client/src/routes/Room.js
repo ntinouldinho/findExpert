@@ -1,9 +1,12 @@
 import React, { useRef, useEffect } from "react";
 import io from "socket.io-client";
 import "../CSS/Room.css";
-import screen from "../assets/screen.png";
-import mute from "../assets/mute.png";
-import camera from "../assets/video-camera.png";
+// import screen from "../assets/screen.png";
+// import mute from "../assets/mute.png";
+// import camera from "../assets/video-camera.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faVideo, faVideoSlash, faWindowClose, faMicrophone, faMicrophoneSlash, faPhoneSlash} from "@fortawesome/free-solid-svg-icons";
+import { faChromecast } from "@fortawesome/free-brands-svg-icons";
 
 const Room = (props) => {
   const userVideo = useRef();
@@ -225,28 +228,38 @@ const Room = (props) => {
           ref={userVideo}
         />
         <div className="room-buttons">
-          <img
-            className="LogoRoom camera"
-            src={camera}
-            alt="logo"
-            height="50"
-            width="50"
-          />
-          <img
-            className="LogoRoom mute"
-            src={mute}
-            alt="logo"
-            height="50"
-            width="50"
-          />
-          <img
-            className="LogoRoom screen"
-            src={screen}
-            onClick={shareScreen}
-            alt="logo"
-            height="50"
-            width="50"
-          />
+          <button id="camerabtn">
+            <FontAwesomeIcon
+              icon={faVideoSlash}
+            //   onClick={() => {
+            //     setIcon("faTimes");
+            //   }}
+            />
+          </button>
+          <button id="mutebtn">
+            <FontAwesomeIcon
+              icon={faMicrophoneSlash}
+            //   onClick={() => {
+            //     setIcon("faTimes");
+            //   }}
+            />
+          </button>
+          <button id="screensharebtn">
+            <FontAwesomeIcon
+              icon={faChromecast}
+            //   onClick={() => {
+            //     setIcon("faTimes");
+            //   }}
+            />
+          </button>
+          <button id="closebtn">
+            <FontAwesomeIcon
+              icon={faPhoneSlash}
+            //   onClick={() => {
+            //     setIcon("faTimes");
+            //   }}
+            />
+          </button>
         </div>
       </div>
 
@@ -258,7 +271,7 @@ const Room = (props) => {
 
         <section>{<ChatRoom />}</section>
       </div>
-      <div className="room-bottom">hello</div>
+      {/* <div className="room-bottom">hello</div> */}
     </div>
   );
 };
