@@ -20,28 +20,8 @@ const ProfessionalBlock = ({ person }) => {
           </span>
         </div>
         <div className="info">
-          m Ipsum. um passages, and more recently with desktop publishing
-          software like Aldus PageMaker including versions of Lorem Ipsum. sum
-          passages, and more recently with desktop publishing software like
-          Aldus PageMaker including versions of Lore sum passages, and more
-          recently with desktop publishing software like Aldus PageMaker
-          including versions of Lore sum passages, and more recently with
-          desktop publishing software like Aldus PageMaker including versions of
-          Lore m Ipsum. um passages, and more recently with desktop publishing
-          software like Aldus PageMaker including versions of Lorem Ipsum. sum
-          passages, and more recently with desktop publishing software like
-          Aldus PageMaker including versions of Lore sum passages, and more
-          recently with desktop publishing software like Aldus PageMaker
-          including versions of Lore sum passages, and more recently with
-          desktop publishing software like Aldus PageMaker including versions of
-          Lore m Ipsum. um passages, and more recently with desktop publishing
-          software like Aldus PageMaker including versions of Lorem Ipsum. sum
-          passages, and more recently with desktop publishing software like
-          Aldus PageMaker including versions of Lore sum passages, and more
-          recently with desktop publishing software like Aldus PageMaker
-          including versions of Lore sum passages, and more recently with
-          desktop publishing software like Aldus PageMaker including versions of
-          Lore
+          I have been working as plumber 18 years.
+          I am an electrician and I love my work. 
         </div>
       </a>
     </div>

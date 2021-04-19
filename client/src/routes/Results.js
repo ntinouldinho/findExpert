@@ -6,18 +6,16 @@ import { Footer } from "../components/Footer";
 
 // <h1>{this.props.match.params.search}</h1>
 
-var Professessions = ["VET", "DOC", "PHYSICIAN", "CHEROPRACTOR", "OTOL"];
+var Professessions = ["Plumber", "Electrician", "Mechanic", "Glazier", "Engineer", "Technologist"];
 export class Results extends Component {
   constructor(props) {
     super(props);
     this.state = {
       professionals: [
-        { job: "Doctor", name: "Kostas"},
-        { job: "Doctor", name: "Kostas"},
-        { job: "Doctor", name: "Kostas"},
-        { job: "Doctor", name: "Kostas"},
-        { job: "Doctor", name: "Kostas"},
-        { job: "Doctor", name: "Kostas"},
+        { job: "Plumber", name: "Kostas Iliopoulos"},
+        { job: "Electrician", name: "Ioannis Argyropoulos"},
+        { job: "Mechanic", name: "Panagiotis Kareas"},
+        { job: "Glazier", name: "Iasonas Mpraxamis"}
       ],
       search: props.match.params.search,
     };
