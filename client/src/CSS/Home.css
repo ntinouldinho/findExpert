@@ -1,3 +1,6 @@
+html{
+    scroll-behavior: smooth;
+}
 .HomeContainer .header {
   width: 100%;
   position: fixed;

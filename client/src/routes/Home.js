@@ -97,7 +97,7 @@ export class Home extends Component {
           </p>
           <Autocomplete options={this.state.src} />
           <p id="moto3">
-            or browse our <span style={{ color: "orangered" }}>categories</span>.
+            or browse our <a href="#homecategories" id="homecategories" style={{ color: "orangered" }}>categories</a>.
           </p>
         </div>
 
