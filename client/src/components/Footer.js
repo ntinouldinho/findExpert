@@ -22,9 +22,8 @@ export class Footer extends Component {
                 <div className="col-md-4">
                   <h1>About Us</h1>
                   <p>
-                    {/* We are a small company that loves<br> to see animals happy and well-treated.<br> Our products are 100% original<br> and safe for your pet.<br><br> Thank you for selecting us! */}
-                  Αγαπάμε ό,τι σας πονάει.
-                            </p>
+                      Find the most professional experts through our site.
+                  </p>
                 </div>
                 <div className="col-md-4">
                   <h1>Find Us on:</h1>
