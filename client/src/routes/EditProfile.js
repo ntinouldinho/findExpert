@@ -3,10 +3,10 @@ import "../CSS/Profile.css";
 import "../CSS/EditProfile.css";
 import Rating from "react-star-review";
 import { Header } from "../components/Header";
-import { EditorState, convertToRaw } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { EditorState, ContentState, convertToRaw, convertFromHTML } from 'draft-js';
 
 export class EditProfile extends Component {
   constructor(props) {
@@ -21,7 +21,11 @@ export class EditProfile extends Component {
       about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis tincidunt elit. Morbi eget elit id lorem feugiat pharetra. Cras nec tortor ac ante volutpat hendrerit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at pretium ante. Morbi elit felis, sollicitudin iaculis malesuada id, tincidunt in turpis. Phasellus aliquet dapibus enim eget bibendum. Pellentesque molestie nulla purus, tincidunt lacinia orci aliquet at. Mauris sit amet rhoncus felis, quis aliquam eros. Vivamus lacinia dignissim malesuada. Vestibulum efficitur, orci in fringilla rhoncus, tortor ante luctus turpis, id fermentum libero dui ac libero. ",
       stars: "4.2",
       appointment: "appointment",
-      editorState: EditorState.createEmpty(),
+      editorState: EditorState.createWithContent(
+        ContentState.createFromBlockArray(
+          convertFromHTML('<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis tincidunt elit. Morbi eget elit id lorem feugiat pharetra. Cras nec tortor ac ante volutpat hendrerit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at pretium ante. Morbi elit felis, sollicitudin iaculis malesuada id, tincidunt in turpis. Phasellus aliquet dapibus enim eget bibendum. Pellentesque molestie nulla purus, tincidunt lacinia orci aliquet at. Mauris sit amet rhoncus felis, quis aliquam eros. Vivamus lacinia dignissim malesuada. Vestibulum efficitur, orci in fringilla rhoncus, tortor ante luctus turpis, id fermentum libero dui ac libero. </p>')
+        )
+      ),
     };
     this.onEditorStateChange = this.onEditorStateChange.bind(this);
   }
@@ -67,7 +71,6 @@ export class EditProfile extends Component {
 
             <div className="EditAboutMe">
               <Editor
-                defaultValue={this.state.about}
                 editorState={editorState}
                 wrapperClassName="demo-wrapper"
                 editorClassName="demo-editor"
