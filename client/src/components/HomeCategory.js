@@ -5,25 +5,25 @@ const HomeCategory = (props) => {
   const renderSwitch = (param) => {
     switch (param) {
       case "Technician":
-        return "https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/CategoryTechnician.jpg?alt=media&token=3bc1738b-8de1-4b2f-95d9-ce5783d71823";
+        return "https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/CategoryTechnician.jpg?alt=media&token=4457af17-572f-4e6e-be47-2592fbf0f8f0";
       case "Medical":
-        return "https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/CategoryDoctor.jpg?alt=media&token=2b27dba1-5b47-4bdc-a849-9da0b381c4cf";
+        return "https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/CategoryDoctor.jpg?alt=media&token=02f74dee-e82c-4ebb-a15a-415495a12c54";
       case "Chef":
-        return "https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/CategoryChef.jpg?alt=media&token=c16eb003-3ee9-4c49-970a-aa7d86be0178";
+        return "https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/CategoryChef.jpg?alt=media&token=b8116202-09e2-4463-b6f0-66845ebdd51e";
       case "Artist":
-        return "https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/CategoryArtist.jpeg?alt=media&token=ad61a7e4-3c8f-4ccb-ac81-6f072a39aa58";
+        return "https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/CategoryArtist.jpeg?alt=media&token=421a04f0-9435-4e0d-9709-e79964adc7d9";
       case "Financial":
-        return "https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/CategoryFinancial.jpg?alt=media&token=5e3d3401-7a3a-42a1-89eb-970416799ec3";
+        return "https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/CategoryFinancial.jpg?alt=media&token=43efc2b1-2e97-46cf-9240-40f08ba20646";
       case "Household":
-        return "https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/CategoryHousehold.jpg?alt=media&token=82b09bf6-2239-4a05-bcc0-3f403db64c34";
+        return "https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/CategoryHousehold.jpg?alt=media&token=259e49bd-d137-4710-8f37-d43e24e7f393";
       case "Informatics":
-        return "https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/CategoryInformatics.jpg?alt=media&token=0e817add-1107-402d-9921-1886d6b9083e";
+        return "https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/CategoryInformatics.jpg?alt=media&token=88a2f9f7-cf9d-40bb-ae53-7157e637c2b0";
       case "Legal":
-        return "https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/CategoryLegal.jpeg?alt=media&token=cfc07eb0-f19c-43e1-b251-24f4270f180b";
+        return "https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/CategoryLegal.jpeg?alt=media&token=611312aa-6265-4a3f-afe8-c354a58ba12b";
       case "Teacher":
-        return "https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/CategoryTeacher.jpg?alt=media&token=a5936d5c-1537-4688-ba27-3898af9d76d0";
+        return "https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/CategoryTeacher.jpg?alt=media&token=c0a0d216-0e8e-4390-99b5-3b1b73da9256";
       default:
-        return "https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/CategoryOther.jpg?alt=media&token=a57a2fd3-7176-477b-94e2-3315e0f24dee";
+        return "https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/CategoryOther.jpg?alt=media&token=2e7a1b48-3273-439e-87b4-33648199330c";
     }
   };
 
