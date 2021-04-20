@@ -150,11 +150,14 @@ const Reviews = (props) => {
     return (
         <div className="reviews box">
             <h2> Reviews </h2>
-            <ul>
+            
             {props.reviews.map((item, i) => (
-                <li key={i}>{item}</li>
+                <div style={{border:'1px black solid',marginBottom:'10px',textAlign:'left',borderRadius:'10px'}} key={i}>
+                    <Rating rating={item.grade} count={5} />
+                    <span>{item.name} {item.date}</span> 
+                    <br/>{item.comment}
+                </div>
             ))}
-            </ul>
 
             
         </div>
@@ -192,7 +195,7 @@ export class Profile extends React.Component {
         this.state = {
             name: "",
             profession: "",
-            reviews: ["4", " 5"],
+            reviews: [{name:"kostas",grade:4, comment:"I was very satisfied with Kostas he did an excellent job.",date:"21/04/2021"}, {name:"mitsos",grade:4.5, comment:"Kostas delivers as promised and does his best help you",date:"21/04/2021"}],
             services: [],
             cv: [],
             about: "",
