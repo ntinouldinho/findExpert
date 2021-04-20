@@ -7,6 +7,7 @@ import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { EditorState, ContentState, convertToRaw, convertFromHTML } from 'draft-js';
+import ListAdder from "../components/ListAdder";
 
 export class EditProfile extends Component {
   constructor(props) {
@@ -66,6 +67,8 @@ export class EditProfile extends Component {
             <label for="profession">Profession: </label>
             <input id="profession"  type="text" placeholder="Profession" defaultValue={this.state.profession}></input>
             </div>
+
+            <Rating className="RatingOnEdit" rating={this.state.stars} count={5} />
             
             
 
@@ -85,18 +88,14 @@ export class EditProfile extends Component {
               />
             </div>
 
-            <div className="services">
-              <input
-                placeholder="What are your services"
-                defaultValue={this.state.services}
-              />
-              <br></br>
+            <div className="AddServices">
+                <ListAdder />
             </div>
 
-            {/* <div className="reviews">
+            <div className="reviews">
               {this.state.reviews}
               <br></br>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>
