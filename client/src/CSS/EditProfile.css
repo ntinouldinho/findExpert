@@ -2,32 +2,39 @@
     width:50%;
 } */
 .grid-container-edit {
-    display: grid;
-  grid-template-areas: "picture addname addname" 
-  "addpicture addprofession addprofession" 
-  "editaboutme editaboutme editaboutme"
-   "services services services" 
-   "cv cv cv" 
-   "reviews reviews reviews";
-   text-align: center;
-    align-items: center;
-    border: 10px groove darkorange;
+  display: grid;
+  grid-template-areas:
+    "picture addname rating"
+    "addpicture addprofession rating"
+    "editaboutme editaboutme editaboutme"
+    "addservices addservices addservices";
+  text-align: center;
+  align-items: center;
+  border: 10px groove darkorange;
 }
 
-.AddPicture{
-    grid-area: addpicture;
+.AddPicture {
+  grid-area: addpicture;
 }
 
-.AddName{
-    grid-area: addname;
-    text-align: left;
+.AddName {
+  grid-area: addname;
+  text-align: left;
 }
 
-.AddProfession{
-    grid-area: addprofession;
-    text-align: left;
+.AddProfession {
+  grid-area: addprofession;
+  text-align: left;
 }
 
 .EditAboutMe {
-    grid-area: editaboutme;
+  grid-area: editaboutme;
+}
+
+.RatingOnEdit {
+    grid-area: rating;
+}
+
+.AddServices {
+    grid-area: addservices;
 }
