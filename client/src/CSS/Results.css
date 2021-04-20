@@ -71,7 +71,7 @@ a:hover .caption, a:hover{
   border-radius: 25px;
   overflow: auto;
   float: left;
-
+  margin-left: 35px;
   top: 20%;
   position: sticky;
 }

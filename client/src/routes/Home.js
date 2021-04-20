@@ -36,11 +36,11 @@ export class Home extends Component {
     super(props);
     this.state = {
       src: [
-        "Legal ",
+        "Legal",
         "Medical",
         "Financial",
         "Technician",
-        "Teacher ",
+        "Teacher",
         "Informatics",
         "Artist",
         "Chef",

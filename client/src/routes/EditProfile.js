@@ -40,7 +40,7 @@ export class EditProfile extends Component {
                 <div className="core">
                     <div className = "grid-container" style={{margin: "15%" }}>
                         <div className="picture">
-                            <img src={"https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/car_mechanic.jpg?alt=media&token=23cb2e86-4440-404d-9fdc-53e99eb2a2dc"} alt="Profile" height="100" width="200" id="profpic"/>
+                            <img src={"https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/CategoryTechnician.jpg?alt=media&token=3bc1738b-8de1-4b2f-95d9-ce5783d71823"} alt="Profile" height="100" width="200" id="profpic"/>
                             {/* <img src={logo} alt="Profile Picture" height="100" width="200" id="profpic"/> */}
                             <input type="file"></input>
                         </div>
