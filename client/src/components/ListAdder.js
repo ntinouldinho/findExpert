@@ -26,7 +26,7 @@ function ListAdder() {
 
   return (
     <div className="ListAdder">
-      <h1>Services</h1>
+     
 
       {fields.map((field, idx) => {
         return (

@@ -89,6 +89,12 @@ export class EditProfile extends Component {
             </div>
 
             <div className="AddServices">
+                <h1>Services</h1>
+                <ListAdder />
+            </div>
+
+            <div className="AddCV">
+                <h1>My CV</h1>
                 <ListAdder />
             </div>
 

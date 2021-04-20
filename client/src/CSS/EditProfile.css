@@ -7,7 +7,8 @@
     "picture addname rating"
     "addpicture addprofession rating"
     "editaboutme editaboutme editaboutme"
-    "addservices addservices addservices";
+    "addservices addservices addservices"
+    "addcv addcv addcv";
   text-align: center;
   align-items: center;
   border: 10px groove darkorange;
@@ -37,4 +38,8 @@
 
 .AddServices {
     grid-area: addservices;
+}
+
+.AddCV{
+    grid-area: addcv;
 }
