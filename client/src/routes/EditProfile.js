@@ -38,7 +38,7 @@ export class EditProfile extends Component {
                 <Header/>
                 
                 <div className="core">
-                    <div className = "grid-container" style={{margin: "15%" }}>
+                    <div className = "grid-container">
                         <div className="picture">
                             <img src={"https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/CategoryTechnician.jpg?alt=media&token=3bc1738b-8de1-4b2f-95d9-ce5783d71823"} alt="Profile" height="100" width="200" id="profpic"/>
                             {/* <img src={logo} alt="Profile Picture" height="100" width="200" id="profpic"/> */}
@@ -48,7 +48,7 @@ export class EditProfile extends Component {
                         <div className="info">
                             {this.state.name}<br></br>
                             {this.state.profession}<br></br>
-                            <Rating rating={this.state.stars} count={5}/><br></br>
+                            {/* <Rating rating={this.state.stars} count={5}/><br></br> */}
                         </div>
 
                         <div className="aboutme">
