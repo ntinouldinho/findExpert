@@ -1,7 +1,6 @@
 .grid-container {
     display: grid;
     /* border: 3px groove orangered; */
-    
     grid-template-areas: 'picture info info' 'aboutme aboutme aboutme' 'box box box' 'services services services' 'cv cv cv' 'reviews reviews reviews';
     grid-gap: 10px;
     background-color: white;
@@ -9,8 +8,6 @@
     text-align: center;
     align-items: center;
     border: 10px groove darkorange;
-    
-    
 }
 
 .core {
@@ -50,7 +47,8 @@
     float: left;
     max-width: 200px;
 }
-#aboutmetitle{
+
+#aboutmetitle {
     border-bottom: 2px solid #b03535;
 }
 
@@ -108,7 +106,6 @@
 
 .services {
     grid-area: services;
-    
 }
 
 ul {
@@ -123,8 +120,6 @@ ul {
 
 .cv {
     grid-area: cv;
- 
-    
 }
 
 .reviews {
@@ -135,8 +130,7 @@ ul {
 
 #modal-content {
     display: grid;
-    grid-template-areas: "calendar results"
-                     "calendar choices";
+    grid-template-areas: "calendar results" "calendar services" "calendar choices";
     height: 100%;
 }
 
@@ -153,10 +147,14 @@ ul {
     overflow-y: scroll;
 }
 
+#modal-services {
+    grid-area: services;
+}
+
 #modal-choices {
     grid-area: choices;
 }
 
-#cancel-modal{
-    margin-left:50px;
+#cancel-modal {
+    margin-left: 50px;
 }

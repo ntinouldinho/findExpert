@@ -81,6 +81,17 @@ class ExampleApp extends React.Component {
                         ))}
                     </ul>
                 </div>
+
+                <div id="modal-services">          
+                    <label for="services">Choose a service:</label>
+                    <select id="services">
+                        {this.props.services.map((item, i) => (
+                            <option value={item}>{item}</option>
+                        ))}
+                    </select>
+                </div>
+
+
                 <div id="modal-choices">
                     <Button id="book-appointment" variant="success">Book</Button>
 
@@ -101,7 +112,7 @@ const Info = (props) => {
             {props.profession}<br/>
             <div style={{display: "inline-flex"}}>Rating:   <span id="rating"><Rating rating={props.stars} count={5} /></span></div><br/>
             
-            <ExampleApp />
+            <ExampleApp services={props.services} />
         </div>
        
     );
@@ -231,7 +242,7 @@ export class Profile extends React.Component {
                             <img src={this.state.url} alt="Profile Picture" height="100" width="200" id="profpic"/>
                         </div>
                        
-                        <Info name={this.state.name} profession={this.state.profession} stars={this.state.stars} />
+                        <Info name={this.state.name} profession={this.state.profession} stars={this.state.stars} services={this.state.services} />
 
                         <AboutMe about={this.state.about} />
 
