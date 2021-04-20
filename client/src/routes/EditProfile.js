@@ -18,7 +18,7 @@ export class EditProfile extends Component {
       reviews: ["4", " 5"],
       services: ["$$ ", " $$"],
       cv: "My CV",
-      about: "About me",
+      about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis tincidunt elit. Morbi eget elit id lorem feugiat pharetra. Cras nec tortor ac ante volutpat hendrerit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at pretium ante. Morbi elit felis, sollicitudin iaculis malesuada id, tincidunt in turpis. Phasellus aliquet dapibus enim eget bibendum. Pellentesque molestie nulla purus, tincidunt lacinia orci aliquet at. Mauris sit amet rhoncus felis, quis aliquam eros. Vivamus lacinia dignissim malesuada. Vestibulum efficitur, orci in fringilla rhoncus, tortor ante luctus turpis, id fermentum libero dui ac libero. ",
       stars: "4.2",
       appointment: "appointment",
       editorState: EditorState.createEmpty(),
@@ -53,18 +53,28 @@ export class EditProfile extends Component {
             
             <input className="AddPicture" type="file" name="asda"></input>
 
-            <input className="AddName" type="text" placeholder="Full Name" defaultValue={this.state.name}></input>
-              
-            <input className="AddProfession" type="text" placeholder="Profession" defaultValue={this.state.profession}></input>
+            <div className="AddName">
+            <label for="name">Name: </label>
+            <input id="name"  type="text" placeholder="Full Name" defaultValue={this.state.name}></input>
+            </div>
+
+            <div className="AddProfession">
+            <label for="profession">Profession: </label>
+            <input id="profession"  type="text" placeholder="Profession" defaultValue={this.state.profession}></input>
+            </div>
+            
+            
 
             <div className="EditAboutMe">
               <Editor
+                defaultValue={this.state.about}
                 editorState={editorState}
                 wrapperClassName="demo-wrapper"
                 editorClassName="demo-editor"
                 onEditorStateChange={this.onEditorStateChange}
               />
               <textarea
+              
                 disabled
                 value={draftToHtml(
                   convertToRaw(editorState.getCurrentContent())

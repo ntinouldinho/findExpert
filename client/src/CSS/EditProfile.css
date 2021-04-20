@@ -20,10 +20,12 @@
 
 .AddName{
     grid-area: addname;
+    text-align: left;
 }
 
 .AddProfession{
     grid-area: addprofession;
+    text-align: left;
 }
 
 .EditAboutMe {
