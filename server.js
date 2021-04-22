@@ -36,13 +36,13 @@ const firestore = firebase.firestore();
 
 var nodemailer = require('nodemailer');
 
-var transporter = nodemailer.createTransport({
-    service: 'hotmail',
-    auth: {
-        user: process.env.EMAIL,
-        pass: process.env.PASSWORD
-    }
-}); 
+// var transporter = nodemailer.createTransport({
+//     service: 'hotmail',
+//     auth: {
+//         user: process.env.EMAIL,
+//         pass: process.env.PASSWORD
+//     }
+// }); 
 
 // var mailOptions = {
 //     from: process.env.EMAIL,
