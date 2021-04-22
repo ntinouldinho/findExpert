@@ -42,7 +42,7 @@ var transporter = nodemailer.createTransport({
         user: process.env.EMAIL,
         pass: process.env.PASSWORD
     }
-});
+}); 
 
 // var mailOptions = {
 //     from: process.env.EMAIL,
