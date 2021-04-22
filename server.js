@@ -44,12 +44,12 @@ var transporter = nodemailer.createTransport({
     }
 });
 
-var mailOptions = {
-    from: process.env.EMAIL,
-    to: 'eminemsticked@gmail.com',
-    subject: 'Se gamaw',
-    text: 'Ton pairneis!'
-};
+// var mailOptions = {
+//     from: process.env.EMAIL,
+//     to: customer.email,
+//     subject: 'Video chat link',
+//     text: 'Your link is...'
+// };
 
 // transporter.sendMail(mailOptions, function(error, info){
 //   if (error) {
