@@ -36,16 +36,16 @@ export class Home extends Component {
     super(props);
     this.state = {
       src: [
-        "Legal",
-        "Medical",
-        "Financial",
-        "Technician",
-        "Teacher",
-        "Informatics",
-        "Artist",
-        "Chef",
-        "Household",
-        "Other",
+          "Teacher",
+          "Chef",
+          "Technician",
+          "Financial",
+          "Legal",
+          "Artist",
+          "Household",
+          "Informatics",
+          "Other",
+          "Medical",
       ],
       search: "",
     };
@@ -101,7 +101,10 @@ export class Home extends Component {
           </p>
         </div>
 
-        <div className="HomeCategories">
+            <div className="HomeCategories">
+                <div className="rightCat"><p>Learning</p></div>
+                <div className="centerCat"><p>Both</p></div>
+                <div className="leftCat"><p>Assistance</p></div>
           {this.state.src.map((item, i) => (
             <HomeCategory key={i} name={item} classtype={i} />
           ))}

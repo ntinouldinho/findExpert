@@ -1,5 +1,5 @@
-html{
-    scroll-behavior: smooth;
+html {
+  scroll-behavior: smooth;
 }
 .HomeContainer .header {
   width: 100%;
@@ -23,7 +23,7 @@ p.desc {
 }
 
 .HomeCategories {
-  width: 1000px;
+  width: 100%;
   height: 500px;
   position: relative;
   margin: auto;
@@ -36,34 +36,100 @@ p.desc {
   align-content: center;
   flex-direction: row; /*  default value; can be omitted */
   background-color: rgba(230, 230, 230, 0.486);
-  border: solid 5px black;
-  border-radius: 10%;
-  padding: 4%;
+  /* border: solid 5px black; */
+  /* border-radius: 10%; */
+  padding: 5%;
   align-items: center;
+  row-gap: 5%;
+  column-gap: 10%;
+}
+
+/* ----------------categbgcolor---------------- */
+
+.rightCat,
+.centerCat,
+.leftCat {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 50%;
+  /* border-radius: 10%; */
+      transition: all 0.5s ease;
+}
+
+.rightCat {
+  clip-path: polygon(0% 0%, 37.5% 0%, 25% 100%, 0% 100%);
+  background-color: orangered;
+  
+}
+
+.centerCat {
+  clip-path: polygon(37.5% 0%, 62.5% 0%, 75% 100%, 25% 100%);
+  background-color: orange;
+}
+
+.leftCat {
+  clip-path: polygon(62.5% 0%, 100% 0%, 100% 100%, 75% 100%);
+  background-color: yellow;
+}
+
+.rightCat:hover,
+.centerCat:hover,
+.leftCat:hover {
+    opacity: 100%;
+}
+
+.HomeCategories p{
+    font-size:3vh;
+    font-weight: bolder;
+}
+
+.rightCat p {
+  margin-left: 6%;
+}
+
+.centerCat p {
+    text-align: center;
+}
+
+.leftCat p {
+    float: right;
+  margin-right: 6%;
+}
+
+/* ----------------endcategbgcolor---------------- */
+
+.HomeCategory {
+    /* size */
+    height: 160px;
+    width: 160px;
+    min-width: 160px;
+    /* max-width: 160px; */
+    /* text */
+    text-align: center;
+    font-size: 21.3px;
+    /* flex-basis: 20%; */
+    /* border-radius: 20px; */
+    /* margin: 0 4%; */
+      border: 2px solid #fff;
+}
+
+
+.homeoverlay {
+    position: absolute;
+    height: 156.5px;
+    width: 156px;
+    /* background */
+    background-size: 100% 100%;
+    /* background-size:cover; */
+    z-index: -1;
 }
 
 .HomeCategory,
 .homeoverlay {
-  /* size */
-  height: 160px;
-  width: 160px;
-  /* min-width: 120px; */
-
-  /* text */
-  font-size: 21.3px;
-
-  /* word-wrap: normal; */
-  text-align: center;
-  /* background */
-  background-size: 100% 100%;
-  /* background-size:cover; */
-  /* margin-right: 5%;
-  margin-left: 5%;
-  margin-bottom: 5%; */
-  border: 1px solid #fff;
-  /* flex-basis: 20%; */
-  transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
+
 
 /* ---------------------category shape------------------------- */
 
@@ -73,18 +139,17 @@ p.desc {
   border-bottom-right-radius: 500px 1000px; 
   border-bottom-left-radius: 500px 1000px; */
   clip-path: polygon(0% 10%, 50% 100%, 50% 100%, 100% 10%);
-  border-radius: 20px;
-  margin: 0 0% 5%;
+  margin-bottom: 5%;
 }
 
 .HomeCategory.Even {
-  border-bottom-left-radius: 0px 0px;
+  /* border-bottom-left-radius: 0px 0px;
   border-bottom-right-radius: 0px 0px;
   border-top-right-radius: 500px 1000px;
-  border-top-left-radius: 500px 1000px;
+  border-top-left-radius: 500px 1000px; */
   clip-path: polygon(50% 0%, 0% 90%, 100% 90%, 50% 0%);
-  border-radius: 20px;
-  margin: 5% 0% 0;
+  /* border-radius: 20px; */
+  margin-top: 5%;
 }
 
 .HomeCategories:hover .homeoverlay {
@@ -98,25 +163,23 @@ p.desc {
 
 .HomeCategory:hover {
   clip-path: polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%);
-  border-radius: 10px;
+  border-radius: 15px;
   z-index: 100;
   filter: blur(0px) !important;
-  margin: 5% -5%;
+  /* margin: 5% -5%; */
+    
+
 }
 
 .HomeCategory:hover .homeoverlay {
-  border-radius: 10px;
+    /* height: 156.5px; */
+    /* width: 156px; */
+  border-radius: 12px;
   filter: blur(0px) !important;
 }
 
 /* ---------------------end category shape------------------------- */
 
-.homeoverlay {
-  position: absolute;
-  height: 160px;
-  width: 160px;
-  z-index: -1;
-}
 
 #catName {
   /* display: none; */
