@@ -53,6 +53,12 @@ p.desc {
   width: 100%;
   height: 100%;
   opacity: 50%;
+display: flex; /* establish flex container */
+  flex-wrap: wrap; /* default value; can be omitted */
+  /* transform: translate(-50%, -50%); */
+  align-content: center;
+  flex-direction: row;
+
   /* border-radius: 10%; */
       transition: all 0.5s ease;
 }
@@ -65,12 +71,15 @@ p.desc {
 
 .centerCat {
   clip-path: polygon(37.5% 0%, 62.5% 0%, 75% 100%, 25% 100%);
+    justify-content: center;
   background-color: orange;
+  padding: 0 40%;
 }
 
 .leftCat {
   clip-path: polygon(62.5% 0%, 100% 0%, 100% 100%, 75% 100%);
   background-color: yellow;
+  justify-content:flex-end;
 }
 
 .rightCat:hover,
@@ -80,6 +89,7 @@ p.desc {
 }
 
 .HomeCategories p{
+    position: absolute;
     font-size:3vh;
     font-weight: bolder;
 }
@@ -166,7 +176,7 @@ p.desc {
   border-radius: 15px;
   z-index: 100;
   filter: blur(0px) !important;
-  /* margin: 5% -5%; */
+  /* margin: 5% 5%; */
     
 
 }
