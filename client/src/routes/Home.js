@@ -115,7 +115,7 @@ export class Home extends Component {
           <div className="rightCat">
             <p> Learning </p>
             {this.state.cat1.map((item, i) => (
-            <HomeCategory key={i} name={item} classtype={i+1} />
+            <HomeCategory key={i} name={item} classtype={i} />
           ))} 
           </div> 
                 <div className="centerCat">

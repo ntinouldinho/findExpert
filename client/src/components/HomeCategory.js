@@ -33,8 +33,10 @@ const HomeCategory = (props) => {
       console.log(classtype);
       
       if (props.name === "Technician") {
-          margNum = 100;
+          margNum = 100 +"%";
           return "Even";
+      } else if (props.name === "Artist" || props.name === "Medical") {
+          return "Odd";
       }
 
     return classtype % 2 === 0 ? "Even" : "Odd";
@@ -42,7 +44,7 @@ const HomeCategory = (props) => {
 
   console.log(props);
     return (
-        <div className={"HomeCategory " + classType(props.classtype)} style={{ marginLeft: margNum, marginRight: margNum }} >
+        <div className={"HomeCategory " + classType(props.classtype)} style={{ marginLeft: margNum, marginRight: margNum}} >
       <a href={"/search/" + props.name}>
         <div
           className="homeoverlay"
