@@ -22,13 +22,18 @@ p.desc {
   text-align: justify;
 }
 
+#homecategoriesScrollPoint{
+    position: absolute;
+    top: 70%;
+}
+
 .HomeCategories {
   width: 100%;
   height: 500px;
   position: relative;
   margin: auto;
-  margin-top: 20vh;
-  margin-bottom: 20vh;
+  margin-top: 10vh;
+  /* margin-bottom: 18vh; */
   display: flex; /* establish flex container */
   flex-wrap: wrap; /* default value; can be omitted */
   justify-content: center;
@@ -52,7 +57,7 @@ p.desc {
   position: absolute;
   width: 100%;
   height: 100%;
-  opacity: 50%;
+  opacity: 70%;
 display: flex; /* establish flex container */
   flex-wrap: wrap; /* default value; can be omitted */
   /* transform: translate(-50%, -50%); */
@@ -60,26 +65,27 @@ display: flex; /* establish flex container */
   flex-direction: row;
 
   /* border-radius: 10%; */
-      transition: all 0.5s ease;
+      transition: all 1s ease;
 }
 
 .rightCat {
   clip-path: polygon(0% 0%, 37.5% 0%, 25% 100%, 0% 100%);
   background-color: orangered;
-  
+  padding-left: 20px;
 }
 
 .centerCat {
   clip-path: polygon(37.5% 0%, 62.5% 0%, 75% 100%, 25% 100%);
     justify-content: center;
   background-color: orange;
-  padding: 0 40%;
+  padding: 0 35%;
 }
 
 .leftCat {
   clip-path: polygon(62.5% 0%, 100% 0%, 100% 100%, 75% 100%);
   background-color: yellow;
   justify-content:flex-end;
+  padding-right: 20px;
 }
 
 .rightCat:hover,
@@ -92,6 +98,7 @@ display: flex; /* establish flex container */
     position: absolute;
     font-size:3vh;
     font-weight: bolder;
+    transition: all 1s ease;
 }
 
 .rightCat p {
@@ -105,6 +112,12 @@ display: flex; /* establish flex container */
 .leftCat p {
     float: right;
   margin-right: 6%;
+}
+
+.rightCat:hover p,
+.centerCat:hover p,
+.leftCat:hover p{
+    font-size:6vh;
 }
 
 /* ----------------endcategbgcolor---------------- */
@@ -162,7 +175,9 @@ display: flex; /* establish flex container */
   margin-top: 5%;
 }
 
-.HomeCategories:hover .homeoverlay {
+.rightCat:hover .homeoverlay,
+.centerCat:hover .homeoverlay,
+.leftCat:hover .homeoverlay {
   filter: blur(3px);
 }
 

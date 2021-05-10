@@ -88,24 +88,25 @@ export class Home extends Component {
           />
           <Login />
           <p id="moto1">
-            Looking for an <span style={{ color: "orangered" }}> expert </span>?
+            Looking for an <span style={{ color: "orangered" }}> expert</span>?
             Book your session now!
           </p> 
           <p id="moto2">
             Look through our many 
-            <span style={{ color: "orangered" }}> experts </span>, and 
+            <span style={{ color: "orangered" }}> experts</span>, and 
             <span style={{ color: "orangered" }}> find </span> the one that fits
             you better. 
           </p> 
-          <Autocomplete options={this.state.src} /> 
+        <Autocomplete options={this.state.src} />
+        <div id="homecategoriesScrollPoint"></div>
+        
           <p id="moto3">
-            or browse our 
+            or browse our&nbsp;
             <a
-              href="#homecategories"
-              id="homecategories"
+              href="#homecategoriesScrollPoint"
               style={{ color: "orangered" }}
             >
-              categories 
+               categories 
             </a>
             . 
           </p> 
@@ -114,19 +115,19 @@ export class Home extends Component {
           <div className="rightCat">
             <p> Learning </p>
             {this.state.cat1.map((item, i) => (
-            <HomeCategory key={i} name={item} classtype={i} />
+            <HomeCategory key={i} name={item} classtype={i+1} />
           ))} 
           </div> 
                 <div className="centerCat">
             <p> Both </p>
             {this.state.cat2.map((item, i) => (
-            <HomeCategory key={i} name={item} classtype={i} />
+            <HomeCategory key={i} name={item} classtype={i+1} />
           ))} 
           </div> 
           <div className="leftCat">
             <p> Assistance </p>
             {this.state.cat3.map((item, i) => (
-            <HomeCategory key={i} name={item} classtype={i} />
+            <HomeCategory key={i} name={item} classtype={i+1} />
           ))} 
           </div> 
           {/* {this.state.src.map((item, i) => (

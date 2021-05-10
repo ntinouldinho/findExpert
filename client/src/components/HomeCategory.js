@@ -25,16 +25,24 @@ const HomeCategory = (props) => {
       default:
         return "https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/CategoryOther.jpg?alt=media&token=2e7a1b48-3273-439e-87b4-33648199330c";
     }
-  };
+    };
+    
+    var margNum= 0;
 
   const classType = (classtype) => {
-    console.log(classtype);
+      console.log(classtype);
+      
+      if (props.name === "Technician") {
+          margNum = 100;
+          return "Even";
+      }
+
     return classtype % 2 === 0 ? "Even" : "Odd";
   };
 
   console.log(props);
-  return (
-    <div className={"HomeCategory " + classType(props.classtype)}>
+    return (
+        <div className={"HomeCategory " + classType(props.classtype)} style={{ marginLeft: margNum, marginRight: margNum }} >
       <a href={"/search/" + props.name}>
         <div
           className="homeoverlay"
