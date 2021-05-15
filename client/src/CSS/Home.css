@@ -62,7 +62,7 @@ p.desc {
   /* transform: translate(-50%, -50%); */
   align-content: center;
   flex-direction: row;
-  row-gap: calc(50%*62vh);
+  /* row-gap: calc(50%*62vh); */
   /* column-gap: 10%; */
   /* border-radius: 10%; */
   transition: all 1s ease;
