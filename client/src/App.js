@@ -25,7 +25,7 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/profile/:name/:id" component={Profile} />
           <Route path="/user" component={withAuth(User)} />
-          <Route path="/profile/edit" component={EditProfile} />
+          <Route path="/profile/edit" component={withAuth(EditProfile)} />
         </Switch>
       </BrowserRouter>
     </div>
