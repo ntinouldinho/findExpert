@@ -60,7 +60,7 @@ export class Login extends Component {
         const api = this.state.isLogin ? "login":"register";
 
         
-        await fetch('/api/'+api, {
+        fetch('/api/'+api, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -70,9 +70,20 @@ export class Login extends Component {
               email: this.state.email,
               password: this.state.password
             }),
-        });
-        
-        //const body = await response.text();
+        })
+        .then(res => {
+            if (res.status === 200) {
+              this.props.history.push('/');
+            } else {
+              const error = new Error(res.error);
+              throw error;
+            }
+          })
+          .catch(err => {
+            console.error(err);
+            alert('Error logging in please try again');
+          });
+
     
       };
 
