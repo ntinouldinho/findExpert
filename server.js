@@ -4,11 +4,17 @@ const http = require("http");
 const socket = require("socket.io");
 const bodyParser = require('body-parser');
 const path = require("path");
+const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
+const withAuth = require('./middleware');
+
+
+const secret = process.env.SECRET;
 
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(cookieParser());
 
 const server = http.createServer(app);
 const io = socket(server);
@@ -35,6 +41,10 @@ const firestore = firebase.firestore();
 
 
 var nodemailer = require('nodemailer');
+
+app.get('/checkToken', withAuth, function(req, res) {
+    res.sendStatus(200);
+});
 
 // var transporter = nodemailer.createTransport({
 //     service: 'hotmail',
@@ -135,7 +145,12 @@ app.post('/api/login/', async(req, res) => {
             // Signed in 
             var user = userCredential.user;
 
-            res.status(201).send(`Logged in: ${user}`);
+            const payload = { user };
+            const token = jwt.sign(payload, secret, {
+              expiresIn: '1h'
+            });
+            res.cookie('token', token, { httpOnly: true })
+              .sendStatus(200);
         })
         .catch((error) => {
             var errorCode = error.code;
