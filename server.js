@@ -96,8 +96,6 @@ app.post('/api/login/', async(req, res) => {
 
 
 app.post('/api/register/', async(req, res) => {
-    console.log(req.body);
-
     //const newDoc = await firestore.collection('users').add(req.body);
     firebase.auth().createUserWithEmailAndPassword(req.body.email, req.body.password)
         .then((userCredential) => {
