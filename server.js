@@ -69,6 +69,64 @@ app.get('/checkToken', withAuth, function(req, res) {
 //   }
 // });
 
+app.post('/api/login/', async(req, res) => {
+    console.log(req.body);
+
+    //const newDoc = await firestore.collection('users').add(req.body);
+    firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
+        .then((userCredential) => {
+            // Signed in 
+            var user = userCredential.user.email;
+
+            const payload = { user };
+            const token = jwt.sign(payload, secret, {
+              expiresIn: '24h'
+            });
+            res.cookie('token', token, { httpOnly: true })
+              .sendStatus(200);
+        })
+        .catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ..
+            res.status(400).send(`${errorMessage} and ${errorCode}`);
+        });
+
+});
+
+
+app.post('/api/register/', async(req, res) => {
+    console.log(req.body);
+
+    //const newDoc = await firestore.collection('users').add(req.body);
+    firebase.auth().createUserWithEmailAndPassword(req.body.email, req.body.password)
+        .then((userCredential) => {
+            // Signed in 
+            var user = userCredential.user.uid;
+
+            firestore.collection('users').doc(user).set({
+                name: req.body.name
+            })
+
+            var email = userCredential.user.email;
+
+            const payload = { email };
+            const token = jwt.sign(payload, secret, {
+              expiresIn: '24h'
+            });
+            res.cookie('token', token, { httpOnly: true })
+              .sendStatus(200);
+        })
+        .catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ..
+            res.status(400).send(`${errorMessage} and ${errorCode}`);
+        });
+
+});
+
+
 app.post('/api/reset/', async(req, res) => {
     console.log(req.body);
 
@@ -84,34 +142,6 @@ app.post('/api/reset/', async(req, res) => {
 });
 
 
-app.get('/api/hello', (req, res) => {
-    res.send({ express: 'Hello From Express' });
-});
-
-app.post('/api/register/', async(req, res) => {
-    console.log(req.body);
-
-    //const newDoc = await firestore.collection('users').add(req.body);
-    firebase.auth().createUserWithEmailAndPassword(req.body.email, req.body.password)
-        .then((userCredential) => {
-            // Signed in 
-            var user = userCredential.user.uid;
-
-            firestore.collection('users').doc(user).set({
-                name: req.body.name
-            })
-
-            //const newDoc = await firestore.collection('users').add(req.body)
-            res.status(201).send(`Created a new user: ${user}`);
-        })
-        .catch((error) => {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // ..
-            res.status(400).send(`${errorMessage} and ${errorCode}`);
-        });
-
-});
 
 app.get('/api/expert/get', async(req, res) => {
     const callDoc = firestore.collection('experts').doc('uDOmxlKpwHvQaJ0N1Dds');
@@ -136,30 +166,6 @@ app.post('/api/expert/edit', async(req, res) => {
 });
 
 
-app.post('/api/login/', async(req, res) => {
-    console.log(req.body);
-
-    //const newDoc = await firestore.collection('users').add(req.body);
-    firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
-        .then((userCredential) => {
-            // Signed in 
-            var user = userCredential.user;
-
-            const payload = { user };
-            const token = jwt.sign(payload, secret, {
-              expiresIn: '1h'
-            });
-            res.cookie('token', token, { httpOnly: true })
-              .sendStatus(200);
-        })
-        .catch((error) => {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // ..
-            res.status(400).send(`${errorMessage} and ${errorCode}`);
-        });
-
-});
 
 
 
