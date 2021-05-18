@@ -33,6 +33,22 @@ class ExampleApp extends React.Component {
       this.setState({ showModal: true });
     }
     
+
+    bookAppointment (){
+        fetch('/checkToken')
+        .then(res => {
+          if (res.status === 200) {
+              //continue
+          } else {
+            const error = new Error(res.error);
+            throw error;
+          }
+        })
+        .catch(err => {
+          alert("You must be signed in to book an appointment")
+        });
+    }
+    
     handleCloseModal () {
       this.setState({ showModal: false });
     }
@@ -93,7 +109,7 @@ class ExampleApp extends React.Component {
 
 
                 <div id="modal-choices">
-                    <Button id="book-appointment" variant="success">Book</Button>
+                    <Button id="book-appointment" onClick={this.bookAppointment} variant="success">Book</Button>
 
                     <Button id="cancel-modal" onClick={this.handleCloseModal} variant="danger">Cancel</Button>
                 </div>
