@@ -1,4 +1,4 @@
-import React, { useState,useRef } from 'react';
+import React from 'react';
 import '../CSS/Profile.css';
 import Rating from 'react-star-review';
 import { Header } from "../components/Header";
@@ -7,9 +7,8 @@ import Button from 'react-bootstrap/Button';
 import ReactModal from 'react-modal';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import ShowMore from 'react-show-more-button';
 import ShowMoreText from 'react-show-more-text';
-import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+import ReactHtmlParser from 'react-html-parser';
  
 
 class ExampleApp extends React.Component {
@@ -65,9 +64,34 @@ class ExampleApp extends React.Component {
             
             const time = this.state.time[this.state.selected];
             const service = this.state.service;
-            
+
             console.log(this.props.services[this.state.service]);
-            
+            fetch('/api/createAppointment', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 
+                    customer: email, 
+                    time:time,
+                    service:service,
+                    email: this.state.email,
+                    password: this.state.password
+                  }),
+              })
+              .then(res => {
+                  if (res.status === 200) {
+                    this.props.history.push('/');
+                  } else {
+                    const error = new Error(res.error);
+                    throw error;
+                  }
+                })
+                .catch(err => {
+                  console.error(err);
+                  alert('Error logging in please try again');
+                });
+      
             
 
 
@@ -81,7 +105,7 @@ class ExampleApp extends React.Component {
     }
 
     clickDay(value, event){
-        console.log(event.target.ariaLabel);
+        console.log(value.toString().substring(4,15));
         this.setState({ selected: -1 }); //reset all green hours
     }
 
@@ -116,7 +140,7 @@ class ExampleApp extends React.Component {
                         {this.state.time.map((item, i) => (
                             <li onClick={() => this.changeSeleceted(i)} 
                                 key={i}
-                                style={{backgroundColor: i==this.state.selected?"lightgreen":""}}
+                                style={{backgroundColor: i===this.state.selected?"lightgreen":""}}
                             >
                             {item}
                             </li>
@@ -126,7 +150,7 @@ class ExampleApp extends React.Component {
                 </div>
 
                 <div id="modal-services">          
-                    <label for="services">Choose a service:</label>
+                    <label htmlFor="services">Choose a service:</label>
                     <select id="services" onChange={this.handleChange}>
                         {this.props.services.map((item, i) => (
                             <option value={item} key={i}>{item}</option>
@@ -282,7 +306,7 @@ export class Profile extends React.Component {
                 <div className="core">
                     <div className = "grid-container">
                         <div className="picture">
-                            <img src={this.state.url} alt="Profile Picture" height="100" width="200" id="profpic"/>
+                            <img src={this.state.url} alt="Profile" height="100" width="200" id="profpic"/>
                         </div>
                        
                         <Info name={this.state.name} profession={this.state.profession} stars={this.state.stars} services={this.state.services} />
