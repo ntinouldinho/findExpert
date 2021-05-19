@@ -5,7 +5,9 @@ const socket = require("socket.io");
 const bodyParser = require('body-parser');
 const path = require("path");
 const jwt = require('jsonwebtoken');
+const jwt_decode = require('jwt-decode');
 const cookieParser = require('cookie-parser');
+
 const withAuth = require('./middleware');
 
 
@@ -95,6 +97,16 @@ app.post('/api/login/', async(req, res) => {
 });
 
 
+app.get('/api/decode/', async(req, res) => {
+    const token = req.cookies.token;
+    console.log(token);
+    var decoded = jwt_decode(token,process.env.SECRET).user;
+    console.log(decoded);
+    res.status(201).send({'email':decoded});
+    
+});
+
+
 app.post('/api/register/', async(req, res) => {
     //const newDoc = await firestore.collection('users').add(req.body);
     firebase.auth().createUserWithEmailAndPassword(req.body.email, req.body.password)
@@ -103,7 +115,8 @@ app.post('/api/register/', async(req, res) => {
             var user = userCredential.user.uid;
 
             firestore.collection('users').doc(user).set({
-                name: req.body.name
+                name: req.body.name,
+                appointmets:[]
             })
 
             var email = userCredential.user.email;
