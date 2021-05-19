@@ -8,7 +8,7 @@ const ProfessionalBlock = ({ person }) => {
       <a href={"/profile/" + person.name +"/" + person.id}>
         <div className="leftside" style={{ float: "left" }}>
           <img
-            alt="Expert Profile Picture"
+            alt="Expert Profile"
             className="ProfilePic"
             src={person.url}
             height="80"
