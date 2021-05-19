@@ -20,6 +20,7 @@ class ExampleApp extends React.Component {
         showModal: false,
         time:['7:00-8:00','8:00-9:00','10:00-11:00','11:00-12:00','12:00-13:00','13:00-14:00','14:00-15:00','15:00-16:00','16:00-17:00','17:00-18:00','18:00-19:00'],
         selected: -1,
+        service:0,
         html: <p>ffff<em>ff</em></p>
       };
       
@@ -27,18 +28,27 @@ class ExampleApp extends React.Component {
       this.handleCloseModal = this.handleCloseModal.bind(this);
       this.changeSeleceted = this.changeSeleceted.bind(this);
       this.clickDay = this.clickDay.bind(this);
+      this.bookAppointment= this.bookAppointment.bind(this);
+      this.handleChange = this.handleChange.bind(this);
     }
     
     handleOpenModal () {
       this.setState({ showModal: true });
     }
     
+    handleChange(event) {
+        this.setState({ service: event.target.selectedIndex });
+    }
+    
 
-    bookAppointment (){
-        fetch('/checkToken')
+    async bookAppointment (){
+
+        var flag=0;
+
+        await fetch('/checkToken')
         .then(res => {
           if (res.status === 200) {
-              //continue
+            flag=1;
           } else {
             const error = new Error(res.error);
             throw error;
@@ -47,6 +57,23 @@ class ExampleApp extends React.Component {
         .catch(err => {
           alert("You must be signed in to book an appointment")
         });
+
+        if(flag){
+            const response = await fetch(`/api/decode`);
+            const json = await response.json();
+            const email = json.email;
+            
+            const time = this.state.time[this.state.selected];
+            const service = this.state.service;
+            
+            console.log(this.props.services[this.state.service]);
+            
+            
+
+
+        }
+        
+  
     }
     
     handleCloseModal () {
@@ -100,9 +127,9 @@ class ExampleApp extends React.Component {
 
                 <div id="modal-services">          
                     <label for="services">Choose a service:</label>
-                    <select id="services">
+                    <select id="services" onChange={this.handleChange}>
                         {this.props.services.map((item, i) => (
-                            <option value={item}>{item}</option>
+                            <option value={item} key={i}>{item}</option>
                         ))}
                     </select>
                 </div>
