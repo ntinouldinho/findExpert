@@ -22,9 +22,30 @@ export class Header extends Component {
         "Other",
       ],
       search: props.search,
+      loggenIn:false
     };
   }
+
+
+  componentDidMount() {
+    fetch('/checkToken')
+        .then(res => {
+          if (res.status === 200) {
+            this.setState({ loggedIn: true });
+          } else {
+            const error = new Error(res.error);
+            throw error;
+          }
+        })
+        .catch(err => {
+          console.error(err);
+    });
+  }
+
   render() {
+
+    var show=this.state.loggedIn?"inline":"none";
+
     return (
       <div className="header">
         <a href="/">
@@ -32,6 +53,7 @@ export class Header extends Component {
         </a>
 
         <Autocomplete options={this.state.src} search={this.state.search} />
+        <button type="button" onClick={this.logout} style={{display:show}}>Logout</button>
         <Login />
       </div>
     );
