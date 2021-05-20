@@ -96,6 +96,10 @@ app.post('/api/login/', async(req, res) => {
 
 });
 
+app.get('/logout', function(req, res) {
+    res.cookie('token', null, { maxAge: 0 })
+    .sendStatus(200);
+});
 
 app.get('/api/decode/', async(req, res) => {
     const token = req.cookies.token;

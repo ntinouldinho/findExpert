@@ -51,12 +51,37 @@ export class Home extends Component {
         "Medical",
       ],
       search: "",
+      loggedIn: false
     };
     this.scrollFunction = this.scrollFunction.bind(this);
+    this.logout = this.logout.bind(this);
+  }
+
+  logout() {
+    try {
+      fetch(`/logout`);
+      this.setState({ 
+            loggedIn: false
+        });
+    } catch (error) {
+    }
   }
 
   componentDidMount() {
     window.addEventListener("scroll", this.scrollFunction);
+
+    fetch('/checkToken')
+        .then(res => {
+          if (res.status === 200) {
+            this.setState({ loggedIn: true });
+          } else {
+            const error = new Error(res.error);
+            throw error;
+          }
+        })
+        .catch(err => {
+          console.error(err);
+    });
   }
 
   componentWillUnmount() {
@@ -86,6 +111,7 @@ export class Home extends Component {
             height="150"
             width="378"
           />
+          <button type="button" onClick={this.logout}>Logout</button>
           <Login />
           <p id="moto1">
             Looking for an <span style={{ color: "orangered" }}> expert</span>?
