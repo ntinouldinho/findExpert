@@ -101,7 +101,8 @@ export class Home extends Component {
   }
   render() {
     var show=this.state.loggedIn?"inline":"none";
-    
+    var showImage = !this.state.loggedIn?"inline":"none";
+
     return (
       <div className="HomeContainer">
         <Header search={this.state.search} />
@@ -114,7 +115,8 @@ export class Home extends Component {
             width="378"
           />
           <button type="button" onClick={this.logout} style={{display:show}}>Logout</button>
-          <Login />
+          <span  style={{display:showImage}} ><Login/></span>
+          
           <p id="moto1">
             Looking for an <span style={{ color: "orangered" }}> expert</span>?
             Book your session now!

@@ -45,6 +45,7 @@ export class Header extends Component {
   render() {
 
     var show=this.state.loggedIn?"inline":"none";
+    var showImage = !this.state.loggedIn?"inline":"none";
 
     return (
       <div className="header">
@@ -54,7 +55,7 @@ export class Header extends Component {
 
         <Autocomplete options={this.state.src} search={this.state.search} />
         <button type="button" onClick={this.logout} style={{display:show}}>Logout</button>
-        <Login />
+        <Login style={{display:showImage}} />
       </div>
     );
   }
