@@ -121,7 +121,7 @@ export class Login extends Component {
 
                             <h4>Password:</h4>
                             <input
-                                type="text"
+                                type="password"
                                 placeholder={"Enter your password..."}
                                 name="password"
                                 onChange={e => this.onTodoChange(e)}
