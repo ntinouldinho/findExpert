@@ -1,6 +1,7 @@
 import React, { useRef, useEffect,useState } from "react";
 import io from "socket.io-client";
 import "../CSS/Room.css";
+import { useHistory } from "react-router-dom";
 // import screen from "../assets/screen.png";
 // import mute from "../assets/mute.png";
 // import camera from "../assets/video-camera.png";
@@ -11,7 +12,7 @@ import {
   faWindowClose,
   faMicrophone,
   faMicrophoneSlash,
-  faPhoneSlash,
+  faPhoneSlash
 } from "@fortawesome/free-solid-svg-icons";
 import { faChromecast } from "@fortawesome/free-brands-svg-icons";
 
@@ -231,12 +232,8 @@ const Room = (props) => {
   // function setMute(mute) {
   //   let icon = mute ? "faMicrophone" : "faMicrophoneSlash";
   // }
-
-    function iconChang() {
-        var icn = document.getElementById("muteicon"); //!this is undefined
-        console.log(icn);
-    }
-
+    
+const history = useHistory();
   return (
     <div className="room-container">
       <div className="video-container">
@@ -266,15 +263,16 @@ const Room = (props) => {
            
           </button>
           <button id="screensharebtn"
-            onClick={() =>{setScreen(!screen);if(!screen){shareScreen();}}}>
+                      onClick={() => {
+                alert("COMING SOON...")
+                // setScreen(!screen); if (!screen) { shareScreen(); }
+            }}>
             <FontAwesomeIcon icon={screen ? faWindowClose : faChromecast}/>
           </button>
           <button id="closebtn">
             <FontAwesomeIcon
               icon={faPhoneSlash}
-              //   onClick={() => {
-              //     setIcon("faTimes");
-              //   }}
+              onClick={() => {history.push(`/`)}}
             />
           </button>
         </div>
@@ -286,7 +284,7 @@ const Room = (props) => {
           {/* <SignOut /> */}
         </header>
 
-        <section>{<ChatRoom />}</section>
+        <section>{<ChatRoom roomID={props.match.params.roomID}/>}</section>
       </div>
       {/* <div className="room-bottom">hello</div> */}
     </div>
@@ -303,68 +301,95 @@ const Room = (props) => {
 //   );
 // }
 
-function ChatRoom() {
-  //   const dummy = useRef();
-  //   const messagesRef = firestore.collection("messages");
-  //   const query = messagesRef.orderBy("createdAt").limit(25);
+function ChatRoom(props) {
 
-  //   const [messages] = useCollectionData(query, { idField: "id" });
+    const socketChat = useRef();
+    const otherUserChat = useRef();
+    const [yourID, setYourID] = useState();
+  const [messages, setMessages] = useState([]);
+    const [message, setMessage] = useState("");
+    
+    useEffect(() => {
+        //----------chat-----
+        socketChat.current = io.connect('/');  //not correct but close
 
-  //   const [formValue, setFormValue] = useState("");
+        socketChat.current.emit("join chat", props.roomID);
 
-  //   const sendMessage = async (e) => {
-  //     e.preventDefault();
+        socketChat.current.on("other user chat", (userID) => {
+          console.log("other user chat " + userID);
+          otherUserChat.current = userID;
+        });
 
-  //     const { uid, photoURL } = auth.currentUser;
+        socketChat.current.on("your id", id => {
+        setYourID(id);
+        });
+        
+        socketChat.current.on("message", (message) => {
+            console.log("here");
+            receivedMessage(message);
+        });
+    }, []);
 
-  //     await messagesRef.add({
-  //       text: formValue,
-  //       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-  //       uid,
-  //       photoURL,
-  //     });
+          // ----------------Chat Stuff---------------
+    
+  function receivedMessage(message) {
+    setMessages((oldMsgs) => [...oldMsgs, message]);
+  }
 
-  //     setFormValue("");
-  //     dummy.current.scrollIntoView({ behavior: "smooth" });
-  //   };
+  function sendMessage(e) {
+    e.preventDefault();
+    const messageObject = {
+      body: message,
+      id: yourID,
+    };
+    setMessage("");
+    socketChat.current.emit("send message", messageObject);
+  }
+
+  function handleChatChange(e) {
+    setMessage(e.target.value);
+  }
+
+// ----------------End Chat Stuff----------------
+    
 
   return (
-    <>
+   <>
       <main>
-        <ChatMessage key={3} message={"Hello Johnny!"} />
-        <ChatMessage key={8} message={"The meeting will start in 5 minutes."} />
 
-        {/* <span ref={dummy}></span> */}
+    {messages.map((message, index) => {
+        return (
+            <ChatMessage key={index} message={message.body} flag={message.id===yourID} />
+        )
+    })}
+
       </main>
-
-      <form>
+      <form onSubmit={sendMessage}>
         <input
           type="text"
-          //   value={formValue}
-          //   onChange={(e) => setFormValue(e.target.value)}
-          placeholder="say something nice"
+            value={message}
+            onChange={handleChatChange}
+            placeholder="Say something..."
         />
-
-        <button type="submit">📝</button>
+        <button type="submit"> 📝 </button>
       </form>
-    </>
+                  </>
   );
 }
 
 function ChatMessage(props) {
-  //   const { text, uid, photoURL } = props.message;
 
-  //   const messageClass = uid === auth.currentUser.uid ? "sent" : "received";
+    const messageClass = props.flag===true ? "sent" : "received";
 
   return (
     <>
-      <div>
+      <div className={`message ${messageClass}`}>
         <img
           src={
             "https://p.kindpng.com/picc/s/24-248325_profile-picture-circle-png-transparent-png.png"
           }
         />
-        <p>{props.message}</p>
+        <p> {props.message} </p>
       </div>
     </>
   );

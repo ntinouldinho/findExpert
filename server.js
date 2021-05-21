@@ -188,19 +188,20 @@ app.post('/api/expert/edit', async(req, res) => {
 //instead of const rooms we will access firebase and see if in the assigned uuid room someone is currently inside and waiting
 //every time a user enters or leaves the room we have to keep a log about his time of arrival and departure from the room
 const rooms = {};
+const chats = {};
 
 io.on("connection", socket => {
 
     socket.on("profile", profile_id => {
-
+        
         const callDoc = firestore.collection('users').doc(profile_id);
         var doc;
         (async() => {
             doc = await callDoc.get();
         })();
-
+        
     });
-
+    
     socket.on("join room", roomID => {
 
         if (rooms[roomID]) {
@@ -209,7 +210,7 @@ io.on("connection", socket => {
             rooms[roomID] = [socket.id];
         }
         const otherUser = rooms[roomID].find(id => id !== socket.id);
-
+        
         if (otherUser) {
             socket.emit("other user", otherUser);
             socket.to(otherUser).emit("user joined", socket.id);
@@ -218,10 +219,31 @@ io.on("connection", socket => {
         }
     });
 
+  socket.on("join chat", roomID => {
+
+        if (chats[roomID]) {
+            chats[roomID].push(socket.id);
+        } else {
+            chats[roomID] = [socket.id];
+        }
+        const otherUser = chats[roomID].find(id => id !== socket.id);
+        
+        if (otherUser) {
+            socket.emit("other user chat", otherUser);
+            socket.to(otherUser).emit("user joined chat", socket.id);
+        } 
+        socket.emit("your id", socket.id);
+
+    });
+    
+    socket.on("send message", body => {
+        io.emit("message", body)
+    })
+    
     socket.on("offer", payload => {
         io.to(payload.target).emit("offer", payload);
     });
-
+    
     socket.on("answer", payload => {
         io.to(payload.target).emit("answer", payload);
     });
