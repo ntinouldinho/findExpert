@@ -217,17 +217,14 @@
   margin-left: 12px;
   line-height: 24px;
   padding: 10px 40px;
-  border-radius: 25px;
+  border-radius: 80px;
   position: relative;
   color: white;
   text-align: center;
   font-size: 1.2vw;
   z-index: 101;
   background-color: rgba(255, 140, 0, 0.39);
-  border-top-left-radius: 3em 0.5em;
-  border-bottom-left-radius: 100px;
-  border-top-right-radius: 80px;
-  border-bottom-right-radius: 80px;
+
 }
 
 #chat .message {
@@ -243,10 +240,14 @@
   color: white;
   background: #0b93f6;
   align-self: flex-end;
+  border-top-right-radius: 3em 0.5em;
+  border-bottom-right-radius: 100px;
 }
 #chat .received p {
   background: #e5e5ea;
   color: black;
+  border-top-left-radius: 3em 0.5em;
+  border-bottom-left-radius: 100px;
 }
 
 #chat img {
