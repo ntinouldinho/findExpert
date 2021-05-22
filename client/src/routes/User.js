@@ -92,10 +92,43 @@ export class User extends Component {
               { id: 2, name: "Billing"},
               { id: 3, name: "History"}
             ],
-            email:"tinoathome@windowslive.com"
+            email:"",
+            appointments:[],
+            role:"",
+            name:""
         };
         this.handleClick = this.handleClick.bind(this);
         this.resetPassword = this.resetPassword.bind(this);
+    }
+
+    async componentDidMount() {
+
+        // const response = await fetch(`/api/decode`);
+        // const json = await response.json();
+        // const user = json.user;
+
+
+        fetch('/api/decode')
+        .then(response => response.json())
+        .then(data => {
+            this.setState({email:data.email})
+            fetch('/api/user/get?user='+data.user)
+            .then(res => res.json())
+            .then(person => { 
+               this.setState({
+                   email:person.email,
+                   role:person.role,
+                   name:person.name,
+                   appointments:person.appointments
+               })
+            })
+              .catch(err => {
+                console.error(err);
+                alert('Error logging in please try again');
+              });
+        });
+
+       
     }
 
     resetPassword = async e => {
