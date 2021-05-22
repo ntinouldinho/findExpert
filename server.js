@@ -128,14 +128,16 @@ app.post('/api/register/', async(req, res) => {
         .then((userCredential) => {
             // Signed in 
             var user = userCredential.user.uid;
+            var email = userCredential.user.email;
 
             firestore.collection('users').doc(user).set({
                 name: req.body.name,
                 appointments: [],
-                role: 'user'
+                role: 'user',
+                email: email
             })
 
-            var email = userCredential.user.email;
+            
 
             const payload = { email };
             const token = jwt.sign(payload, secret, {
@@ -194,14 +196,15 @@ app.post('/api/appointment/create', async(req, res) => {
 
 
 
-app.get('/api/expert/get', async(req, res) => {
-    const callDoc = firestore.collection('users').doc('HVp43gujF3Ssoor8t4hGN5jA1w33');
+app.get('/api/user/get', async(req, res) => {
+    let user = req.query.user || req.body.user;
+    const callDoc = firestore.collection('users').doc(user);
     var doc = await callDoc.get();
 
     var data = doc.data();
     const appointments = data.appointments;
     const fullAppointments = [];
-
+    
     for (var i = 0; i < appointments.length; i++) {
 
         const appointment = firestore.collection('appointments').doc(appointments[i]);
