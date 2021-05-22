@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const path = require("path");
 const jwt = require('jsonwebtoken');
 const jwt_decode = require('jwt-decode');
+const crypto = require("crypto");
 const cookieParser = require('cookie-parser');
 
 const withAuth = require('./middleware');
@@ -74,18 +75,13 @@ app.get('/checkToken', withAuth, function(req, res) {
 app.post('/api/login/', async(req, res) => {
     console.log(req.body);
 
+    var theUser = {};
     //const newDoc = await firestore.collection('users').add(req.body);
-    firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
+    await firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
         .then((userCredential) => {
             // Signed in 
-            var user = userCredential.user.email;
+            theUser = userCredential;
 
-            const payload = { user };
-            const token = jwt.sign(payload, secret, {
-              expiresIn: '24h'
-            });
-            res.cookie('token', token, { httpOnly: true })
-              .sendStatus(200);
         })
         .catch((error) => {
             var errorCode = error.code;
@@ -93,21 +89,36 @@ app.post('/api/login/', async(req, res) => {
             // ..
             res.status(400).send(`${errorMessage} and ${errorCode}`);
         });
+    
+    console.log(theUser);
+    var email = theUser.user.email;
+    var user = theUser.user.uid;
+
+    const callDoc = firestore.collection('users').doc(user);
+    var doc = await callDoc.get();
+    var user_data = doc.data();
+
+    const payload = { email: email, user: user, role: user_data.role };
+    const token = jwt.sign(payload, secret, {
+        expiresIn: '24h'
+    });
+    res.cookie('token', token, { httpOnly: true })
+        .sendStatus(200);
 
 });
 
 app.get('/logout', function(req, res) {
     res.cookie('token', null, { maxAge: 0 })
-    .sendStatus(200);
+        .sendStatus(200);
 });
 
 app.get('/api/decode/', async(req, res) => {
     const token = req.cookies.token;
     console.log(token);
-    var decoded = jwt_decode(token,process.env.SECRET).user;
-    console.log(decoded);
-    res.status(201).send({'email':decoded});
-    
+    var decoded = jwt_decode(token, process.env.SECRET);
+    console.log(jwt_decode(token, process.env.SECRET));
+    res.status(201).send( decoded );
+
 });
 
 
@@ -120,17 +131,18 @@ app.post('/api/register/', async(req, res) => {
 
             firestore.collection('users').doc(user).set({
                 name: req.body.name,
-                appointmets:[]
+                appointments: [],
+                role: 'user'
             })
 
             var email = userCredential.user.email;
 
             const payload = { email };
             const token = jwt.sign(payload, secret, {
-              expiresIn: '24h'
+                expiresIn: '24h'
             });
             res.cookie('token', token, { httpOnly: true })
-              .sendStatus(200);
+                .sendStatus(200);
         })
         .catch((error) => {
             var errorCode = error.code;
@@ -157,11 +169,68 @@ app.post('/api/reset/', async(req, res) => {
 });
 
 
+app.post('/api/appointment/create', async(req, res) => {
+
+    const appointment = {
+        customer: req.body.customer,
+        expert: "HVp43gujF3Ssoor8t4hGN5jA1w33",
+        uuid: crypto.randomBytes(16).toString("hex"),
+        status: 0
+    };
+
+    const newDoc = await firestore.collection('appointments').add(appointment);
+
+    const app_id = newDoc.id;
+
+    firestore.collection('users').doc(appointment.customer).update({
+        appointments: firebase.firestore.FieldValue.arrayUnion(app_id)
+    })
+
+    firestore.collection('users').doc(appointment.expert).update({
+        appointments: firebase.firestore.FieldValue.arrayUnion(app_id)
+    })
+    res.status(200).send("ok");
+});
+
+
 
 app.get('/api/expert/get', async(req, res) => {
+    const callDoc = firestore.collection('users').doc('HVp43gujF3Ssoor8t4hGN5jA1w33');
+    var doc = await callDoc.get();
+
+    var data = doc.data();
+    const appointments = data.appointments;
+    const fullAppointments = [];
+
+    for (var i = 0; i < appointments.length; i++) {
+
+        const appointment = firestore.collection('appointments').doc(appointments[i]);
+        var appointment_data = await appointment.get();
+        fullAppointments.push(appointment_data.data());
+
+    }
+
+    data.appointments = fullAppointments;
+
+    res.status(201).send(data);
+});
+
+
+app.post('/api/appointment/approve/', async(req, res) => {
+
+    firestore.collection('appointments').doc(req.body.id).update({
+        status: 1
+    })
+    res.status(200).send("ok");
+
+});
+
+
+
+app.get('/api/expert/getAppointment', async(req, res) => {
     const callDoc = firestore.collection('experts').doc('uDOmxlKpwHvQaJ0N1Dds');
-     var doc = await callDoc.get();
-     console.log(doc.data());
+    var doc = await callDoc.get();
+    console.log(doc.data());
     res.status(201).send(doc.data());
 });
 
@@ -169,14 +238,14 @@ app.get('/api/expert/get', async(req, res) => {
 app.post('/api/user/edit', async(req, res) => {
     const user = db.collection('users').doc(req.body.id);
 
-     res = await user.update({name: req.body.name});
+    res = await user.update({ name: req.body.name });
 
 });
 
 app.post('/api/expert/edit', async(req, res) => {
     const expert = db.collection('experts').doc(req.body.id);
 
-     res = await expert.update({name: req.body.name});
+    res = await expert.update({ name: req.body.name });
 
 });
 
@@ -193,15 +262,15 @@ const chats = {};
 io.on("connection", socket => {
 
     socket.on("profile", profile_id => {
-        
+
         const callDoc = firestore.collection('users').doc(profile_id);
         var doc;
         (async() => {
             doc = await callDoc.get();
         })();
-        
+
     });
-    
+
     socket.on("join room", roomID => {
 
         if (rooms[roomID]) {
@@ -210,7 +279,7 @@ io.on("connection", socket => {
             rooms[roomID] = [socket.id];
         }
         const otherUser = rooms[roomID].find(id => id !== socket.id);
-        
+
         if (otherUser) {
             socket.emit("other user", otherUser);
             socket.to(otherUser).emit("user joined", socket.id);
@@ -219,7 +288,7 @@ io.on("connection", socket => {
         }
     });
 
-  socket.on("join chat", roomID => {
+    socket.on("join chat", roomID => {
 
         if (chats[roomID]) {
             chats[roomID].push(socket.id);
@@ -227,23 +296,23 @@ io.on("connection", socket => {
             chats[roomID] = [socket.id];
         }
         const otherUser = chats[roomID].find(id => id !== socket.id);
-        
+
         if (otherUser) {
             socket.emit("other user chat", otherUser);
             socket.to(otherUser).emit("user joined chat", socket.id);
-        } 
+        }
         socket.emit("your id", socket.id);
 
     });
-    
+
     socket.on("send message", body => {
         io.emit("message", body)
     })
-    
+
     socket.on("offer", payload => {
         io.to(payload.target).emit("offer", payload);
     });
-    
+
     socket.on("answer", payload => {
         io.to(payload.target).emit("answer", payload);
     });
