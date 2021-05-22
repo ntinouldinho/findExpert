@@ -70,6 +70,10 @@ const Appointments = (props) => {
                         <th>
                             status
                         </th>
+
+                        <th>
+                            link
+                        </th>
                     </tr>
                 </thead>
 
@@ -86,6 +90,10 @@ const Appointments = (props) => {
 
                             <td>
                                 {filterStatus(row.status,row.appointment_id)}
+                            </td>
+
+                            <td>
+                                <a href={"/room/"+row.appointment_id}> Click Here </a>
                             </td>
                         </tr>
                     ))}
