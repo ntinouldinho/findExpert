@@ -209,7 +209,12 @@ app.get('/api/user/get', async(req, res) => {
 
         const appointment = firestore.collection('appointments').doc(appointments[i]);
         var appointment_data = await appointment.get();
-        fullAppointments.push(appointment_data.data());
+
+        var theData = appointment_data.data();
+
+        theData.appointment_id = appointments[i]
+        //get experts name 
+        fullAppointments.push(theData);
 
     }
 
