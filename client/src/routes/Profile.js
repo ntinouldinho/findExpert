@@ -66,6 +66,9 @@ class ExampleApp extends React.Component {
             const time = this.state.time[this.state.selected];
             const service = this.state.service;
 
+            const linkParams = window.location.pathname.split("/");
+            const expert = linkParams[linkParams.length-1];
+
             console.log(this.props.services[this.state.service]);
             fetch('/api/appointment/create', {
                 method: 'POST',
@@ -74,6 +77,7 @@ class ExampleApp extends React.Component {
                 },
                 body: JSON.stringify({ 
                     customer: user, 
+                    expert:expert,
                     time:time,
                     service:service
                   }),
