@@ -9,6 +9,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import ShowMoreText from 'react-show-more-text';
 import ReactHtmlParser from 'react-html-parser';
+import  { Redirect } from 'react-router-dom'
  
 
 class ExampleApp extends React.Component {
@@ -84,7 +85,7 @@ class ExampleApp extends React.Component {
               })
               .then(res => {
                   if (res.status === 200) {
-                    this.props.history.push('/');
+                    window.location.href = "/"
                   } else {
                     const error = new Error(res.error);
                     throw error;
