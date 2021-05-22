@@ -1,4 +1,4 @@
-import React, { useRef, useEffect,useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import io from "socket.io-client";
 import "../CSS/Room.css";
 import { useHistory } from "react-router-dom";
@@ -12,7 +12,7 @@ import {
   faWindowClose,
   faMicrophone,
   faMicrophoneSlash,
-  faPhoneSlash
+  faPhoneSlash,
 } from "@fortawesome/free-solid-svg-icons";
 import { faChromecast } from "@fortawesome/free-brands-svg-icons";
 
@@ -175,10 +175,15 @@ const Room = (props) => {
         .find((sender) => sender.track.kind === "video")
         .replaceTrack(screenTrack);
 
+      userVideo.current.srcObject.replaceTrack(screenTrack);
+
       screenTrack.onended = function () {
         senders.current
           .find((sender) => sender.track.kind === "video")
           .replaceTrack(userStream.current.getTracks()[1]);
+        userVideo.current.srcObject.replaceTrack(
+          userStream.current.getTracks()[1]
+        );
       };
     });
   }
@@ -232,8 +237,8 @@ const Room = (props) => {
   // function setMute(mute) {
   //   let icon = mute ? "faMicrophone" : "faMicrophoneSlash";
   // }
-    
-const history = useHistory();
+
+  const history = useHistory();
   return (
     <div className="room-container">
       <div className="video-container">
@@ -253,26 +258,40 @@ const history = useHistory();
           ref={userVideo}
         />
         <div className="room-buttons">
-          <button id="camerabtn"
-           onClick={() =>{setCamera(!camera)}}>
-            <FontAwesomeIcon icon={camera ? faVideo : faVideoSlash}/>
+          <button
+            id="camerabtn"
+            onClick={() => {
+              setCamera(!camera);
+            }}
+          >
+            <FontAwesomeIcon icon={camera ? faVideo : faVideoSlash} />
           </button>
-          <button id="mutebtn"
-           onClick={() =>{setMute(!mute);}}>
-            <FontAwesomeIcon icon={mute ? faMicrophone : faMicrophoneSlash}/>
-           
+          <button
+            id="mutebtn"
+            onClick={() => {
+              setMute(!mute);
+            }}
+          >
+            <FontAwesomeIcon icon={mute ? faMicrophone : faMicrophoneSlash} />
           </button>
-          <button id="screensharebtn"
-                      onClick={() => {
-                alert("COMING SOON...")
-                // setScreen(!screen); if (!screen) { shareScreen(); }
-            }}>
-            <FontAwesomeIcon icon={screen ? faWindowClose : faChromecast}/>
+          <button
+            id="screensharebtn"
+            onClick={() => {
+              // alert("COMING SOON...")
+              setScreen(!screen);
+              if (!screen) {
+                shareScreen();
+              }
+            }}
+          >
+            <FontAwesomeIcon icon={screen ? faWindowClose : faChromecast} />
           </button>
           <button id="closebtn">
             <FontAwesomeIcon
               icon={faPhoneSlash}
-              onClick={() => {history.push(`/`)}}
+              onClick={() => {
+                history.push(`/`);
+              }}
             />
           </button>
         </div>
@@ -284,7 +303,7 @@ const history = useHistory();
           {/* <SignOut /> */}
         </header>
 
-        <section>{<ChatRoom roomID={props.match.params.roomID}/>}</section>
+        <section>{<ChatRoom roomID={props.match.params.roomID} />}</section>
       </div>
       {/* <div className="room-bottom">hello</div> */}
     </div>
@@ -302,36 +321,35 @@ const history = useHistory();
 // }
 
 function ChatRoom(props) {
-
-    const socketChat = useRef();
-    const otherUserChat = useRef();
-    const [yourID, setYourID] = useState();
+  const socketChat = useRef();
+  const otherUserChat = useRef();
+  const [yourID, setYourID] = useState();
   const [messages, setMessages] = useState([]);
-    const [message, setMessage] = useState("");
-    
-    useEffect(() => {
-        //----------chat-----
-        socketChat.current = io.connect('/');  //not correct but close
+  const [message, setMessage] = useState("");
 
-        socketChat.current.emit("join chat", props.roomID);
+  useEffect(() => {
+    //----------chat-----
+    socketChat.current = io.connect("/"); //not correct but close
 
-        socketChat.current.on("other user chat", (userID) => {
-          console.log("other user chat " + userID);
-          otherUserChat.current = userID;
-        });
+    socketChat.current.emit("join chat", props.roomID);
 
-        socketChat.current.on("your id", id => {
-        setYourID(id);
-        });
-        
-        socketChat.current.on("message", (message) => {
-            console.log("here");
-            receivedMessage(message);
-        });
-    }, []);
+    socketChat.current.on("other user chat", (userID) => {
+      console.log("other user chat " + userID);
+      otherUserChat.current = userID;
+    });
 
-          // ----------------Chat Stuff---------------
-    
+    socketChat.current.on("your id", (id) => {
+      setYourID(id);
+    });
+
+    socketChat.current.on("message", (message) => {
+      console.log("here");
+      receivedMessage(message);
+    });
+  }, []);
+
+  // ----------------Chat Stuff---------------
+
   function receivedMessage(message) {
     setMessages((oldMsgs) => [...oldMsgs, message]);
   }
@@ -350,36 +368,36 @@ function ChatRoom(props) {
     setMessage(e.target.value);
   }
 
-// ----------------End Chat Stuff----------------
-    
+  // ----------------End Chat Stuff----------------
 
   return (
-   <>
+    <>
       <main>
-
-    {messages.map((message, index) => {
-        return (
-            <ChatMessage key={index} message={message.body} flag={message.id===yourID} />
-        )
-    })}
-
+        {messages.map((message, index) => {
+          return (
+            <ChatMessage
+              key={index}
+              message={message.body}
+              flag={message.id === yourID}
+            />
+          );
+        })}
       </main>
       <form onSubmit={sendMessage}>
         <input
           type="text"
-            value={message}
-            onChange={handleChatChange}
-            placeholder="Say something..."
+          value={message}
+          onChange={handleChatChange}
+          placeholder="Say something..."
         />
         <button type="submit"> 📝 </button>
       </form>
-                  </>
+    </>
   );
 }
 
 function ChatMessage(props) {
-
-    const messageClass = props.flag===true ? "sent" : "received";
+  const messageClass = props.flag === true ? "sent" : "received";
 
   return (
     <>
