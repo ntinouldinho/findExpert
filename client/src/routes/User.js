@@ -35,10 +35,63 @@ const Overview = (props) => {
 };
 
 const Appointments = (props) => {
-  
+    
+
+    function filterStatus(status,id){
+        if(props.data.role!=="user"){
+            if(!status){
+                let OnClick = "approveAppointment("+id+")";
+                return (
+                    <button type="button" onClick={() => { props.approve(id)}}> Approve </button>
+                )
+            }else{
+                return (
+                    "approved"
+                )
+            }
+        }else{
+            return status?"confirmed":"pending";
+        }
+    }
+
     return (
         <div>
-            <input type="text" defaultValue={props.name} />
+           <table>
+                <thead>
+                    <tr>
+                        <th>
+                            expert
+                        </th>
+
+                        <th>
+                            service
+                        </th>
+
+                        <th>
+                            status
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {props.data.appointments.map((row) => (
+                        <tr>
+                            <td>
+                                {row.expert}
+                            </td>
+
+                            <td>
+                                idk
+                            </td>
+
+                            <td>
+                                {filterStatus(row.status,row.appointment_id)}
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+               
+           </table>
         </div>
     );
 
@@ -70,7 +123,7 @@ const Handler = (props) => {
         case 0:
             return <Overview name={props.name} resetPassword={props.resetPassword}/>;
         case 1:
-            return <Appointments name={props.name}/>;
+            return <Appointments data={props.data} approve={props.approve}/>;
         case 2:
             return <Billing name={props.name}/>;
         case 3:
@@ -101,7 +154,7 @@ export class User extends Component {
         this.resetPassword = this.resetPassword.bind(this);
     }
 
-    async componentDidMount() {
+    async componentWillMount() {
 
         // const response = await fetch(`/api/decode`);
         // const json = await response.json();
@@ -147,7 +200,30 @@ export class User extends Component {
         //const body = await response.text();
     
     };
-      
+    
+    approveAppointment(id){
+        fetch('/api/appointment/approve', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 
+                id:id
+              }),
+          })
+          .then(res => {
+              if (res.status === 200) {
+                window.location.href = "/user"
+              } else {
+                const error = new Error(res.error);
+                throw error;
+              }
+            })
+            .catch(err => {
+              console.error(err);
+              alert('Error logging in please try again');
+            });
+    }
       
     handleClick(currentTab) {
       this.setState({ currentTab });
@@ -175,6 +251,8 @@ export class User extends Component {
                                 id={this.state.currentTab} 
                                 name={this.state.data[this.state.currentTab].name} 
                                 resetPassword={this.resetPassword}
+                                data = {this.state}
+                                approve = {this.approveAppointment}
                             />
                             
 
