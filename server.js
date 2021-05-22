@@ -213,6 +213,18 @@ app.get('/api/user/get', async(req, res) => {
         var theData = appointment_data.data();
 
         theData.appointment_id = appointments[i]
+
+
+
+        const expert = firestore.collection('users').doc(theData.expert);
+        var expert_data = await expert.get();
+        expert_data= expert_data.data();
+        theData.expert_name = expert_data.name + " "+expert_data.surname
+
+        const customer = firestore.collection('users').doc(theData.customer);
+        var customer_data = await customer.get();
+        customer_data= customer_data.data();
+        theData.customer_name = customer_data.name;
         //get experts name 
         fullAppointments.push(theData);
 

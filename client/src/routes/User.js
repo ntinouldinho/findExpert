@@ -60,7 +60,7 @@ const Appointments = (props) => {
                 <thead>
                     <tr>
                         <th>
-                            expert
+                            {props.data.role=="user"?"expert":"client"}
                         </th>
 
                         <th>
@@ -77,7 +77,7 @@ const Appointments = (props) => {
                     {props.data.appointments.map((row) => (
                         <tr>
                             <td>
-                                {row.expert}
+                                {props.data.role=="user"?row.expert_name:row.customer_name}
                             </td>
 
                             <td>
