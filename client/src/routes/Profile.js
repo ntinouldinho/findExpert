@@ -60,23 +60,22 @@ class ExampleApp extends React.Component {
         if(flag){
             const response = await fetch(`/api/decode`);
             const json = await response.json();
-            const email = json.email;
+            const user = json.user;
             
+            console.log(json);
             const time = this.state.time[this.state.selected];
             const service = this.state.service;
 
             console.log(this.props.services[this.state.service]);
-            fetch('/api/createAppointment', {
+            fetch('/api/appointment/create', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ 
-                    customer: email, 
+                    customer: user, 
                     time:time,
-                    service:service,
-                    email: this.state.email,
-                    password: this.state.password
+                    service:service
                   }),
               })
               .then(res => {
