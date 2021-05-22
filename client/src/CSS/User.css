@@ -5,7 +5,7 @@
   border: 1px solid #ccc;
   background-color: #f1f1f1;
   width: 30%;
-  height: 300px;
+  height: 500px;
 }
 
 /* Style the buttons inside the tab */
@@ -40,5 +40,24 @@
   border: 1px solid #ccc;
   width: 70%;
   border-left: none;
-  height: 300px;
+  height: 500px;
 }
+
+tr,th, td {
+  padding: 0.5rem;
+  vertical-align: middle;
+  text-align:center;
+  border-top: 1px solid #000000;
+}
+
+table{
+  width: 50%;
+  margin-top:50px;
+  border:"2px solid black";
+  border-collapse: collapse;
+  border-right-style: none;
+  border-right: 0px;
+  border-left: 0px
+}
+
+
