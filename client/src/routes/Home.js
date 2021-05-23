@@ -13,19 +13,19 @@ import { alert } from "globalthis/implementation";
 
 const Login = (props) => {
   const history = useHistory();
+
   const toLogin = (e) => {
-    history.push(`/login`);
     e.preventDefault();
-};
+    history.push(`/login`);
+    
+  };
 
     
-    const logout = (e) => {
+    const logout = () => {
         try {
-            // alert("up here")
             fetch(`/logout`);
-            // this.setState({
-            //     loggedIn: false
-            // });
+            
+            props.login(false);
             props.loggedIn = false;
         } catch (error) { }
     };
@@ -121,6 +121,10 @@ export class Home extends Component {
       document.getElementsByClassName("header")[0].style.top = "-150px";
     }
   }
+
+  changeLogin(login){
+    this.setState({loggedIn:login})
+  }
   render() {
     return (
       <div className="HomeContainer">
@@ -135,7 +139,7 @@ export class Home extends Component {
           />
 
           <span>
-            <Login loggedIn={this.state.loggedIn} />
+            <Login loggedIn={this.state.loggedIn} login={this.changeLogin}/>
           </span>
 
           <p id="moto1">
