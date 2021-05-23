@@ -145,7 +145,8 @@ const Room = (props) => {
         userStream.current
           .getTracks()
           .forEach((track) =>
-            peerRef.current.addTrack(track, userStream.current)
+          senders.current.push(
+            peerRef.current.addTrack(track, userStream.current) )
           );
       })
       .then(() => {
@@ -192,7 +193,6 @@ const Room = (props) => {
   function shareScreen() {
     navigator.mediaDevices.getDisplayMedia({ cursor: true }).then((stream) => {
       const screenTrack = stream.getTracks()[0];
-      console.log(screenTrack);
 
       senders.current.find((sender) => sender.track.kind === "video").replaceTrack(screenTrack);
 
