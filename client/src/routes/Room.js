@@ -36,11 +36,6 @@ const Room = (props) => {
       navigator.mediaDevices
       .getUserMedia({ audio: mute, video: camera })
       .then((stream) => {
-
-        
-        // stream.getTracks()[0].muted = true;
-        
-        
         userVideo.current.srcObject = stream;
         userStream.current = stream;
         
@@ -94,6 +89,12 @@ const Room = (props) => {
           peerRef.current.addTrack(track, userStream.current)
         )
       );
+  }
+
+  function muter(){
+    setMute(!mute);
+    userStream.current.getTracks()[0].enabled = !mute;
+    console.log(userStream.current.getTracks()[0]);
   }
 
   function createPeer(userID) {
@@ -287,7 +288,7 @@ const Room = (props) => {
           <button
             id="mutebtn"
             onClick={() => {
-                setMute(!mute);
+                muter();
             }}
           >
             <FontAwesomeIcon icon={mute ? faMicrophone : faMicrophoneSlash} />
