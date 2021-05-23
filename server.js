@@ -139,7 +139,7 @@ app.post('/api/register/', async(req, res) => {
 
 
 
-            const payload = { email };
+            const payload = { email: email, user: user, role: "user"  };
             const token = jwt.sign(payload, secret, {
                 expiresIn: '24h'
             });
@@ -272,9 +272,11 @@ app.post('/api/user/edit', async(req, res) => {
 });
 
 app.post('/api/expert/edit', async(req, res) => {
-    const expert = db.collection('users').doc(req.body.id);
+    const expert = req.body.expert;
 
-    res = await expert.update({ name: req.body.name });
+    firestore.collection('users').doc(expert).update(req.body)
+
+    res.status(200).send("ok");
 
 });
 

@@ -11,7 +11,6 @@ export default function withAuth(ComponentToProtect) {
       };
     }
     componentDidMount() {
-      if(localStorage.getItem("token")){
         fetch('/checkToken')
           .then(res => {
             if (res.status === 200) {
@@ -25,7 +24,7 @@ export default function withAuth(ComponentToProtect) {
             console.error(err);
             this.setState({ loading: false, redirect: true });
           });
-        }
+        
     }
     render() {
       const { loading, redirect } = this.state;
