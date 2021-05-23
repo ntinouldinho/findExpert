@@ -22,9 +22,9 @@ const Login = () => {
       type="button"
       onClick={toLogin}
       id="login"
-      //   value={<FontAwesomeIcon icon={faUser} />}
     >
-      <FontAwesomeIcon icon={faUser} /> 
+          <FontAwesomeIcon icon={faUser} />
+          <br></br><h6>Log In</h6>
     </button>
   );
 };
@@ -113,9 +113,11 @@ export class Home extends Component {
             alt="logo"
             height="150"
             width="378"
-          />
-          <button type="button" onClick={this.logout} style={{display:show}}>Logout</button>
-          <span  style={{display:showImage}} ><Login/></span>
+                />
+                
+          <button type="button" id="login" onClick={this.logout} style={{display:show}}><FontAwesomeIcon icon={faUser}/>
+          <br></br><h6>Log Out</h6></button>
+          <span style={{display:showImage}} ><Login/></span>
           
           <p id="moto1">
             Looking for an <span style={{ color: "orangered" }}> expert</span>?

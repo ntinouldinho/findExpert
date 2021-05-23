@@ -20,7 +20,7 @@ export class Footer extends Component {
                   <p>Terms of Use</p>
                 </div>
                 <div className="col-md-4">
-                  <h1>About Us</h1>
+                  <h1>About Us</h1><br></br>
                   <p>
                       Find the most professional experts through our site.
                   </p>
@@ -30,10 +30,10 @@ export class Footer extends Component {
                   <div className="media">
                     <ul>
                       <li>
-                        <a href="https://www.aueb.gr/" target="_blank" rel="noreferrer">
+                        <a href="https://www.linkedin.com/school/athens-university-of-economics-and-business/" target="_blank" rel="noreferrer">
                           <img
-                            src="https://upload.wikimedia.org/wikipedia/el/9/94/Athens_University_of_Economics_and_Business_%28logo%29.png"
-                            alt="AUEB Logo"
+                            src="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-shapes-2-free/128/social-linkedin-circle-512.png"
+                            alt="LnkdIn Logo"
                             className="aueb"
                           ></img>
                         </a>

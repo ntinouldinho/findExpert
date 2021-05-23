@@ -2,12 +2,22 @@
 #center-div{
     margin-top: 2.5%;
     margin-left: 25%;
-    height:75%;
+    height:90vh;
     width:50%;
     background-color: black;
     text-align: center;
     border-radius: 25px;
     border: 10px groove darkorange;
+}
+
+#toggleSign{
+   left: 42%;
+   /* bottom: 90%; */
+}
+
+#center-div .btn{
+    position: absolute;
+    bottom: 10vh;
 }
 
 @media only screen and (max-width: 800px) {
