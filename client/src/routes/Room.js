@@ -32,41 +32,57 @@ const Room = (props) => {
     const [screen, setScreen] = useState(false);
 
   useEffect(() => {
-    navigator.mediaDevices
+    
+      navigator.mediaDevices
       .getUserMedia({ audio: mute, video: camera })
       .then((stream) => {
+
+        
+        // stream.getTracks()[0].muted = true;
+        
+        
         userVideo.current.srcObject = stream;
         userStream.current = stream;
-          console.log(mute);
-        socketRef.current = io.connect("/");
-        console.log("started");
-        socketRef.current.emit("join room", props.match.params.roomID);
-        dragElement();
+        
+        console.log(mute);
+        if(!first){
+          socketRef.current = io.connect("/");
+          console.log("started");
+          socketRef.current.emit("join room", props.match.params.roomID);
+          setFirst(true);
+          dragElement();
 
-        socketRef.current.on("other user", (userID) => {
-          console.log("other user " + userID);
-          callUser(userID);
+          socketRef.current.on("other user", (userID) => {
+            console.log("other user " + userID);
+            callUser(userID);
             otherUser.current = userID;
             console.log(first);
-        });
+          });
 
-        socketRef.current.on("no user", (userID) => {
-            console.log("first user " + userID);
-            setFirst(true);
-            console.log(first);
-        });
+          socketRef.current.on("no user", (userID) => {
+              console.log("first user " + userID);
+              
+          });
 
-        socketRef.current.on("user joined", (userID) => {
-          console.log("user joined");
-          otherUser.current = userID;
-        });
+          socketRef.current.on("user joined", (userID) => {
+            console.log("user joined");
+            otherUser.current = userID;
+          });
+        
+          socketRef.current.on("offer", handleRecieveCall);
 
-        socketRef.current.on("offer", handleRecieveCall);
+          socketRef.current.on("answer", handleAnswer);
 
-        socketRef.current.on("answer", handleAnswer);
-
-        socketRef.current.on("ice-candidate", handleNewICECandidateMsg);
+          socketRef.current.on("ice-candidate", handleNewICECandidateMsg);
+        }
       });
+
+    // window.addEventListener("beforeunload", (ev) => 
+    // {  
+    //     ev.preventDefault();
+    //     return ev.returnValue = 'Are you sure you want to close?';
+    // });
+
   }, [callUser, handleRecieveCall, dragElement, camera, mute, first, props.match.params.roomID]);
 
   function callUser(userID) {
@@ -188,6 +204,8 @@ const Room = (props) => {
     });
   }
 
+  
+
   /*---------------Make small camera movable----------------*/
 
   function dragElement() {
@@ -270,7 +288,6 @@ const Room = (props) => {
             id="mutebtn"
             onClick={() => {
                 setMute(!mute);
-                console.log(mute);
             }}
           >
             <FontAwesomeIcon icon={mute ? faMicrophone : faMicrophoneSlash} />

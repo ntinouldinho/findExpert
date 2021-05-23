@@ -204,7 +204,8 @@ app.get('/api/user/get', async(req, res) => {
     var doc = await callDoc.get();
 
     var data = doc.data();
-    const appointments = data.appointments;
+
+    let appointments = data.appointments;
     const fullAppointments = [];
 
     for (var i = 0; i < appointments.length; i++) {
@@ -300,9 +301,13 @@ io.on("connection", socket => {
     });
 
     socket.on("join room", roomID => {
-
+        console.log("the socket is:"+socket.id)
+        console.log(rooms[roomID])
+        
         if (rooms[roomID]) {
-            rooms[roomID].push(socket.id);
+            const me = rooms[roomID].find(id => id === socket.id);
+            if(!me) rooms[roomID].push(socket.id);
+            
         } else {
             rooms[roomID] = [socket.id];
         }
