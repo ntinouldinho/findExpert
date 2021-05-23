@@ -15,18 +15,21 @@ import {
   faPhoneSlash,
 } from "@fortawesome/free-solid-svg-icons";
 import { faChromecast } from "@fortawesome/free-brands-svg-icons";
+import { console, MediaDeviceInfo } from "globalthis/implementation";
+// import console from "node:console";
 
 const Room = (props) => {
-  const userVideo = useRef();
-  const partnerVideo = useRef();
-  const peerRef = useRef();
-  const socketRef = useRef();
-  const otherUser = useRef();
-  const userStream = useRef();
-  const senders = useRef([]);
-  const [mute, setMute] = useState(true);
-  const [camera, setCamera] = useState(true);
-  const [screen, setScreen] = useState(false);
+    const userVideo = useRef();
+    const partnerVideo = useRef();
+    const peerRef = useRef();
+    const socketRef = useRef();
+    const otherUser = useRef();
+    const userStream = useRef();
+    const senders = useRef([]);
+    const [first, setFirst] = useState(false);
+    const [mute, setMute] = useState(true);
+    const [camera, setCamera] = useState(true);
+    const [screen, setScreen] = useState(false);
 
   useEffect(() => {
     navigator.mediaDevices
@@ -34,7 +37,7 @@ const Room = (props) => {
       .then((stream) => {
         userVideo.current.srcObject = stream;
         userStream.current = stream;
-
+          console.log(mute);
         socketRef.current = io.connect("/");
         console.log("started");
         socketRef.current.emit("join room", props.match.params.roomID);
@@ -43,11 +46,14 @@ const Room = (props) => {
         socketRef.current.on("other user", (userID) => {
           console.log("other user " + userID);
           callUser(userID);
-          otherUser.current = userID;
+            otherUser.current = userID;
+            console.log(first);
         });
 
         socketRef.current.on("no user", (userID) => {
-          console.log(userID);
+            console.log("first user " + userID);
+            setFirst(true);
+            console.log(first);
         });
 
         socketRef.current.on("user joined", (userID) => {
@@ -61,7 +67,7 @@ const Room = (props) => {
 
         socketRef.current.on("ice-candidate", handleNewICECandidateMsg);
       });
-  }, [callUser, handleRecieveCall, dragElement]);
+  }, [callUser, handleRecieveCall, dragElement, camera, mute, first, props.match.params.roomID]);
 
   function callUser(userID) {
     peerRef.current = createPeer(userID);
@@ -171,19 +177,13 @@ const Room = (props) => {
       const screenTrack = stream.getTracks()[0];
       console.log(screenTrack);
 
-      senders.current
-        .find((sender) => sender.track.kind === "video")
-        .replaceTrack(screenTrack);
+      senders.current.find((sender) => sender.track.kind === "video").replaceTrack(screenTrack);
 
-      userVideo.current.srcObject.replaceTrack(screenTrack);
+    //   userVideo.current = senders.current;
 
       screenTrack.onended = function () {
-        senders.current
-          .find((sender) => sender.track.kind === "video")
-          .replaceTrack(userStream.current.getTracks()[1]);
-        userVideo.current.srcObject.replaceTrack(
-          userStream.current.getTracks()[1]
-        );
+        senders.current.find((sender) => sender.track.kind === "video").replaceTrack(userStream.current.getTracks()[1]);
+        // userVideo.current = stream;
       };
     });
   }
@@ -192,7 +192,7 @@ const Room = (props) => {
 
   function dragElement() {
     var elmnt = document.getElementById("myVideo");
-    console.log(elmnt);
+    // console.log(elmnt);
     var pos1 = 0,
       pos2 = 0,
       pos3 = 0,
@@ -269,7 +269,8 @@ const Room = (props) => {
           <button
             id="mutebtn"
             onClick={() => {
-              setMute(!mute);
+                setMute(!mute);
+                console.log(mute);
             }}
           >
             <FontAwesomeIcon icon={mute ? faMicrophone : faMicrophoneSlash} />
@@ -346,7 +347,7 @@ function ChatRoom(props) {
       console.log("here");
       receivedMessage(message);
     });
-  }, []);
+  }, [props.roomID]);
 
   // ----------------Chat Stuff---------------
 
@@ -402,7 +403,7 @@ function ChatMessage(props) {
   return (
     <>
       <div className={`message ${messageClass}`}>
-        <img
+        <img alt="chatter"
           src={
             "https://p.kindpng.com/picc/s/24-248325_profile-picture-circle-png-transparent-png.png"
           }
