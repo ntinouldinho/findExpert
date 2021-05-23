@@ -8,36 +8,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 export class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      src: [
-        "Legal ",
-        "Medical",
-        "Financial",
-        "Technician",
-        "Teacher ",
-        "Informatics",
-        "Artist",
-        "Chef",
-        "Household",
-        "Other",
-      ],
-      search: props.search,
-      loggenIn:false
-    };
-     this.logout = this.logout.bind(this);
-  }
-
-  logout() {
-    try {
-      fetch(`/logout`);
-      this.setState({ 
-            loggedIn: false
-        });
-    } catch (error) {
+    constructor(props) {
+        super(props);
+        this.state = {
+            src: [
+                "Legal ",
+                "Medical",
+                "Financial",
+                "Technician",
+                "Teacher ",
+                "Informatics",
+                "Artist",
+                "Chef",
+                "Household",
+                "Other",
+            ],
+            search: props.search,
+            loggenIn: false
+        };
     }
-  }
 
 
   componentDidMount() {
@@ -67,9 +56,10 @@ export class Header extends Component {
         </a>
 
         <Autocomplete options={this.state.src} search={this.state.search} />
-         <button type="button" id="login" onClick={this.logout} style={{display:show}}><FontAwesomeIcon icon={faUser}/>
-          <br></br><h6>Log Out</h6></button>
-        <span style={{display:showImage}} ><Login/></span>
+
+        <span>
+          <Login loggedIn={this.state.loggedIn} />
+        </span>
       </div>
     );
   }

@@ -99,7 +99,7 @@ export class Login extends Component {
 
             <h4>email:</h4>
             <input
-              type="email"
+              type="text"
               placeholder={"Enter your email..."}
               name="email"
               onChange={(e) => this.onTodoChange(e)}
