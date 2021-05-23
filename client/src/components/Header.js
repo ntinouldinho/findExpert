@@ -30,18 +30,21 @@ export class Header extends Component {
 
 
   componentDidMount() {
-    fetch('/checkToken')
-        .then(res => {
-          if (res.status === 200) {
-            this.setState({ loggedIn: true });
-          } else {
-            const error = new Error(res.error);
-            throw error;
-          }
-        })
-        .catch(err => {
-          console.error(err);
-    });
+
+    if(localStorage.getItem("token")){
+      fetch('/checkToken')
+          .then(res => {
+            if (res.status === 200) {
+              this.setState({ loggedIn: true });
+            } else {
+              const error = new Error(res.error);
+              throw error;
+            }
+          })
+          .catch(err => {
+            console.error(err);
+      });
+  }
   }
 
   render() {
