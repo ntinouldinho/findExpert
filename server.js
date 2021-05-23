@@ -89,7 +89,7 @@ app.post('/api/login/', async(req, res) => {
             // ..
             res.status(400).send(`${errorMessage} and ${errorCode}`);
         });
-    
+
     console.log(theUser);
     var email = theUser.user.email;
     var user = theUser.user.uid;
@@ -117,7 +117,7 @@ app.get('/api/decode/', async(req, res) => {
     console.log(token);
     var decoded = jwt_decode(token, process.env.SECRET);
     console.log(jwt_decode(token, process.env.SECRET));
-    res.status(201).send( decoded );
+    res.status(201).send(decoded);
 
 });
 
@@ -137,7 +137,7 @@ app.post('/api/register/', async(req, res) => {
                 email: email
             })
 
-            
+
 
             const payload = { email };
             const token = jwt.sign(payload, secret, {
@@ -173,6 +173,8 @@ app.post('/api/reset/', async(req, res) => {
 
 app.post('/api/appointment/create', async(req, res) => {
 
+    //create email to inform expert that he has a new appointment pending
+
     const appointment = {
         customer: req.body.customer,
         expert: "HVp43gujF3Ssoor8t4hGN5jA1w33",
@@ -204,7 +206,7 @@ app.get('/api/user/get', async(req, res) => {
     var data = doc.data();
     const appointments = data.appointments;
     const fullAppointments = [];
-    
+
     for (var i = 0; i < appointments.length; i++) {
 
         const appointment = firestore.collection('appointments').doc(appointments[i]);
@@ -214,16 +216,22 @@ app.get('/api/user/get', async(req, res) => {
 
         theData.appointment_id = appointments[i]
 
+        console.log(theData)
+
 
 
         const expert = firestore.collection('users').doc(theData.expert);
         var expert_data = await expert.get();
-        expert_data= expert_data.data();
-        theData.expert_name = expert_data.name + " "+expert_data.surname
+        expert_data = expert_data.data();
+        theData.expert_name = expert_data.name + " " + expert_data.surname
+
+        console.log(expert_data)
 
         const customer = firestore.collection('users').doc(theData.customer);
         var customer_data = await customer.get();
-        customer_data= customer_data.data();
+        customer_data = customer_data.data();
+
+        console.log(customer_data)
         theData.customer_name = customer_data.name;
         //get experts name 
         fullAppointments.push(theData);

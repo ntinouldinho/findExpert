@@ -288,16 +288,18 @@ export class Profile extends React.Component {
 
     async componentDidMount() {
         try {
-          const response = await fetch(`/api/expert/get`);
-          const json = await response.json();
-          this.setState({ 
-                name:json.name+" "+json.surname,
-                profession:json.profession,
-                about: json.about,
-                url:json.photo,
-                services:json.services,
-                cv:json.cv
-            });
+            const linkParams = window.location.pathname.split("/");
+            const expert = linkParams[linkParams.length-1];
+            const response = await fetch(`/api/user/get?user=${expert}`);
+            const json = await response.json();
+            this.setState({ 
+                    name:json.name+" "+json.surname,
+                    profession:json.profession,
+                    about: json.about,
+                    url:json.photo,
+                    services:json.services,
+                    cv:json.cv
+                });
         } catch (error) {
         }
     }
