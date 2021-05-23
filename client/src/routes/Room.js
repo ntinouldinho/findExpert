@@ -309,7 +309,7 @@ const Room = (props) => {
             <FontAwesomeIcon
               icon={faPhoneSlash}
               onClick={() => {
-                history.push(`/`);
+                window.location.href = "/"
               }}
             />
           </button>
@@ -318,7 +318,7 @@ const Room = (props) => {
 
       <div id="chat">
         <header>
-          <h1>⚛️🔥💬</h1>
+          <h1>FindExpert Chat</h1>
           {/* <SignOut /> */}
         </header>
 
