@@ -26,6 +26,17 @@ export class Header extends Component {
       search: props.search,
       loggenIn:false
     };
+     this.logout = this.logout.bind(this);
+  }
+
+  logout() {
+    try {
+      fetch(`/logout`);
+      this.setState({ 
+            loggedIn: false
+        });
+    } catch (error) {
+    }
   }
 
 
