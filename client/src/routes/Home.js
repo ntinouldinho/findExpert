@@ -26,7 +26,6 @@ const Login = (props) => {
             fetch(`/logout`);
             
             props.login(false);
-            props.loggedIn = false;
         } catch (error) { }
     };
     
@@ -86,6 +85,7 @@ export class Home extends Component {
     };
     this.scrollFunction = this.scrollFunction.bind(this);
     // this.logout = this.logout.bind(this);
+    this.changeLogin= this.changeLogin.bind(this);
   }
 
 

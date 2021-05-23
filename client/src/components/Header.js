@@ -24,7 +24,7 @@ export class Header extends Component {
                 "Other",
             ],
             search: props.search,
-            loggenIn: false
+            loggedIn: false
         };
     }
 
