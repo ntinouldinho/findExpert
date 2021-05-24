@@ -131,7 +131,7 @@ export class Home extends Component {
         <Header search={this.state.search} />
         <div className="logoSearch">
           <img
-            className="Logo"
+            className="FXLogo"
             src={logo}
             alt="logo"
             height="150"

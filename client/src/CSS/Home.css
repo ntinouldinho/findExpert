@@ -15,7 +15,7 @@ html {
 }
 
 .logoSearch form {
-  margin: 10vh 0 15vh;
+  margin: 10vh 0 20vh;
 }
 
 p.desc {
@@ -317,6 +317,7 @@ p.desc {
 .Logo {
   margin: 15px;
   grid-area: Logo;
+  width: 100%;
 }
 
 .stepTitle {
