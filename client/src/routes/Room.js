@@ -211,29 +211,34 @@ const Room = (props) => {
     const json = await response.json();
     const stripe_id = json.stripe_id;
 
-    fetch('/api/stripe/createPayment', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ 
-          id: stripe_id, 
-          price: 160,
-          appointment:'IAbTXIkyCC694DUbIowt'
-        }),
-    })
-    .then(res => {
-        if (res.status === 200) {
-          window.location.href = "/"
-        } else {
-          const error = new Error(res.error);
-          throw error;
-        }
+    if(json.role === "user"){
+      fetch('/api/stripe/createPayment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+            id: stripe_id, 
+            price: 160,
+            appointment:'IAbTXIkyCC694DUbIowt'
+          }),
       })
-      .catch(err => {
-        console.error(err);
-        alert('Error logging in please try again');
-      });
+      .then(res => {
+          if (res.status === 200) {
+            window.location.href = "/"
+          } else {
+            const error = new Error(res.error);
+            throw error;
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          alert('Error logging in please try again');
+        });
+    }else{
+      window.location.href = "/"
+    }
+    
 
   }
 
