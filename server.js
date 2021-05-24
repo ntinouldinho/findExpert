@@ -100,7 +100,7 @@ app.post('/api/login/', async(req, res) => {
     var doc = await callDoc.get();
     var user_data = doc.data();
 
-    const payload = { email: email, user: user, role: user_data.role };
+    const payload = { email: email, user: user, role: user_data.role, stripe_id:user_data.stripe_id};
     const token = jwt.sign(payload, secret, {
         expiresIn: '24h'
     });
