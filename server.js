@@ -10,6 +10,8 @@ const crypto = require("crypto");
 const cookieParser = require('cookie-parser');
 
 const withAuth = require('./middleware');
+const createPayment = require('./Stripe/createPayment');
+const createStripeCustomer = require('./Stripe/createStripeCustomer');
 
 
 const secret = process.env.SECRET;
@@ -276,6 +278,15 @@ app.post('/api/expert/edit', async(req, res) => {
 
     firestore.collection('users').doc(expert).update(req.body)
 
+    res.status(200).send("ok");
+
+});
+
+app.post('/api/stripe/createCustomer', async(req, res) => {
+    const name = req.body.name;
+    const email = req.body.email;
+
+    console.log(createStripeCustomer(name,email))
     res.status(200).send("ok");
 
 });

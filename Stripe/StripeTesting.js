@@ -1,8 +1,7 @@
-const stripe = require('stripe')('sk_test_51ItDZlJVZruv3Jo51RC6y0CBKw3YnKEsc8lmHw9O1P6fjGmat2KpsidumDjqCVT5PmdFLbqVslKYVAHQtG8GQ9dR00hJuza53O');//secret key
+require("dotenv").config();
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-// module.exports() = {
-//   STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY
-// }
+
 
 // const charge = stripe.charges.create({
 //   amount: servicePrice*100,
