@@ -20,15 +20,14 @@ export class EditProfile extends Component {
   constructor(props) {
     super(props);
       this.state = {
-        id: "HVp43gujF3Ssoor8t4hGN5jA1w33",
-        name: "Kostas Iliopoulos",
-        profession: "Plumber",
-        photo: "Fwtografia",
+        id: "",
+        name: "",
+        profession: "",
+        photo: "",
         reviews: ["4", " 5"], //nonCustom
         services: ["$$ ", " $$"], //nonCustom
-        cv: "My CV",
-        about:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis tincidunt elit. Morbi eget elit id lorem feugiat pharetra. Cras nec tortor ac ante volutpat hendrerit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at pretium ante. Morbi elit felis, sollicitudin iaculis malesuada id, tincidunt in turpis. Phasellus aliquet dapibus enim eget bibendum. Pellentesque molestie nulla purus, tincidunt lacinia orci aliquet at. Mauris sit amet rhoncus felis, quis aliquam eros. Vivamus lacinia dignissim malesuada. Vestibulum efficitur, orci in fringilla rhoncus, tortor ante luctus turpis, id fermentum libero dui ac libero. ",
+        cv: "",
+        about:"",
         stars: "4.2", //nonCustom
         appointment: "appointment", //nonCustom
         editorState: EditorState.createWithContent(
@@ -52,12 +51,12 @@ export class EditProfile extends Component {
         console.log(jsan.user);
         this.setState({
           id:jsan.user,
-        name: json.name + " " + json.surname,
-        profession: json.profession,
-        about: json.about,
-        photo: json.photo,
-        services: json.services,
-        cv: json.cv,
+          name: json.name + " " + json.surname,
+          profession: json.profession,
+          about: json.about,
+          photo: json.photo,
+          services: json.services,
+          cv: json.cv,
       });
     } catch (error) {}
   }
@@ -70,6 +69,9 @@ export class EditProfile extends Component {
 
   handleUpdate = async (e) => {     //prepei na ta apothikeyei prwta kapou
     e.preventDefault();
+    let array  = this.state.name.split(' ');
+    const name = array[0];
+    const surname = array[1];
     fetch("/api/expert/edit", {
       method: "POST",
       headers: {
