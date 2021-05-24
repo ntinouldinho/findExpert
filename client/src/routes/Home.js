@@ -193,7 +193,7 @@ export class Home extends Component {
           <h1 className="stepTitle"> Book your appointment: </h1>
           <img
             className="Logo"
-            src={logo}
+            src='https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/gifs%2Fbook.gif?alt=media&token=4c5763c5-bafb-404b-8dd8-33ea7bc2a950'
             alt="logo"
             height="400"
             width="600"
@@ -222,10 +222,11 @@ export class Home extends Component {
             width="600"
           />
           <p className="desc">
-            When your appointment is booked, you will recieve an e - mail that
+            When your appointment is booked, you will receive an e - mail that
             contains a link.When you click that, you will be redirected to a
             room, where your videocall will take place.Feel free to use the chat
-            too!
+            too! Or if you want, look through the appointments tab in your settings and the link
+            for the call will be there. 
           </p>
         </div>
         <div

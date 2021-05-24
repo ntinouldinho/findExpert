@@ -10,7 +10,8 @@ import 'react-calendar/dist/Calendar.css';
 import ShowMoreText from 'react-show-more-text';
 import ReactHtmlParser from 'react-html-parser';
 import  { Redirect } from 'react-router-dom'
- 
+import SweetAlert from 'react-bootstrap-sweetalert';
+import Swal from 'sweetalert2'
 
 class ExampleApp extends React.Component {
 
@@ -85,7 +86,12 @@ class ExampleApp extends React.Component {
               })
               .then(res => {
                   if (res.status === 200) {
-                    window.location.href = "/"
+                    Swal.fire({  
+                        title: 'Success!',  
+                        text: 'Your appointment has been created',
+                        icon: 'success'
+                      }); 
+                    // window.location.href = "/"
                   } else {
                     const error = new Error(res.error);
                     throw error;
