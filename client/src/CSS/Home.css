@@ -312,15 +312,18 @@ p.desc {
 }
 
 .desc {
+  margin: 15px;
   grid-area: desc;
   font-size: 2vw;
 }
 
 .Logo {
+  margin: 15px;
   grid-area: Logo;
 }
 
 .stepTitle {
+  margin: 15px;
   grid-area: stepTitle;
 }
 
