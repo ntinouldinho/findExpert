@@ -206,6 +206,36 @@ const Room = (props) => {
   }
 
   
+  async function hangUpCall(){
+    const response = await fetch(`/api/decode`);
+    const json = await response.json();
+    const stripe_id = json.stripe_id;
+
+    fetch('/api/stripe/createPayment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ 
+          id: stripe_id, 
+          price: 160,
+          appointment:'IAbTXIkyCC694DUbIowt'
+        }),
+    })
+    .then(res => {
+        if (res.status === 200) {
+          window.location.href = "/"
+        } else {
+          const error = new Error(res.error);
+          throw error;
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        alert('Error logging in please try again');
+      });
+
+  }
 
   /*---------------Make small camera movable----------------*/
 
@@ -309,7 +339,7 @@ const Room = (props) => {
             <FontAwesomeIcon
               icon={faPhoneSlash}
               onClick={() => {
-                window.location.href = "/"
+                hangUpCall()
               }}
             />
           </button>
