@@ -285,8 +285,12 @@ app.post('/api/expert/edit', async(req, res) => {
 app.post('/api/stripe/createCustomer', async(req, res) => {
     const name = req.body.name;
     const email = req.body.email;
+    const customer_fb_id = req.body.id;
 
-    console.log(createStripeCustomer(name,email))
+    const customer_stripe_id = await createStripeCustomer(name,email);
+
+    firestore.collection('users').doc(customer_fb_id).update({stripe_id:customer_stripe_id})
+
     res.status(200).send("ok");
 
 });
