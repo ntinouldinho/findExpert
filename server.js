@@ -126,11 +126,13 @@ app.get('/api/decode/', async(req, res) => {
 
 app.post('/api/register/', async(req, res) => {
     //const newDoc = await firestore.collection('users').add(req.body);
-    firebase.auth().createUserWithEmailAndPassword(req.body.email, req.body.password)
+    let uid = "";
+    await firebase.auth().createUserWithEmailAndPassword(req.body.email, req.body.password)
         .then((userCredential) => {
             // Signed in 
             var user = userCredential.user.uid;
             var email = userCredential.user.email;
+
 
             firestore.collection('users').doc(user).set({
                 name: req.body.name,
@@ -140,13 +142,7 @@ app.post('/api/register/', async(req, res) => {
             })
 
 
-
-            const payload = { email: email, user: user, role: "user"  };
-            const token = jwt.sign(payload, secret, {
-                expiresIn: '24h'
-            });
-            res.cookie('token', token, { httpOnly: true })
-                .sendStatus(200);
+            uid = user;
         })
         .catch((error) => {
             var errorCode = error.code;
@@ -155,6 +151,17 @@ app.post('/api/register/', async(req, res) => {
             res.status(400).send(`${errorMessage} and ${errorCode}`);
         });
 
+
+        const customer_stripe_id = await createStripeCustomer(req.body.name,req.body.email);
+        firestore.collection('users').doc(uid).update({stripe_id:customer_stripe_id})
+
+
+        const payload = { email: req.body.email, user: uid, role: "user", stripe_id: customer_stripe_id  };
+        const token = jwt.sign(payload, secret, {
+            expiresIn: '24h'
+        });
+        res.cookie('token', token, { httpOnly: true })
+            .sendStatus(200);
 });
 
 
