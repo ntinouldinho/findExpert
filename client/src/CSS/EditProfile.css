@@ -43,3 +43,9 @@
 .AddCV{
     grid-area: addcv;
 }
+
+#updatebtn{
+    position:fixed;
+    bottom: 2vh;
+    right: 10%;
+}

@@ -15,7 +15,7 @@ html {
 }
 
 .logoSearch form {
-  margin: 10vh 0 20vh;
+  margin: 10vh 0 15vh;
 }
 
 p.desc {
@@ -56,7 +56,6 @@ p.desc {
   width: 100%;
   height: 100%;
   padding-top: 3%;
-  opacity: 70%;
   display: flex; /* establish flex container */
   flex-wrap: wrap; /* default value; can be omitted */
   /* transform: translate(-50%, -50%); */
@@ -70,7 +69,7 @@ p.desc {
 
 .rightCat {
   clip-path: polygon(0% 0%, 37.5% 0%, 25% 100%, 0% 100%);
-  background-color: orangered;
+  background-color: rgba(255, 68, 0, 0.7);
   padding-left: 6vw;
   padding-right: 70vw;
   
@@ -79,23 +78,21 @@ p.desc {
 .centerCat {
   clip-path: polygon(37.5% 0%, 62.5% 0%, 75% 100%, 25% 100%);
   justify-content: center;
-  background-color: orange;
+  background-color: rgba(255, 166, 0, 0.7);
   padding: 3% 30%;
 }
 
 .leftCat {
   clip-path: polygon(62.5% 0%, 100% 0%, 100% 100%, 75% 100%);
-  background-color: yellow;
+  background-color: rgba(255, 255, 0, 0.7);
   justify-content: flex-end;
   padding-right: 6vw;
   padding-left: 70vw;
 }
 
-.rightCat:hover,
-.centerCat:hover,
-.leftCat:hover {
-  opacity: 100%;
-}
+.rightCat:hover{background-color: rgba(255, 68, 0, 1);}
+.centerCat:hover{background-color: rgba(255, 166, 0, 1);}
+.leftCat:hover {background-color: rgba(255, 255, 0, 1);}
 
 .HomeCategories p {
   position: absolute;
