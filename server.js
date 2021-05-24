@@ -296,6 +296,20 @@ app.post('/api/stripe/createCustomer', async(req, res) => {
 });
 
 
+app.post('/api/stripe/createPayment', async(req, res) => {
+    const customer = req.body.id;
+    const price = req.body.price;
+    const appointment_id = req.body.appointment;
+
+    const stripe_pi_id = await createPayment(customer,price);
+
+    if(stripe_pi_id) firestore.collection('appointments').doc(appointment_id).update({status:2})
+    
+
+    res.status(200).send("ok");
+
+});
+
 
 
 
