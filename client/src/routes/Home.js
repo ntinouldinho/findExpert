@@ -15,6 +15,7 @@ const Login = (props) => {
   const history = useHistory();
 
   const toLogin = (e) => {
+    console.log("clicked");
     e.preventDefault();
     history.push(`/login`);
     
@@ -22,6 +23,7 @@ const Login = (props) => {
 
     
     const logout = () => {
+      console.log("clicked");
         try {
             fetch(`/logout`);
             

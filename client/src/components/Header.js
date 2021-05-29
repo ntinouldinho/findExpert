@@ -32,7 +32,6 @@ export class Header extends Component {
 
   componentDidMount() {
 
-    if(localStorage.getItem("token")){
       fetch('/checkToken')
           .then(res => {
             if (res.status === 200) {
@@ -45,7 +44,7 @@ export class Header extends Component {
           .catch(err => {
             console.error(err);
       });
-  }
+  
   }
 
   render() {
