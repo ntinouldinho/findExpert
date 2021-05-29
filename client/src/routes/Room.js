@@ -277,8 +277,6 @@ const Room = (props) => {
                       <h1>Review:</h1> 
                       <textarea rows="5" cols="20" placeholder="Leave your review here..." id="textReview"></textarea>`,
               confirmButtonText: 'Submit',
-              showCancelButton: true,
-              denyButtonText: `Skip`,
               focusConfirm: false,
               willOpen: () => {
                 var slider = document.getElementById("myRange");
