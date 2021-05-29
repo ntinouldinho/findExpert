@@ -294,7 +294,7 @@ export class Profile extends React.Component {
 
     async componentDidMount() {
         try {
-            const linkParams = window.location.pathname.split("/");
+            const linkParams = window.location.href.split("/");
             const expert = linkParams[linkParams.length-1];
             const response = await fetch(`/api/user/get?user=${expert}`);
             const json = await response.json();
@@ -304,7 +304,8 @@ export class Profile extends React.Component {
                     about: json.about,
                     url:json.photo,
                     services:json.services,
-                    cv:json.cv
+                    cv:json.cv,
+                    stars:json.rating
                 });
         } catch (error) {
         }
