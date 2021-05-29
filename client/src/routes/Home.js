@@ -89,8 +89,7 @@ export class Home extends Component {
         if (res.status === 200) {
           this.setState({ loggedIn: true });
         } else {
-          const error = new Error(res.error);
-          throw error;
+          throw new Error(res.error);
         }
       })
       .catch((err) => {
