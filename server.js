@@ -243,7 +243,31 @@ app.post('/api/appointment/review', async(req, res) => {
     res.status(200).send("ok");
 });
 
+app.get('/api/search', async (req,res) => {
+    const search = req.query.search.toLowerCase();
+    console.log(search)
+    let results = [];
+    const users = await firestore.collection('users').get();
 
+    users.forEach(doc => {
+        const user_data = doc.data();
+        if(user_data.role=="professional"){
+            if(user_data.profession.toLowerCase() == search){
+                results.push({ 
+                    name:user_data.name + " "+user_data.surname,
+                    job: user_data.profession,
+                    info:user_data.about,
+                    id:doc.id,
+                    url:user_data.photo,
+                    rating:user_data.rating
+                });
+            }
+        }
+    })
+
+    res.status(200).send(results);
+
+})
 
 app.get('/api/user/get', async(req, res) => {
     let user = req.query.user || req.body.user;
@@ -435,4 +459,4 @@ if (process.env.PROD) {
 }
 
 
-server.listen(port, () => console.log(`🚀🚀🚀🚀🚀server is running on port🚀🚀🚀 ${process.env.EMAIL}`));
+server.listen(port, () => console.log(`🚀🚀🚀🚀🚀server is running on port ${port}🚀🚀🚀 `));
