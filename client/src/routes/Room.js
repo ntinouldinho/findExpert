@@ -308,6 +308,7 @@ const Room = (props) => {
                     }),
                 }).then((response) => {
                   Swal.fire('Saved!', '', 'success')
+                  window.location.href = "/"
                 })
             })
             //   preConfirm: () => {
