@@ -10,6 +10,7 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 export class Header extends Component {
     constructor(props) {
         super(props);
+        
         this.state = {
             src: [
                 "Legal ",
@@ -24,7 +25,7 @@ export class Header extends Component {
                 "Other",
             ],
             search: props.search,
-            loggedIn: false
+            loggedIn: props.loggedIn?props.loggedIn:false
         };
     }
 

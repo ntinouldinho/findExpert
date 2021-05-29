@@ -29,33 +29,23 @@ const Login = (props) => {
         } catch (error) { }
     };
     
-var show = props.loggedIn ? "inline" : "none";
-var showImage = !props.loggedIn ? "inline" : "none";
-
+var func = props.loggedIn ? logout : toLogin;
+var title = props.loggedIn ? "Logout" : "Login";
 
   return (
-    <>
+    <div>
       <button
         type="button"
-        onClick={toLogin}
+        onClick={func}
         id="login"
-        style={{ display: showImage }}
+        style={{ display: "inline" }}
       >
         <FontAwesomeIcon icon={faUser} />
         <br></br>
-        <h6>Log In</h6>
+        <h6>{title}</h6>
       </button>
-      <button
-        type="button"
-        id="login"
-        onClick={logout}
-        style={{ display: show }}
-      >
-        <FontAwesomeIcon icon={faUser} />
-        <br></br>
-        <h6>Log Out</h6>
-      </button>
-    </>
+
+    </div>
   );
 };
 
@@ -128,7 +118,7 @@ export class Home extends Component {
   render() {
     return (
       <div className="HomeContainer">
-        <Header search={this.state.search} />
+        <Header loggedIn={this.state.loggedIn} login={this.changeLogin} search={this.state.search} />
         <div className="logoSearch">
           <img
             className="FXLogo"

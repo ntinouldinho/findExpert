@@ -30,7 +30,6 @@ const HomeCategory = (props) => {
     var margNum= 0;
 
   const classType = (classtype) => {
-      console.log(classtype);
       
       if (props.name === "Technician") {
           margNum = 100 +"%";
@@ -42,7 +41,6 @@ const HomeCategory = (props) => {
     return classtype % 2 === 0 ? "Even" : "Odd";
   };
 
-  console.log(props);
     return (
         <div className={"HomeCategory " + classType(props.classtype)} style={{ marginLeft: margNum, marginRight: margNum}} >
       <a href={"/search/" + props.name}>

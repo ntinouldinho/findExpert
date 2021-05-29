@@ -24,7 +24,7 @@ function App() {
           <Route path="/search/:search" component={Results} />
           <Route path="/login" component={Login} />
           <Route path="/profile/:name/:id" component={Profile} />
-          <Route path="/user" component={withAuth(User)} />
+          <Route path="/settings" component={withAuth(User)} />
           <Route path="/profile/edit" component={withAuth(EditProfile)} />
         </Switch>
       </BrowserRouter>
