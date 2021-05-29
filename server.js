@@ -225,6 +225,7 @@ app.post('/api/appointment/review', async(req, res) => {
     const appointment_id = req.body.appointment;
     const review = req.body.review;
     const customer = req.body.customer;
+    const rating = req.body.rating;
     
     console.log(req.body)
     const appointment = await firestore.collection('appointments').doc(appointment_id).get();
@@ -234,7 +235,8 @@ app.post('/api/appointment/review', async(req, res) => {
 
     await firestore.collection('users').doc(professional_id).collection('reviews').add({
         customer:customer,
-        review:review
+        review:review,
+        rating:rating
     })
 
 

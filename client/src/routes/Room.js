@@ -17,6 +17,7 @@ import {
 import { faChromecast } from "@fortawesome/free-brands-svg-icons";
 import { console, MediaDeviceInfo } from "globalthis/implementation";
 import Swal from 'sweetalert2'
+import Rating from "react-star-review";
 // import {getCookie} from "../components/readCookie.js"
 // import console from "node:console";
 
@@ -260,39 +261,87 @@ const Room = (props) => {
       })
       .then(res => {
           if (res.status === 200) {
-            new Swal({
-              title: "Leave a review",
-              text: "Write some thoughts about the expert to help out others",
-              input: "text",
+            // new Swal({
+            //   title: "Leave a review",
+            //   text: "Write some thoughts about the expert to help out others",
+            //   input: "text",
+            //   showCancelButton: true,
+            //   inputPlaceholder: "Write something"
+            // })
+            
+
+            Swal.fire({
+              title: 'Login Form',
+              html:  `<h1 id="demo">Rating: 1</h1>
+                      <input type="range" min="1" max="5" value="1" step="1" class="slider" id="myRange">
+                      <h1>Review:</h1> 
+                      <textarea rows="5" cols="20" placeholder="Leave your review here..." id="textReview"></textarea>`,
+              confirmButtonText: 'Submit',
               showCancelButton: true,
-              inputPlaceholder: "Write something"
-            }).then((inputValue) => {
-              if (inputValue === null) return false;
-              inputValue=inputValue.value;
-              
-              if (inputValue === "" || !inputValue) {
-                return false
+              denyButtonText: `Skip`,
+              focusConfirm: false,
+              willOpen: () => {
+                var slider = document.getElementById("myRange");
+                var output = document.getElementById("demo");
+                output.innerHTML = slider.value; // Display the default slider value
+
+                // Update the current slider value (each time you drag the slider handle)
+                slider.oninput = function() {
+                  output.innerHTML = "Rating: "+this.value;
+                }
+              },
+              preConfirm: () => {
+                const rating = Swal.getPopup().querySelector('#myRange').value
+                const review = Swal.getPopup().querySelector('#textReview').value
+                
+                return { rating: rating, review:review }
               }
-
-              console.log(json)
-
+            }).then((result) => {
               fetch('/api/appointment/review', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ 
-                    appointment: appointment_id,
-                    review: inputValue,
-                    customer: json.name
-                  }),
-              }).then((response) => {
-
-              })
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({ 
+                      appointment: appointment_id,
+                      review: result.value.review,
+                      customer: json.name,
+                      rating: result.value.rating
+                    }),
+                }).then((response) => {
+                  Swal.fire('Saved!', '', 'success')
+                })
+            })
+            //   preConfirm: () => {
+            //     const login = document.getElementById('text-review').value
+            //     const password = document.getElementById('myRange').value
+                
+            //     console.log(login)
+            //     return { login: login, password: password } }
+            //   })          
+            // .then((result) => {
+            //   console.log(result)
+            //   if (result.isConfirmed) {
+            //     fetch('/api/appointment/review', {
+            //       method: 'POST',
+            //       headers: {
+            //         'Content-Type': 'application/json',
+            //       },
+            //       body: JSON.stringify({ 
+            //           appointment: appointment_id,
+            //           review: document.getElementById("text-review").value,
+            //           customer: json.name,
+            //           rating: document.getElementById("myRange").value
+            //         }),
+            //     }).then((response) => {
+            //       Swal.fire('Saved!', '', 'success')
+            //     })
+                
+            //   } else if (result.isDenied) {
+            //     Swal.fire('Changes are not saved', '', 'info')
+            //   }
               
-              // new Swal("Nice!", "You wrote: " + inputValue, "success");
-
-            });
+            // });
             // window.location.href = "/"
           } else {
             const error = new Error(res.error);
