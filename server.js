@@ -100,7 +100,14 @@ app.post('/api/login/', async(req, res) => {
     var doc = await callDoc.get();
     var user_data = doc.data();
 
-    const payload = { email: email, user: user, role: user_data.role, stripe_id:user_data.stripe_id};
+    const payload = { 
+        email: email,
+        user: user, 
+        role: user_data.role, 
+        stripe_id:user_data.stripe_id, 
+        name: user_data.name
+    };
+
     const token = jwt.sign(payload, secret, {
         expiresIn: '24h'
     });
@@ -116,6 +123,7 @@ app.get('/logout', function(req, res) {
 
 app.get('/api/decode/', async(req, res) => {
     const token = req.cookies.token;
+    if(!token) res.status(400).send("Authentication issue")
     console.log(token);
     var decoded = jwt_decode(token, process.env.SECRET);
     console.log(jwt_decode(token, process.env.SECRET));
@@ -156,7 +164,14 @@ app.post('/api/register/', async(req, res) => {
         firestore.collection('users').doc(uid).update({stripe_id:customer_stripe_id})
 
 
-        const payload = { email: req.body.email, user: uid, role: "user", stripe_id: customer_stripe_id  };
+        const payload = { 
+            email: req.body.email, 
+            user: uid, 
+            role: "user", 
+            stripe_id: customer_stripe_id, 
+            name: req.body.name
+        };
+
         const token = jwt.sign(payload, secret, {
             expiresIn: '24h'
         });
@@ -205,6 +220,27 @@ app.post('/api/appointment/create', async(req, res) => {
     res.status(200).send("ok");
 });
 
+app.post('/api/appointment/review', async(req, res) => {
+
+    const appointment_id = req.body.appointment;
+    const review = req.body.review;
+    const customer = req.body.customer;
+    
+    console.log(req.body)
+    const appointment = await firestore.collection('appointments').doc(appointment_id).get();
+    const appointment_data = appointment.data();
+    console.log(appointment_data);
+    const professional_id = appointment_data.expert;
+
+    await firestore.collection('users').doc(professional_id).collection('reviews').add({
+        customer:customer,
+        review:review
+    })
+
+
+    res.status(200).send("ok");
+});
+
 
 
 app.get('/api/user/get', async(req, res) => {
@@ -226,8 +262,6 @@ app.get('/api/user/get', async(req, res) => {
 
         theData.appointment_id = appointments[i]
 
-        console.log(theData)
-
 
 
         const expert = firestore.collection('users').doc(theData.expert);
@@ -235,13 +269,11 @@ app.get('/api/user/get', async(req, res) => {
         expert_data = expert_data.data();
         theData.expert_name = expert_data.name + " " + expert_data.surname
 
-        console.log(expert_data)
 
         const customer = firestore.collection('users').doc(theData.customer);
         var customer_data = await customer.get();
         customer_data = customer_data.data();
 
-        console.log(customer_data)
         theData.customer_name = customer_data.name;
         //get experts name 
         fullAppointments.push(theData);

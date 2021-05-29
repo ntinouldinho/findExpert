@@ -16,6 +16,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faChromecast } from "@fortawesome/free-brands-svg-icons";
 import { console, MediaDeviceInfo } from "globalthis/implementation";
+import Swal from 'sweetalert2'
+// import {getCookie} from "../components/readCookie.js"
 // import console from "node:console";
 
 const Room = (props) => {
@@ -205,13 +207,46 @@ const Room = (props) => {
     });
   }
 
+
+  function getCookie(name) {
+    console.log("innn")
+    // Split cookie string and get all individual name=value pairs in an array
+    var cookieArr = document.cookie.split(";");
+    
+    // Loop through the array elements
+    for(var i = 0; i < cookieArr.length; i++) {
+        var cookiePair = cookieArr[i].split("=");
+        console.log( cookiePair)
+        /* Removing whitespace at the beginning of the cookie name
+        and compare it with the given string */
+        if(name == cookiePair[0].trim()) {
+            // Decode the cookie value and return
+            return decodeURIComponent(cookiePair[1]);
+        }
+    }
+    
+    // Return null if not found
+    return null;
+}
+
   
   async function hangUpCall(){
-    const response = await fetch(`/api/decode`);
-    const json = await response.json();
+    
+    let json = null;
+    
+    try{
+      const response = await fetch(`/api/decode`);
+      json = await response.json();
+    }catch(e){
+      alert(e)
+    }
+    
     const stripe_id = json.stripe_id;
+    const link = window.location.href.split('/');
+    const appointment_id = link[link.length-1];
 
     if(json.role === "user"){
+      
       fetch('/api/stripe/createPayment', {
         method: 'POST',
         headers: {
@@ -220,12 +255,45 @@ const Room = (props) => {
         body: JSON.stringify({ 
             id: stripe_id, 
             price: 160,
-            appointment:'IAbTXIkyCC694DUbIowt'
+            appointment: appointment_id
           }),
       })
       .then(res => {
           if (res.status === 200) {
-            window.location.href = "/"
+            new Swal({
+              title: "Leave a review",
+              text: "Write some thoughts about the expert to help out others",
+              input: "text",
+              showCancelButton: true,
+              inputPlaceholder: "Write something"
+            }).then((inputValue) => {
+              if (inputValue === null) return false;
+              inputValue=inputValue.value;
+              
+              if (inputValue === "" || !inputValue) {
+                return false
+              }
+
+              console.log(json)
+
+              fetch('/api/appointment/review', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 
+                    appointment: appointment_id,
+                    review: inputValue,
+                    customer: json.name
+                  }),
+              }).then((response) => {
+
+              })
+              
+              // new Swal("Nice!", "You wrote: " + inputValue, "success");
+
+            });
+            // window.location.href = "/"
           } else {
             const error = new Error(res.error);
             throw error;
@@ -233,7 +301,7 @@ const Room = (props) => {
         })
         .catch(err => {
           console.error(err);
-          alert('Error logging in please try again');
+          alert('Error, could not process payment');
         });
     }else{
       window.location.href = "/"
