@@ -46,7 +46,7 @@ class ExampleApp extends React.Component {
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.changeSeleceted = this.changeSeleceted.bind(this);
     this.clickDay = this.clickDay.bind(this);
-    this.bookAppointment= this.bookAppointment.bind(this);
+    this.updateCalendar= this.updateCalendar.bind(this);
     this.handleChange = this.handleChange.bind(this);
 
     this.selectColor = this.selectColor.bind(this);
@@ -77,24 +77,8 @@ class ExampleApp extends React.Component {
   }
   
 
-  async bookAppointment (){
+  async updateCalendar (){
 
-      var flag=0;
-
-      await fetch('/checkToken')
-      .then(res => {
-        if (res.status === 200) {
-          flag=1;
-        } else {
-          const error = new Error(res.error);
-          throw error;
-        }
-      })
-      .catch(err => {
-        alert("You must be signed in to book an appointment")
-      });
-
-      if(flag){
           const response = await fetch(`/api/decode`);
           const json = await response.json();
           const user = json.user;
@@ -136,11 +120,6 @@ class ExampleApp extends React.Component {
                 console.error(err);
                 alert('Error logging in please try again');
               });
-    
-          
-
-
-      }
       
 
   }
@@ -212,7 +191,7 @@ class ExampleApp extends React.Component {
 
 
               <div id="modal-choices">
-                  <Button id="book-appointment" onClick={this.bookAppointment} variant="success">Update</Button>
+                  <Button id="book-appointment" onClick={this.updateCalendar} variant="success">Update</Button>
 
                   <Button id="cancel-modal" onClick={this.handleCloseModal} variant="danger">Cancel</Button>
               </div>
