@@ -50,7 +50,7 @@ tr,th, td {
   border-top: 1px solid #000000;
 }
 
-table{
+.userDiv table{
   width: 50%;
   margin-top:50px;
   border:"2px solid black";

@@ -1,6 +1,10 @@
 /* #editor{
     width:50%;
 } */
+.header{
+    z-index: 100;
+}
+
 .grid-container-edit {
   display: grid;
   grid-template-areas:
@@ -30,7 +34,7 @@
 }
 
 .EditAboutMe {
-  margin-top: 50px;
+  margin: 50px 10px;
   grid-area: editaboutme;
 }
 
@@ -44,11 +48,17 @@
 }
 
 .AddServices {
+    margin-bottom: 50px;
     grid-area: addservices;
 }
 
 .AddCV{
     grid-area: addcv;
+}
+
+.ListAdder{
+    margin: auto;
+    width: 80%;
 }
 
 #updatebtn{
@@ -63,6 +73,8 @@
   display: grid;
   grid-template-areas: "calendar results" "calendar services" "calendar choices";
   height: 100%;
+  width: 75%;
+  margin: 0 auto 150px;
 }
 
 #calendar {
@@ -72,10 +84,37 @@
   grid-area: calendar;
 }
 
+.hourDetails{
+    display: inline-flex;
+}
+
+.hourDetails span{
+    margin-right: 24px;
+}
+
+.hourDetails input{
+    width: 40px;
+    
+}
+
+#dayoff{
+    background-color:steelblue;
+    border-color: steelblue;
+}
+
 #results>ul {
-  grid-area: results;
-  height: 200px;
-  overflow-y: scroll;
+    list-style: none;
+    text-align: center;
+    grid-area: results;
+    height: 200px;
+    overflow-y: scroll;
+    margin: auto;
+    padding-left: 0%;
+    margin: 2% 10% 0
+}
+#results li{
+    border: solid 1px black;
+    border-radius: 5px;
 }
 
 #modal-services {

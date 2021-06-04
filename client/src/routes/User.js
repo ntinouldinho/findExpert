@@ -55,7 +55,7 @@ const Appointments = (props) => {
     }
 
     return (
-        <div>
+        <div className="userDiv">
            <table>
                 <thead>
                     <tr>

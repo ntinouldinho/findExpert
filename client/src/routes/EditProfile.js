@@ -167,35 +167,71 @@ class ExampleApp extends React.Component {
       
     return (
       <div className="Profile">
-
-          <div id="modal-content">
-      
-              <Calendar onClickDay={this.clickDay} id="calendar" />
-              <div id="results" style={{display:this.state.show}}> 
-                  <h1>Available hours: </h1>
-                  <Button onClick={this.dayOff} variant="success">Day Off</Button>
-                  <ul>
-                      {this.state.time.map((item, i) => (
-                          <li onClick={() => this.changeSeleceted(i)} 
-                              key={i}
-                              style={{backgroundColor: this.selectColor(i)}}
-                          >
-                          {item}
-                          </li>
-
-                      ))}
-                  </ul>
-              </div>
-
-              
-
-
-              <div id="modal-choices">
-                  <Button id="book-appointment" onClick={this.updateCalendar} variant="success">Update</Button>
-
-                  <Button id="cancel-modal" onClick={this.handleCloseModal} variant="danger">Cancel</Button>
-              </div>
+        <div id="modal-content">
+          <Calendar onClickDay={this.clickDay} id="calendar" />
+          <div id="results" style={{ display: this.state.show }}>
+            <h1>Available hours: </h1>
+            <div className="hourDetails">
+              <span>
+                <input
+                  id="start"
+                  type="number"
+                  defaultValue="9"
+                  min="0"
+                  max="23"
+                />
+                <br></br>
+                <label htmlFor="start">Start</label>
+              </span>
+              <span>
+                <input
+                  id="end"
+                  type="number"
+                  defaultValue="19"
+                  min="1"
+                  max="24"
+                />
+                <br></br>
+                <label htmlFor="end">Until</label>
+              </span>
+            </div>
+              <Button onClick={this.dayOff} variant="success" id="dayoff">
+                Day Off
+              </Button>
+            <ul>
+              {this.state.time.map((item, i) => (
+                <li
+                  onClick={() => this.changeSeleceted(i)}
+                  key={i}
+                  style={{
+                    backgroundColor: this.selectColor(i),
+                    borderColor: this.selectColor(i),
+                  }}
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
+
+          <div id="modal-choices">
+            <Button
+              id="book-appointment"
+              onClick={this.updateCalendar}
+              variant="success"
+            >
+              Update
+            </Button>
+
+            <Button
+              id="cancel-modal"
+              onClick={this.handleCloseModal}
+              variant="danger"
+            >
+              Cancel
+            </Button>
+          </div>
+        </div>
       </div>
     );
   }
@@ -322,7 +358,7 @@ export class EditProfile extends Component {
               id="profpic"
             />
 
-            <input className="AddPicture" type="file" name="asda"></input>
+            {/* <input className="AddPicture" type="file" name="asda"></input> */}
 
             <div className="AddName">
               <label htmlFor="name">Name: </label>
