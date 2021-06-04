@@ -287,12 +287,16 @@ export class EditProfile extends Component {
       expert: user
     })
 
+    var data =Object.assign({}, this.state);
+
+    delete data.editorState;
+
     await fetch("/api/expert/edit", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(this.state),
+      body: JSON.stringify(data),
     })
       .then((res) => {
         if (res.status === 200) {
