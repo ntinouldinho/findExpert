@@ -18,24 +18,32 @@ const Login = (props) => {
     console.log("clicked");
     e.preventDefault();
     history.push(`/login`);
-    
   };
 
-    
-    const logout = () => {
-      console.log("clicked");
-        try {
-            fetch(`/logout`);
-            
-            props.login(false);
-        } catch (error) { }
-    };
-    
-var func = props.loggedIn ? logout : toLogin;
-var title = props.loggedIn ? "Logout" : "Login";
+  const logout = () => {
+    console.log("clicked");
+    try {
+      fetch(`/logout`);
+
+      props.login(false);
+    } catch (error) {}
+  };
+
+  var func = props.loggedIn ? logout : toLogin;
+  var title = props.loggedIn ? "Logout" : "Login";
 
   return (
     <div>
+      <button
+        type="button"
+        // onClick={func}
+        id="settings"
+        style={{ display: "inline" }}
+        //display none
+      >
+
+      </button>
+
       <button
         type="button"
         onClick={func}
@@ -46,7 +54,6 @@ var title = props.loggedIn ? "Logout" : "Login";
         <br></br>
         <h6>{title}</h6>
       </button>
-
     </div>
   );
 };
@@ -77,9 +84,8 @@ export class Home extends Component {
     };
     this.scrollFunction = this.scrollFunction.bind(this);
     // this.logout = this.logout.bind(this);
-    this.changeLogin= this.changeLogin.bind(this);
+    this.changeLogin = this.changeLogin.bind(this);
   }
-
 
   componentDidMount() {
     window.addEventListener("scroll", this.scrollFunction);
@@ -113,13 +119,17 @@ export class Home extends Component {
     }
   }
 
-  changeLogin(login){
-    this.setState({loggedIn:login})
+  changeLogin(login) {
+    this.setState({ loggedIn: login });
   }
   render() {
     return (
       <div className="HomeContainer">
-        <Header loggedIn={this.state.loggedIn} login={this.changeLogin} search={this.state.search} />
+        <Header
+          loggedIn={this.state.loggedIn}
+          login={this.changeLogin}
+          search={this.state.search}
+        />
         <div className="logoSearch">
           <img
             className="FXLogo"
@@ -130,7 +140,7 @@ export class Home extends Component {
           />
 
           <span>
-            <Login loggedIn={this.state.loggedIn} login={this.changeLogin}/>
+            <Login loggedIn={this.state.loggedIn} login={this.changeLogin} />
           </span>
 
           <p id="moto1">
@@ -184,14 +194,14 @@ export class Home extends Component {
           <h1 className="stepTitle"> Book your appointment: </h1>
           <img
             className="Logo"
-            src='https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/gifs%2Fbook.gif?alt=media&token=4c5763c5-bafb-404b-8dd8-33ea7bc2a950'
+            src="https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/gifs%2Fbook.gif?alt=media&token=4c5763c5-bafb-404b-8dd8-33ea7bc2a950"
             alt="book gif"
           />
           <p className="desc">
             When you have found your desired expert, you will have the
-            opportunity to book an online appointment in a few simple steps. Move
-            to their profile, and click on the button "Book Appointment". Then
-            select the day and the hour you desire.Confirm your choice by
+            opportunity to book an online appointment in a few simple steps.
+            Move to their profile, and click on the button "Book Appointment".
+            Then select the day and the hour you desire.Confirm your choice by
             clicking the green button "Book". Congratulations!You have booked
             your first online meeting.
           </p>
@@ -200,20 +210,20 @@ export class Home extends Component {
           className="grid-container-lefttext"
           style={{ backgroundColor: "rgb(216, 141, 114)" }}
         >
-          <h1 className="stepTitle" >
+          <h1 className="stepTitle">
             Log in to your video call through our site:
           </h1>
           <img
             className="Logo"
-            src='https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/gifs%2Fcall.gif?alt=media&token=331cae91-41f4-49ab-96bf-dcf7f9c4a28f'
+            src="https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/gifs%2Fcall.gif?alt=media&token=331cae91-41f4-49ab-96bf-dcf7f9c4a28f"
             alt="call gif"
           />
           <p className="desc">
             When your appointment is booked, you will receive an e - mail that
             contains a link. When you click that, you will be redirected to a
-            room, where your videocall will take place. Feel free to use the chat
-            too! Or if you want, look through the appointments tab in your settings and the link
-            for the call will be there. 
+            room, where your videocall will take place. Feel free to use the
+            chat too! Or if you want, look through the appointments tab in your
+            settings and the link for the call will be there.
           </p>
         </div>
         <div
@@ -225,7 +235,7 @@ export class Home extends Component {
           </h1>
           <img
             className="Logo"
-            src='https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/gifs%2Fcard.gif?alt=media&token=2d2fe16a-ad2a-4b78-b2b6-4e57384a4ea2'
+            src="https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/gifs%2Fcard.gif?alt=media&token=2d2fe16a-ad2a-4b78-b2b6-4e57384a4ea2"
             alt="card gif"
           />
           <p className="desc">

@@ -5,7 +5,10 @@ import Rating from "react-star-review";
 import { Header } from "../components/Header";
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
+import ReactModal from 'react-modal';
+import Calendar from 'react-calendar';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+
 import {
   EditorState,
   ContentState,
@@ -24,7 +27,6 @@ export class EditProfile extends Component {
         name: "",
         profession: "",
         photo: "",
-        reviews: ["4", " 5"], //nonCustom
         services: ["$$ ", " $$"], //nonCustom
         cv: "",
         about:"",
@@ -39,6 +41,7 @@ export class EditProfile extends Component {
         ),
       };
     this.onEditorStateChange = this.onEditorStateChange.bind(this);
+    this.updateState = this.updateState.bind(this)
   }
 
   async componentDidMount() {
@@ -66,6 +69,21 @@ export class EditProfile extends Component {
       editorState: editorState,
     });
   }
+
+
+    updateState(input, type){
+      // switch(type){
+      //   case "name":
+      //     this.setState({name: input.value})
+      // //   case "profession":
+      //     this.setState({profession: input.value})
+      //   default:
+      //     console.log("nothing changed")
+      //   // case "aboutme":
+      //   //   this.setState({aboutme: input.value})
+      // }
+    };
+
 
   handleUpdate = async (e) => {     //prepei na ta apothikeyei prwta kapou
     e.preventDefault();
@@ -102,6 +120,7 @@ export class EditProfile extends Component {
       });
   };
 
+
   render() {
     const editorState = this.state.editorState;
     return (
@@ -130,6 +149,7 @@ export class EditProfile extends Component {
                 type="text"
                 placeholder="Full Name"
                 defaultValue={this.state.name}
+                // onKeyUp={this.updateState(this, "name")}
               ></input>
             </div>
 
@@ -140,6 +160,7 @@ export class EditProfile extends Component {
                 type="text"
                 placeholder="Profession"
                 defaultValue={this.state.profession}
+                // onKeyUp={this.updateState(this, "profession")}
               ></input>
             </div>
 
@@ -155,6 +176,7 @@ export class EditProfile extends Component {
                 wrapperClassName="demo-wrapper"
                 editorClassName="demo-editor"
                 onEditorStateChange={this.onEditorStateChange}
+                // onKeyUp={updateState(this, "aboutme")}
               />
               <textarea
                 disabled
@@ -166,7 +188,8 @@ export class EditProfile extends Component {
 
             <div className="AddServices">
               <h1>Services</h1>
-              <ListAdder />
+              <ListAdder  /> 
+              {/* fields={this.state.services} */}
             </div>
 
             <div className="AddCV">
@@ -174,10 +197,10 @@ export class EditProfile extends Component {
               <ListAdder />
             </div>
 
-            <div className="reviews">
+            {/* <div className="reviews">
               {this.state.reviews}
               <br></br>
-            </div>
+            </div> */}
           </div>
           <Button id="updatebtn" onClick={this.handleUpdate} variant="success">
             Update Profile
@@ -187,3 +210,150 @@ export class EditProfile extends Component {
     );
   }
 }
+
+
+
+
+// class schedulaer extends React.Component {
+
+//   constructor () {
+//     super();
+//     this.state = {
+//       showModal: false,
+//       time:['7:00-8:00','8:00-9:00','10:00-11:00','11:00-12:00','12:00-13:00','13:00-14:00','14:00-15:00','15:00-16:00','16:00-17:00','17:00-18:00','18:00-19:00'],
+//       selected: -1,
+//       service:0,
+//       html: <p>ffff<em>ff</em></p>
+//     };
+    
+//     this.handleOpenModal = this.handleOpenModal.bind(this);
+//     this.handleCloseModal = this.handleCloseModal.bind(this);
+//     this.changeSeleceted = this.changeSeleceted.bind(this);
+//     this.clickDay = this.clickDay.bind(this);
+//     this.bookAppointment= this.bookAppointment.bind(this);
+//     this.handleChange = this.handleChange.bind(this);
+//   }
+  
+//   handleOpenModal () {
+//     this.setState({ showModal: true });
+//   }
+  
+//   handleChange(event) {
+//       this.setState({ service: event.target.selectedIndex });
+//   }
+  
+
+//   async bookAppointment (){
+
+//       var flag=0;
+
+//       await fetch('/checkToken')
+//       .then(res => {
+//         if (res.status === 200) {
+//           flag=1;
+//         } else {
+//           const error = new Error(res.error);
+//           throw error;
+//         }
+//       })
+//       .catch(err => {
+//         alert("You must be signed in to edit your profile")
+//       });
+
+//       if(flag){
+//           const response = await fetch(`/api/decode`);
+//           const json = await response.json();
+//           const user = json.user;
+          
+//           console.log(json);
+//           const time = this.state.time[this.state.selected];
+
+//           const expert = this.state.id;
+
+//           fetch('/api/expert/edit', {
+//               method: 'POST',
+//               headers: {
+//                 'Content-Type': 'application/json',
+//               },
+//               body: JSON.stringify({ 
+
+//                   // time:
+//                   // date:
+//                 }),
+//             })
+
+//       }
+      
+
+//   }
+  
+//   handleCloseModal () {
+//     this.setState({ showModal: false });
+//   }
+
+//   clickDay(value, event){
+//       console.log(value.toString().substring(4,15));
+//       this.setState({ selected: -1 }); //reset all green hours
+//   }
+
+//   clickHour(event){
+
+//       event.target.style.backgroundColor = "lightgreen";
+//   }
+
+//   changeSeleceted(i){
+//       this.setState({ selected: i });
+//   }
+
+
+//   render () {
+      
+//     return (
+//       <div className="Profile">
+//         <Button onClick={this.handleOpenModal} variant="success">Book Appointment</Button>
+//         <ReactModal 
+//            isOpen={this.state.showModal}
+//            contentLabel="onRequestClose Example"
+//            onRequestClose={this.handleCloseModal}
+//            className="Modal"
+//            ariaHideApp={false}
+//         > 
+//           <div id="modal-content">
+      
+//               <Calendar onClickDay={this.clickDay} id="calendar" />
+//               <div id="results"> 
+//                   <h1>Available hours: </h1>
+//                   <ul>
+//                       {this.state.time.map((item, i) => (
+//                           <li onClick={() => this.changeSeleceted(i)} 
+//                               key={i}
+//                               style={{backgroundColor: i===this.state.selected?"lightgreen":""}}
+//                           >
+//                           {item}
+//                           </li>
+
+//                       ))}
+//                   </ul>
+//               </div>
+
+//               <div id="modal-services">          
+//                   <label htmlFor="services">Choose a service:</label>
+//                   <select id="services" onChange={this.handleChange}>
+//                       {this.props.services.map((item, i) => (
+//                           <option value={item} key={i}>{item}</option>
+//                       ))}
+//                   </select>
+//               </div>
+
+
+//               <div id="modal-choices">
+//                   <Button id="book-appointment" onClick={this.bookAppointment} variant="success">Book</Button>
+
+//                   <Button id="cancel-modal" onClick={this.handleCloseModal} variant="danger">Cancel</Button>
+//               </div>
+//           </div>
+//         </ReactModal>
+//       </div>
+//     );
+//   }
+// }
