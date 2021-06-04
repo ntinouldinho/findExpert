@@ -17,7 +17,199 @@ import {
 } from "draft-js";
 import ListAdder from "../components/ListAdder";
 import Button from "react-bootstrap/Button";
+import Swal from 'sweetalert2'
 // import console from "node:console";
+
+class ExampleApp extends React.Component {
+
+  constructor () {
+    super();
+    var times = [];
+    for(var i=9;i<19;i++){
+      var first = i<9?"0"+i:i;
+      var second = i+1<9?"0"+(i+1):i+1;
+
+      times.push(first+":00-"+first+":30")
+      times.push(first+":30-"+second+":00")
+    }
+    this.state = {
+      showModal: false,
+      time:times,
+      selected: {"start":["ff"]},
+      service:0,
+      day:"start",
+      html: <p>ffff<em>ff</em></p>
+    };
+    
+    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
+    this.changeSeleceted = this.changeSeleceted.bind(this);
+    this.clickDay = this.clickDay.bind(this);
+    this.bookAppointment= this.bookAppointment.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+
+    this.selectColor = this.selectColor.bind(this);
+  }
+  
+  handleOpenModal () {
+    this.setState({ showModal: true });
+  }
+  
+  handleChange(event) {
+      this.setState({ service: event.target.selectedIndex });
+  }
+
+  selectColor(i) {
+    console.log("day is "+this.state.day)
+    console.log(this.state.selected)
+    let array = this.state.selected[this.state.day];
+
+    return array.includes(this.state.time[i])?"red":""
+  }
+  
+
+  async bookAppointment (){
+
+      var flag=0;
+
+      await fetch('/checkToken')
+      .then(res => {
+        if (res.status === 200) {
+          flag=1;
+        } else {
+          const error = new Error(res.error);
+          throw error;
+        }
+      })
+      .catch(err => {
+        alert("You must be signed in to book an appointment")
+      });
+
+      if(flag){
+          const response = await fetch(`/api/decode`);
+          const json = await response.json();
+          const user = json.user;
+          
+          console.log(json);
+          const time = this.state.time[this.state.selected];
+          const service = this.state.service;
+
+          const linkParams = window.location.pathname.split("/");
+          const expert = linkParams[linkParams.length-1];
+
+          console.log(this.props.services[this.state.service]);
+          fetch('/api/appointment/create', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ 
+                  customer: user, 
+                  expert:expert,
+                  time:time,
+                  service:service
+                }),
+            })
+            .then(res => {
+                if (res.status === 200) {
+                  Swal.fire({  
+                      title: 'Success!',  
+                      text: 'Your appointment has been created',
+                      icon: 'success'
+                    }); 
+                  // window.location.href = "/"
+                } else {
+                  const error = new Error(res.error);
+                  throw error;
+                }
+              })
+              .catch(err => {
+                console.error(err);
+                alert('Error logging in please try again');
+              });
+    
+          
+
+
+      }
+      
+
+  }
+  
+  handleCloseModal () {
+    this.setState({ showModal: false });
+  }
+
+  clickDay(value, event){
+      let date = value.toString().substring(4,15);
+      this.setState({ day: date }); //reset all green hours
+
+      let selected = this.state.selected;
+
+      if(!selected[date]){
+        selected[date] = []
+        this.setState({selected : selected })
+      }
+  }
+
+  clickHour(event){
+
+      event.target.style.backgroundColor = "lightgreen";
+  }
+
+  changeSeleceted(i){
+
+    let array  = this.state.selected;
+    const time = this.state.time;
+
+    const index = array[this.state.day].indexOf(time[i]);
+
+    if(index === -1){
+      array[this.state.day].push(time[i])
+    }else{
+      array[this.state.day].splice(index,1)
+    }
+    
+    this.setState({ selected: array });
+  }
+
+
+  render () {
+      
+    return (
+      <div className="Profile">
+
+          <div id="modal-content">
+      
+              <Calendar onClickDay={this.clickDay} id="calendar" />
+              <div id="results"> 
+                  <h1>Available hours: </h1>
+                  <ul>
+                      {this.state.time.map((item, i) => (
+                          <li onClick={() => this.changeSeleceted(i)} 
+                              key={i}
+                              style={{backgroundColor: this.selectColor(i)}}
+                          >
+                          {item}
+                          </li>
+
+                      ))}
+                  </ul>
+              </div>
+
+              
+
+
+              <div id="modal-choices">
+                  <Button id="book-appointment" onClick={this.bookAppointment} variant="success">Update</Button>
+
+                  <Button id="cancel-modal" onClick={this.handleCloseModal} variant="danger">Cancel</Button>
+              </div>
+          </div>
+      </div>
+    );
+  }
+}
 
 export class EditProfile extends Component {
   constructor(props) {
@@ -175,6 +367,8 @@ export class EditProfile extends Component {
               <h1>My CV</h1>
               <ListAdder />
             </div>
+
+             <ExampleApp />
 
             {/* <div className="reviews">
               {this.state.reviews}

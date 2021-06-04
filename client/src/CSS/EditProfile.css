@@ -49,3 +49,36 @@
     bottom: 2vh;
     right: 10%;
 }
+
+/* MODAL GRID */
+
+#modal-content {
+  display: grid;
+  grid-template-areas: "calendar results" "calendar services" "calendar choices";
+  height: 100%;
+}
+
+#calendar {
+  position: relative;
+  margin-top: 25%;
+  left: 25%;
+  grid-area: calendar;
+}
+
+#results>ul {
+  grid-area: results;
+  height: 200px;
+  overflow-y: scroll;
+}
+
+#modal-services {
+  grid-area: services;
+}
+
+#modal-choices {
+  grid-area: choices;
+}
+
+#cancel-modal {
+  margin-left: 50px;
+}
