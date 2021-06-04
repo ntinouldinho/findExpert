@@ -23,17 +23,15 @@ function ListAdder(props) {
     values.splice(i, 1);
     setFields(values);
   }
-  // console.log(props.value)
-  {Object.keys(props.value).map((e, i) => {
-      // console.log(e)
-      // console.log(props.value[e])
-  })}
+ 
+  const type= props.type =="cv"? "none":""
+
   return (
     <table className="ListAdder">
       <thead>
         <tr>
           <th>Service</th>
-          <th>Price</th>
+          <th style={{display: type}}>Price</th>
           <th>
             <button type="button" onClick={() => handleAdd()}>
               <FontAwesomeIcon icon={faPlusCircle} />
@@ -45,7 +43,7 @@ function ListAdder(props) {
       {Object.entries(props.value).map(([title, price]) => {
         return(
           <tr>
-            <td>{title}</td>
+            <td style={{display: type}}>{title}</td>
             <td>{price}</td>
             <td>
               <button type="button" onClick={() => handleRemove(1)}>
