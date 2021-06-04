@@ -243,6 +243,16 @@ p.desc {
   background-color: #000;
 }
 
+#settings{
+    position: absolute;
+  font-size: 24px;
+  top: 40px;
+  left: 90.8%;
+  border: 7px groove darkorange;
+  color: darkorange;
+  background-color: #000;
+}
+
 /* ------------------Step Sections------------------ */
 
 .Steps {

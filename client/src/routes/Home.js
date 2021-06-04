@@ -5,7 +5,7 @@ import { Autocomplete } from "../components/Autocomplete";
 import { Footer } from "../components/Footer";
 import Header from "../components/Header.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faAdjust } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faCog } from "@fortawesome/free-solid-svg-icons";
 
 import "../CSS/Home.css";
 import logo from "../assets/logo.png";
@@ -37,11 +37,16 @@ const Login = (props) => {
     <div>
       <button
         type="button"
-        // onClick={history.push(`/settings`)}
+        onClick={
+            function (e) {
+                e.preventDefault();
+                history.push(`/settings`);
+            }
+        }
         id="settings"
         style={{ display: settdisp }}
       >
-        <FontAwesomeIcon icon={faAdjust} />
+        <FontAwesomeIcon icon={faCog} />
       </button>
 
       <button
