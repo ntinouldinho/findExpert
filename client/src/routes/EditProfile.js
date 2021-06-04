@@ -38,7 +38,8 @@ class ExampleApp extends React.Component {
       selected: {"start":["ff"]},
       service:0,
       day:"start",
-      html: <p>ffff<em>ff</em></p>
+      html: <p>ffff<em>ff</em></p>,
+      show:'none'
     };
     
     this.handleOpenModal = this.handleOpenModal.bind(this);
@@ -49,10 +50,20 @@ class ExampleApp extends React.Component {
     this.handleChange = this.handleChange.bind(this);
 
     this.selectColor = this.selectColor.bind(this);
+    this.dayOff = this.dayOff.bind(this);
   }
   
   handleOpenModal () {
     this.setState({ showModal: true });
+  }
+
+  dayOff(){
+    let array = this.state.selected;
+    
+    array[this.state.day] = this.state.time;
+
+    console.log(array)
+    this.setState({selected : array})
   }
   
   handleChange(event) {
@@ -60,8 +71,6 @@ class ExampleApp extends React.Component {
   }
 
   selectColor(i) {
-    console.log("day is "+this.state.day)
-    console.log(this.state.selected)
     let array = this.state.selected[this.state.day];
 
     return array.includes(this.state.time[i])?"red":""
@@ -141,15 +150,16 @@ class ExampleApp extends React.Component {
   }
 
   clickDay(value, event){
-      let date = value.toString().substring(4,15);
-      this.setState({ day: date }); //reset all green hours
+    this.setState({show:""})
+    let date = value.toString().substring(4,15);
+    this.setState({ day: date }); //reset all green hours
 
-      let selected = this.state.selected;
+    let selected = this.state.selected;
 
-      if(!selected[date]){
-        selected[date] = []
-        this.setState({selected : selected })
-      }
+    if(!selected[date]){
+      selected[date] = []
+      this.setState({selected : selected })
+    }
   }
 
   clickHour(event){
@@ -182,8 +192,9 @@ class ExampleApp extends React.Component {
           <div id="modal-content">
       
               <Calendar onClickDay={this.clickDay} id="calendar" />
-              <div id="results"> 
+              <div id="results" style={{display:this.state.show}}> 
                   <h1>Available hours: </h1>
+                  <Button onClick={this.dayOff} variant="success">Day Off</Button>
                   <ul>
                       {this.state.time.map((item, i) => (
                           <li onClick={() => this.changeSeleceted(i)} 
