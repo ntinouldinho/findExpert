@@ -5,17 +5,17 @@ import { Autocomplete } from "../components/Autocomplete";
 import { Footer } from "../components/Footer";
 import Header from "../components/Header.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faAdjust } from "@fortawesome/free-solid-svg-icons";
 
 import "../CSS/Home.css";
 import logo from "../assets/logo.png";
-import { alert } from "globalthis/implementation";
+// import { alert} from "globalthis/implementation";
 
 const Login = (props) => {
   const history = useHistory();
 
   const toLogin = (e) => {
-    console.log("clicked");
+    // console.log("clicked");
     e.preventDefault();
     history.push(`/login`);
   };
@@ -29,19 +29,19 @@ const Login = (props) => {
     } catch (error) {}
   };
 
-  var func = props.loggedIn ? logout : toLogin;
-  var title = props.loggedIn ? "Logout" : "Login";
+    var func = props.loggedIn ? logout : toLogin;
+    var title = props.loggedIn ? "Logout" : "Login";
+    var settdisp = props.loggedIn ? "inline" : "none"
 
   return (
     <div>
       <button
         type="button"
-        // onClick={func}
+        // onClick={history.push(`/settings`)}
         id="settings"
-        style={{ display: "inline" }}
-        //display none
+        style={{ display: settdisp }}
       >
-
+        <FontAwesomeIcon icon={faAdjust} />
       </button>
 
       <button
