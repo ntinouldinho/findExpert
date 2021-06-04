@@ -8,7 +8,8 @@
     "addpicture addprofession rating"
     "editaboutme editaboutme editaboutme"
     "addservices addservices addservices"
-    "addcv addcv addcv";
+    "addcv addcv addcv"
+    "Calendar Calendar Calendar";
   text-align: center;
   align-items: center;
   border: 10px groove darkorange;
@@ -34,6 +35,11 @@
 
 .RatingOnEdit {
     grid-area: rating;
+}
+
+.Calendar {
+  margin-top: 100px;
+  grid-area: Calendar;
 }
 
 .AddServices {

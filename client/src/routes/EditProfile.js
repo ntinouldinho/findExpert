@@ -387,8 +387,11 @@ export class EditProfile extends Component {
               <h1>My CV</h1>
               <ListAdder type="cv" value={this.state.cv} />
             </div>
-
-            <ExampleApp />
+              
+            <div className="Calendar">
+              <ExampleApp />
+            </div>
+           
           </div>
           <Button id="updatebtn" onClick={this.handleUpdate} variant="success">
             Update Profile
