@@ -179,6 +179,7 @@ class ExampleApp extends React.Component {
                   defaultValue="9"
                   min="0"
                   max="23"
+                  onChange = {(e)=>{this.setState({ start:e.target.value})}}
                 />
                 <br></br>
                 <label htmlFor="start">Start</label>
@@ -190,6 +191,7 @@ class ExampleApp extends React.Component {
                   defaultValue="19"
                   min="1"
                   max="24"
+                  onChange = {(e)=>{this.setState({ end:e.target.value})}}
                 />
                 <br></br>
                 <label htmlFor="end">Until</label>
