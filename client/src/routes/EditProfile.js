@@ -39,7 +39,9 @@ class ExampleApp extends React.Component {
       service:0,
       day:"start",
       html: <p>ffff<em>ff</em></p>,
-      show:'none'
+      show:'none',
+      start:9,
+      end:19
     };
     
     this.handleOpenModal = this.handleOpenModal.bind(this);
@@ -51,10 +53,28 @@ class ExampleApp extends React.Component {
 
     this.selectColor = this.selectColor.bind(this);
     this.dayOff = this.dayOff.bind(this);
+    this.updateHours = this.updateHours.bind(this);
   }
   
   handleOpenModal () {
     this.setState({ showModal: true });
+  }
+
+  updateHours(e,type){
+    type=="start"?this.setState({ start:e.target.value}):this.setState({ end:e.target.value});
+    
+    let newTimes =[];
+    console.log(this.state.start)
+    console.log(this.state.end)
+    for(var i=parseInt(this.state.start);i<parseInt(this.state.end);i++){
+      var first = i<=9?"0"+i:i;
+      var second = i+1<=9?"0"+(i+1):i+1;
+
+      newTimes.push(first+":00-"+first+":30")
+      newTimes.push(first+":30-"+second+":00")
+    }
+
+    this.setState({time:newTimes})
   }
 
   dayOff(){
@@ -176,10 +196,10 @@ class ExampleApp extends React.Component {
                 <input
                   id="start"
                   type="number"
-                  defaultValue="9"
+                  defaultValue={this.state.start}
                   min="0"
                   max="23"
-                  onChange = {(e)=>{this.setState({ start:e.target.value})}}
+                  onInput ={(e)=>{this.updateHours(e,"start")}}
                 />
                 <br></br>
                 <label htmlFor="start">Start</label>
@@ -188,10 +208,10 @@ class ExampleApp extends React.Component {
                 <input
                   id="end"
                   type="number"
-                  defaultValue="19"
+                  defaultValue={this.state.end}
                   min="1"
                   max="24"
-                  onChange = {(e)=>{this.setState({ end:e.target.value})}}
+                  onInput =  {(e)=>{this.updateHours(e,"end")}}
                 />
                 <br></br>
                 <label htmlFor="end">Until</label>
