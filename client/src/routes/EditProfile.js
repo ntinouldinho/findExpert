@@ -219,8 +219,8 @@ export class EditProfile extends Component {
         name: "",
         profession: "",
         photo: "",
-        services: ["$$ ", " $$"], //nonCustom
-        cv: "",
+        services: {}, //nonCustom
+        cv: {},
         about:"",
         stars: "4.2", //nonCustom
         appointment: "appointment", //nonCustom
@@ -349,7 +349,7 @@ export class EditProfile extends Component {
                 editorClassName="demo-editor"
                 onEditorStateChange={this.onEditorStateChange}
               />
-            <textarea
+              <textarea
                 disabled
                 value={draftToHtml(
                   convertToRaw(editorState.getCurrentContent())
@@ -359,16 +359,15 @@ export class EditProfile extends Component {
 
             <div className="AddServices">
               <h1>Services</h1>
-              <ListAdder  /> 
-              {/* fields={this.state.services} */}
+              <ListAdder type="services" value={this.state.services} />
             </div>
 
             <div className="AddCV">
               <h1>My CV</h1>
-              <ListAdder />
+              <ListAdder type="cv" value={this.state.cv} />
             </div>
 
-             <ExampleApp />
+            <ExampleApp />
 
             {/* <div className="reviews">
               {this.state.reviews}
