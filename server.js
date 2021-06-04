@@ -341,6 +341,7 @@ app.post('/api/user/edit', async(req, res) => {
 app.post('/api/expert/edit', async(req, res) => {
     const expert = req.body.expert;
 
+    console.log(req.body)
     firestore.collection('users').doc(expert).update(req.body)
 
     res.status(200).send("ok");

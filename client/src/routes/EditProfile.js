@@ -233,7 +233,7 @@ export class EditProfile extends Component {
         ),
       };
     this.onEditorStateChange = this.onEditorStateChange.bind(this);
-    // this.updateState = this.updateState.bind(this)
+    this.handleUpdate = this.handleUpdate.bind(this)
   }
 
   async componentDidMount() {
@@ -270,13 +270,24 @@ export class EditProfile extends Component {
   }
 
 
-  handleUpdate = async (e) => {     //prepei na ta apothikeyei prwta kapou
+  async handleUpdate (e){     //prepei na ta apothikeyei prwta kapou
     e.preventDefault();
     let array  = this.state.name.split(' ');
     const name = array[0];
-      const surname = array[1];
-      this.setState({ name: name, surname: surname,about: draftToHtml( convertToRaw(this.state.editorState.getCurrentContent())) })
-    fetch("/api/expert/edit", {
+    const surname = array[1];
+
+    const response = await fetch(`/api/decode`);
+      const jsan = await response.json();
+      const user = jsan.user;
+
+    await this.setState({ 
+      name: name, 
+      surname: surname,
+      about: draftToHtml( convertToRaw(this.state.editorState.getCurrentContent())),
+      expert: user
+    })
+
+    await fetch("/api/expert/edit", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -285,9 +296,7 @@ export class EditProfile extends Component {
     })
       .then((res) => {
         if (res.status === 200) {
-          this.props.history.push(
-            "/profile/" + this.state.name + "/" + this.state.id
-          );
+          // window.location.reload()
         } else {
           const error = new Error(res.error);
           throw error;
@@ -352,6 +361,7 @@ export class EditProfile extends Component {
             <div className="EditAboutMe">
               <Editor
                 editorState={editorState}
+                
                 wrapperClassName="demo-wrapper"
                 editorClassName="demo-editor"
                 onEditorStateChange={this.onEditorStateChange}
