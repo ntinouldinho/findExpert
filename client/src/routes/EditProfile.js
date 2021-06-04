@@ -41,7 +41,7 @@ export class EditProfile extends Component {
         ),
       };
     this.onEditorStateChange = this.onEditorStateChange.bind(this);
-    this.updateState = this.updateState.bind(this)
+    // this.updateState = this.updateState.bind(this)
   }
 
   async componentDidMount() {
@@ -71,38 +71,18 @@ export class EditProfile extends Component {
   }
 
 
-    updateState(input, type){
-      // switch(type){
-      //   case "name":
-      //     this.setState({name: input.value})
-      // //   case "profession":
-      //     this.setState({profession: input.value})
-      //   default:
-      //     console.log("nothing changed")
-      //   // case "aboutme":
-      //   //   this.setState({aboutme: input.value})
-      // }
-    };
-
-
   handleUpdate = async (e) => {     //prepei na ta apothikeyei prwta kapou
     e.preventDefault();
     let array  = this.state.name.split(' ');
     const name = array[0];
-    const surname = array[1];
+      const surname = array[1];
+      this.setState({ name: name, surname: surname})
     fetch("/api/expert/edit", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        // name: json.name + " " + json.surname,
-        profession: this.state.profession,
-        about: this.state.about,
-        photo: this.state.photo,
-        services: this.state.services,
-        cv: this.state.cv,
-      }),
+      body: JSON.stringify(this.state),
     })
       .then((res) => {
         if (res.status === 200) {
@@ -143,24 +123,24 @@ export class EditProfile extends Component {
             <input className="AddPicture" type="file" name="asda"></input>
 
             <div className="AddName">
-              <label for="name">Name: </label>
+              <label htmlFor="name">Name: </label>
               <input
                 id="name"
                 type="text"
                 placeholder="Full Name"
                 defaultValue={this.state.name}
-                // onKeyUp={this.updateState(this, "name")}
+                disabled
               ></input>
             </div>
 
             <div className="AddProfession">
-              <label for="profession">Profession: </label>
+              <label htmlFor="profession">Profession: </label>
               <input
                 id="profession"
                 type="text"
                 placeholder="Profession"
                 defaultValue={this.state.profession}
-                // onKeyUp={this.updateState(this, "profession")}
+                disabled
               ></input>
             </div>
 
@@ -176,9 +156,8 @@ export class EditProfile extends Component {
                 wrapperClassName="demo-wrapper"
                 editorClassName="demo-editor"
                 onEditorStateChange={this.onEditorStateChange}
-                // onKeyUp={updateState(this, "aboutme")}
               />
-              <textarea
+            <textarea
                 disabled
                 value={draftToHtml(
                   convertToRaw(editorState.getCurrentContent())
@@ -337,7 +316,7 @@ export class EditProfile extends Component {
 //               </div>
 
 //               <div id="modal-services">          
-//                   <label htmlFor="services">Choose a service:</label>
+//                   <label htmlhtmlFor="services">Choose a service:</label>
 //                   <select id="services" onChange={this.handleChange}>
 //                       {this.props.services.map((item, i) => (
 //                           <option value={item} key={i}>{item}</option>
