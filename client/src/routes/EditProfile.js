@@ -252,6 +252,13 @@ export class EditProfile extends Component {
           photo: json.photo,
           services: json.services,
           cv: json.cv,
+          editorState: EditorState.createWithContent(
+            ContentState.createFromBlockArray(
+              convertFromHTML(
+                json.about
+              )
+            )
+          )
       });
     } catch (error) {}
   }
