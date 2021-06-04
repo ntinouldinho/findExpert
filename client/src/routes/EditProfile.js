@@ -275,7 +275,7 @@ export class EditProfile extends Component {
     let array  = this.state.name.split(' ');
     const name = array[0];
       const surname = array[1];
-      this.setState({ name: name, surname: surname})
+      this.setState({ name: name, surname: surname,about: draftToHtml( convertToRaw(this.state.editorState.getCurrentContent())) })
     fetch("/api/expert/edit", {
       method: "POST",
       headers: {
