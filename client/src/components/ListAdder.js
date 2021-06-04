@@ -42,16 +42,18 @@ function ListAdder(props) {
         </tr>
       </thead>
       <tbody>
-        {Object.keys(props.value).map((e, i) => {
+      {Object.entries(props.value).map(([title, price]) => {
+        return(
           <tr>
-            <td>123</td>
-            <td>123</td>
+            <td>{title}</td>
+            <td>{price}</td>
             <td>
-              <button type="button" onClick={() => handleRemove(i)}>
+              <button type="button" onClick={() => handleRemove(1)}>
                 <FontAwesomeIcon icon={faTrashAlt} />
               </button>
             </td>
           </tr>
+        )
         })}
       </tbody>
     </table>
