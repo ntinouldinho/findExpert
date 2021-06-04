@@ -60,7 +60,7 @@ class ExampleApp extends React.Component {
   dayOff(){
     let array = this.state.selected;
     
-    array[this.state.day] = this.state.time;
+    array[this.state.day] = [...this.state.time];
 
     console.log(array)
     this.setState({selected : array})
@@ -374,18 +374,13 @@ export class EditProfile extends Component {
             />
 
             <div className="EditAboutMe">
+              <h1>About Me</h1>
               <Editor
                 editorState={editorState}
                 
                 wrapperClassName="demo-wrapper"
                 editorClassName="demo-editor"
                 onEditorStateChange={this.onEditorStateChange}
-              />
-              <textarea
-                disabled
-                value={draftToHtml(
-                  convertToRaw(editorState.getCurrentContent())
-                )}
               />
             </div>
 

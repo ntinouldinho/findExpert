@@ -30,6 +30,7 @@
 }
 
 .EditAboutMe {
+  margin-top: 50px;
   grid-area: editaboutme;
 }
 
