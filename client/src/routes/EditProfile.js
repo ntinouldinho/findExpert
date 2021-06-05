@@ -26,11 +26,11 @@ class ExampleApp extends React.Component {
     super();
     var times = [];
     for(var i=9;i<19;i++){
-      var first = i<9?"0"+i:i;
-      var second = i+1<9?"0"+(i+1):i+1;
+      // var first = i<9?"0"+i:i;
+      // var second = i+1<9?"0"+(i+1):i+1;
 
-      times.push(first+":00-"+first+":30")
-      times.push(first+":30-"+second+":00")
+      times.push(i+":00-"+i+":30")
+      times.push(i+":30-"+(i+1)+":00")
     }
     this.state = {
       showModal: false,
@@ -68,11 +68,11 @@ class ExampleApp extends React.Component {
       let newTimes =[];
 
       for(var i=json.start;i<json.end;i++){
-        var first = i<9?"0"+i:i;
-        var second = i+1<9?"0"+(i+1):i+1;
+        // var first = i<9?"0"+i:i;
+        // var second = i+1<9?"0"+(i+1):i+1;
   
-        newTimes.push(first+":00-"+first+":30")
-        newTimes.push(first+":30-"+second+":00")
+        newTimes.push(i+":00-"+i+":30")
+        newTimes.push(i+":30-"+(i+1)+":00")
       }
 
       this.setState({
@@ -101,11 +101,11 @@ class ExampleApp extends React.Component {
     console.log(this.state.start)
     console.log(this.state.end)
     for(var i=this.state.start;i<this.state.end;i++){
-      var first = i<=9?"0"+i:i;
-      var second = i+1<=9?"0"+(i+1):i+1;
+      // var first = i<=9?"0"+i:i;
+      // var second = i+1<=9?"0"+(i+1):i+1;
 
-      newTimes.push(first+":00-"+first+":30")
-      newTimes.push(first+":30-"+second+":00")
+      newTimes.push(i+":00-"+i+":30")
+      newTimes.push(i+":30-"+(i+1)+":00")
     }
 
     this.setState({time:newTimes})
@@ -124,10 +124,16 @@ class ExampleApp extends React.Component {
       this.setState({ service: event.target.selectedIndex });
   }
 
-  selectColor(i) {
+  selectColor(hour) {
     let array = this.state.selected[this.state.day];
 
-    return array.includes(this.state.time[i])?"red":""
+    console.log(array)
+    console.log(hour + " but "+array.includes(hour))
+
+    for(var i=0;i<array.length; i++){
+      if(array[i]==hour) console.log('is in')
+    }
+    return array.includes(hour)?"red":""
   }
   
 
@@ -251,8 +257,8 @@ class ExampleApp extends React.Component {
                   onClick={() => this.changeSeleceted(i)}
                   key={i}
                   style={{
-                    backgroundColor: this.selectColor(i),
-                    borderColor: this.selectColor(i),
+                    backgroundColor: this.selectColor(this.state.time[i]),
+                    borderColor: this.selectColor(this.state.time[i]),
                   }}
                 >
                   {item}
