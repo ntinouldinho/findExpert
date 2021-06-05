@@ -9,42 +9,44 @@ import { empty } from "statuses";
 // <h1>{this.props.match.params.search}</h1>
 
 var Professessions = [
-  "Plumber",
-  "Electrician",
-  "Mechanic",
-  "Glazier",
-  "Engineer",
-  "Technologist",
+  "Artist",
+  "Chef",
+  "Financial",
+  "Household",
+  "Informatics",
+  "Legal",
+  "Medical",
+  "Other",
+  "Teacher",
+  "Techinican",
 ];
 export class Results extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      professionals: [{test:"ok"}],
+      professionals: [{ test: "ok" }],
       search: props.match.params.search,
     };
   }
-  
+
   componentWillMount() {
-      
-      const link = window.location.href.split('/');
-      const search = link[link.length - 1];
-      
-      fetch("/api/search?search="+search)
-      .then(response => response.json())
-      .then(res => {
-          this.setState({ professionals: res });
-          
-        }).catch(err => {
-            console.error(err);
-        });
-        
-    }
-    
-    render() {
-        const empty = this.state.professionals.length!=0 ? "none" : ""
-        console.log(empty);
+    const link = window.location.href.split("/");
+    const search = link[link.length - 1];
+
+    fetch("/api/search?search=" + search)
+      .then((response) => response.json())
+      .then((res) => {
+        this.setState({ professionals: res });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
+  render() {
+    const empty = this.state.professionals.length != 0 ? "none" : "";
+    console.log(empty);
     return (
       <div className="resultsDiv">
         <Header search={this.state.search} />
@@ -73,7 +75,6 @@ export class Results extends Component {
     );
   }
 }
-
 
 // {
 //   job: "Plumber",
