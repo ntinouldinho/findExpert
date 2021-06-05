@@ -21,8 +21,7 @@ const ProfessionalBlock = ({ person }) => {
             <Rating rating={person.rating} count={5} />
           </span>
         </div>
-        <div className="info">
-          {person.info}
+        <div className="info" dangerouslySetInnerHTML={{__html: person.info}}>
         </div>
       </a>
     </div>
