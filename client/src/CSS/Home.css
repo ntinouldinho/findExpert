@@ -233,24 +233,30 @@ p.desc {
 
 /* ------------------Login------------------ */
 
+.loginBtns{
+    position: absolute;
+    top: 40px;
+    border: 7px groove darkorange;
+    color: darkorange;
+    background-color: #000;
+}
+
 #login {
-  position: absolute;
   font-size: 36px;
-  top: 40px;
   left: 94%;
-  border: 7px groove darkorange;
-  color: darkorange;
-  background-color: #000;
+}
+
+#settings, #editProf{
+  font-size: 24px;
+  left: 90.5%;
 }
 
 #settings{
-    position: absolute;
-  font-size: 24px;
-  top: 40px;
-  left: 90.8%;
-  border: 7px groove darkorange;
-  color: darkorange;
-  background-color: #000;
+    padding: 0 9px;
+}
+
+#editProf{
+    top: 85px;
 }
 
 /* ------------------Step Sections------------------ */

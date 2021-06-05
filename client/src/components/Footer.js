@@ -14,23 +14,24 @@ export class Footer extends Component {
                   <h1>Useful Info</h1>
                   <p>Upcoming Discounts</p>
                   <p>Return Policy</p>
-                  <p>
-                    Privacy Policy
-                  </p>
+                  <p>Privacy Policy</p>
                   <p>Terms of Use</p>
                 </div>
                 <div className="col-md-4">
-                  <h1>About Us</h1><br></br>
-                  <p>
-                      Find the most professional experts through our site.
-                  </p>
+                  <h1>About Us</h1>
+                  <br></br>
+                  <p>Find the most professional experts through our site.</p>
                 </div>
                 <div className="col-md-4">
                   <h1>Find Us on:</h1>
                   <div className="media">
                     <ul>
                       <li>
-                        <a href="https://www.linkedin.com/school/athens-university-of-economics-and-business/" target="_blank" rel="noreferrer">
+                        <a
+                          href="https://www.linkedin.com/school/athens-university-of-economics-and-business/"
+                          target="_blank"
+                          rel="noreferrer"
+                        >
                           <img
                             src="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-shapes-2-free/128/social-linkedin-circle-512.png"
                             alt="LnkdIn Logo"
@@ -75,15 +76,22 @@ export class Footer extends Component {
                       </li>
                     </ul>
                   </div>
-                  <h1>Subscribe to our Newsletter:</h1>
+                  <p style={{ margin: "45px 0 5px", fontSize: "16px" }}>
+                    You want to become a professional? Contact us:
+                  </p>
                   <form action="">
                     <input
                       type="email"
                       placeholder="Email address"
-                      name="mail"
-                      size="30px"
+                    name="mail"
+                    required
                     ></input>
-                    <button type="reset">
+                    <button
+                      type="reset"
+                      onClick={function () {
+                        alert("Thank you for getting in touch with us! We will contact you soon!")
+                      }}
+                    >
                       <FontAwesomeIcon icon={faPaperPlane} />
                     </button>
                     {/* <!--just to erase the email--> */}

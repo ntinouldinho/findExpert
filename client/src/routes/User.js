@@ -116,13 +116,13 @@ const Billing = (props) => {
 
 }
 
-const History = (props) => {
+// const History = (props) => {
   
-    return (
-       <input type="text" defaultValue={props.name} />
-    );
+//     return (
+//        <input type="text" defaultValue={props.name} />
+//     );
 
-}
+// }
 
 
 
@@ -134,8 +134,8 @@ const Handler = (props) => {
             return <Appointments data={props.data} approve={props.approve}/>;
         case 2:
             return <Billing name={props.name}/>;
-        case 3:
-            return <History name={props.name}/>;
+        // case 3:
+        //     return <History name={props.name}/>;
         default:
             return <Appointments name={props.name}/>;
     }
@@ -150,8 +150,8 @@ export class User extends Component {
             data: [
               { id: 0, name: "Overview"},
               { id: 1, name: "Appointments"},
-              { id: 2, name: "Billing"},
-              { id: 3, name: "History"}
+              { id: 2, name: "Billing"}
+            //   { id: 3, name: "History"}
             ],
             email:"",
             appointments:[],

@@ -15,6 +15,11 @@ footer p {
     font-size: 12px;
 }
 
+footer input{
+    width: 300px;
+    max-width: 22vw;
+}
+
 .copyright {
     margin-bottom: -80px;
     text-align: center;

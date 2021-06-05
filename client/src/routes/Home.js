@@ -5,7 +5,7 @@ import { Autocomplete } from "../components/Autocomplete";
 import { Footer } from "../components/Footer";
 import Header from "../components/Header.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faCog } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faCog, faUserEdit } from "@fortawesome/free-solid-svg-icons";
 
 import "../CSS/Home.css";
 import logo from "../assets/logo.png";
@@ -15,7 +15,6 @@ const Login = (props) => {
   const history = useHistory();
 
   const toLogin = (e) => {
-    // console.log("clicked");
     e.preventDefault();
     history.push(`/login`);
   };
@@ -31,19 +30,19 @@ const Login = (props) => {
 
     var func = props.loggedIn ? logout : toLogin;
     var title = props.loggedIn ? "Logout" : "Login";
-    var settdisp = props.loggedIn ? "inline" : "none"
+    var settdisp = props.loggedIn ? "inline" : "none";
+    var editProf = props.loggedIn ? "inline" : "none"; //if role is professional: inline else: none
 
   return (
     <div>
       <button
         type="button"
-        onClick={
-            function (e) {
-                e.preventDefault();
-                history.push(`/settings`);
-            }
-        }
+        onClick={function (e) {
+          e.preventDefault();
+          history.push(`/settings`);
+        }}
         id="settings"
+        className="loginBtns"
         style={{ display: settdisp }}
       >
         <FontAwesomeIcon icon={faCog} />
@@ -51,8 +50,22 @@ const Login = (props) => {
 
       <button
         type="button"
+        onClick={function (e) {
+          e.preventDefault();
+          history.push(`/profile/edit`);
+        }}
+        id="editProf"
+        className="loginBtns"
+        style={{ display: editProf }}
+      >
+        <FontAwesomeIcon icon={faUserEdit} />
+      </button>
+
+      <button
+        type="button"
         onClick={func}
         id="login"
+        className="loginBtns"
         style={{ display: "inline" }}
       >
         <FontAwesomeIcon icon={faUser} />

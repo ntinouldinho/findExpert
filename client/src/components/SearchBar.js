@@ -3,11 +3,13 @@ import { useHistory } from 'react-router-dom';
 import '../CSS/Autocomplete.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+// import console from 'node:console';
 
 
 const SearchBar = (props) => {
     const history = useHistory();
     const onSubmit = (e) => {
+        console.log(props.value);
         history.push(`/search/${props.value}`);
         e.preventDefault();
     };

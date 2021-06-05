@@ -219,7 +219,7 @@ class ExampleApp extends React.Component {
                     <select id="services" onChange={this.handleChange}>
                     {Object.entries(this.props.services).map(([title, price]) => {
                         return(
-                            <option>{title + ", Τιμή:"+price+"€"}</option>
+                            <option>{title + ", Price:"+price+"€"}</option>
                         )
                     })}
                     </select>
