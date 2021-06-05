@@ -5,6 +5,7 @@ import Rating from "react-star-review";
 import { Header } from "../components/Header";
 import { Editor } from "react-draft-wysiwyg";
 import { ListAdder } from "../components/ListAdder"
+import { ListAdderCV } from "../components/ListAdderCV"
 import draftToHtml from "draftjs-to-html";
 import ReactModal from 'react-modal';
 import Calendar from 'react-calendar';
@@ -358,6 +359,9 @@ export class EditProfile extends Component {
     this.setState({services: value})
   }
 
+  propUpdaterCV(value){
+    this.setState({cv: value})
+  }
 
   async handleUpdate (e){     //prepei na ta apothikeyei prwta kapou
     e.preventDefault();
@@ -469,7 +473,7 @@ export class EditProfile extends Component {
 
             <div className="AddCV">
               <h1>My CV</h1>
-              <ListAdder type="cv" data={this.state.cv} />
+              <ListAdderCV type="cv" datacv={this.state.cv} updater = {this.propUpdaterCV}/>
             </div>
               
             <div className="Calendar">
