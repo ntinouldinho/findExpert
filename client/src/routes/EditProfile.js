@@ -35,13 +35,13 @@ class ExampleApp extends React.Component {
     this.state = {
       showModal: false,
       time:times,
-      selected: {"start":["ff"]},
+      selected:  {"start":["ff"]},
       service:0,
       day:"start",
       html: <p>ffff<em>ff</em></p>,
       show:'none',
-      start:9,
-      end:19
+      start:8,
+      end:14
     };
     
     this.handleOpenModal = this.handleOpenModal.bind(this);
@@ -55,18 +55,52 @@ class ExampleApp extends React.Component {
     this.dayOff = this.dayOff.bind(this);
     this.updateHours = this.updateHours.bind(this);
   }
+
+  async componentDidMount() {
+    try {
+      const response = await fetch(`/api/decode`);
+      const jsan = await response.json();
+      const user = jsan.user;
+      const data = await fetch(`/api/user/get?user=${user}`);
+      const json = await data.json();
+      console.log(jsan.user);
+
+      let newTimes =[];
+
+      for(var i=json.start;i<json.end;i++){
+        var first = i<9?"0"+i:i;
+        var second = i+1<9?"0"+(i+1):i+1;
+  
+        newTimes.push(first+":00-"+first+":30")
+        newTimes.push(first+":30-"+second+":00")
+      }
+
+      this.setState({
+        start: json.start,
+        end: json.end,
+        selected : json.hoursOff,
+        time:newTimes,
+        day:"Jun 13 2021"
+      });
+
+      
+
+
+    } catch (error) {}
+  }
+
   
   handleOpenModal () {
     this.setState({ showModal: true });
   }
 
   updateHours(e,type){
-    type=="start"?this.setState({ start:e.target.value}):this.setState({ end:e.target.value});
+    type=="start"?this.setState({ start:parseInt(e.target.value)}):this.setState({ end:parseInt(e.target.value)});
     
     let newTimes =[];
     console.log(this.state.start)
     console.log(this.state.end)
-    for(var i=parseInt(this.state.start);i<parseInt(this.state.end);i++){
+    for(var i=this.state.start;i<this.state.end;i++){
       var first = i<=9?"0"+i:i;
       var second = i+1<=9?"0"+(i+1):i+1;
 
@@ -103,43 +137,33 @@ class ExampleApp extends React.Component {
           const json = await response.json();
           const user = json.user;
           
-          console.log(json);
-          const time = this.state.time[this.state.selected];
-          const service = this.state.service;
+          let array = Object.assign({}, this.state.selected);
+          delete array.start
 
-          const linkParams = window.location.pathname.split("/");
-          const expert = linkParams[linkParams.length-1];
-
-          console.log(this.props.services[this.state.service]);
-          fetch('/api/appointment/create', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ 
-                  customer: user, 
-                  expert:expert,
-                  time:time,
-                  service:service
-                }),
+          await fetch("/api/expert/edit", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              start:this.state.start,
+              end:this.state.end,
+              hoursOff : array,
+              expert:user
+            }),
+          })
+            .then((res) => {
+              if (res.status === 200) {
+                // window.location.reload()
+              } else {
+                const error = new Error(res.error);
+                throw error;
+              }
             })
-            .then(res => {
-                if (res.status === 200) {
-                  Swal.fire({  
-                      title: 'Success!',  
-                      text: 'Your appointment has been created',
-                      icon: 'success'
-                    }); 
-                  // window.location.href = "/"
-                } else {
-                  const error = new Error(res.error);
-                  throw error;
-                }
-              })
-              .catch(err => {
-                console.error(err);
-                alert('Error logging in please try again');
-              });
+            .catch((err) => {
+              console.error(err);
+              alert("Error updating");
+            });
       
 
   }
@@ -149,9 +173,9 @@ class ExampleApp extends React.Component {
   }
 
   clickDay(value, event){
-    this.setState({show:""})
+    
     let date = value.toString().substring(4,15);
-    this.setState({ day: date }); //reset all green hours
+    this.setState({ show:"",day: date }); //reset all green hours
 
     let selected = this.state.selected;
 
@@ -184,6 +208,7 @@ class ExampleApp extends React.Component {
 
 
   render () {
+    console.log("in")
       
     return (
       <div className="Profile">
@@ -196,7 +221,7 @@ class ExampleApp extends React.Component {
                 <input
                   id="start"
                   type="number"
-                  defaultValue={this.state.start}
+                  value={this.state.start}
                   min="0"
                   max="23"
                   onInput ={(e)=>{this.updateHours(e,"start")}}
@@ -208,7 +233,7 @@ class ExampleApp extends React.Component {
                 <input
                   id="end"
                   type="number"
-                  defaultValue={this.state.end}
+                  value={this.state.end}
                   min="1"
                   max="24"
                   onInput =  {(e)=>{this.updateHours(e,"end")}}
@@ -279,6 +304,9 @@ export class EditProfile extends Component {
             )
           )
         ),
+        start:0,
+        end:0,
+        hoursOff:{}
       };
     this.onEditorStateChange = this.onEditorStateChange.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this)
@@ -306,7 +334,10 @@ export class EditProfile extends Component {
                 json.about
               )
             )
-          )
+          ),
+          start: json.start,
+          end: json.end,
+          hoursOff : json.hoursOff
       });
     } catch (error) {}
   }
@@ -356,7 +387,7 @@ export class EditProfile extends Component {
       })
       .catch((err) => {
         console.error(err);
-        alert("Error logging in please try again");
+        alert("Error updating");
       });
   };
 
@@ -432,7 +463,7 @@ export class EditProfile extends Component {
             </div>
               
             <div className="Calendar">
-              <ExampleApp />
+              <ExampleApp start={this.state.start} />
             </div>
            
           </div>
