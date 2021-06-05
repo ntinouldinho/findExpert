@@ -1,81 +1,100 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import { faTrashAlt, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import console from "node:console";
 
-function ListAdder(props) {
-  const [fields, setFields] = useState(props.value);
-
-  function handleChange(i, event) {
-    const values = [...Object.entries(props.value)];
-    values[i].value = event.target.value;
-    setFields(values);
+export class ListAdder extends Component {
+  constructor(props) {
+    super(props);
+    console.log(props);
+    this.state = {
+      type: "",
+      data: [{}],
+    };
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleAddClick = this.handleAddClick.bind(this);
+    this.handleRemoveClick = this.handleRemoveClick.bind(this);
   }
 
-  function handleAdd() {
-    const values = [...Object.entries(props.value)];
-    values.push({ value: null });
-    setFields(values);
+  componentWillReceiveProps(nextProps) {
+    this.setState({ data: nextProps.data });
   }
 
-  function handleRemove(i) {
-    const values = [...Object.entries(props.value)];
-    values.splice(i, 1);
-    setFields(values);
-  }
- 
-  const type= props.type =="cv"? "none":""
+  handleInputChange = (e, index, tp) => {
+    const list = [...this.state.data];
+    if (tp=="title"){
+      list[index].title = e;
+    }else{
+      list[index].price = e;
+    }
+    this.setState({ data: list });
+    this.props.updater(list)
+  };
 
-  return (
-    <table className="ListAdder">
-      <thead>
-        <tr>
-          <th>Service</th>
-          <th style={{display: type}}>Price</th>
-          <th>
-            <button type="button" onClick={() => handleAdd()}>
-              <FontAwesomeIcon icon={faPlusCircle} />
-            </button>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-      {Object.entries(props.value).map(([title, price]) => {
-        return(
+  handleAddClick = () => {
+    this.setState({ data: [...this.state.data, { title: "", price: "" }] });
+  };
+
+  handleRemoveClick = (index) => {
+    const list = [...this.state.data];
+    list.splice(index, 1);
+    this.setState({ data: list });
+  };
+
+  render() {
+    const type = this.state.type == "cv" ? "none" : "";
+    return (
+      <table className="ListAdder">
+        <thead>
           <tr>
-            <td style={{display: type}}>{title}</td>
-            <td>{price}</td>
-            <td>
-              <button type="button" onClick={() => handleRemove(1)}>
-                <FontAwesomeIcon icon={faTrashAlt} />
+            <th>Service</th>
+            <th style={{ display: type }}>Price</th>
+            <th>
+              <button onClick={this.handleAddClick}>
+                <FontAwesomeIcon icon={faPlusCircle} />
               </button>
-            </td>
+            </th>
           </tr>
-        )
-        })}
-      </tbody>
-    </table>
-  );
-
-  //     {props.value.map((name, id) => {
-  //       console.log(name);
-  //       console.log(id);
-  //       return (
-  //         <tr key={`${name}-${id}`}>
-  //           <input
-  //             type="text"
-  //             placeholder="Enter text"
-  //             value={name || "Add your " + props.type}
-  //             onChange={(e) => handleChange(id, e)}
-  //           />
-  //           <input type="number" placeholder="€" value={name.value || 0} />
-  //           <button type="button" onClick={() => handleRemove(id)}>
-  //             <FontAwesomeIcon icon={faTrashAlt} />
-  //           </button>
-  //         </tr>
-  //       );
-  //     })}
-  //
-  // );
+        </thead>
+        <tbody>
+          {this.state.data.map((x, i) => {
+            return (
+              <tr>
+                <td style={{ display: type }}>
+                  <input
+                    type="text"
+                    value={x.title}
+                    placeholder="Enter service title"
+                    onChange={(e) =>
+                      this.handleInputChange(e.target.value, i, "title")
+                    }
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value={x.price}
+                    placeholder="Enter service price"
+                    onChange={(e) =>
+                      this.handleInputChange(e.target.value, i, "price")
+                    }
+                  />
+                </td>
+                <td>
+                  <button
+                    type="button"
+                    onClick={() => this.handleRemoveClick(i)}
+                  >
+                    <FontAwesomeIcon icon={faTrashAlt} />
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    );
+  }
 }
+
 export default ListAdder;

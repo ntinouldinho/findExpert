@@ -221,7 +221,7 @@ export class User extends Component {
           })
           .then(res => {
               if (res.status === 200) {
-                window.location.href = "/user"
+                window.location.href = "/settings"
               } else {
                 const error = new Error(res.error);
                 throw error;

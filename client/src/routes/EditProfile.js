@@ -4,20 +4,21 @@ import "../CSS/EditProfile.css";
 import Rating from "react-star-review";
 import { Header } from "../components/Header";
 import { Editor } from "react-draft-wysiwyg";
+import { ListAdder } from "../components/ListAdder"
 import draftToHtml from "draftjs-to-html";
 import ReactModal from 'react-modal';
 import Calendar from 'react-calendar';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-
+import Button from "react-bootstrap/Button";
+import Swal from 'sweetalert2'
 import {
   EditorState,
   ContentState,
   convertToRaw,
   convertFromHTML,
 } from "draft-js";
-import ListAdder from "../components/ListAdder";
-import Button from "react-bootstrap/Button";
-import Swal from 'sweetalert2'
+;
+
 // import console from "node:console";
 
 class ExampleApp extends React.Component {
@@ -63,7 +64,7 @@ class ExampleApp extends React.Component {
       const user = jsan.user;
       const data = await fetch(`/api/user/get?user=${user}`);
       const json = await data.json();
-      console.log(jsan.user);
+      // console.log(jsan.user);
 
       let newTimes =[];
 
@@ -98,8 +99,6 @@ class ExampleApp extends React.Component {
     type=="start"?this.setState({ start:parseInt(e.target.value)}):this.setState({ end:parseInt(e.target.value)});
     
     let newTimes =[];
-    console.log(this.state.start)
-    console.log(this.state.end)
     for(var i=this.state.start;i<this.state.end;i++){
       // var first = i<=9?"0"+i:i;
       // var second = i+1<=9?"0"+(i+1):i+1;
@@ -116,7 +115,7 @@ class ExampleApp extends React.Component {
     
     array[this.state.day] = [...this.state.time];
 
-    console.log(array)
+    // console.log(array)
     this.setState({selected : array})
   }
   
@@ -127,11 +126,11 @@ class ExampleApp extends React.Component {
   selectColor(hour) {
     let array = this.state.selected[this.state.day];
 
-    console.log(array)
-    console.log(hour + " but "+array.includes(hour))
+    // console.log(array)
+    // console.log(hour + " but "+array.includes(hour))
 
     for(var i=0;i<array.length; i++){
-      if(array[i]==hour) console.log('is in')
+      // if(array[i]==hour) console.log('is in')
     }
     return array.includes(hour)?"red":""
   }
@@ -214,7 +213,7 @@ class ExampleApp extends React.Component {
 
 
   render () {
-    console.log("in")
+    // console.log("in")
       
     return (
       <div className="Profile">
@@ -316,6 +315,7 @@ export class EditProfile extends Component {
       };
     this.onEditorStateChange = this.onEditorStateChange.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this)
+    this.propUpdater = this.propUpdater.bind(this)
   }
 
   async componentDidMount() {
@@ -325,7 +325,7 @@ export class EditProfile extends Component {
       const user = jsan.user;
       const data = await fetch(`/api/user/get?user=${user}`);
         const json = await data.json();
-        console.log(jsan.user);
+        // console.log(jsan.user);
         this.setState({
           id:jsan.user,
           name: json.name + " " + json.surname,
@@ -352,6 +352,10 @@ export class EditProfile extends Component {
     this.setState({
       editorState: editorState,
     });
+  }
+
+  propUpdater(value){
+    this.setState({services: value})
   }
 
 
@@ -460,12 +464,12 @@ export class EditProfile extends Component {
 
             <div className="AddServices">
               <h1>Services</h1>
-              <ListAdder type="services" value={this.state.services} />
+              <ListAdder type="services" data={this.state.services} updater = {this.propUpdater}/>
             </div>
 
             <div className="AddCV">
               <h1>My CV</h1>
-              <ListAdder type="cv" value={this.state.cv} />
+              <ListAdder type="cv" data={this.state.cv} />
             </div>
               
             <div className="Calendar">
