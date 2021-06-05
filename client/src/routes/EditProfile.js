@@ -4,53 +4,54 @@ import "../CSS/EditProfile.css";
 import Rating from "react-star-review";
 import { Header } from "../components/Header";
 import { Editor } from "react-draft-wysiwyg";
-import { ListAdder } from "../components/ListAdder"
-import { ListAdderCV } from "../components/ListAdderCV"
+import { ListAdder } from "../components/ListAdder";
+import { ListAdderCV } from "../components/ListAdderCV";
 import draftToHtml from "draftjs-to-html";
-import ReactModal from 'react-modal';
-import Calendar from 'react-calendar';
+import ReactModal from "react-modal";
+import Calendar from "react-calendar";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import Button from "react-bootstrap/Button";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 import {
   EditorState,
   ContentState,
   convertToRaw,
   convertFromHTML,
 } from "draft-js";
-;
-
 // import console from "node:console";
 
 class ExampleApp extends React.Component {
-
-  constructor () {
+  constructor() {
     super();
     var times = [];
-    for(var i=9;i<19;i++){
+    for (var i = 9; i < 19; i++) {
       // var first = i<9?"0"+i:i;
       // var second = i+1<9?"0"+(i+1):i+1;
 
-      times.push(i+":00-"+i+":30")
-      times.push(i+":30-"+(i+1)+":00")
+      times.push(i + ":00-" + i + ":30");
+      times.push(i + ":30-" + (i + 1) + ":00");
     }
     this.state = {
       showModal: false,
-      time:times,
-      selected:  {"start":["ff"]},
-      service:0,
-      day:"start",
-      html: <p>ffff<em>ff</em></p>,
-      show:'none',
-      start:8,
-      end:14
+      time: times,
+      selected: { start: ["ff"] },
+      service: 0,
+      day: "start",
+      html: (
+        <p>
+          ffff<em>ff</em>
+        </p>
+      ),
+      show: "none",
+      start: 8,
+      end: 14,
     };
-    
+
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.changeSeleceted = this.changeSeleceted.bind(this);
     this.clickDay = this.clickDay.bind(this);
-    this.updateCalendar= this.updateCalendar.bind(this);
+    this.updateCalendar = this.updateCalendar.bind(this);
     this.handleChange = this.handleChange.bind(this);
 
     this.selectColor = this.selectColor.bind(this);
@@ -67,61 +68,58 @@ class ExampleApp extends React.Component {
       const json = await data.json();
       // console.log(jsan.user);
 
-      let newTimes =[];
+      let newTimes = [];
 
-      for(var i=json.start;i<json.end;i++){
+      for (var i = json.start; i < json.end; i++) {
         // var first = i<9?"0"+i:i;
         // var second = i+1<9?"0"+(i+1):i+1;
-  
-        newTimes.push(i+":00-"+i+":30")
-        newTimes.push(i+":30-"+(i+1)+":00")
+
+        newTimes.push(i + ":00-" + i + ":30");
+        newTimes.push(i + ":30-" + (i + 1) + ":00");
       }
 
       this.setState({
         start: json.start,
         end: json.end,
-        selected : json.hoursOff,
-        time:newTimes,
-        day:"Jun 13 2021"
+        selected: json.hoursOff,
+        time: newTimes,
+        day: "Jun 13 2021",
       });
-
-      
-
-
     } catch (error) {}
   }
 
-  
-  handleOpenModal () {
+  handleOpenModal() {
     this.setState({ showModal: true });
   }
 
-  updateHours(e,type){
-    type=="start"?this.setState({ start:parseInt(e.target.value)}):this.setState({ end:parseInt(e.target.value)});
-    
-    let newTimes =[];
-    for(var i=this.state.start;i<this.state.end;i++){
+  updateHours(e, type) {
+    type == "start"
+      ? this.setState({ start: parseInt(e.target.value) })
+      : this.setState({ end: parseInt(e.target.value) });
+
+    let newTimes = [];
+    for (var i = this.state.start; i < this.state.end; i++) {
       // var first = i<=9?"0"+i:i;
       // var second = i+1<=9?"0"+(i+1):i+1;
 
-      newTimes.push(i+":00-"+i+":30")
-      newTimes.push(i+":30-"+(i+1)+":00")
+      newTimes.push(i + ":00-" + i + ":30");
+      newTimes.push(i + ":30-" + (i + 1) + ":00");
     }
 
-    this.setState({time:newTimes})
+    this.setState({ time: newTimes });
   }
 
-  dayOff(){
+  dayOff() {
     let array = this.state.selected;
-    
+
     array[this.state.day] = [...this.state.time];
 
     // console.log(array)
-    this.setState({selected : array})
+    this.setState({ selected: array });
   }
-  
+
   handleChange(event) {
-      this.setState({ service: event.target.selectedIndex });
+    this.setState({ service: event.target.selectedIndex });
   }
 
   selectColor(hour) {
@@ -130,92 +128,84 @@ class ExampleApp extends React.Component {
     // console.log(array)
     // console.log(hour + " but "+array.includes(hour))
 
-    for(var i=0;i<array.length; i++){
+    for (var i = 0; i < array.length; i++) {
       // if(array[i]==hour) console.log('is in')
     }
-    return array.includes(hour)?"red":""
+    return array.includes(hour) ? "red" : "";
   }
-  
 
-  async updateCalendar (){
+  async updateCalendar() {
+    const response = await fetch(`/api/decode`);
+    const json = await response.json();
+    const user = json.user;
 
-          const response = await fetch(`/api/decode`);
-          const json = await response.json();
-          const user = json.user;
-          
-          let array = Object.assign({}, this.state.selected);
-          delete array.start
+    let array = Object.assign({}, this.state.selected);
+    delete array.start;
 
-          await fetch("/api/expert/edit", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              start:this.state.start,
-              end:this.state.end,
-              hoursOff : array,
-              expert:user
-            }),
-          })
-            .then((res) => {
-              if (res.status === 200) {
-                // window.location.reload()
-              } else {
-                const error = new Error(res.error);
-                throw error;
-              }
-            })
-            .catch((err) => {
-              console.error(err);
-              alert("Error updating");
-            });
-      
-
+    await fetch("/api/expert/edit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        start: this.state.start,
+        end: this.state.end,
+        hoursOff: array,
+        expert: user,
+      }),
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          // window.location.reload()
+        } else {
+          const error = new Error(res.error);
+          throw error;
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("Error updating");
+      });
   }
-  
-  handleCloseModal () {
+
+  handleCloseModal() {
     this.setState({ showModal: false });
   }
 
-  clickDay(value, event){
-    
-    let date = value.toString().substring(4,15);
-    this.setState({ show:"",day: date }); //reset all green hours
+  clickDay(value, event) {
+    let date = value.toString().substring(4, 15);
+    this.setState({ show: "", day: date }); //reset all green hours
 
     let selected = this.state.selected;
 
-    if(!selected[date]){
-      selected[date] = []
-      this.setState({selected : selected })
+    if (!selected[date]) {
+      selected[date] = [];
+      this.setState({ selected: selected });
     }
   }
 
-  clickHour(event){
-
-      event.target.style.backgroundColor = "lightgreen";
+  clickHour(event) {
+    event.target.style.backgroundColor = "lightgreen";
   }
 
-  changeSeleceted(i){
-
-    let array  = this.state.selected;
+  changeSeleceted(i) {
+    let array = this.state.selected;
     const time = this.state.time;
 
     const index = array[this.state.day].indexOf(time[i]);
 
-    if(index === -1){
-      array[this.state.day].push(time[i])
-    }else{
-      array[this.state.day].splice(index,1)
+    if (index === -1) {
+      array[this.state.day].push(time[i]);
+    } else {
+      array[this.state.day].splice(index, 1);
     }
-    
+
     this.setState({ selected: array });
   }
 
-
-  render () {
+  render() {
     // console.log("in")
-      
+
     return (
       <div className="Profile">
         <div id="modal-content">
@@ -230,7 +220,9 @@ class ExampleApp extends React.Component {
                   value={this.state.start}
                   min="0"
                   max="23"
-                  onInput ={(e)=>{this.updateHours(e,"start")}}
+                  onInput={(e) => {
+                    this.updateHours(e, "start");
+                  }}
                 />
                 <br></br>
                 <label htmlFor="start">Start</label>
@@ -242,15 +234,17 @@ class ExampleApp extends React.Component {
                   value={this.state.end}
                   min="1"
                   max="24"
-                  onInput =  {(e)=>{this.updateHours(e,"end")}}
+                  onInput={(e) => {
+                    this.updateHours(e, "end");
+                  }}
                 />
                 <br></br>
                 <label htmlFor="end">Until</label>
               </span>
             </div>
-              <Button onClick={this.dayOff} variant="success" id="dayoff">
-                Day Off
-              </Button>
+            <Button onClick={this.dayOff} variant="success" id="dayoff">
+              Day Off
+            </Button>
             <ul>
               {this.state.time.map((item, i) => (
                 <li
@@ -293,30 +287,27 @@ class ExampleApp extends React.Component {
 export class EditProfile extends Component {
   constructor(props) {
     super(props);
-      this.state = {
-        id: "",
-        name: "",
-        profession: "",
-        photo: "",
-        services: {}, //nonCustom
-        cv: {},
-        about:"",
-        stars: "4.2", //nonCustom
-        appointment: "appointment", //nonCustom
-        editorState: EditorState.createWithContent(
-          ContentState.createFromBlockArray(
-            convertFromHTML(
-              ""
-            )
-          )
-        ),
-        start:0,
-        end:0,
-        hoursOff:{}
-      };
+    this.state = {
+      id: "",
+      name: "",
+      profession: "",
+      photo: "",
+      services: {}, //nonCustom
+      cv: {},
+      about: "",
+      stars: "4.2", //nonCustom
+      appointment: "appointment", //nonCustom
+      editorState: EditorState.createWithContent(
+        ContentState.createFromBlockArray(convertFromHTML(""))
+      ),
+      start: 0,
+      end: 0,
+      hoursOff: {},
+    };
     this.onEditorStateChange = this.onEditorStateChange.bind(this);
-    this.handleUpdate = this.handleUpdate.bind(this)
-    this.propUpdater = this.propUpdater.bind(this)
+    this.handleUpdate = this.handleUpdate.bind(this);
+    this.propUpdater = this.propUpdater.bind(this);
+    this.propUpdaterCV = this.propUpdaterCV.bind(this);
   }
 
   async componentDidMount() {
@@ -325,26 +316,22 @@ export class EditProfile extends Component {
       const jsan = await response.json();
       const user = jsan.user;
       const data = await fetch(`/api/user/get?user=${user}`);
-        const json = await data.json();
-        // console.log(jsan.user);
-        this.setState({
-          id:jsan.user,
-          name: json.name + " " + json.surname,
-          profession: json.profession,
-          about: json.about,
-          photo: json.photo,
-          services: json.services,
-          cv: json.cv,
-          editorState: EditorState.createWithContent(
-            ContentState.createFromBlockArray(
-              convertFromHTML(
-                json.about
-              )
-            )
-          ),
-          start: json.start,
-          end: json.end,
-          hoursOff : json.hoursOff
+      const json = await data.json();
+      // console.log(jsan.user);
+      this.setState({
+        id: jsan.user,
+        name: json.name + " " + json.surname,
+        profession: json.profession,
+        about: json.about,
+        photo: json.photo,
+        services: json.services,
+        cv: json.cv,
+        editorState: EditorState.createWithContent(
+          ContentState.createFromBlockArray(convertFromHTML(json.about))
+        ),
+        start: json.start,
+        end: json.end,
+        hoursOff: json.hoursOff,
       });
     } catch (error) {}
   }
@@ -355,32 +342,35 @@ export class EditProfile extends Component {
     });
   }
 
-  propUpdater(value){
-    this.setState({services: value})
+  propUpdater(value) {
+    this.setState({ services: value });
   }
 
-  propUpdaterCV(value){
-    this.setState({cv: value})
+  propUpdaterCV(value) {
+    this.setState({ cv: value });
   }
 
-  async handleUpdate (e){     //prepei na ta apothikeyei prwta kapou
+  async handleUpdate(e) {
+    //prepei na ta apothikeyei prwta kapou
     e.preventDefault();
-    let array  = this.state.name.split(' ');
+    let array = this.state.name.split(" ");
     const name = array[0];
     const surname = array[1];
 
     const response = await fetch(`/api/decode`);
-      const jsan = await response.json();
-      const user = jsan.user;
+    const jsan = await response.json();
+    const user = jsan.user;
 
-    await this.setState({ 
-      name: name, 
+    await this.setState({
+      name: name,
       surname: surname,
-      about: draftToHtml( convertToRaw(this.state.editorState.getCurrentContent())),
-      expert: user
-    })
+      about: draftToHtml(
+        convertToRaw(this.state.editorState.getCurrentContent())
+      ),
+      expert: user,
+    });
 
-    var data =Object.assign({}, this.state);
+    var data = Object.assign({}, this.state);
 
     delete data.editorState;
 
@@ -403,8 +393,7 @@ export class EditProfile extends Component {
         console.error(err);
         alert("Error updating");
       });
-  };
-
+  }
 
   render() {
     const editorState = this.state.editorState;
@@ -459,7 +448,6 @@ export class EditProfile extends Component {
               <h1>About Me</h1>
               <Editor
                 editorState={editorState}
-                
                 wrapperClassName="demo-wrapper"
                 editorClassName="demo-editor"
                 onEditorStateChange={this.onEditorStateChange}
@@ -468,18 +456,26 @@ export class EditProfile extends Component {
 
             <div className="AddServices">
               <h1>Services</h1>
-              <ListAdder type="services" data={this.state.services} updater = {this.propUpdater}/>
+              <ListAdder
+                type="services"
+                data={this.state.services}
+                updater={this.propUpdater}
+              />
             </div>
 
             <div className="AddCV">
               <h1>My CV</h1>
-              <ListAdderCV type="cv" datacv={this.state.cv} updater = {this.propUpdaterCV}/>
+              <ListAdderCV
+                type="cv"
+                datacv={this.state.cv}
+                updater={this.propUpdaterCV}
+                // updater={this.propUpdater}
+              />
             </div>
-              
+
             <div className="Calendar">
               <ExampleApp start={this.state.start} />
             </div>
-           
           </div>
           <Button id="updatebtn" onClick={this.handleUpdate} variant="success">
             Update Profile

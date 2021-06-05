@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export class ListAdderCV extends Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
       type: "",
       datacv: [{}],
@@ -23,11 +24,11 @@ export class ListAdderCV extends Component {
     const list = [...this.state.datacv];
     list[index].cv = e;
     this.setState({ datacv: list });
-    this.props.updater(list)
+    this.props.updater(list);
   };
 
   handleAddClick = () => {
-    this.setState({ datacv: [...this.state.datacv, { cv: " "}] });
+    this.setState({ datacv: [...this.state.datacv, { cv: " " }] });
   };
 
   handleRemoveClick = (index) => {
@@ -52,7 +53,7 @@ export class ListAdderCV extends Component {
         </thead>
         <tbody>
           {this.state.datacv.map((x, i) => {
-            console.log(i)
+            console.log(i);
             return (
               <tr>
                 <td style={{ display: type }}>
@@ -60,9 +61,7 @@ export class ListAdderCV extends Component {
                     type="text"
                     value={x.cv}
                     placeholder="Enter CV element"
-                    onChange={(e) =>
-                      this.handleInputChange(e.target.value, i)
-                    }
+                    onChange={(e) => this.handleInputChange(e.target.value, i)}
                   />
                 </td>
                 <td>

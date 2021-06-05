@@ -22,13 +22,13 @@ export class ListAdder extends Component {
 
   handleInputChange = (e, index, tp) => {
     const list = [...this.state.data];
-    if (tp=="title"){
+    if (tp == "title") {
       list[index].title = e;
-    }else{
+    } else {
       list[index].price = e;
     }
     this.setState({ data: list });
-    this.props.updater(list)
+    this.props.updater(list);
   };
 
   handleAddClick = () => {
