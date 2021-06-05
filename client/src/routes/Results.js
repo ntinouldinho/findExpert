@@ -3,6 +3,8 @@ import "../CSS/Results.css";
 import ProfessionalBlock from "../components/ProfessionalBlock.js";
 import Header from "../components/Header.js";
 import { Footer } from "../components/Footer";
+import { empty } from "statuses";
+// import console from "node:console";
 
 // <h1>{this.props.match.params.search}</h1>
 
@@ -23,35 +25,37 @@ export class Results extends Component {
       search: props.match.params.search,
     };
   }
-
+  
   componentWillMount() {
-
-    const link = window.location.href.split('/');
-    const search = link[link.length-1];
-
-    fetch("/api/search?search="+search)
-    .then(response => response.json())
-    .then(res => {
-      this.setState({ professionals: res });
       
-    }).catch(err => {
-      console.error(err);
-});
+      const link = window.location.href.split('/');
+      const search = link[link.length - 1];
+      
+      fetch("/api/search?search="+search)
+      .then(response => response.json())
+      .then(res => {
+          this.setState({ professionals: res });
+          
+        }).catch(err => {
+            console.error(err);
+        });
+        
+    }
     
-  }
-
-  render() {
+    render() {
+        const empty = this.state.professionals.length!=0 ? "none" : ""
+        console.log(empty);
     return (
-      <div>
+      <div className="resultsDiv">
         <Header search={this.state.search} />
 
         <div className="flexboxresults">
           <div className="ProfList">
             <ul>
-              <h2>Subcategories</h2>
+              <h2>Other Categories</h2>
               {Professessions.map((item) => (
                 <li>
-                  <a href="">{item}</a>{" "}
+                  <a href={"/search/" + item}>{item}</a>
                 </li>
               ))}
             </ul>
@@ -61,6 +65,7 @@ export class Results extends Component {
             {this.state.professionals.map((item, i) => (
               <ProfessionalBlock key={i} person={item} />
             ))}
+            <h1 style={{ display: empty }}>No Experts in this category yet!</h1>
           </div>
         </div>
         <Footer />

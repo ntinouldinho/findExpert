@@ -7,19 +7,19 @@ function ListAdder(props) {
   const [fields, setFields] = useState(props.value);
 
   function handleChange(i, event) {
-    const values = [...fields];
+    const values = [...Object.entries(props.value)];
     values[i].value = event.target.value;
     setFields(values);
   }
 
   function handleAdd() {
-    const values = [...fields];
+    const values = [...Object.entries(props.value)];
     values.push({ value: null });
     setFields(values);
   }
 
   function handleRemove(i) {
-    const values = [...fields];
+    const values = [...Object.entries(props.value)];
     values.splice(i, 1);
     setFields(values);
   }
