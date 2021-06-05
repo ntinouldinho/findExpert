@@ -74,6 +74,7 @@ a:hover .caption, a:hover{
   margin-left: 35px;
   top: 22vh;
   position: sticky;
+  margin-top: 1%;
   /* z-index: -1; */
 }
 
