@@ -16,9 +16,9 @@ var Professessions = [
   "Informatics",
   "Legal",
   "Medical",
-  "Other",
   "Teacher",
-  "Techinican",
+  "Technician",
+  "Other"
 ];
 export class Results extends Component {
   constructor(props) {
