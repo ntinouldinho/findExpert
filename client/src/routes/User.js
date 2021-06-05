@@ -173,7 +173,7 @@ export class User extends Component {
         .then(response => response.json())
         .then(data => {
             this.setState({email:data.email})
-            fetch('/api/user/get?user='+data.user)
+            fetch('/api/user/get?appointments=1&user='+data.user)
             .then(res => res.json())
             .then(person => { 
                this.setState({

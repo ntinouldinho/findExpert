@@ -100,11 +100,11 @@ app.post('/api/login/', async(req, res) => {
     var doc = await callDoc.get();
     var user_data = doc.data();
 
-    const payload = { 
+    const payload = {
         email: email,
-        user: user, 
-        role: user_data.role, 
-        stripe_id:user_data.stripe_id, 
+        user: user,
+        role: user_data.role,
+        stripe_id: user_data.stripe_id,
         name: user_data.name
     };
 
@@ -123,7 +123,7 @@ app.get('/logout', function(req, res) {
 
 app.get('/api/decode/', async(req, res) => {
     const token = req.cookies.token;
-    if(!token) res.status(400).send("Authentication issue")
+    if (!token) res.status(400).send("Authentication issue")
     console.log(token);
     var decoded = jwt_decode(token, process.env.SECRET);
     console.log(jwt_decode(token, process.env.SECRET));
@@ -160,23 +160,23 @@ app.post('/api/register/', async(req, res) => {
         });
 
 
-        const customer_stripe_id = await createStripeCustomer(req.body.name,req.body.email);
-        firestore.collection('users').doc(uid).update({stripe_id:customer_stripe_id})
+    const customer_stripe_id = await createStripeCustomer(req.body.name, req.body.email);
+    firestore.collection('users').doc(uid).update({ stripe_id: customer_stripe_id })
 
 
-        const payload = { 
-            email: req.body.email, 
-            user: uid, 
-            role: "user", 
-            stripe_id: customer_stripe_id, 
-            name: req.body.name
-        };
+    const payload = {
+        email: req.body.email,
+        user: uid,
+        role: "user",
+        stripe_id: customer_stripe_id,
+        name: req.body.name
+    };
 
-        const token = jwt.sign(payload, secret, {
-            expiresIn: '24h'
-        });
-        res.cookie('token', token, { httpOnly: true })
-            .sendStatus(200);
+    const token = jwt.sign(payload, secret, {
+        expiresIn: '24h'
+    });
+    res.cookie('token', token, { httpOnly: true })
+        .sendStatus(200);
 });
 
 
@@ -226,7 +226,7 @@ app.post('/api/appointment/review', async(req, res) => {
     const review = req.body.review;
     const customer = req.body.customer;
     const rating = req.body.rating;
-    
+
     console.log(req.body)
     const appointment = await firestore.collection('appointments').doc(appointment_id).get();
     const appointment_data = appointment.data();
@@ -234,16 +234,16 @@ app.post('/api/appointment/review', async(req, res) => {
     const professional_id = appointment_data.expert;
 
     await firestore.collection('users').doc(professional_id).collection('reviews').add({
-        customer:customer,
-        review:review,
-        rating:rating
+        customer: customer,
+        review: review,
+        rating: rating
     })
 
 
     res.status(200).send("ok");
 });
 
-app.get('/api/search', async (req,res) => {
+app.get('/api/search', async(req, res) => {
     const search = req.query.search.toLowerCase();
     console.log(search)
     let results = [];
@@ -251,15 +251,15 @@ app.get('/api/search', async (req,res) => {
 
     users.forEach(doc => {
         const user_data = doc.data();
-        if(user_data.role=="professional"){
-            if(user_data.profession.toLowerCase() == search){
-                results.push({ 
-                    name:user_data.name + " "+user_data.surname,
+        if (user_data.role == "professional") {
+            if (user_data.profession.toLowerCase() == search) {
+                results.push({
+                    name: user_data.name + " " + user_data.surname,
                     job: user_data.profession,
-                    info:user_data.about,
-                    id:doc.id,
-                    url:user_data.photo,
-                    rating:user_data.rating
+                    info: user_data.about,
+                    id: doc.id,
+                    url: user_data.photo,
+                    rating: user_data.rating
                 });
             }
         }
@@ -276,37 +276,39 @@ app.get('/api/user/get', async(req, res) => {
 
     var data = doc.data();
 
-    let appointments = data.appointments;
-    const fullAppointments = [];
+    if (req.query.appointments) {
+        let appointments = data.appointments;
+        const fullAppointments = [];
 
-    for (var i = 0; i < appointments.length; i++) {
+        for (var i = 0; i < appointments.length; i++) {
 
-        const appointment = firestore.collection('appointments').doc(appointments[i]);
-        var appointment_data = await appointment.get();
+            const appointment = firestore.collection('appointments').doc(appointments[i]);
+            var appointment_data = await appointment.get();
 
-        var theData = appointment_data.data();
+            var theData = appointment_data.data();
 
-        theData.appointment_id = appointments[i]
-
-
-
-        const expert = firestore.collection('users').doc(theData.expert);
-        var expert_data = await expert.get();
-        expert_data = expert_data.data();
-        theData.expert_name = expert_data.name + " " + expert_data.surname
+            theData.appointment_id = appointments[i]
 
 
-        const customer = firestore.collection('users').doc(theData.customer);
-        var customer_data = await customer.get();
-        customer_data = customer_data.data();
 
-        theData.customer_name = customer_data.name;
-        //get experts name 
-        fullAppointments.push(theData);
+            const expert = firestore.collection('users').doc(theData.expert);
+            var expert_data = await expert.get();
+            expert_data = expert_data.data();
+            theData.expert_name = expert_data.name + " " + expert_data.surname
 
+
+            const customer = firestore.collection('users').doc(theData.customer);
+            var customer_data = await customer.get();
+            customer_data = customer_data.data();
+
+            theData.customer_name = customer_data.name;
+            //get experts name 
+            fullAppointments.push(theData);
+
+        }
+
+        data.appointments = fullAppointments;
     }
-
-    data.appointments = fullAppointments;
 
     res.status(201).send(data);
 });
@@ -348,14 +350,16 @@ app.post('/api/expert/edit', async(req, res) => {
 
 });
 
+
+
 app.post('/api/stripe/createCustomer', async(req, res) => {
     const name = req.body.name;
     const email = req.body.email;
     const customer_fb_id = req.body.id;
 
-    const customer_stripe_id = await createStripeCustomer(name,email);
+    const customer_stripe_id = await createStripeCustomer(name, email);
 
-    firestore.collection('users').doc(customer_fb_id).update({stripe_id:customer_stripe_id})
+    firestore.collection('users').doc(customer_fb_id).update({ stripe_id: customer_stripe_id })
 
     res.status(200).send("ok");
 
@@ -367,10 +371,10 @@ app.post('/api/stripe/createPayment', async(req, res) => {
     const price = req.body.price;
     const appointment_id = req.body.appointment;
 
-    const stripe_pi_id = await createPayment(customer,price);
+    const stripe_pi_id = await createPayment(customer, price);
 
-    if(stripe_pi_id) firestore.collection('appointments').doc(appointment_id).update({status:2})
-    
+    if (stripe_pi_id) firestore.collection('appointments').doc(appointment_id).update({ status: 2 })
+
 
     res.status(200).send("ok");
 
@@ -398,13 +402,13 @@ io.on("connection", socket => {
     });
 
     socket.on("join room", roomID => {
-        console.log("the socket is:"+socket.id)
+        console.log("the socket is:" + socket.id)
         console.log(rooms[roomID])
-        
+
         if (rooms[roomID]) {
             const me = rooms[roomID].find(id => id === socket.id);
-            if(!me) rooms[roomID].push(socket.id);
-            
+            if (!me) rooms[roomID].push(socket.id);
+
         } else {
             rooms[roomID] = [socket.id];
         }
