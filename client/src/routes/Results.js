@@ -50,7 +50,7 @@ export class Results extends Component {
         <Header search={this.state.search} />
 
         <div className="flexboxresults">
-          {/* <div className="ProfList">
+          <div className="ProfList">
             <ul>
               <h2>Other Categories</h2>
               {Professessions.map((item) => (
@@ -59,7 +59,7 @@ export class Results extends Component {
                 </li>
               ))}
             </ul>
-          </div> */}
+          </div>
 
           <div className="Professionals">
             {this.state.professionals.map((item, i) => (
