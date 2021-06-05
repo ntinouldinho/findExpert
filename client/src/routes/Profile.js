@@ -16,22 +16,60 @@ import Swal from 'sweetalert2'
 class ExampleApp extends React.Component {
 
     constructor () {
-      super();
-      this.state = {
-        showModal: false,
-        time:['7:00-8:00','8:00-9:00','10:00-11:00','11:00-12:00','12:00-13:00','13:00-14:00','14:00-15:00','15:00-16:00','16:00-17:00','17:00-18:00','18:00-19:00'],
-        selected: -1,
-        service:0,
-        html: <p>ffff<em>ff</em></p>
-      };
-      
-      this.handleOpenModal = this.handleOpenModal.bind(this);
-      this.handleCloseModal = this.handleCloseModal.bind(this);
-      this.changeSeleceted = this.changeSeleceted.bind(this);
-      this.clickDay = this.clickDay.bind(this);
-      this.bookAppointment= this.bookAppointment.bind(this);
-      this.handleChange = this.handleChange.bind(this);
+        super();
+
+        var times = [];
+        // for(var i=this.props.start;i<this.props.end;i++){
+        //     times.push(i+":00-"+i+":30")
+        //     times.push(i+":30-"+(i+1)+":00")
+        // }
+
+        this.state = {
+            showModal: false,
+            time:['7:00-8:00','8:00-9:00','10:00-11:00','11:00-12:00','12:00-13:00','13:00-14:00','14:00-15:00','15:00-16:00','16:00-17:00','17:00-18:00','18:00-19:00'],
+            // selected: this.props.hoursOff,
+            // start: this.props.start,
+            // end: this.props.end,
+            service:0
+        };
+        
+        this.handleOpenModal = this.handleOpenModal.bind(this);
+        this.handleCloseModal = this.handleCloseModal.bind(this);
+        this.changeSeleceted = this.changeSeleceted.bind(this);
+        this.clickDay = this.clickDay.bind(this);
+        this.bookAppointment= this.bookAppointment.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
+
+    async componentDidMount() {
+        try {
+            const linkParams = window.location.pathname.split("/");
+            const expert = linkParams[linkParams.length-1];
+
+            const data = await fetch(`/api/user/get?user=${expert}`);
+            const json = await data.json();
+        
+            let newTimes =[];
+        
+            for(var i=json.start;i<json.end;i++){
+                // var first = i<9?"0"+i:i;
+                // var second = i+1<9?"0"+(i+1):i+1;
+        
+                newTimes.push(i+":00-"+i+":30")
+                newTimes.push(i+":30-"+(i+1)+":00")
+            }
+        
+            this.setState({
+                start: json.start,
+                end: json.end,
+                hoursOff : json.hoursOff,
+                time:newTimes,
+                day:"Jun 13 2021"
+            });
+    
+        } catch (error) {}
+      }
+
     
     handleOpenModal () {
       this.setState({ showModal: true });
@@ -115,8 +153,25 @@ class ExampleApp extends React.Component {
     }
 
     clickDay(value, event){
-        console.log(value.toString().substring(4,15));
-        this.setState({ selected: -1 }); //reset all green hours
+        const day = value.toString().substring(4,15);
+
+        console.log(day);
+        console.log(this.state.hoursOff[day])
+        let newTimes =[];
+        for(var i=this.state.start;i<this.state.end;i++){
+            const first = i+":00-"+i+":30";
+            const second = i+":30-"+(i+1)+":00";
+
+            if(this.state.hoursOff[day]){
+                const re = !this.state.hoursOff[day].includes(first)?newTimes.push(first):""
+                
+                const r = !this.state.hoursOff[day].includes(second)?newTimes.push(second):""
+            }else{
+                newTimes.push(first);
+                newTimes.push(second)
+            }
+        }
+        this.setState({ selected: -1, time:newTimes}); //reset all green hours
     }
 
     clickHour(event){
@@ -162,9 +217,11 @@ class ExampleApp extends React.Component {
                 <div id="modal-services">          
                     <label htmlFor="services">Choose a service:</label>
                     <select id="services" onChange={this.handleChange}>
-                        {this.props.services.map((item, i) => (
-                            <option value={item} key={i}>{item}</option>
-                        ))}
+                    {Object.entries(this.props.services).map(([title, price]) => {
+                        return(
+                            <option>{title + ", Τιμή:"+price+"€"}</option>
+                        )
+                    })}
                     </select>
                 </div>
 
@@ -189,7 +246,7 @@ const Info = (props) => {
             {props.profession}<br/>
             <div style={{display: "inline-flex"}}>Rating:   <span id="rating"><Rating rating={props.stars} count={5} /></span></div><br/>
             
-            <ExampleApp services={props.services} />
+            <ExampleApp services={props.services} start={props.start} end={props.end} hoursOff={props.hoursOff} />
         </div>
        
     );
@@ -263,9 +320,12 @@ const Services = (props) => {
         <div className="services box">
             <h2> Services </h2>
             <ul>
-            {props.services.map((item, i) => (
-                <li key={i}>{item}</li>
-            ))}
+            {Object.entries(props.services).map(([title, price]) => {
+                return(
+                    <li>{title + ", Τιμή:"+price+"€"}</li>
+                )
+            })}
+            
             </ul>
         </div>
        
@@ -288,7 +348,10 @@ export class Profile extends React.Component {
             cv: [],
             about: "",
             stars: "3.2",
-            url:""
+            url:"",
+            start:0,
+            end:0,
+            hoursOff:[]
         };
     }
 
@@ -305,7 +368,10 @@ export class Profile extends React.Component {
                     url:json.photo,
                     services:json.services,
                     cv:json.cv,
-                    stars:json.rating
+                    stars:json.rating,
+                    start:json.start,
+                    end:json.end,
+                    hoursOff:json.hoursOff
                 });
         } catch (error) {
         }
@@ -322,7 +388,7 @@ export class Profile extends React.Component {
                             <img src={this.state.url} alt="Profile" height="100" width="200" id="profpic"/>
                         </div>
                        
-                        <Info name={this.state.name} profession={this.state.profession} stars={this.state.stars} services={this.state.services} />
+                        <Info name={this.state.name} profession={this.state.profession} stars={this.state.stars} services={this.state.services} start={this.state.start} end={this.state.end} hoursOff={this.state.hoursOff}/>
 
                         <AboutMe about={this.state.about} />
 
