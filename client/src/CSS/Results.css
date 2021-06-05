@@ -1,6 +1,6 @@
 .Professionals {
   text-align: center;
-  margin-left: 69px;
+  margin: 0 auto;
 }
 .ProfessionalBlock {
   height: 25vh;
@@ -12,6 +12,7 @@
   border: 10px groove darkorange;
   overflow: hidden;
   margin: 20px;
+  text-align: center;
 }
 
 .ProfessionalBlock > div {
@@ -60,7 +61,7 @@ a:hover .caption, a:hover{
 }
 
 
-.ProfList {
+/* .ProfList {
   grid-area: ProfList;
   list-style-type: circle;
   padding: 20px;
@@ -75,18 +76,18 @@ a:hover .caption, a:hover{
   top: 22vh;
   position: sticky;
   /* z-index: -1; */
-}
+/* }  */
 
-.ProfList a:hover,
+ /* .ProfList a:hover,
 .ProfList li:hover {
   color: orangered;
   font-size: 1em;
-}
+} */ 
 
-.grid-container-prof {
+/* .grid-container-prof {
   grid-template-areas: "ProfList Professionals";
   display: grid;
-}
+} */
 
 .flexboxresults {
   display: flex;
