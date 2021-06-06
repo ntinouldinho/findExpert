@@ -30,9 +30,9 @@ export class Header extends Component {
     }
 
 
-  componentDidMount() {
+  async componentDidMount() {
 
-      fetch('/checkToken')
+      await fetch('/checkToken')
           .then(res => {
             if (res.status === 200) {
               this.setState({ loggedIn: true });
@@ -44,7 +44,11 @@ export class Header extends Component {
           .catch(err => {
             console.error(err);
       });
-  
+      
+      const response = await fetch(`/api/decode`);
+      const json = await response.json();
+      this.setState({role:json.role})
+      
   }
 
   render() {
@@ -61,7 +65,7 @@ export class Header extends Component {
         <Autocomplete options={this.state.src} search={this.state.search} />
 
         <span>
-          <Login loggedIn={this.state.loggedIn} />
+          <Login loggedIn={this.state.loggedIn} role={this.state.role} />
         </span>
       </div>
     );
