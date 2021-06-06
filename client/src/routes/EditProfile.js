@@ -320,7 +320,7 @@ export class EditProfile extends Component {
       // console.log(jsan.user);
       this.setState({
         id: jsan.user,
-        name: json.name + " " + json.surname,
+        name: json.name,
         profession: json.profession,
         about: json.about,
         photo: json.photo,
@@ -353,17 +353,12 @@ export class EditProfile extends Component {
   async handleUpdate(e) {
     //prepei na ta apothikeyei prwta kapou
     e.preventDefault();
-    let array = this.state.name.split(" ");
-    const name = array[0];
-    const surname = array[1];
 
     const response = await fetch(`/api/decode`);
     const jsan = await response.json();
     const user = jsan.user;
 
     await this.setState({
-      name: name,
-      surname: surname,
       about: draftToHtml(
         convertToRaw(this.state.editorState.getCurrentContent())
       ),

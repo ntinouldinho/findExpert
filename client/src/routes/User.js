@@ -14,12 +14,8 @@ const Overview = (props) => {
                 <input type="text" name="name" defaultValue={props.name} />
                 <br/><br/>
 
-                <label htmlFor="surname">Surname:</label> 
-                <input type="text" name="surname" defaultValue={props.name} />
-                <br/><br/>
-
                 <label htmlFor="email">Email:</label> 
-                <input type="email" name="email" defaultValue={props.name} disabled/>
+                <input type="email" name="email" defaultValue={props.email} disabled/>
                 <br/><br/>
 
                 
@@ -129,7 +125,7 @@ const Billing = (props) => {
 const Handler = (props) => {
     switch(props.id) {
         case 0:
-            return <Overview name={props.name} resetPassword={props.resetPassword}/>;
+            return <Overview name={props.user} email={props.email} resetPassword={props.resetPassword}/>;
         case 1:
             return <Appointments data={props.data} approve={props.approve}/>;
         case 2:
@@ -261,6 +257,8 @@ export class User extends Component {
                                 resetPassword={this.resetPassword}
                                 data = {this.state}
                                 approve = {this.approveAppointment}
+                                user = {this.state.name}
+                                email = {this.state.email}
                             />
                             
 

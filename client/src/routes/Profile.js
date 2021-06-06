@@ -280,7 +280,7 @@ const CV = (props) => {
             <h2> CV </h2>
             <ul>
             {props.cv.map((item, i) => (
-                <li key={i}>{item}</li>
+                <li key={i}>{item.cv}</li>
             ))}
             </ul>
         </div>
@@ -320,9 +320,9 @@ const Services = (props) => {
         <div className="services box">
             <h2> Services </h2>
             <ul>
-            {Object.entries(props.services).map(([title, price]) => {
+            {props.services.map((x, i) => {
                 return(
-                    <li>{title + ", Τιμή:"+price+"€"}</li>
+                    <li>{x.title + ", Τιμή:"+x.price+"€"}</li>
                 )
             })}
             
@@ -362,7 +362,7 @@ export class Profile extends React.Component {
             const response = await fetch(`/api/user/get?user=${expert}`);
             const json = await response.json();
             this.setState({ 
-                    name:json.name+" "+json.surname,
+                    name:json.name,
                     profession:json.profession,
                     about: json.about,
                     url:json.photo,

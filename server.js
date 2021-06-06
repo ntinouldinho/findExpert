@@ -254,7 +254,7 @@ app.get('/api/search', async(req, res) => {
         if (user_data.role == "professional") {
             if (user_data.profession.toLowerCase() == search) {
                 results.push({
-                    name: user_data.name + " " + user_data.surname,
+                    name: user_data.name,
                     job: user_data.profession,
                     info: user_data.about,
                     id: doc.id,
@@ -294,7 +294,7 @@ app.get('/api/user/get', async(req, res) => {
             const expert = firestore.collection('users').doc(theData.expert);
             var expert_data = await expert.get();
             expert_data = expert_data.data();
-            theData.expert_name = expert_data.name + " " + expert_data.surname
+            theData.expert_name = expert_data.name
 
 
             const customer = firestore.collection('users').doc(theData.customer);
