@@ -51,7 +51,7 @@ tr,th, td {
 }
 
 .userDiv table{
-  width:75%;
+  width:100%;
   margin-top:50px;
   border:"2px solid black";
   border-collapse: collapse;
