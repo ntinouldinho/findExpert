@@ -31,7 +31,7 @@ const Login = (props) => {
     var func = props.loggedIn ? logout : toLogin;
     var title = props.loggedIn ? "Logout" : "Login";
     var settdisp = props.loggedIn ? "inline" : "none";
-    var editProf = props.loggedIn ? "inline" : "none"; //if role is professional: inline else: none
+    var editProf = props.role=="professional" ? "inline" : "none"; //if role is professional: inline else: none
 
   return (
     <div>
@@ -99,18 +99,22 @@ export class Home extends Component {
       ],
       search: "",
       loggedIn: false,
+      role:""
     };
     this.scrollFunction = this.scrollFunction.bind(this);
     // this.logout = this.logout.bind(this);
     this.changeLogin = this.changeLogin.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     window.addEventListener("scroll", this.scrollFunction);
 
-    fetch("/checkToken")
+    await fetch("/checkToken")
       .then((res) => {
         if (res.status === 200) {
+          
+
+          
           this.setState({ loggedIn: true });
         } else {
           throw new Error(res.error);
@@ -119,6 +123,10 @@ export class Home extends Component {
       .catch((err) => {
         console.error(err);
       });
+
+      const response = await fetch(`/api/decode`);
+      const json = await response.json();
+      this.setState({role:json.role})
   }
 
   componentWillUnmount() {
@@ -158,7 +166,7 @@ export class Home extends Component {
           />
 
           <span>
-            <Login loggedIn={this.state.loggedIn} login={this.changeLogin} />
+            <Login loggedIn={this.state.loggedIn} login={this.changeLogin} role={this.state.role} />
           </span>
 
           <p id="moto1">
