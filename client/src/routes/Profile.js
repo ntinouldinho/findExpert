@@ -217,9 +217,9 @@ class ExampleApp extends React.Component {
                 <div id="modal-services">          
                     <label htmlFor="services">Choose a service:</label>
                     <select id="services" onChange={this.handleChange}>
-                    {Object.entries(this.props.services).map(([title, price]) => {
+                    {this.props.services.map((x, i) => {
                         return(
-                            <option>{title + ", Price:"+price+"€"}</option>
+                            <option>{x.title + ", Price:"+x.price+"€"}</option>
                         )
                     })}
                     </select>
