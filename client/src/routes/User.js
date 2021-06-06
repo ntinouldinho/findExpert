@@ -11,7 +11,7 @@ const Overview = (props) => {
             <br/>
             <form>
                 <label htmlFor="name">Name:</label>
-                <input type="text" name="name" defaultValue={props.name} />
+                <input type="text" name="name" defaultValue={props.name} disabled/>
                 <br/><br/>
 
                 <label htmlFor="email">Email:</label> 
@@ -21,7 +21,6 @@ const Overview = (props) => {
                 
                 <Button variant="primary" onClick={props.resetPassword}>Reset Password</Button>
 
-                <Button variant="success" type="submit">Update</Button>
             </form>
                 
         </div>
@@ -56,19 +55,27 @@ const Appointments = (props) => {
                 <thead>
                     <tr>
                         <th>
-                            {props.data.role=="user"?"expert":"client"}
+                            Date
                         </th>
 
                         <th>
-                            service
+                            {props.data.role=="user"?"Expert":"Client"}
                         </th>
 
                         <th>
-                            status
+                            Service
                         </th>
 
                         <th>
-                            link
+                            Price
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Link
                         </th>
                     </tr>
                 </thead>
@@ -77,11 +84,19 @@ const Appointments = (props) => {
                     {props.data.appointments.map((row) => (
                         <tr>
                             <td>
+                                {row.day+"/"+row.hour}
+                            </td>
+
+                            <td>
                                 {props.data.role=="user"?row.expert_name:row.customer_name}
                             </td>
 
                             <td>
-                                idk
+                                {row.service}
+                            </td>
+
+                            <td>
+                                {row.price+"€"}
                             </td>
 
                             <td>
