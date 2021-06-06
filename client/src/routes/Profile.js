@@ -30,6 +30,7 @@ class ExampleApp extends React.Component {
             // selected: this.props.hoursOff,
             // start: this.props.start,
             // end: this.props.end,
+            hours:"",
             service:0
         };
         
@@ -106,6 +107,10 @@ class ExampleApp extends React.Component {
             const time = this.state.time[this.state.selected];
             const service = this.state.service;
 
+            const hour = this.state.hours;
+            const day = this.state.day;
+            const serviceName = this.props.services[service]
+
             const linkParams = window.location.pathname.split("/");
             const expert = linkParams[linkParams.length-1];
 
@@ -118,8 +123,10 @@ class ExampleApp extends React.Component {
                 body: JSON.stringify({ 
                     customer: user, 
                     expert:expert,
-                    time:time,
-                    service:service
+                    day,day,
+                    hour:hour,
+                    service:serviceName.title,
+                    price:serviceName.price
                   }),
               })
               .then(res => {
@@ -171,16 +178,17 @@ class ExampleApp extends React.Component {
                 newTimes.push(second)
             }
         }
-        this.setState({ selected: -1, time:newTimes}); //reset all green hours
+        this.setState({ selected: -1, time:newTimes,day:day}); //reset all green hours
     }
 
     clickHour(event){
-
+        this.setState({hours:event.target.value});
         event.target.style.backgroundColor = "lightgreen";
     }
 
-    changeSeleceted(i){
-        this.setState({ selected: i });
+    changeSeleceted(e,i){
+        console.log(e.target)
+        this.setState({ selected: i, hours:e.target.innerHTML });
     }
 
  
@@ -203,7 +211,7 @@ class ExampleApp extends React.Component {
                     <h1>Available hours: </h1>
                     <ul>
                         {this.state.time.map((item, i) => (
-                            <li onClick={() => this.changeSeleceted(i)} 
+                            <li onClick={(e) => this.changeSeleceted(e,i)} 
                                 key={i}
                                 style={{backgroundColor: i===this.state.selected?"lightgreen":""}}
                             >

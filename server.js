@@ -201,7 +201,11 @@ app.post('/api/appointment/create', async(req, res) => {
 
     const appointment = {
         customer: req.body.customer,
-        expert: "HVp43gujF3Ssoor8t4hGN5jA1w33",
+        expert: req.body.expert,
+        day: req.body.day,
+        hour: req.body.hour,
+        price: req.body.price,
+        service: req.body.service,
         uuid: crypto.randomBytes(16).toString("hex"),
         status: 0
     };
