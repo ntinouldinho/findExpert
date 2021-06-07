@@ -31,7 +31,7 @@ const Login = (props) => {
   var func = props.loggedIn ? logout : toLogin;
   var title = props.loggedIn ? "Logout" : "Login";
   var settdisp = props.loggedIn ? "inline" : "none";
-  var editProf = props.role == "professional" ? "inline" : "none"; //if role is professional: inline else: none
+  var editProf = props.role == "professional" && props.loggedIn ? "inline" : "none"; //if role is professional: inline else: none
 
   return (
     <div>
