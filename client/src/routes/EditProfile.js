@@ -296,7 +296,7 @@ export class EditProfile extends Component {
       services: {}, //nonCustom
       cv: {},
       about: "",
-      stars: "4.2", //nonCustom
+      stars: "4", //nonCustom
       appointment: "appointment", //nonCustom
       editorState: EditorState.createWithContent(
         ContentState.createFromBlockArray(convertFromHTML(""))
@@ -333,7 +333,10 @@ export class EditProfile extends Component {
         start: json.start,
         end: json.end,
         hoursOff: json.hoursOff,
+        stars:json.stars
       });
+
+      this.forceUpdate();
     } catch (error) {}
   }
 

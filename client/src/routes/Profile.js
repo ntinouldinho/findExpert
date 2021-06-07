@@ -355,7 +355,7 @@ export class Profile extends React.Component {
             services: [],
             cv: [],
             about: "",
-            stars: "3.2",
+            stars: "",
             url:"",
             start:0,
             end:0,
@@ -376,12 +376,13 @@ export class Profile extends React.Component {
                     url:json.photo,
                     services:json.services,
                     cv:json.cv,
-                    stars:json.rating,
+                    stars:json.stars,
                     start:json.start,
                     end:json.end,
                     hoursOff:json.hoursOff,
                     reviews:json.reviews
                 });
+                this.forceUpdate();
         } catch (error) {
         }
     }

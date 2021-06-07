@@ -263,7 +263,7 @@ app.get('/api/search', async(req, res) => {
                     info: user_data.about,
                     id: doc.id,
                     url: user_data.photo,
-                    rating: user_data.rating
+                    rating: user_data.stars
                 });
             }
         }
@@ -291,9 +291,11 @@ app.get('/api/user/get', async(req, res) => {
         average+=parseFloat(data.rating)
         number++;
     });
-
+    
     data.reviews = reviews;
-    data.rating = parseFloat(average/number).toFixed(1);
+
+
+    data.stars = parseFloat(average/number).toFixed(1);
 
     if (req.query.appointments) {
         let appointments = data.appointments;
