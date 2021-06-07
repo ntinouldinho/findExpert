@@ -221,7 +221,7 @@ export class Home extends Component {
           <h1 className="stepTitle"> Book your appointment: </h1>
           <img
             className="Logo"
-            src="https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/gifs%2Fbook.gif?alt=media&token=99b6afb0-e33e-484e-b335-21a40a2e0f50"
+            src="https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/gifs%2Fbook.gif?alt=media&token=86131a54-0d90-4fce-b1b7-d7fb84f4c406"
             alt="book gif"
           />
           <p className="desc">
@@ -242,7 +242,7 @@ export class Home extends Component {
           </h1>
           <img
             className="Logo"
-            src="https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/gifs%2Fcall.gif?alt=media&token=331cae91-41f4-49ab-96bf-dcf7f9c4a28f"
+            src=""
             alt="call gif"
           />
           <p className="desc">
