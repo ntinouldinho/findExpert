@@ -39,6 +39,7 @@ export class ListAdder extends Component {
     const list = [...this.state.data];
     list.splice(index, 1);
     this.setState({ data: list });
+    this.props.updater(list);
   };
 
   render() {

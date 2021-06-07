@@ -35,6 +35,7 @@ export class ListAdderCV extends Component {
     const list = [...this.state.datacv];
     list.splice(index, 1);
     this.setState({ datacv: list });
+    this.props.updater(list);
   };
 
   render() {

@@ -124,7 +124,7 @@ class ExampleApp extends React.Component {
 
   selectColor(hour) {
     let array = this.state.selected[this.state.day];
-    console.log(array,"11111111111111111111111111111");
+    // console.log(array,"11111111111111111111111111111");
     // console.log(array)
     // console.log(hour + " but "+array.includes(hour))
 
@@ -379,7 +379,9 @@ export class EditProfile extends Component {
     })
       .then((res) => {
         if (res.status === 200) {
-          // window.location.reload()
+          this.props.history.push(
+            "/profile/" + this.state.name + "/" + this.state.id
+          );
         } else {
           const error = new Error(res.error);
           throw error;
