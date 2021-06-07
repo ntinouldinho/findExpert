@@ -51,10 +51,11 @@ export class Autocomplete extends Component {
     const { activeOption, filteredOptions } = this.state;
 
     if (e.keyCode === 13) {
+      const value = filteredOptions[0]?filteredOptions[0]:e.target.value;
       this.setState({
         activeOption: 0,
         showOptions: false,
-        search: e.target.value,
+        search: value,
       });
     } else if (e.keyCode === 38) {
       if (activeOption === 0) {
