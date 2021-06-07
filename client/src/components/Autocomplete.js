@@ -54,7 +54,7 @@ export class Autocomplete extends Component {
       this.setState({
         activeOption: 0,
         showOptions: false,
-        search: filteredOptions[activeOption],
+        search: e.target.value,
       });
     } else if (e.keyCode === 38) {
       if (activeOption === 0) {
