@@ -23,6 +23,7 @@ const Login = (props) => {
       fetch(`/logout`);
 
       props.login(false);
+      props.role("");
       window.location.href = "/";
     } catch (error) {}
   };
