@@ -25,6 +25,7 @@ const Login = (props) => {
       fetch(`/logout`);
 
       props.login(false);
+      window.location.href = '/';
     } catch (error) {}
   };
 
