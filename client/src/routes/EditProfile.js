@@ -124,13 +124,14 @@ class ExampleApp extends React.Component {
 
   selectColor(hour) {
     let array = this.state.selected[this.state.day];
-
+    console.log(array,"11111111111111111111111111111");
     // console.log(array)
     // console.log(hour + " but "+array.includes(hour))
 
-    for (var i = 0; i < array.length; i++) {
-      // if(array[i]==hour) console.log('is in')
-    }
+    // for (var i = 0; i < array.length; i++) {
+    //   // if(array[i]==hour) console.log('is in')
+    // }
+
     return array.includes(hour) ? "red" : "";
   }
 
@@ -401,7 +402,7 @@ export class EditProfile extends Component {
             <img
               className="picture"
               src={
-                "https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/plumber.jpg?alt=media&token=9f739649-cad2-4582-b045-9de224f7bb0b"
+                this.state.photo
               }
               alt="Profile"
               height="100"

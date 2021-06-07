@@ -164,7 +164,6 @@ class ExampleApp extends React.Component {
         const day = value.toString().substring(4,15);
 
         console.log(day);
-        console.log(this.state.hoursOff[day])
         let newTimes =[];
         for(var i=this.state.start;i<this.state.end;i++){
             const first = i+":00-"+i+":30";

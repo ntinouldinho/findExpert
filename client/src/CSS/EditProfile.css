@@ -19,6 +19,14 @@
   border: 10px groove darkorange;
 }
 
+.picture {
+  height: auto;
+  width: auto;
+  max-width: 300px;
+  max-height: 300px;
+  border-radius: 150px;
+  padding: 10px;
+}
 .AddPicture {
   grid-area: addpicture;
 }
