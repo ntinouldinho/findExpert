@@ -281,12 +281,19 @@ app.get('/api/user/get', async(req, res) => {
     var data = doc.data();
 
     let reviews = [];
+    let average = 0;
+    let number=0;
     const reviewsDic = await firestore.collection('users/'+user+'/reviews').get();
     reviewsDic.docs.forEach((document) => {
-        reviews.push(document.data())
+        const data = document.data();
+        reviews.push(data)
+        
+        average+=parseFloat(data.rating)
+        number++;
     });
 
     data.reviews = reviews;
+    data.rating = parseFloat(average/number).toFixed(1);
 
     if (req.query.appointments) {
         let appointments = data.appointments;
