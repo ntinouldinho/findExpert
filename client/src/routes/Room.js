@@ -428,14 +428,7 @@ const Room = (props) => {
           ref={userVideo}
         />
         <div className="room-buttons">
-          <button
-            id="camerabtn"
-            onClick={() => {
-              setCamera(!camera);
-            }}
-          >
-            <FontAwesomeIcon icon={camera ? faVideo : faVideoSlash} />
-          </button>
+          
           <button
             id="mutebtn"
             onClick={() => {
