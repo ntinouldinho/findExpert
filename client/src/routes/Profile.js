@@ -306,9 +306,9 @@ const Reviews = (props) => {
             
             {props.reviews.map((item, i) => (
                 <div style={{border:'1px black solid',marginBottom:'10px',textAlign:'left',borderRadius:'10px'}} key={i}>
-                    <Rating rating={item.grade} count={5} />
-                    <span>{item.name} {item.date}</span> 
-                    <br/>{item.comment}
+                    <Rating rating={item.rating} count={5} />
+                    <span>{item.customer}</span> 
+                    <br/>{item.review}
                 </div>
             ))}
 
@@ -330,7 +330,7 @@ const Services = (props) => {
             <ul>
             {props.services.map((x, i) => {
                 return(
-                    <li>{x.title + ", Τιμή:"+x.price+"€"}</li>
+                    <li>{x.title + ", Price:"+x.price+"€"}</li>
                 )
             })}
             
@@ -351,7 +351,7 @@ export class Profile extends React.Component {
         this.state = {
             name: "",
             profession: "",
-            reviews: [{name:"kostas",grade:4, comment:"I was very satisfied with Kostas he did an excellent job.",date:"21/04/2021"}, {name:"mitsos",grade:4.5, comment:"Kostas delivers as promised and does his best help you",date:"21/04/2021"}],
+            reviews: [],
             services: [],
             cv: [],
             about: "",
@@ -379,7 +379,8 @@ export class Profile extends React.Component {
                     stars:json.rating,
                     start:json.start,
                     end:json.end,
-                    hoursOff:json.hoursOff
+                    hoursOff:json.hoursOff,
+                    reviews:json.reviews
                 });
         } catch (error) {
         }

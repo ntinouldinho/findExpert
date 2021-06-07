@@ -235,7 +235,7 @@ app.post('/api/appointment/review', async(req, res) => {
     const appointment = await firestore.collection('appointments').doc(appointment_id).get();
     const appointment_data = appointment.data();
     console.log(appointment_data);
-    const professional_id = appointment_data.expert;
+    const professional_id = "HVp43gujF3Ssoor8t4hGN5jA1w33"
 
     await firestore.collection('users').doc(professional_id).collection('reviews').add({
         customer: customer,
@@ -279,6 +279,14 @@ app.get('/api/user/get', async(req, res) => {
     var doc = await callDoc.get();
 
     var data = doc.data();
+
+    let reviews = [];
+    const reviewsDic = await firestore.collection('users/'+user+'/reviews').get();
+    reviewsDic.docs.forEach((document) => {
+        reviews.push(document.data())
+    });
+
+    data.reviews = reviews;
 
     if (req.query.appointments) {
         let appointments = data.appointments;
