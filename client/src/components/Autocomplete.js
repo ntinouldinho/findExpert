@@ -5,8 +5,8 @@ import "../CSS/Autocomplete.css";
 
 export class Autocomplete extends Component {
   static propTypes = {
-      options: PropTypes.instanceOf(Array).isRequired,
-      search: PropTypes.instanceOf(String)
+    options: PropTypes.instanceOf(Array).isRequired,
+    search: PropTypes.instanceOf(String),
   };
   state = {
     activeOption: 0,
@@ -19,24 +19,23 @@ export class Autocomplete extends Component {
     console.log("onChanges");
     const { options } = this.props;
     const search = e.currentTarget.value;
-      if (search === "") {
-          this.setState({
-              search: ""
-          });
-          return;
-      }
+    if (search === "") {
+      this.setState({
+        search: "",
+      });
+      return;
+    }
     const filteredOptions = options.filter(
       (optionName) =>
         optionName.toLowerCase().indexOf(search.toLowerCase()) > -1
-      );
-      
+    );
+
     this.setState({
       activeOption: 0,
       filteredOptions,
       showOptions: true,
       search: e.currentTarget.value,
     });
-    
   };
 
   onClick = (e) => {
@@ -51,7 +50,7 @@ export class Autocomplete extends Component {
     const { activeOption, filteredOptions } = this.state;
 
     if (e.keyCode === 13) {
-      const value = filteredOptions[0]?filteredOptions[0]:e.target.value;
+      const value = filteredOptions[0] ? filteredOptions[0] : e.target.value;
       this.setState({
         activeOption: 0,
         showOptions: false,
@@ -112,7 +111,6 @@ export class Autocomplete extends Component {
         <div className="search">
           <SearchBar
             value={this.state.search}
-            // handleChange={(e) => this.setState({ search: e.target.value })}
             placeholder="Search for a Profession..."
             onChange={onChange}
             onKeyDown={onKeyDown}

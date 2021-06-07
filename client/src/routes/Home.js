@@ -6,10 +6,8 @@ import { Footer } from "../components/Footer";
 import Header from "../components/Header.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faCog, faUserEdit } from "@fortawesome/free-solid-svg-icons";
-
 import "../CSS/Home.css";
 import logo from "../assets/logo.png";
-// import { alert} from "globalthis/implementation";
 
 const Login = (props) => {
   const history = useHistory();
@@ -25,14 +23,14 @@ const Login = (props) => {
       fetch(`/logout`);
 
       props.login(false);
-      window.location.href = '/';
+      window.location.href = "/";
     } catch (error) {}
   };
 
-    var func = props.loggedIn ? logout : toLogin;
-    var title = props.loggedIn ? "Logout" : "Login";
-    var settdisp = props.loggedIn ? "inline" : "none";
-    var editProf = props.role=="professional" ? "inline" : "none"; //if role is professional: inline else: none
+  var func = props.loggedIn ? logout : toLogin;
+  var title = props.loggedIn ? "Logout" : "Login";
+  var settdisp = props.loggedIn ? "inline" : "none";
+  var editProf = props.role == "professional" ? "inline" : "none"; //if role is professional: inline else: none
 
   return (
     <div>
@@ -100,10 +98,9 @@ export class Home extends Component {
       ],
       search: "",
       loggedIn: false,
-      role:""
+      role: "",
     };
     this.scrollFunction = this.scrollFunction.bind(this);
-    // this.logout = this.logout.bind(this);
     this.changeLogin = this.changeLogin.bind(this);
   }
 
@@ -113,9 +110,6 @@ export class Home extends Component {
     await fetch("/checkToken")
       .then((res) => {
         if (res.status === 200) {
-          
-
-          
           this.setState({ loggedIn: true });
         } else {
           throw new Error(res.error);
@@ -125,9 +119,9 @@ export class Home extends Component {
         console.error(err);
       });
 
-      const response = await fetch(`/api/decode`);
-      const json = await response.json();
-      this.setState({role:json.role})
+    const response = await fetch(`/api/decode`);
+    const json = await response.json();
+    this.setState({ role: json.role });
   }
 
   componentWillUnmount() {
@@ -167,7 +161,11 @@ export class Home extends Component {
           />
 
           <span>
-            <Login loggedIn={this.state.loggedIn} login={this.changeLogin} role={this.state.role} />
+            <Login
+              loggedIn={this.state.loggedIn}
+              login={this.changeLogin}
+              role={this.state.role}
+            />
           </span>
 
           <p id="moto1">
@@ -210,9 +208,6 @@ export class Home extends Component {
               <HomeCategory key={i} name={item} classtype={i + 1} />
             ))}
           </div>
-          {/* {this.state.src.map((item, i) => (
-            <HomeCategory key={i} name={item} classtype={i} />
-          ))}  */}
         </div>
         <div
           className="grid-container-righttext"
@@ -240,11 +235,7 @@ export class Home extends Component {
           <h1 className="stepTitle">
             Log in to your video call through our site:
           </h1>
-          <img
-            className="Logo"
-            src=""
-            alt="call gif"
-          />
+          <img className="Logo" src="" alt="call gif" />
           <p className="desc">
             When your appointment is booked, you will receive an e - mail that
             contains a link. When you click that, you will be redirected to a
