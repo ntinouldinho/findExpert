@@ -31,7 +31,8 @@ class ExampleApp extends React.Component {
             // start: this.props.start,
             // end: this.props.end,
             hours:"",
-            service:0
+            service:0,
+            show: "none"
         };
         
         this.handleOpenModal = this.handleOpenModal.bind(this);
@@ -178,7 +179,7 @@ class ExampleApp extends React.Component {
                 newTimes.push(second)
             }
         }
-        this.setState({ selected: -1, time:newTimes,day:day}); //reset all green hours
+        this.setState({ show:"",selected: -1, time:newTimes,day:day}); //reset all green hours
     }
 
     clickHour(event){
@@ -207,7 +208,7 @@ class ExampleApp extends React.Component {
             <div id="modal-content">
         
                 <Calendar onClickDay={this.clickDay} id="calendar" />
-                <div id="results"> 
+                <div id="results" style={{ display: this.state.show }}> 
                     <h1>Available hours: </h1>
                     <ul>
                         {this.state.time.map((item, i) => (
