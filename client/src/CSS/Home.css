@@ -1,6 +1,12 @@
 html {
   scroll-behavior: smooth;
+    
 }
+
+.HomeContainer{
+    overflow-x: hidden;
+}
+
 .HomeContainer .header {
   width: 100%;
   position: fixed;
