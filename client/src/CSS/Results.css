@@ -37,6 +37,8 @@ a:hover .caption, a:hover h2, a:hover{
 }
 
 .ProfilePic {
+
+    object-fit: cover;
   display: block;
   margin: auto;
   max-width: 100%;

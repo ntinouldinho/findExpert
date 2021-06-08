@@ -75,7 +75,7 @@ class ExampleApp extends React.Component {
       }
 
     
-    handleOpenModal () {
+    async handleOpenModal () {
         await fetch('/checkToken')
         .then(res => {
           if (res.status === 200) {
