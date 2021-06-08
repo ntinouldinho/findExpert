@@ -43,6 +43,7 @@ class ExampleApp extends React.Component {
         </p>
       ),
       show: "none",
+      showAfter: "none",
       start: 8,
       end: 14,
     };
@@ -201,7 +202,7 @@ class ExampleApp extends React.Component {
       array[this.state.day].splice(index, 1);
     }
 
-    this.setState({ selected: array });
+    this.setState({ selected: array,showAfter:"" });
   }
 
   render() {
@@ -262,21 +263,13 @@ class ExampleApp extends React.Component {
             </ul>
           </div>
 
-          <div id="modal-choices">
+          <div id="modal-choices" style={{ display: this.state.showAfter }}>
             <Button
               id="book-appointment"
               onClick={this.updateCalendar}
               variant="success"
             >
               Update
-            </Button>
-
-            <Button
-              id="cancel-modal"
-              onClick={this.handleCloseModal}
-              variant="danger"
-            >
-              Cancel
             </Button>
           </div>
         </div>

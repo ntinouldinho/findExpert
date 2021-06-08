@@ -32,13 +32,15 @@ class ExampleApp extends React.Component {
             // end: this.props.end,
             hours:"",
             service:0,
-            show: "none"
+            show: "none",
+            showAfter: "none"
         };
         
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
         this.changeSeleceted = this.changeSeleceted.bind(this);
         this.clickDay = this.clickDay.bind(this);
+        this.clickHour = this.clickHour.bind(this);
         this.bookAppointment= this.bookAppointment.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
@@ -182,13 +184,16 @@ class ExampleApp extends React.Component {
     }
 
     clickHour(event){
-        this.setState({hours:event.target.value});
+        this.setState({
+            hours:event.target.value,
+            showAfter:""
+        });
         event.target.style.backgroundColor = "lightgreen";
     }
 
     changeSeleceted(e,i){
         console.log(e.target)
-        this.setState({ selected: i, hours:e.target.innerHTML });
+        this.setState({ selected: i, hours:e.target.innerHTML,showAfter:"" });
     }
 
  
@@ -222,7 +227,7 @@ class ExampleApp extends React.Component {
                     </ul>
                 </div>
 
-                <div id="modal-services">          
+                <div id="modal-services" style={{ display: this.state.showAfter }}>          
                     <label htmlFor="services">Choose a service:</label>
                     <select id="services" onChange={this.handleChange}>
                     {this.props.services.map((x, i) => {
@@ -234,7 +239,7 @@ class ExampleApp extends React.Component {
                 </div>
 
 
-                <div id="modal-choices">
+                <div id="modal-choices" style={{ display: this.state.showAfter }}>
                     <Button id="book-appointment" onClick={this.bookAppointment} variant="success">Book</Button>
 
                     <Button id="cancel-modal" onClick={this.handleCloseModal} variant="danger">Cancel</Button>
