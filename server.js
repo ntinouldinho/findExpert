@@ -220,17 +220,23 @@ app.post('/api/appointment/create', async(req, res) => {
         appointments: firebase.firestore.FieldValue.arrayUnion(app_id)
     })
 
-    await firestore.collection('users').doc(appointment.expert).update({
-        appointments: firebase.firestore.FieldValue.arrayUnion(app_id)
-    })
+    
 
-
-    const exp = firestore.collection('appointments').doc(appointment.expert);
+    const exp = firestore.collection('users').doc(appointment.expert);
     var exp_data = await exp.get();
-    var theData = exp_data.data();
+    var dataa = exp_data.data();
+    
+    let hoursOff = dataa.hoursOff
 
-    let hoursOff = theData.hoursOff
-
+    if(!hoursOff[req.body.day])hoursOff[req.body.day]=[]
+    
+    hoursOff[req.body.day].push(req.body.hour)
+    
+    await firestore.collection('users').doc(appointment.expert).update({
+        appointments: firebase.firestore.FieldValue.arrayUnion(app_id),
+        hoursOff: hoursOff
+    })
+    
     res.status(200).send("ok");
 });
 
@@ -306,6 +312,10 @@ app.get('/api/user/get', async(req, res) => {
 
 
     data.stars = parseFloat(average/number).toFixed(1);
+
+
+    
+
 
     if (req.query.appointments) {
         let appointments = data.appointments;
