@@ -51,28 +51,15 @@ app.get('/checkToken', withAuth, function(req, res) {
     res.sendStatus(200);
 });
 
-// var transporter = nodemailer.createTransport({
-//     service: 'hotmail',
-//     auth: {
-//         user: process.env.EMAIL,
-//         pass: process.env.PASSWORD
-//     }
-// }); 
+var transporter = nodemailer.createTransport({
+    service: 'hotmail',
+    auth: {
+        user: process.env.EMAIL,
+        pass: process.env.PASSWORD
+    }
+}); 
 
-// var mailOptions = {
-//     from: process.env.EMAIL,
-//     to: customer.email,
-//     subject: 'Video chat link',
-//     text: 'Your link is...'
-// };
 
-// transporter.sendMail(mailOptions, function(error, info){
-//   if (error) {
-//     console.log(error);
-//   } else {
-//     console.log('Email sent: ' + info.response);
-//   }
-// });
 
 app.post('/api/login/', async(req, res) => {
     console.log(req.body);
@@ -359,6 +346,41 @@ app.post('/api/appointment/approve/', async(req, res) => {
     await firestore.collection('appointments').doc(req.body.id).update({
         status: req.body.status
     })
+
+    
+    const appointment = firestore.collection('appointments').doc(req.body.id);
+    var appointment_data = await appointment.get();
+    var theData = appointment_data.data();
+
+    const customer_id = theData.customer;
+    const expert_id = theData.expert;
+
+
+    const cust = firestore.collection('users').doc(customer_id);
+    var cust_data = await cust.get();
+    const customer = cust_data.data();
+
+    const exp = firestore.collection('users').doc(expert_id);
+    var exp_data = await exp.get();
+    const expert = exp_data.data();
+
+
+    var mailOptions = {
+        from: process.env.EMAIL,
+        to: customer.email,
+        subject: 'Find Expert',
+        text: `Your appoitment with ${expert.name} at ${theData.day + ","+theData.hour} has been confirmed.`
+    };
+    
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
+
+
     res.status(200).send("ok");
 
 });
