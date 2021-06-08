@@ -239,7 +239,7 @@ export class Home extends Component {
           <h1 className="stepTitle">
             Log in to your video call through our site:
           </h1>
-          <img className="Logo" src="" alt="call gif" />
+          <img className="Logo" src="https://firebasestorage.googleapis.com/v0/b/professionall.appspot.com/o/gifs%2Fcall.gif?alt=media&token=c2a3bc60-6d1e-49f0-afed-f9eb5a4f1ab2" alt="call gif" />
           <p className="desc">
             When your appointment is booked, you will receive an e - mail that
             contains a link. When you click that, you will be redirected to a
