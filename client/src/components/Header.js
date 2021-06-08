@@ -19,6 +19,7 @@ export class Header extends Component {
         "Artist",
         "Chef",
         "Household",
+        "Psychologist",
         "Other",
       ],
       search: props.search,
