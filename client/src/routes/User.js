@@ -34,18 +34,27 @@ const Appointments = (props) => {
 
     function filterStatus(status,id){
         if(props.data.role!=="user"){
-            if(!status){
-                let OnClick = "approveAppointment("+id+")";
+            if(status===0){
                 return (
-                    <button type="button" onClick={() => { props.approve(id)}}> Approve </button>
+                    <div>
+                        <button type="button" onClick={() => { props.approve(id,1)}}> Approve </button>
+                        <button type="button" onClick={() => { props.approve(id,2)}}> Deny </button>
+                    </div>
                 )
-            }else{
-                return (
-                    "approved"
-                )
+            }else if(status===1){
+                    return ("approved")
+            }else if(status===2){
+                    return ("denied")
             }
+            
         }else{
-            return status?"confirmed":"pending";
+            if(status===0){
+                return "pending"
+            }else if(status===1){
+                return "approved"
+            }else if(status===2){
+                return "denied"
+            }
         }
     }
 
@@ -220,14 +229,15 @@ export class User extends Component {
     
     };
     
-    approveAppointment(id){
+    approveAppointment(id, status){
         fetch('/api/appointment/approve', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({ 
-                id:id
+                id:id,
+                status: status
               }),
           })
           .then(res => {
