@@ -216,13 +216,21 @@ app.post('/api/appointment/create', async(req, res) => {
 
     const app_id = newDoc.id;
 
-    firestore.collection('users').doc(appointment.customer).update({
+    await firestore.collection('users').doc(appointment.customer).update({
         appointments: firebase.firestore.FieldValue.arrayUnion(app_id)
     })
 
-    firestore.collection('users').doc(appointment.expert).update({
+    await firestore.collection('users').doc(appointment.expert).update({
         appointments: firebase.firestore.FieldValue.arrayUnion(app_id)
     })
+
+
+    const exp = firestore.collection('appointments').doc(appointment.expert);
+    var exp_data = await exp.get();
+    var theData = exp_data.data();
+
+    let hoursOff = theData.hoursOff
+
     res.status(200).send("ok");
 });
 
@@ -340,7 +348,7 @@ app.get('/api/user/get', async(req, res) => {
 app.post('/api/appointment/approve/', async(req, res) => {
 
     firestore.collection('appointments').doc(req.body.id).update({
-        status: 1
+        status: req.body.status
     })
     res.status(200).send("ok");
 
