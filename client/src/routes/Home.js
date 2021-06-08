@@ -98,6 +98,7 @@ export class Home extends Component {
         "Informatics",
         "Other",
         "Medical",
+        "Psychologist"
       ],
       search: "",
       loggedIn: false,
