@@ -229,7 +229,7 @@ app.post('/api/appointment/create', async(req, res) => {
     let hoursOff = dataa.hoursOff
 
     if(!hoursOff[req.body.day])hoursOff[req.body.day]=[]
-    
+
     hoursOff[req.body.day].push(req.body.hour)
     
     await firestore.collection('users').doc(appointment.expert).update({
@@ -357,7 +357,7 @@ app.get('/api/user/get', async(req, res) => {
 
 app.post('/api/appointment/approve/', async(req, res) => {
 
-    firestore.collection('appointments').doc(req.body.id).update({
+    await firestore.collection('appointments').doc(req.body.id).update({
         status: req.body.status
     })
     res.status(200).send("ok");
