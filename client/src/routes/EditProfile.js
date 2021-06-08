@@ -116,7 +116,7 @@ class ExampleApp extends React.Component {
     array[this.state.day] = [...this.state.time];
 
     // console.log(array)
-    this.setState({ selected: array });
+    this.setState({ selected: array,showAfter:"" });
   }
 
   handleChange(event) {
