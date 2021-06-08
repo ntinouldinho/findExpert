@@ -38,12 +38,14 @@ const Appointments = (props) => {
                 return (
                     <div>
                         <button type="button" onClick={() => { props.approve(id,1)}}> Approve </button>
-                        <button type="button" onClick={() => { props.approve(id,2)}}> Deny </button>
+                        <button type="button" onClick={() => { props.approve(id,3)}}> Deny </button>
                     </div>
                 )
             }else if(status===1){
                     return ("approved")
             }else if(status===2){
+                    return ("completed")
+            }else if(status===3){
                     return ("denied")
             }
             
@@ -53,8 +55,10 @@ const Appointments = (props) => {
             }else if(status===1){
                 return "approved"
             }else if(status===2){
-                return "denied"
-            }
+                return ("completed")
+        }else if(status===3){
+                return ("denied")
+        }
         }
     }
 
