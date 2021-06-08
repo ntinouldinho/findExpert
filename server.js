@@ -207,7 +207,9 @@ app.post('/api/appointment/create', async(req, res) => {
         price: req.body.price,
         service: req.body.service,
         uuid: crypto.randomBytes(16).toString("hex"),
-        status: 0
+        status: 0,
+        professional_time:0,
+        user_time:0
     };
 
     const newDoc = await firestore.collection('appointments').add(appointment);
@@ -343,6 +345,38 @@ app.post('/api/appointment/approve/', async(req, res) => {
     res.status(200).send("ok");
 
 });
+
+app.post('/api/appointments/time', async(req, res) => {
+    const appointment_id = req.body.id;
+    const role = req.body.role;
+
+
+    const appointment = firestore.collection('appointments').doc(appointment_id);
+    var appointment_data = await appointment.get();
+
+    var theData = appointment_data.data();
+
+    console.log(theData);
+
+    let professional_time = theData.professional_time?theData.professional_time+10:10;
+    let user_time = theData.user_time?theData.user_time+10:10;
+
+    if(role == 'professional'){
+        await firestore.collection('appointments').doc(appointment_id).update({
+            professional_time:professional_time
+        })
+    }else{
+        await firestore.collection('appointments').doc(appointment_id).update({
+            user_time: user_time
+        })
+    }
+
+    
+
+
+    res.status(201).send("ok");
+});
+
 
 
 

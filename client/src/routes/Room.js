@@ -81,6 +81,49 @@ const Room = (props) => {
     //     return ev.returnValue = 'Are you sure you want to close?';
     // });
 
+    const interval = setInterval(() => {
+
+      try{
+        fetch(`/api/decode`)
+        .then(response =>response.json())
+        .then(json => {
+          const link = window.location.href.split('/');
+          const appointment_id = link[link.length-1];
+          
+
+          let header = new Headers();
+          header.append('Accept', 'application/json');
+
+          let init = {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body:JSON.stringify({
+                id:appointment_id,
+                role:json.role
+              })
+          }
+
+
+          fetch("/api/appointments/time",init)
+          .then(response=> console.log(response))
+          
+        });
+        
+      }catch(e){
+        alert(e)
+      }
+      
+    
+    }, 10000);
+
+    return () => {
+      console.log(`clearing interval`);
+      clearInterval(interval);
+    };
+
+
   }, [callUser, handleRecieveCall, dragElement, camera, mute, first, props.match.params.roomID]);
 
   function callUser(userID) {
