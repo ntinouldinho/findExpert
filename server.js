@@ -246,12 +246,12 @@ app.post('/api/appointment/review', async(req, res) => {
     const review = req.body.review;
     const customer = req.body.customer;
     const rating = req.body.rating;
+    const professional_id = req.body.expert;
 
     console.log(req.body)
     const appointment = await firestore.collection('appointments').doc(appointment_id).get();
     const appointment_data = appointment.data();
     console.log(appointment_data);
-    const professional_id = "HVp43gujF3Ssoor8t4hGN5jA1w33"
 
     await firestore.collection('users').doc(professional_id).collection('reviews').add({
         customer: customer,
@@ -436,6 +436,19 @@ app.post('/api/stripe/createCustomer', async(req, res) => {
     res.status(200).send("ok");
 
 });
+
+
+app.get('/api/appointment/:id', async(req, res) => {
+    const id = req.params.id.toString();
+
+    const appointment = firestore.collection('appointments').doc(id);
+    var appointment_data = await appointment.get();
+    var theData = appointment_data.data();
+
+    res.status(200).send(theData);
+
+});
+
 
 
 app.post('/api/stripe/createPayment', async(req, res) => {

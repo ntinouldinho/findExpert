@@ -289,6 +289,14 @@ const Room = (props) => {
     const link = window.location.href.split('/');
     const appointment_id = link[link.length-1];
 
+    let appointmentData = null;
+
+    await fetch(`/api/appointment/${appointment_id}`)
+          .then(response => response.json())
+          .then(response => appointmentData=response)
+
+    console.log("fffffffffffffffffffffffffffff")
+    console.log(appointmentData)
     if(json.role === "user"){
       
       fetch('/api/stripe/createPayment', {
@@ -298,7 +306,7 @@ const Room = (props) => {
         },
         body: JSON.stringify({ 
             id: stripe_id, 
-            price: 160,
+            price: appointmentData.price,
             appointment: appointment_id
           }),
       })
@@ -347,7 +355,8 @@ const Room = (props) => {
                       appointment: appointment_id,
                       review: result.value.review,
                       customer: json.name,
-                      rating: result.value.rating
+                      rating: result.value.rating,
+                      expert: appointmentData.expert
                     }),
                 }).then((response) => {
                   Swal.fire('Saved!', '', 'success')
