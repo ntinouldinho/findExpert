@@ -369,7 +369,7 @@ app.post('/api/appointment/approve/', async(req, res) => {
         from: process.env.EMAIL,
         to: customer.email,
         subject: 'Find Expert',
-        text: `Your appoitment with ${expert.name} at ${theData.day + ","+theData.hour} has been confirmed.`
+        text: `Your appointment with ${expert.name} at ${theData.day + ","+theData.hour} has been confirmed.`
     };
     
     transporter.sendMail(mailOptions, function(error, info){
