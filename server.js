@@ -347,38 +347,40 @@ app.post('/api/appointment/approve/', async(req, res) => {
         status: req.body.status
     })
 
+    if(req.body.status==1){
+        const appointment = firestore.collection('appointments').doc(req.body.id);
+        var appointment_data = await appointment.get();
+        var theData = appointment_data.data();
     
-    const appointment = firestore.collection('appointments').doc(req.body.id);
-    var appointment_data = await appointment.get();
-    var theData = appointment_data.data();
-
-    const customer_id = theData.customer;
-    const expert_id = theData.expert;
-
-
-    const cust = firestore.collection('users').doc(customer_id);
-    var cust_data = await cust.get();
-    const customer = cust_data.data();
-
-    const exp = firestore.collection('users').doc(expert_id);
-    var exp_data = await exp.get();
-    const expert = exp_data.data();
-
-
-    var mailOptions = {
-        from: process.env.EMAIL,
-        to: customer.email,
-        subject: 'Find Expert',
-        text: `Your appointment with ${expert.name} at ${theData.day + ","+theData.hour} has been confirmed.`
-    };
+        const customer_id = theData.customer;
+        const expert_id = theData.expert;
     
-    transporter.sendMail(mailOptions, function(error, info){
-      if (error) {
-        console.log(error);
-      } else {
-        console.log('Email sent: ' + info.response);
-      }
-    });
+    
+        const cust = firestore.collection('users').doc(customer_id);
+        var cust_data = await cust.get();
+        const customer = cust_data.data();
+    
+        const exp = firestore.collection('users').doc(expert_id);
+        var exp_data = await exp.get();
+        const expert = exp_data.data();
+    
+    
+        var mailOptions = {
+            from: process.env.EMAIL,
+            to: customer.email,
+            subject: 'Find Expert',
+            text: `Your appointment with ${expert.name} at ${theData.day + ","+theData.hour} has been confirmed.`
+        };
+        
+        transporter.sendMail(mailOptions, function(error, info){
+          if (error) {
+            console.log(error);
+          } else {
+            console.log('Email sent: ' + info.response);
+          }
+        });
+    }
+    
 
 
     res.status(200).send("ok");
