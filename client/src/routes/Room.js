@@ -311,10 +311,10 @@ const Room = (props) => {
             //   showCancelButton: true,
             //   inputPlaceholder: "Write something"
             // })
-            
+            Swal.fire('Payment was successful!', '', 'success')
 
             Swal.fire({
-              title: 'Login Form',
+              title: 'Review Form',
               html:  `<h1 id="demo">Rating: 1</h1>
                       <input type="range" min="1" max="5" value="1" step="1" class="slider" id="myRange">
                       <h1>Review:</h1> 

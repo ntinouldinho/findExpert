@@ -17,14 +17,16 @@ const Login = (props) => {
     history.push(`/login`);
   };
 
-  const logout = () => {
+  async function logout (e) {
+    e.preventDefault();
     console.log("clicked");
     try {
-      fetch(`/logout`);
+      await fetch(`/logout`).then(response =>{
+        history.push(`/login`);
+      }
+      );
 
-      props.login(false);
-      props.role("");
-      window.location.href = "/";
+      
     } catch (error) {}
   };
 
