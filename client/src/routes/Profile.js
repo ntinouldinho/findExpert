@@ -76,22 +76,10 @@ class ExampleApp extends React.Component {
 
     
     handleOpenModal () {
-      this.setState({ showModal: true });
-    }
-    
-    handleChange(event) {
-        this.setState({ service: event.target.selectedIndex });
-    }
-    
-
-    async bookAppointment (){
-
-        var flag=0;
-
         await fetch('/checkToken')
         .then(res => {
           if (res.status === 200) {
-            flag=1;
+            this.setState({ showModal: true });
           } else {
             const error = new Error(res.error);
             throw error;
@@ -101,7 +89,16 @@ class ExampleApp extends React.Component {
           alert("You must be signed in to book an appointment")
         });
 
-        if(flag){
+      
+    }
+    
+    handleChange(event) {
+        this.setState({ service: event.target.selectedIndex });
+    }
+    
+
+    async bookAppointment (){
+
             const response = await fetch(`/api/decode`);
             const json = await response.json();
             const user = json.user;
@@ -152,10 +149,7 @@ class ExampleApp extends React.Component {
                   alert('Error logging in please try again');
                 });
       
-            
-
-
-        }
+        
         
   
     }
