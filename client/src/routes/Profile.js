@@ -138,8 +138,10 @@ class ExampleApp extends React.Component {
                         title: 'Success!',  
                         text: 'Your appointment has been created',
                         icon: 'success'
+                      }).then(() => {
+                        window.location.reload();
                       }); 
-                    // window.location.href = "/"
+                    
                   } else {
                     const error = new Error(res.error);
                     throw error;
