@@ -113,7 +113,7 @@ const Appointments = (props) => {
                             </td>
 
                             <td>
-                                <a href={"/room/"+row.appointment_id}> Click Here </a>
+                                <a href={"/room/"+row.appointment_id} style={{display:row.status==1? '':'none'}}> Click Here </a>
                             </td>
                         </tr>
                     ))}
