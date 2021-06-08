@@ -357,6 +357,7 @@ app.get('/api/user/get', async(req, res) => {
 
 app.post('/api/appointment/approve/', async(req, res) => {
 
+    console.log('status '+req.body.status)
     await firestore.collection('appointments').doc(req.body.id).update({
         status: req.body.status
     })
