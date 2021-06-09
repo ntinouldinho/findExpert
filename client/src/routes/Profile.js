@@ -356,7 +356,7 @@ export class Profile extends React.Component {
             services: [],
             cv: [],
             about: "",
-            stars: "",
+            stars: 5,
             url:"",
             start:0,
             end:0,
