@@ -216,7 +216,7 @@ export class User extends Component {
        
     }
 
-    resetPassword = async e => {
+    resetPassword = async e => { 
         e.preventDefault();
 
         await fetch('/api/reset', {
